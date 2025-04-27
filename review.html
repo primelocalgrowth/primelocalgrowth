@@ -1,92 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Share Your Experience | Prime Local Growth</title>
   <meta name="description" content="Help other business owners by sharing your experience with Prime Local Growth's visibility audit service.">
   
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" 
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self' https://fonts.googleapis.com;
+                 font-src 'self' https://fonts.gstatic.com;
+                 img-src 'self' data: https://www.primelocalgrowth.com;
+                 form-action 'self' https://docs.google.com;
+                 frame-src 'none'">
+
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Share Your Experience | Prime Local Growth">
   <meta property="og:description" content="Your review helps other businesses discover effective visibility solutions">
-  <meta property="og:image" content="https://www.primelocalgrowth.com/logo.webp">
+  <meta property="og:image" content="https://www.primelocalgrowth.com/assets/og-review.jpg">
   <meta property="og:url" content="https://www.primelocalgrowth.com/review">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Preloads -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style">
-  <link rel="preload" href="logo.webp" as="image" type="image/webp">
+  <link rel="preload" href="/assets/logo.avif" as="image" type="image/avif">
 
-  <!-- Styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Critical CSS -->
   <style>
     :root {
       --primary: #1A3C6C;
-      --accent: #d49b00;
-      --text: #333;
-      --light-bg: #f7f7f7;
+      --accent: #FFA726;
+      --text: #2D3748;
+      --light-bg: #F8FAFC;
+      --transition: 250ms ease;
     }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.5; }
+
+    .skip-link {
+      position: absolute;
+      top: -3rem;
+      left: 0.5rem;
+      padding: 0.75rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      z-index: 9999;
+      transition: transform var(--transition);
+    }
+    .skip-link:focus { transform: translateY(3rem); }
+
     body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--light-bg);
       color: var(--text);
       min-height: 100vh;
       display: grid;
       grid-template-rows: auto 1fr auto;
     }
-    header {
-      padding: 2rem 1rem 0;
-      text-align: center;
-    }
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-    h1 {
-      color: var(--primary);
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      line-height: 1.3;
-      margin: 0 0 1.5rem;
-    }
-    .review-cta {
-      background: var(--primary);
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: transform 0.2s;
-      text-decoration: none;
-    }
-    .review-cta:hover {
-      transform: translateY(-2px);
-      background: #143056;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-    .footer-nav {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-    .footer-nav a {
-      color: var(--primary);
-      text-decoration: none;
-    }
   </style>
-  
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/css/main.css" media="all" onload="this.loaded=true">
+  <noscript><link rel="stylesheet" href="/css/main.css"></noscript>
+
   <!-- Schema -->
   <script type="application/ld+json">
   {
@@ -96,53 +79,83 @@
     "description": "Review page for Prime Local Growth's visibility audit services",
     "publisher": {
       "@type": "ProfessionalService",
-      "name": "Prime Local Growth"
+      "name": "Prime Local Growth",
+      "image": "https://www.primelocalgrowth.com/assets/logo.avif",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Antonio",
+        "addressRegion": "TX"
+      }
     }
   }
   </script>
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <header>
-    <a href="/">
-      <img src="logo.webp" 
-           alt="Prime Local Growth - Expert Business Visibility Solutions" 
-           width="140" 
-           height="70"
-           loading="eager">
-    </a>
+    <div class="container">
+      <a href="/">
+        <picture>
+          <source srcset="/assets/logo.avif 1x, /assets/logo@2x.avif 2x" type="image/avif">
+          <source srcset="/assets/logo.webp 1x, /assets/logo@2x.webp 2x" type="image/webp">
+          <img src="/assets/logo.png" 
+               srcset="/assets/logo.png 1x, /assets/logo@2x.png 2x"
+               alt="Prime Local Growth - Expert Business Visibility Solutions" 
+               width="140" 
+               height="70"
+               loading="eager"
+               decoding="sync">
+        </picture>
+      </a>
+    </div>
   </header>
 
-  <main>
-    <h1>Help Other Businesses Grow</h1>
-    <p style="max-width: 50ch; margin: 0 auto 2rem;">
-      Your honest review helps fellow business owners discover effective solutions for improving their online visibility.
-    </p>
-    <a href="https://maps.app.goo.gl/FuVZSEFBofS9WNsw7" 
-       class="review-cta"
-       target="_blank" 
-       rel="noopener noreferrer">
-      ✍️ Leave Google Review
-    </a>
-    
-    <div style="margin-top: 3rem;">
-      <p>Prefer to share privately?<br>
-      Email us: <a href="mailto:feedback@primelocalgrowth.com" style="color: var(--primary);">feedback@primelocalgrowth.com</a></p>
+  <main id="main-content">
+    <div class="container">
+      <h1 class="text-balance">Help Other Businesses Grow</h1>
+      <p class="text-lead">Your honest review helps fellow business owners discover effective solutions for improving their online visibility.</p>
+      
+      <a href="https://maps.app.goo.gl/FuVZSEFBofS9WNsw7" 
+         class="cta-button"
+         target="_blank" 
+         rel="noopener noreferrer nofollow">
+        ✍️ Leave Google Review
+      </a>
+      
+      <div class="review-alt">
+        <p>Prefer to share privately?</p>
+        <a href="mailto:feedback@primelocalgrowth.com" class="text-link">
+          📧 feedback@primelocalgrowth.com
+        </a>
+      </div>
     </div>
   </main>
 
-  <footer>
-    <p>&copy; <span id="current-year"></span> Prime Local Growth</p>
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <a href="/">Home</a>
-      <a href="/contact">Contact</a>
-      <a href="https://instagram.com/primelocalgrowth" rel="noopener noreferrer">Instagram</a>
-    </nav>
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="current-year"></span> Prime Local Growth</p>
+      <nav aria-label="Footer navigation">
+        <ul class="footer-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="https://instagram.com/primelocalgrowth" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </nav>
+    </div>
   </footer>
 
   <script>
-    // Current year
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    // Progressive Enhancement
+    document.documentElement.classList.remove('no-js');
+
+    // Set current year with error handling
+    try {
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    } catch (error) {
+      console.error('Year update failed:', error);
+    }
   </script>
 </body>
 </html>

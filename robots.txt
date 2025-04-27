@@ -1,3 +1,11 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login/
+Disallow: /private/
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+Disallow: /search/
+Disallow: /*?*
+Crawl-delay: 2
+
 Sitemap: https://www.primelocalgrowth.com/sitemap.xml

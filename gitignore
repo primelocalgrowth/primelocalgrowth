@@ -1,0 +1,17 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Build files
+/node_modules/
+/.sass-cache/
+/build/
+
+# Environment files
+.env
+*.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp

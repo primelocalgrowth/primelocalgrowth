@@ -6,39 +6,42 @@
   <title>Prime Local Growth | Fix Local Business Visibility Online</title>
   <meta name="description" content="Get a free report showing why customers can't find your local business online - fix it fast with no jargon.">
   
-  <!-- Security Headers (Simplified CSP) -->
+  <!-- Security Headers -->
   <meta http-equiv="Content-Security-Policy" 
         content="default-src 'self';
-                 script-src 'self' https://www.googletagmanager.com;
-                 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-                 img-src 'self' data: https://www.primelocalgrowth.com;
+                 script-src 'self';
+                 style-src 'self' https://fonts.googleapis.com;
                  font-src 'self' https://fonts.gstatic.com;
-                 connect-src 'self' https://www.google-analytics.com;
-                 form-action 'self';">
-
+                 img-src 'self' data: https://www.primelocalgrowth.com;
+                 form-action 'self' https://docs.google.com;
+                 frame-src 'none';
+                 base-uri 'self';
+                 object-src 'none'">
+  
   <!-- Preload & Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style">
-  <link rel="preload" href="assets/logo.avif" as="image" type="image/avif">
+  <link rel="preload" href="/assets/logo.avif" as="image" type="image/avif"
+        imagesrcset="/assets/logo.avif 1x, /assets/logo@2x.avif 2x"
+        imagesizes="(max-width: 768px) 100vw, 160px">
 
-  <!-- Critical CSS (Improved) -->
+  <!-- Critical CSS -->
   <style>
+    /* Modern Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.5; }
+
     :root {
       --primary: #1A3C6C;
-      --accent: #FFA726; /* WCAG AA compliant */
+      --accent: #FFA726;
       --text: #2D3748;
       --light-bg: #F8FAFC;
       --transition: 250ms ease;
     }
 
-    /* Modern CSS Reset */
-    *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; }
-
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      line-height: 1.5;
       color: var(--text);
       background: var(--light-bg);
     }
@@ -46,13 +49,15 @@
     .skip-link {
       position: absolute;
       top: -3rem;
-      left: 0;
+      left: 0.5rem;
+      padding: 0.75rem;
       background: var(--primary);
       color: white;
-      padding: 0.5rem;
+      text-decoration: none;
+      z-index: 9999;
       transition: transform var(--transition);
     }
-    .skip-link:focus { top: 0; }
+    .skip-link:focus { transform: translateY(3rem); }
 
     header {
       background: var(--primary);
@@ -60,18 +65,41 @@
       padding: clamp(2rem, 5vh, 4rem) 1rem;
       position: relative;
     }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: var(--accent);
+      color: #000;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform var(--transition);
+    }
+    .cta-button:hover { transform: translateY(-2px); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta-button { transition: none; }
+    }
   </style>
 
-  <!-- Non-Critical CSS -->
-  <link rel="stylesheet" href="css/main.css" media="print" onload="this.media='all'">
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/css/main.css" media="all" onload="this.loaded=true">
+  <noscript><link rel="stylesheet" href="/css/main.css"></noscript>
 
-  <!-- Favicon Modern Stack -->
+  <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- Schema Markup (Enhanced) -->
+  <!-- Schema Markup -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -80,13 +108,18 @@
     "image": "https://www.primelocalgrowth.com/assets/og-image.jpg",
     "url": "https://www.primelocalgrowth.com/",
     "telephone": "+12106461436",
-    "priceRange": "$$",
+    "priceRange": "$$-$$$",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "123 Main St",
       "addressLocality": "San Antonio",
       "addressRegion": "TX",
-      "postalCode": "78209"
+      "postalCode": "78209",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 29.4241,
+        "longitude": -98.4936
+      }
     },
     "aggregateRating": {
       "@type": "AggregateRating",
@@ -103,15 +136,16 @@
   <header>
     <div class="container">
       <picture>
-        <source srcset="assets/logo.avif 1x, assets/logo@2x.avif 2x" type="image/avif">
-        <source srcset="assets/logo.webp 1x, assets/logo@2x.webp 2x" type="image/webp">
-        <img src="assets/logo.png" 
-             srcset="assets/logo.png 1x, assets/logo@2x.png 2x"
+        <source srcset="/assets/logo.avif 1x, /assets/logo@2x.avif 2x" type="image/avif">
+        <source srcset="/assets/logo.webp 1x, /assets/logo@2x.webp 2x" type="image/webp">
+        <img src="/assets/logo.png" 
+             srcset="/assets/logo.png 1x, /assets/logo@2x.png 2x"
              alt="Prime Local Growth - Local SEO Experts"
              width="160" 
              height="80"
              loading="eager"
-             decoding="sync">
+             decoding="sync"
+             fetchpriority="high">
       </picture>
       <div class="hero-content">
         <h1 class="text-balance">Why Can't Local Customers Find Your Business?</h1>
@@ -122,14 +156,71 @@
   </header>
 
   <main id="main-content">
-    <!-- Rest of content -->
+    <section class="process" aria-labelledby="how-we-work">
+      <div class="container">
+        <h2 id="how-we-work">Our 3-Step Visibility Fix</h2>
+        <div class="flowchart">
+          <div class="step">
+            <h3>1. Free Audit</h3>
+            <p>We analyze your online presence across 50+ local directories</p>
+          </div>
+          <div class="step">
+            <h3>2. Action Plan</h3>
+            <p>Receive prioritized fixes you can implement yourself</p>
+          </div>
+          <div class="step">
+            <h3>3. Ongoing Support</h3>
+            <p>Monthly monitoring and expert help when needed</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" aria-labelledby="success-stories">
+      <div class="container">
+        <h2 id="success-stories">Local Business Success Stories</h2>
+        <div class="testimonial-grid">
+          <article class="testimonial">
+            <blockquote>
+              "Our phone started ringing within a week of implementing their recommendations!"
+            </blockquote>
+            <p class="author">- Maria's Diner, Downtown SA</p>
+          </article>
+          <article class="testimonial">
+            <blockquote>
+              "Finally understand how local search works. Worth every penny!"
+            </blockquote>
+            <p class="author">- Joe's Auto Repair</p>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="current-year"></span> Prime Local Growth</p>
+      <nav aria-label="Legal navigation">
+        <ul class="footer-nav">
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="cookie-consent" role="region" aria-label="Cookie consent" aria-live="polite" hidden>
+    <div class="container">
+      <p>We use cookies to analyze traffic. <a href="/privacy">Learn more</a></p>
+      <button class="cta-button" aria-label="Accept cookies">Accept</button>
+    </div>
+  </div>
 
   <script>
     // Progressive Enhancement
     document.documentElement.classList.remove('no-js');
 
-    // Cookie Consent Manager
     class CookieConsent {
       constructor() {
         this.banner = document.querySelector('.cookie-consent');
@@ -137,7 +228,7 @@
       }
 
       init() {
-        if(!this.getConsent()) this.showBanner();
+        if (!this.getConsent()) this.showBanner();
         this.addEventListeners();
       }
 
@@ -158,10 +249,14 @@
       }
     }
 
-    // Initialize features
+    // Initialize
     document.addEventListener('DOMContentLoaded', () => {
-      new CookieConsent();
-      document.getElementById('current-year').textContent = new Date().getFullYear();
+      try {
+        new CookieConsent();
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+      } catch (error) {
+        console.error('Initialization error:', error);
+      }
     });
   </script>
 </body>

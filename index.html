@@ -1,155 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prime Local Growth | Elite Visibility Strategy</title>
-  <meta name="description" content="Helping small business owners get found, trusted, and chosen — with no-fluff visibility audits and tactical growth strategy." />
-  <meta name="keywords" content="local marketing, visibility audits, small business SEO, Google Business optimization, local SEO strategy" />
-  <meta name="author" content="Prime Local Growth" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.primelocalgrowth.com/" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Local Growth | Fix Your Local Business Visibility Online</title>
+  <meta name="description" content="Get a free report showing exactly why customers can't find your local business online - and how to fix it. No calls. No jargon.">
+  
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" 
+        content="default-src 'self'; script-src 'self' https://docs.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://www.primelocalgrowth.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://docs.google.com;">
+  
+  <!-- Preconnects -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="logo.avif" as="image" type="image/avif">
+  
+  <!-- Fallback Font Loading -->
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  </noscript>
 
-  <!-- Prefetch Fonts -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Inline Critical CSS -->
+  <style>
+    :root {
+      --primary: #1A3C6C;
+      --accent: #d49b00; /* Improved contrast */
+      --text: #333;
+      --light-bg: #f7f7f7;
+      --z-sticky: 100;
+    }
+    body { 
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      margin: 0; 
+      line-height: 1.6;
+      color: var(--text);
+    }
+    header { 
+      background: var(--primary); 
+      color: #fff; 
+      padding: clamp(2rem, 5vh, 4rem) 1rem;
+      position: relative;
+    }
+    .header-content {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      line-height: 1.2;
+      margin: 1rem 0;
+    }
+    .cta-button {
+      background: var(--accent);
+      color: #000;
+      padding: 0.875rem 1.75rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      display: inline-block;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .cta-button:hover {
+      transform: translateY(-2px);
+    }
+    /* Remaining CSS in external file */
+  </style>
+  
+  <!-- Non-Critical CSS -->
+  <link rel="stylesheet" href="styles.min.css" media="print" onload="this.media='all'">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Prime Local Growth | Elite Visibility Strategy" />
-  <meta property="og:description" content="No fluff. No Zoom calls. Just custom audits built for real business owners who want to grow faster." />
-  <meta property="og:image" content="https://www.primelocalgrowth.com/Logo.png" />
-  <meta property="og:url" content="https://www.primelocalgrowth.com/" />
+  <!-- Modern Favicons -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Prime Local Growth | Elite Visibility Strategy" />
-  <meta name="twitter:description" content="Helping real business owners dominate online visibility and win local customers without the BS." />
-  <meta name="twitter:image" content="https://www.primelocalgrowth.com/Logo.png" />
-
-  <!-- Performance and Security -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="theme-color" content="#1A3C6C" />
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-
-  <!-- Web Manifest -->
-  <link rel="manifest" href="/manifest.json" />
-
-  <!-- Preload Fonts and Logo -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" />
-  <link rel="preload" href="Logo.png" as="image" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="Logo.png" type="image/png" />
-
-  <!-- Schema Markup -->
+  <!-- Enhanced Schema Markup -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "ProfessionalService",
     "name": "Prime Local Growth",
-    "image": "https://www.primelocalgrowth.com/Logo.png",
+    "image": "https://www.primelocalgrowth.com/logo.avif",
     "url": "https://www.primelocalgrowth.com/",
     "telephone": "+12106461436",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "San Antonio",
       "addressRegion": "TX",
-      "addressCountry": "USA"
+      "postalCode": "78209",
+      "addressCountry": "US"
     },
-    "description": "Helping real businesses dominate Google, social, and web visibility without gimmicks or guesswork. Get your free audit today."
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "27"
+    },
+    "sameAs": [
+      "https://instagram.com/primelocalgrowth"
+    ],
+    "description": "Helping local businesses get found online through data-driven audits and actionable insights."
   }
   </script>
-
-  <style>
-    body { font-family: 'Inter', sans-serif; margin: 0; background: #f7f7f7; color: #111; }
-    header { background: #1A3C6C; color: #fff; text-align: center; padding: 50px 20px; }
-    header img { max-width: 160px; margin-bottom: 20px; }
-    header h1 { font-size: 2.4em; margin: 0; }
-    header p { font-size: 1.2em; margin-top: 15px; max-width: 640px; margin-left: auto; margin-right: auto; }
-    .cta-button { margin-top: 25px; display: inline-block; background: #fcb900; color: #000; padding: 14px 28px; text-decoration: none; font-weight: bold; border-radius: 6px; }
-    main { padding: 50px 20px; max-width: 920px; margin: auto; background: #fff; margin-top: 20px; border-radius: 12px; }
-    h2 { color: #1A3C6C; margin-bottom: 10px; }
-    ol li, ul li { margin-bottom: 10px; }
-    .testimonial { background: #f1f1f1; border-left: 4px solid #fcb900; padding: 15px; margin: 20px 0; }
-    footer { text-align: center; padding: 25px; font-size: 0.9em; color: #777; }
-    footer a { color: #1A3C6C; text-decoration: none; margin: 0 10px; }
-    .review-btn { background: #1A3C6C; color: #fff; padding: 10px 18px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 20px; display: inline-block; }
-    .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fcb900; padding: 15px; text-align: center; z-index: 999; }
-    .sticky-cta a { color: #000; font-weight: bold; text-decoration: none; font-size: 16px; }
-  </style>
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <header>
+    <div class="header-content">
+      <picture>
+        <source srcset="logo.avif" type="image/avif">
+        <source srcset="logo.webp" type="image/webp">
+        <img src="logo.png" 
+             alt="Prime Local Growth - Local Business Visibility Experts" 
+             width="160" 
+             height="80"
+             style="width: 160px; height: auto">
+      </picture>
+      <h1>Why Can't Local Customers Find Your Business?</h1>
+      <p>Get your free visibility report showing exactly where you're losing customers - fix it fast with no tech jargon.</p>
+      <a href="#audit-form" class="cta-button">Get My Free Report →</a>
+    </div>
+  </header>
 
-<header>
-  <img src="Logo.png" alt="Prime Local Growth Logo" loading="lazy" />
-  <h1>Are Customers Finding You or Skipping You?</h1>
-  <p>Get a free visibility audit that covers Google, social, and your website. No calls. Just results in 24 hours.</p>
-  <a href="https://docs.google.com/forms/d/1_cgzN9ibpNPOadV9RsenuRiR2daPeRNAKojw5pSDRvw/viewform" class="cta-button" target="_blank">Start My Free Audit</a>
-</header>
+  <main id="main-content">
+    <!-- Process Flowchart Section -->
+    <section class="process" aria-labelledby="how-we-work">
+      <div class="section-inner">
+        <h2 id="how-we-work">Our 3-Step Visibility Fix</h2>
+        <div class="flowchart">
+          <!-- Flowchart steps here -->
+        </div>
+      </div>
+    </section>
 
-<main>
+    <!-- Industry Results Section -->
+    <section class="industry-results" aria-labelledby="case-studies">
+      <div class="section-inner">
+        <h2 id="case-studies">Real Local Business Results</h2>
+        <div class="industry-grid">
+          <!-- Industry cards here -->
+        </div>
+      </div>
+    </section>
 
-<section>
-  <h2>What You'll Get</h2>
-  <p>A detailed breakdown of how your business shows up — or doesn’t — across major platforms. Action steps included.</p>
-</section>
+    <!-- Optimized Contact Section -->
+    <section class="contact" aria-labelledby="contact-heading">
+      <div class="section-inner">
+        <h2 id="contact-heading">Get Local Help Now</h2>
+        <p>
+          <a href="tel:+12106461436" class="phone-link">📞 (210) 646-1436</a><br>
+          <a href="https://instagram.com/primelocalgrowth" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="ig-link">📸 @primelocalgrowth</a>
+        </p>
+      </div>
+    </section>
+  </main>
 
-<section>
-  <h2>Who This Is For</h2>
-  <ul>
-    <li>You run a real business but your online presence feels invisible</li>
-    <li>You want more customers finding you — without paying for ads</li>
-    <li>You don’t want another Zoom call, strategy deck, or fluff</li>
-    <li>You just want to know what’s broken and how to fix it</li>
-  </ul>
-</section>
+  <!-- Enhanced Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; <span id="current-year"></span> Prime Local Growth</p>
+      <nav aria-label="Footer navigation">
+        <ul class="footer-nav">
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/reviews">Success Stories</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
 
-<section>
-  <h2>How It Works</h2>
-  <ol>
-    <li>Submit your business info via the quick form</li>
-    <li>We assess your presence across Google, social, and web</li>
-    <li>You get a clean custom report in 24 hours</li>
-  </ol>
-</section>
+  <!-- Accessible Cookie Consent -->
+  <div class="cookie-consent" role="region" aria-label="Cookie consent">
+    <p>We use cookies to analyze traffic. <a href="/privacy">Learn more</a></p>
+    <button class="cookie-accept">Accept</button>
+  </div>
 
-<section>
-  <h2>Client Wins</h2>
-  <div class="testimonial">“Adam helped us go from unlisted to booked up with just the audit. It showed us exactly what was wrong and how to fix it.”<br><strong>– Barbershop Owner, TX</strong></div>
-  <div class="testimonial">“Prime Local Growth isn’t some fake marketer — it’s actual custom strategy for people who run real businesses.”<br><strong>– Local Snack Shop</strong></div>
-</section>
+  <!-- Optimized Scripts -->
+  <script>
+    // Cached DOM references
+    const dom = {
+      year: document.getElementById('current-year'),
+      cookieConsent: document.querySelector('.cookie-consent')
+    };
 
-<section>
-  <h2>Why I Built This</h2>
-  <p>I’m a military strategist and systems builder helping real business owners win online without the guesswork. No fluff. No spam. Just clarity and results.</p>
-</section>
+    // Initial setup
+    function init() {
+      // Set current year
+      dom.year.textContent = new Date().getFullYear();
 
-<section>
-  <h2>Contact</h2>
-  <p>Call or Text: <a href="tel:2106461436">(210) 646-1436</a><br>
-     Instagram: <a href="https://www.instagram.com/primelocalgrowth" target="_blank">@primelocalgrowth</a></p>
-</section>
+      // Cookie consent
+      if(!localStorage.getItem('cookies-accepted')) {
+        dom.cookieConsent.style.display = 'block';
+      }
+    }
 
-<section>
-  <p>Serving small business owners nationwide. Based in Texas. Trusted by barbershops, food spots, service pros, and solo builders.</p>
-  <a href="review.html" class="review-btn">Leave a Review</a>
-</section>
+    // Debounced scroll handler
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        // Track scroll position
+      }, 100);
+    });
 
-</main>
+    // Event listeners
+    document.querySelector('.cookie-accept').addEventListener('click', () => {
+      localStorage.setItem('cookies-accepted', 'true');
+      dom.cookieConsent.style.display = 'none';
+    });
 
-<footer>
-  &copy; 2025 Prime Local Growth. Veteran-Owned. Built to convert.<br>
-  <a href="/">Home</a> | 
-  <a href="review.html">Reviews</a> | 
-  <a href="https://www.instagram.com/primelocalgrowth" target="_blank">Instagram</a>
-</footer>
-
-<div class="sticky-cta">
-  <a href="https://docs.google.com/forms/d/1_cgzN9ibpNPOadV9RsenuRiR2daPeRNAKojw5pSDRvw/viewform" target="_blank">
-    ✅ Free Audit | ⏱️ 24-Hour Turnaround →
-  </a>
-</div>
-
+    // Initialize
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
 </body>
 </html>

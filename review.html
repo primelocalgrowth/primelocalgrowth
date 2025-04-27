@@ -1,61 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leave a Review | Prime Local Growth</title>
-  <meta name="description" content="Leave a review for Prime Local Growth and help more small businesses discover expert visibility audits and marketing solutions." />
-  <meta name="keywords" content="Prime Local Growth, leave a review, customer feedback, small business growth, visibility audits" />
-  <meta name="author" content="Prime Local Growth" />
-  <link rel="canonical" href="https://www.primelocalgrowth.com/review.html" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Your Experience | Prime Local Growth</title>
+  <meta name="description" content="Help other business owners by sharing your experience with Prime Local Growth's visibility audit service.">
+  
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Share Your Experience | Prime Local Growth">
+  <meta property="og:description" content="Your review helps other businesses discover effective visibility solutions">
+  <meta property="og:image" content="https://www.primelocalgrowth.com/logo.webp">
+  <meta property="og:url" content="https://www.primelocalgrowth.com/review">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Leave a Review | Prime Local Growth" />
-  <meta property="og:description" content="Share your experience with Prime Local Growth and help more businesses grow." />
-  <meta property="og:image" content="https://www.primelocalgrowth.com/Logo.png" />
-  <meta property="og:url" content="https://www.primelocalgrowth.com/review.html" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Leave a Review | Prime Local Growth" />
-  <meta name="twitter:description" content="Help more businesses succeed by sharing your feedback on Prime Local Growth." />
-  <meta name="twitter:image" content="https://www.primelocalgrowth.com/Logo.png" />
-
-  <!-- Performance -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="theme-color" content="#1A3C6C" />
-
+  <!-- Preloads -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style">
-  <link rel="preload" href="Logo.png" as="image">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="Logo.png" type="image/png" />
+  <link rel="preload" href="logo.webp" as="image" type="image/webp">
 
+  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; background: #f7f7f7; text-align: center; padding: 60px; color: #111; }
-    h1 { color: #1A3C6C; font-size: 2.4em; }
-    p { font-size: 1.2em; margin-top: 10px; max-width: 640px; margin-left: auto; margin-right: auto; }
-    a { text-decoration: none; background: #1A3C6C; color: white; padding: 12px 20px; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; font-size: 1.1em; }
+    :root {
+      --primary: #1A3C6C;
+      --accent: #d49b00;
+      --text: #333;
+      --light-bg: #f7f7f7;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: var(--light-bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+    header {
+      padding: 2rem 1rem 0;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    h1 {
+      color: var(--primary);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      line-height: 1.3;
+      margin: 0 0 1.5rem;
+    }
+    .review-cta {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+    .review-cta:hover {
+      transform: translateY(-2px);
+      background: #143056;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .footer-nav {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .footer-nav a {
+      color: var(--primary);
+      text-decoration: none;
+    }
   </style>
+  
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Leave a Review",
+    "description": "Review page for Prime Local Growth's visibility audit services",
+    "publisher": {
+      "@type": "ProfessionalService",
+      "name": "Prime Local Growth"
+    }
+  }
+  </script>
 </head>
+
 <body>
+  <header>
+    <a href="/">
+      <img src="logo.webp" 
+           alt="Prime Local Growth - Expert Business Visibility Solutions" 
+           width="140" 
+           height="70"
+           loading="eager">
+    </a>
+  </header>
 
-<header>
-  <img src="Logo.png" alt="Prime Local Growth Logo" loading="lazy" style="max-width:140px;margin-bottom:20px;" />
-</header>
+  <main>
+    <h1>Help Other Businesses Grow</h1>
+    <p style="max-width: 50ch; margin: 0 auto 2rem;">
+      Your honest review helps fellow business owners discover effective solutions for improving their online visibility.
+    </p>
+    <a href="https://maps.app.goo.gl/FuVZSEFBofS9WNsw7" 
+       class="review-cta"
+       target="_blank" 
+       rel="noopener noreferrer">
+      ✍️ Leave Google Review
+    </a>
+    
+    <div style="margin-top: 3rem;">
+      <p>Prefer to share privately?<br>
+      Email us: <a href="mailto:feedback@primelocalgrowth.com" style="color: var(--primary);">feedback@primelocalgrowth.com</a></p>
+    </div>
+  </main>
 
-<main>
-  <h1>We’d Love Your Feedback</h1>
-  <p>Reviews help more small businesses trust us with their visibility and growth. Thank you for taking 30 seconds to support other entrepreneurs!</p>
-  <a href="https://maps.app.goo.gl/FuVZSEFBofS9WNsw7" target="_blank">Leave a Google Review</a>
-</main>
+  <footer>
+    <p>&copy; <span id="current-year"></span> Prime Local Growth</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/">Home</a>
+      <a href="/contact">Contact</a>
+      <a href="https://instagram.com/primelocalgrowth" rel="noopener noreferrer">Instagram</a>
+    </nav>
+  </footer>
 
-<footer style="margin-top:50px;font-size:0.9em;color:#777;">
-  &copy; 2025 Prime Local Growth. Veteran-Owned.<br>
-  <a href="/">Home</a> |
-  <a href="review.html">Reviews</a> |
-  <a href="https://www.instagram.com/primelocalgrowth" target="_blank">Instagram</a>
-</footer>
-
+  <script>
+    // Current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

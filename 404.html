@@ -1,125 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404: Page Not Found (2024) | Prime Local Growth</title>
   <meta name="description" content="While this page isn't visible, your business could be! Get found by customers with our free visibility audit.">
   
-  <!-- Open Graph -->
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" 
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self' https://fonts.googleapis.com;
+                 font-src 'self' https://fonts.gstatic.com;
+                 img-src 'self' data: https://www.primelocalgrowth.com;
+                 form-action 'self' https://docs.google.com;
+                 frame-src 'none'">
+
+  <!-- Open Graph & Twitter -->
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Missing Page Found - Let's Fix Your Visibility Instead | Prime Local Growth">
   <meta property="og:description" content="This page disappeared - don't let your business do the same online. Free audit in 24 hours.">
-  <meta property="og:image" content="https://www.primelocalgrowth.com/logo.webp">
+  <meta property="og:image" content="https://www.primelocalgrowth.com/assets/og-404.jpg">
   <meta property="og:url" content="https://www.primelocalgrowth.com/404">
-  
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Let's Fix Visibility Issues - Starting With This 404">
-  <meta name="twitter:description" content="We found this missing page - now let's help customers find your business.">
 
   <!-- Preloads -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style">
-  <link rel="preload" href="/logo.webp" as="image" type="image/webp">
+  <link rel="preload" href="/assets/logo.avif" as="image" type="image/avif">
 
+  <!-- Critical CSS -->
   <style>
     :root {
       --primary: #1A3C6C;
-      --accent: #d49b00;
-      --text: #333;
+      --accent: #FFA726;
+      --text: #2D3748;
       --gap: 2rem;
+      --transition: 200ms ease;
     }
-    
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.5; }
+
+    .skip-link {
+      position: absolute;
+      top: -3rem;
+      left: 0.5rem;
+      padding: 0.75rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      z-index: 9999;
+      transition: transform var(--transition);
+    }
+    .skip-link:focus { transform: translateY(3rem); }
+
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       min-height: 100vh;
       display: grid;
       place-items: center;
-      background: #f7f7f7;
+      background: #F8FAFC;
       padding: 2rem;
       text-align: center;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 600px;
-    }
-
-    h1 {
-      color: var(--primary);
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      margin: 0 0 1rem;
-    }
-
-    p {
-      color: var(--text);
-      font-size: 1.1rem;
-      margin: 0 0 var(--gap);
-    }
-
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .cta {
-      background: var(--primary);
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.2s;
-    }
-
-    .cta:hover {
-      transform: translateY(-2px);
-      background: #143056;
-    }
-
-    .cta-secondary {
-      background: var(--accent);
-      color: #000;
-    }
-
-    img {
-      width: min(160px, 30vw);
-      height: auto;
-      margin: 0 auto 2rem;
     }
   </style>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/main.css"></noscript>
 </head>
 
 <body>
-  <div class="container">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="container" id="main-content">
     <a href="/">
-      <img src="/logo.webp" 
-           alt="Prime Local Growth - Fix Your Online Visibility" 
-           loading="eager"
-           width="160"
-           height="80">
+      <picture>
+        <source srcset="/assets/logo.avif 1x, /assets/logo@2x.avif 2x" type="image/avif">
+        <source srcset="/assets/logo.webp 1x, /assets/logo@2x.webp 2x" type="image/webp">
+        <img src="/assets/logo.png" 
+             srcset="/assets/logo.png 1x, /assets/logo@2x.png 2x"
+             alt="Prime Local Growth - Fix Your Online Visibility" 
+             width="160"
+             height="80"
+             loading="eager"
+             decoding="sync">
+      </picture>
     </a>
     
-    <h1>404: Page Not Found</h1>
-    <p>While this page isn't visible, your business might be missing online too. Let's fix that first:</p>
+    <h1 class="text-balance">404: Page Not Found</h1>
+    <p class="text-lead">While this page isn't visible, your business might be missing online too. Let's fix that first:</p>
     
     <div class="cta-group">
-      <a href="/" class="cta">🏠 Return Home</a>
+      <a href="/" class="cta-button">🏠 Return Home</a>
       <a href="https://docs.google.com/forms/d/1_cgzN9ibpNPOadV9RsenuRiR2daPeRNAKojw5pSDRvw/viewform" 
-         class="cta cta-secondary"
+         class="cta-button secondary"
          target="_blank" 
-         rel="noopener noreferrer">
+         rel="noopener noreferrer nofollow">
          🔍 Free Visibility Audit
       </a>
     </div>
     
-    <p style="margin-top: 2rem; font-size: 0.9rem;">
+    <p class="text-small">
       Need immediate help?<br>
-      Call <a href="tel:+12106461436" style="color: var(--primary);">(210) 646-1436</a>
+      Call <a href="tel:+12106461436" class="text-link">(210) 646-1436</a>
     </p>
   </div>
+
+  <script>
+    // Progressive Enhancement
+    document.documentElement.classList.remove('no-js');
+
+    // Add interaction tracking safely
+    document.querySelectorAll('.cta-button').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Add analytics tracking here
+      });
+    });
+  </script>
 </body>
 </html>

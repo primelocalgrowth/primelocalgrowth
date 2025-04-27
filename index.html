@@ -1,263 +1,170 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prime Local Growth | Fix Local Business Visibility Online</title>
-  <meta name="description" content="Get a free report showing why customers can't find your local business online - fix it fast with no jargon.">
+  <title>Prime Local Growth | Fix Your Local Business Visibility Online</title>
+  <meta name="description" content="Get a free report showing exactly why customers can't find your local business online - and how to fix it. No calls. No jargon.">
   
-  <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy" 
-        content="default-src 'self';
-                 script-src 'self';
-                 style-src 'self' https://fonts.googleapis.com;
-                 font-src 'self' https://fonts.gstatic.com;
-                 img-src 'self' data: https://www.primelocalgrowth.com;
-                 form-action 'self' https://docs.google.com;
-                 frame-src 'none';
-                 base-uri 'self';
-                 object-src 'none'">
-  
-  <!-- Preload & Preconnect -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style">
-  <link rel="preload" href="/assets/logo.avif" as="image" type="image/avif"
-        imagesrcset="/assets/logo.avif 1x, /assets/logo@2x.avif 2x"
-        imagesizes="(max-width: 768px) 100vw, 160px">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Critical CSS -->
+  <!-- All CSS Embedded -->
   <style>
     /* Modern Reset */
     *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; line-height: 1.5; }
-
+    body { margin: 0; padding: 0; }
+    
+    /* Variables */
     :root {
       --primary: #1A3C6C;
-      --accent: #FFA726;
-      --text: #2D3748;
-      --light-bg: #F8FAFC;
-      --transition: 250ms ease;
+      --accent: #d49b00;
+      --text: #333;
+      --light-bg: #f7f7f7;
     }
-
+    
+    /* Base Styles */
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      color: var(--text);
+      font-family: 'Inter', sans-serif;
       background: var(--light-bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
     }
-
-    .skip-link {
-      position: absolute;
-      top: -3rem;
-      left: 0.5rem;
-      padding: 0.75rem;
-      background: var(--primary);
-      color: white;
-      text-decoration: none;
-      z-index: 9999;
-      transition: transform var(--transition);
-    }
-    .skip-link:focus { transform: translateY(3rem); }
-
-    header {
-      background: var(--primary);
-      color: white;
-      padding: clamp(2rem, 5vh, 4rem) 1rem;
-      position: relative;
-    }
-
+    
+    /* Layout */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1rem;
     }
-
+    
+    /* Header */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+    
+    .logo {
+      width: 160px;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+    
+    h1 {
+      font-size: 2.25rem;
+      margin: 0 0 1rem;
+      line-height: 1.2;
+    }
+    
+    /* Buttons */
     .cta-button {
       display: inline-block;
-      padding: 1rem 2rem;
       background: var(--accent);
       color: #000;
-      border-radius: 0.375rem;
+      padding: 1rem 2rem;
+      border-radius: 6px;
       font-weight: 600;
       text-decoration: none;
-      transition: transform var(--transition);
+      margin-top: 1rem;
+      transition: transform 0.2s;
     }
-    .cta-button:hover { transform: translateY(-2px); }
-
-    @media (prefers-reduced-motion: reduce) {
-      .cta-button { transition: none; }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+    }
+    
+    /* Sections */
+    section {
+      padding: 3rem 0;
+    }
+    
+    .step {
+      margin-bottom: 2rem;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      background: white;
+    }
+    
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .footer-nav a {
+      color: var(--primary);
+      text-decoration: none;
     }
   </style>
-
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="/css/main.css" media="all" onload="this.loaded=true">
-  <noscript><link rel="stylesheet" href="/css/main.css"></noscript>
-
-  <!-- Favicons -->
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-
-  <!-- Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Prime Local Growth",
-    "image": "https://www.primelocalgrowth.com/assets/og-image.jpg",
-    "url": "https://www.primelocalgrowth.com/",
-    "telephone": "+12106461436",
-    "priceRange": "$$-$$$",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "123 Main St",
-      "addressLocality": "San Antonio",
-      "addressRegion": "TX",
-      "postalCode": "78209",
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 29.4241,
-        "longitude": -98.4936
-      }
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "ratingCount": "27"
-    }
-  }
-  </script>
 </head>
 
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-
   <header>
     <div class="container">
-      <picture>
-        <source srcset="/assets/logo.avif 1x, /assets/logo@2x.avif 2x" type="image/avif">
-        <source srcset="/assets/logo.webp 1x, /assets/logo@2x.webp 2x" type="image/webp">
-        <img src="/assets/logo.png" 
-             srcset="/assets/logo.png 1x, /assets/logo@2x.png 2x"
-             alt="Prime Local Growth - Local SEO Experts"
-             width="160" 
-             height="80"
-             loading="eager"
-             decoding="sync"
-             fetchpriority="high">
-      </picture>
-      <div class="hero-content">
-        <h1 class="text-balance">Why Can't Local Customers Find Your Business?</h1>
-        <p class="text-lead">Get your free visibility report in 24 hours</p>
-        <a href="#audit-form" class="cta-button">Get Free Report →</a>
-      </div>
+      <img src="logo.webp" alt="Prime Local Growth" class="logo" width="160" height="80">
+      <h1>Why Can't Local Customers Find Your Business?</h1>
+      <p>Get your free visibility report in 24 hours</p>
+      <a href="#audit-form" class="cta-button">Get Free Report →</a>
     </div>
   </header>
 
-  <main id="main-content">
-    <section class="process" aria-labelledby="how-we-work">
-      <div class="container">
-        <h2 id="how-we-work">Our 3-Step Visibility Fix</h2>
-        <div class="flowchart">
-          <div class="step">
-            <h3>1. Free Audit</h3>
-            <p>We analyze your online presence across 50+ local directories</p>
-          </div>
-          <div class="step">
-            <h3>2. Action Plan</h3>
-            <p>Receive prioritized fixes you can implement yourself</p>
-          </div>
-          <div class="step">
-            <h3>3. Ongoing Support</h3>
-            <p>Monthly monitoring and expert help when needed</p>
-          </div>
-        </div>
+  <main>
+    <section class="container">
+      <h2>Our 3-Step Visibility Fix</h2>
+      
+      <div class="step">
+        <h3>1. Free Audit</h3>
+        <p>We analyze your online presence across 50+ local directories</p>
+      </div>
+      
+      <div class="step">
+        <h3>2. Action Plan</h3>
+        <p>Receive prioritized fixes you can implement yourself</p>
+      </div>
+      
+      <div class="step">
+        <h3>3. Ongoing Support</h3>
+        <p>Monthly monitoring and expert help when needed</p>
       </div>
     </section>
-
-    <section class="testimonials" aria-labelledby="success-stories">
-      <div class="container">
-        <h2 id="success-stories">Local Business Success Stories</h2>
-        <div class="testimonial-grid">
-          <article class="testimonial">
-            <blockquote>
-              "Our phone started ringing within a week of implementing their recommendations!"
-            </blockquote>
-            <p class="author">- Maria's Diner, Downtown SA</p>
-          </article>
-          <article class="testimonial">
-            <blockquote>
-              "Finally understand how local search works. Worth every penny!"
-            </blockquote>
-            <p class="author">- Joe's Auto Repair</p>
-          </article>
-        </div>
-      </div>
+    
+    <section class="container">
+      <h2>Local Business Success Stories</h2>
+      <blockquote>
+        "Our phone started ringing within a week of implementing their recommendations!"
+        <cite>- Maria's Diner, Downtown SA</cite>
+      </blockquote>
+      <blockquote>
+        "Finally understand how local search works. Worth every penny!"
+        <cite>- Joe's Auto Repair</cite>
+      </blockquote>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer>
     <div class="container">
       <p>&copy; <span id="current-year"></span> Prime Local Growth</p>
-      <nav aria-label="Legal navigation">
-        <ul class="footer-nav">
-          <li><a href="/privacy">Privacy Policy</a></li>
-          <li><a href="/terms">Terms of Service</a></li>
-          <li><a href="/contact">Contact Us</a></li>
-        </ul>
+      <nav class="footer-nav">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/contact">Contact</a>
       </nav>
     </div>
   </footer>
 
-  <div class="cookie-consent" role="region" aria-label="Cookie consent" aria-live="polite" hidden>
-    <div class="container">
-      <p>We use cookies to analyze traffic. <a href="/privacy">Learn more</a></p>
-      <button class="cta-button" aria-label="Accept cookies">Accept</button>
-    </div>
-  </div>
-
   <script>
-    // Progressive Enhancement
-    document.documentElement.classList.remove('no-js');
-
-    class CookieConsent {
-      constructor() {
-        this.banner = document.querySelector('.cookie-consent');
-        this.init();
-      }
-
-      init() {
-        if (!this.getConsent()) this.showBanner();
-        this.addEventListeners();
-      }
-
-      getConsent() {
-        return localStorage.getItem('cookies-accepted');
-      }
-
-      showBanner() {
-        this.banner.hidden = false;
-        this.banner.focus();
-      }
-
-      addEventListeners() {
-        this.banner.querySelector('button').addEventListener('click', () => {
-          localStorage.setItem('cookies-accepted', 'true');
-          this.banner.hidden = true;
-        });
-      }
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
-      try {
-        new CookieConsent();
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-      } catch (error) {
-        console.error('Initialization error:', error);
-      }
-    });
+    // Current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>

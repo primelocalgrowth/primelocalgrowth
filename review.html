@@ -14,7 +14,9 @@
                  font-src 'self' https://fonts.gstatic.com;
                  img-src 'self' data: https://www.primelocalgrowth.com;
                  form-action 'self' https://docs.google.com;
-                 frame-src 'none'">
+                 frame-src 'none';
+                 upgrade-insecure-requests;
+                 report-uri /csp-violations">
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
@@ -92,7 +94,7 @@
 </head>
 
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
 
   <header>
     <div class="container">
@@ -102,7 +104,7 @@
           <source srcset="/assets/logo.webp 1x, /assets/logo@2x.webp 2x" type="image/webp">
           <img src="/assets/logo.png" 
                srcset="/assets/logo.png 1x, /assets/logo@2x.png 2x"
-               alt="Prime Local Growth - Expert Business Visibility Solutions" 
+               alt="Prime Local Growth Logo" 
                width="140" 
                height="70"
                loading="eager"
@@ -155,6 +157,7 @@
       document.getElementById('current-year').textContent = new Date().getFullYear();
     } catch (error) {
       console.error('Year update failed:', error);
+      document.getElementById('current-year').textContent = '2025';
     }
   </script>
 </body>

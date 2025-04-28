@@ -5,7 +5,7 @@
   <!-- Homepage (Highest Priority) -->
   <url>
     <loc>https://www.primelocalgrowth.com/</loc>
-    <lastmod>2024-03-15</lastmod>
+    <lastmod>2025-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link 
@@ -17,29 +17,28 @@
   <!-- Core Pages -->
   <url>
     <loc>https://www.primelocalgrowth.com/success</loc>
-    <lastmod>2024-02-28</lastmod> <!-- Differentiate dates -->
+    <lastmod>2025-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.primelocalgrowth.com/reviews</loc>
-    <lastmod>2024-03-01</lastmod> <!-- More recent date -->
-    <changefreq>weekly</changefreq> <!-- Reduced from daily -->
-    <priority>0.8</priority> <!-- Lowered from 0.9 -->
+    <lastmod>2025-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
-  <!-- Future-Proof Structure -->
   <url>
     <loc>https://www.primelocalgrowth.com/contact</loc>
-    <lastmod>2024-01-15</lastmod> <!-- Added older date -->
-    <changefreq>monthly</changefreq> <!-- More realistic than yearly -->
-    <priority>0.5</priority> <!-- Lower priority -->
+    <lastmod>2025-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://www.primelocalgrowth.com/privacy</loc>
-    <lastmod>2023-12-01</lastmod> <!-- Add lastmod -->
+    <lastmod>2025-01-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404: Page Not Found | Prime Local Growth</title>
-  <meta name="description" content="While this page isn't visible, your business could be! Get found by customers with our free visibility audit.">
+  <title>404: Fix Your Online Visibility | Prime Local Growth</title>
+  <meta name="description" content="This page isn't visible, but your business can be! Get found by customers with a free visibility audit.">
   
   <!-- Open Graph -->
   <meta property="og:title" content="Missing Page Found - Let's Fix Your Visibility Instead">
@@ -73,9 +73,10 @@
       transition: transform 0.2s, background 0.2s;
     }
 
-    .cta:hover {
+    .cta:hover, .cta:focus {
       transform: translateY(-2px);
       background: #143056;
+      outline: 2px dotted var(--accent);
     }
 
     .cta-secondary {
@@ -101,23 +102,26 @@
 <body>
   <div class="container">
     <a href="/">
-      <img src="logo.webp" 
-           alt="Prime Local Growth - Fix Your Online Visibility" 
-           loading="eager"
-           width="160"
-           height="80">
+      <picture>
+        <source srcset="logo.webp" type="image/webp">
+        <img src="logo.png" 
+             alt="Prime Local Growth Logo" 
+             loading="eager"
+             width="160"
+             height="80">
+      </picture>
     </a>
     
     <h1>404: Page Not Found</h1>
     <p>While this page isn't visible, your business might be missing online too. Let's fix that first:</p>
     
     <div class="cta-group">
-      <a href="/" class="cta">🏠 Return Home</a>
+      <a href="/" class="cta">🏠 Go Back Home</a>
       <a href="https://docs.google.com/forms/d/1_cgzN9ibpNPOadV9RsenuRiR2daPeRNAKojw5pSDRvw/viewform" 
          class="cta cta-secondary"
          target="_blank" 
          rel="noopener noreferrer">
-         🔍 Free Visibility Audit
+         🔍 Get Your Free Audit
       </a>
     </div>
     

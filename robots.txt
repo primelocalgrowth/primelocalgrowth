@@ -1,7 +1,22 @@
+# General rules for all user agents
 User-agent: *
 Allow: /
+
+# Sitemap location
 Sitemap: https://www.primelocalgrowth.com/sitemap.xml
 
-# Block AI scrapers (optional)
+# Block specific AI scrapers (optional)
 User-agent: ChatGPT-User
 Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+# Example: Adding crawl delay for specific bots (optional)
+# User-agent: Googlebot
+# Crawl-delay: 10
+
+# Example: Disallow access to sensitive or restricted areas
+# User-agent: *
+# Disallow: /admin/
+# Disallow: /private/

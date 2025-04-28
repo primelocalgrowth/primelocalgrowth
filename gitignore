@@ -1,17 +1,37 @@
 # System files
 .DS_Store
 Thumbs.db
+.AppleDouble
+__MACOSX/
 
 # Build files
 /node_modules/
 /.sass-cache/
 /build/
+*.log
+*.tmp
+*.temp
+
+# Log files
+npm-debug.log*
+yarn-error.log*
 
 # Environment files
 .env
 *.env.local
+.env.*
+.envrc
 
 # IDE
 .idea/
 .vscode/
 *.swp
+*.bak
+*.orig
+*.~
+
+# Testing and Coverage
+coverage/
+
+# Miscellaneous
+*.lock

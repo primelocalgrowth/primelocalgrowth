@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prime Local Growth | Local SEO Experts</title>
-  <meta name="description" content="Fix your local business visibility - get a free report showing why customers can't find you online">
+  <meta name="description" content="Fix your local business visibility - get a free report showing why customers can't find you online.">
   
   <!-- Font Loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,8 +63,9 @@
       transition: transform 0.2s;
     }
     
-    .cta-button:hover {
+    .cta-button:hover, .cta-button:focus {
       transform: translateY(-2px);
+      outline: 2px dotted var(--primary);
     }
     
     /* Content Sections */
@@ -100,18 +101,24 @@
       gap: 1rem;
       margin-top: 1rem;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta-button {
+        transition: none;
+      }
+    }
   </style>
 </head>
 
 <body>
   <header>
-    <img src="logo.webp" alt="Prime Local Growth" class="logo" width="160" height="80">
+    <img src="logo.webp" alt="Prime Local Growth Logo" class="logo" width="160" height="80">
     <h1>Why Can't Local Customers Find Your Business?</h1>
     <p>Get your free visibility report in 24 hours</p>
     <a href="#audit-form" class="cta-button">Get Free Report →</a>
   </header>
 
-  <main>
+  <main role="main">
     <div class="container">
       <h2>Our 3-Step Visibility Fix</h2>
       
@@ -144,7 +151,7 @@
     </div>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     <p>&copy; <script>document.write(new Date().getFullYear())</script> Prime Local Growth</p>
     <nav class="footer-nav">
       <a href="/privacy">Privacy</a>

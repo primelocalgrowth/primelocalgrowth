@@ -1,28 +1,10 @@
-# System files
+# OS junk
 .DS_Store
 Thumbs.db
 .AppleDouble
 __MACOSX/
 
-# Build files
-/node_modules/
-/.sass-cache/
-/build/
-*.log
-*.tmp
-*.temp
-
-# Log files
-npm-debug.log*
-yarn-error.log*
-
-# Environment files
-.env
-*.env.local
-.env.*
-.envrc
-
-# IDE
+# Editor/IDE
 .idea/
 .vscode/
 *.swp
@@ -30,8 +12,25 @@ yarn-error.log*
 *.orig
 *.~
 
-# Testing and Coverage
+# Logs and temp
+*.log
+*.tmp
+*.temp
+npm-debug.log*
+yarn-error.log*
+
+# Environment files (if added later)
+.env
+*.env.local
+.env.*
+.envrc
+
+# Testing
 coverage/
 
-# Miscellaneous
+# Generated assets (if you use favicon generators)
+assets/favicons/*
+!assets/favicons/.gitkeep
+
+# Lockfiles (not needed for static HTML)
 *.lock

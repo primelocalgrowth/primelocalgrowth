@@ -1,27 +1,179 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  # Force HTTPS
-  RewriteCond %{HTTPS} !=on
-  RewriteCond %{HTTP:X-Forwarded-Proto} !https
-  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  <title>Prime Local Growth | Local Authority Systems for Service Businesses</title>
+  <meta name="description" content="Get a free local visibility report in 24 hours. We fix Google Business, reviews, and booking friction so searches turn into calls and jobs." />
+  <link rel="canonical" href="https://www.primelocalgrowth.com/" />
 
-  # Remove .html extensions
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME}\.html -f
-  RewriteRule ^(.*)$ $1.html [NC,L]
-</IfModule>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Prime Local Growth | Local Authority Systems" />
+  <meta property="og:description" content="Free 24 hour visibility report. Fix Google Business, reviews, and booking friction." />
+  <meta property="og:url" content="https://www.primelocalgrowth.com/" />
+  <meta property="og:image" content="https://www.primelocalgrowth.com/Logo.webp" />
 
-# Security Headers
-<IfModule mod_headers.c>
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
-  Header always set X-Frame-Options "DENY"
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), fullscreen=()"
-</IfModule>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Prime Local Growth | Local Authority Systems" />
+  <meta name="twitter:description" content="Free 24 hour visibility report. Fix Google Business, reviews, and booking friction." />
+  <meta name="twitter:image" content="https://www.primelocalgrowth.com/Logo.webp" />
 
-# Cache Control (1 year for static assets)
-<FilesMatch "\.(webp|avif|css|js|png|jpg|jpeg|gif|svg|woff|woff2|eot|ttf|otf|ico)$">
-  Header set Cache-Control "max-age=31536000, public, immutable"
-</FilesMatch>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --primary:#1A3C6C;
+      --accent:#d49b00;
+      --text:#252525;
+      --muted:#6b7280;
+      --bg:#f7f7f7;
+      --card:#ffffff;
+      --max:960px;
+      --radius:12px;
+    }
+    html:focus-within{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto}
+
+    .container{max-width:var(--max);margin:0 auto;padding:0 1rem}
+    .stack{display:grid;gap:1.25rem}
+    .grid{display:grid;gap:1rem}
+    @media(min-width:768px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+
+    .skip{position:absolute;left:-9999px;top:auto}
+    .skip:focus{left:1rem;top:1rem;background:#fff;padding:.5rem .75rem;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+    header{
+      background:linear-gradient(180deg,var(--primary),#0f2546);
+      color:#fff;
+      padding:2.5rem 0 3rem;
+      text-align:center;
+    }
+    .brand{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:1rem}
+    .brand img{width:160px;height:80px}
+    .kicker{color:#bcd0ff;font-weight:600;letter-spacing:.02em}
+    h1{font-size:clamp(1.8rem,3.5vw,2.6rem);line-height:1.2;margin:.25rem 0 .5rem}
+    .lead{color:#e6ecff;max-width:46ch;margin:0 auto 1rem}
+    .cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:.75rem}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:.9rem 1.25rem;border-radius:10px;font-weight:700;border:2px solid transparent;
+      transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease;
+      cursor:pointer
+    }
+    .btn-primary{background:var(--accent);color:#000}
+    .btn-primary:hover,.btn-primary:focus{transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.18)}
+    .btn-outlined{background:transparent;border-color:#8fb2ff;color:#e6ecff}
+    .btn-outlined:hover,.btn-outlined:focus{background:rgba(255,255,255,.08)}
+
+    section{padding:2.25rem 0}
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:1.25rem;
+      box-shadow:0 4px 16px rgba(0,0,0,.06)
+    }
+    .card h3{margin:.25rem 0 .25rem}
+    .muted{color:var(--muted)}
+    .check{list-style:none;padding-left:0}
+    .check li{display:flex;gap:.5rem;align-items:flex-start}
+    .check li::before{content:"✔";margin-top:.2rem}
+
+    blockquote{
+      background:var(--card);
+      padding:1.1rem;
+      border-radius:var(--radius);
+      border-left:6px solid var(--accent);
+      box-shadow:0 4px 16px rgba(0,0,0,.05)
+    }
+    cite{display:block;color:var(--muted);margin-top:.35rem;font-style:normal}
+
+    form{display:grid;gap:.75rem}
+    .field{display:grid;gap:.35rem}
+    label{font-weight:600}
+    input,textarea,select{
+      width:100%;padding:.75rem;border-radius:10px;border:1px solid #e5e7eb;background:#fff;font:inherit
+    }
+    input:focus,textarea:focus,select:focus{outline:2px solid #93c5fd;outline-offset:1px;border-color:#93c5fd}
+    .privacy{font-size:.9rem;color:var(--muted)}
+
+    footer{background:#fff;border-top:1px solid #eee;padding:2rem 0}
+    .footer-grid{display:grid;gap:1rem}
+    @media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
+    @media (prefers-reduced-motion:reduce){.btn{transition:none}}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "name":"Prime Local Growth",
+    "url":"https://www.primelocalgrowth.com/",
+    "image":"https://www.primelocalgrowth.com/Logo.webp",
+    "description":"Local Authority Systems for solo service businesses. Free visibility audit in 24 hours.",
+    "areaServed":{"@type":"Place","name":"San Antonio, TX"},
+    "address":{"@type":"PostalAddress","addressLocality":"Cibolo","addressRegion":"TX","addressCountry":"US"}
+  }
+  </script>
+
+  <!-- GA4 placeholder
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)}
+    gtag('js', new Date()); gtag('config', 'G-XXXXXXX');
+  </script>
+  -->
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="container">
+      <div class="brand" aria-label="Prime Local Growth">
+        <img src="Logo.webp" alt="Prime Local Growth logo" width="160" height="80" decoding="async" fetchpriority="high" />
+      </div>
+      <div class="kicker">Free 24 hour visibility report</div>
+      <h1>Own your local market in 90 days</h1>
+      <p class="lead">We build simple systems that turn searches into booked jobs. Fix Google Business, reviews, and booking friction fast.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#audit-form" aria-label="Get your free visibility report">Get free report →</a>
+        <a class="btn btn-outlined" href="#proof" aria-label="See client proof">See proof</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <section>
+      <div class="container grid grid-3">
+        <div class="card">
+          <h3>Local Authority Jumpstart</h3>
+          <ul class="check">
+            <li>Fix Google Business and NAP conflicts</li>
+            <li>Review engine with request and reply scripts</li>
+            <li>Posting cadence and offer blocks</li>
+            <li>Booking cleanup and link hygiene</li>
+            <li>Weekly scorecard with calls, direction requests, CTR</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What you get</h3>
+          <p class="muted">Actionable changes in 7 days. Measurable lift in 30 days. Compounding gains in 90 days.</p>
+          <ul class=

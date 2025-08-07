@@ -2,140 +2,323 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prime Local Growth | Local SEO Experts</title>
-  <meta name="description" content="Fix your local business visibility - get a free report showing why customers can't find you online.">
-  
-  <!-- Font Loading -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Prime Local Growth | Local Authority Systems for Service Businesses</title>
+  <meta name="description" content="Get a free local visibility report in 24 hours. We fix Google Business, reviews, and booking friction so searches turn into calls and jobs." />
+  <link rel="canonical" href="https://www.primelocalgrowth.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Prime Local Growth | Local Authority Systems" />
+  <meta property="og:description" content="Free 24 hour visibility report. Fix Google Business, reviews, and booking friction." />
+  <meta property="og:url" content="https://www.primelocalgrowth.com/" />
+  <meta property="og:image" content="https://www.primelocalgrowth.com/Logo.webp" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Prime Local Growth | Local Authority Systems" />
+  <meta name="twitter:description" content="Free 24 hour visibility report. Fix Google Business, reviews, and booking friction." />
+  <meta name="twitter:image" content="https://www.primelocalgrowth.com/Logo.webp" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --primary: #1A3C6C;
-      --accent: #d49b00;
-      --text: #333;
-      --light-bg: #f7f7f7;
+    /* Base */
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --primary:#1A3C6C;
+      --accent:#d49b00;
+      --text:#252525;
+      --muted:#6b7280;
+      --bg:#f7f7f7;
+      --card:#ffffff;
+      --max:960px;
+      --radius:12px;
     }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--light-bg);
-      color: var(--text);
-      line-height: 1.6;
+    html:focus-within{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
-    header {
-      background: var(--primary);
-      color: white;
-      padding: 3rem 1rem;
-      text-align: center;
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto}
+
+    /* Layout */
+    .container{max-width:var(--max);margin:0 auto;padding:0 1rem}
+    .stack{display:grid;gap:1.25rem}
+    .grid{display:grid;gap:1rem}
+    @media(min-width:768px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+
+    /* Header */
+    .skip{position:absolute;left:-9999px;top:auto}
+    .skip:focus{left:1rem;top:1rem;background:#fff;padding:.5rem .75rem;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+    header{
+      background:linear-gradient(180deg,var(--primary),#0f2546);
+      color:#fff;
+      padding:2.5rem 0 3rem;
+      text-align:center;
     }
-    .logo {
-      width: 160px;
-      height: auto;
-      margin-bottom: 1rem;
+    .brand{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:1rem}
+    .brand img{width:160px;height:80px}
+    .kicker{color:#bcd0ff;font-weight:600;letter-spacing:.02em}
+    h1{font-size:clamp(1.8rem,3.5vw,2.6rem);line-height:1.2;margin:.25rem 0 .5rem}
+    .lead{color:#e6ecff;max-width:46ch;margin:0 auto 1rem}
+    .cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:.75rem}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:.9rem 1.25rem;border-radius:10px;font-weight:700;border:2px solid transparent;
+      transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease;
+      cursor:pointer
     }
-    h1 {
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      margin-bottom: 1rem;
-      line-height: 1.3;
+    .btn-primary{background:var(--accent);color:#000}
+    .btn-primary:hover,.btn-primary:focus{transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.18)}
+    .btn-outlined{background:transparent;border-color:#8fb2ff;color:#e6ecff}
+    .btn-outlined:hover,.btn-outlined:focus{background:rgba(255,255,255,.08)}
+
+    /* Sections */
+    section{padding:2.25rem 0}
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:1.25rem;
+      box-shadow:0 4px 16px rgba(0,0,0,.06)
     }
-    .cta-button {
-      display: inline-block;
-      background: var(--accent);
-      color: #000;
-      padding: 1rem 2rem;
-      border-radius: 6px;
-      font-weight: 600;
-      text-decoration: none;
-      margin-top: 1rem;
-      transition: transform 0.2s;
+    .card h3{margin:.25rem 0 .25rem}
+    .muted{color:var(--muted)}
+    .check{list-style:none;padding-left:0}
+    .check li{display:flex;gap:.5rem;align-items:flex-start}
+    .check li::before{content:"✔";margin-top:.2rem}
+
+    /* Testimonials */
+    blockquote{
+      background:var(--card);
+      padding:1.1rem 1.1rem 1.1rem 1.1rem;
+      border-radius:var(--radius);
+      border-left:6px solid var(--accent);
+      box-shadow:0 4px 16px rgba(0,0,0,.05)
     }
-    .cta-button:hover, .cta-button:focus {
-      transform: translateY(-2px);
-      outline: 2px dotted var(--primary);
+    cite{display:block;color:var(--muted);margin-top:.35rem;font-style:normal}
+
+    /* Form */
+    form{display:grid;gap:.75rem}
+    .field{display:grid;gap:.35rem}
+    label{font-weight:600}
+    input,textarea,select{
+      width:100%;padding:.75rem;border-radius:10px;border:1px solid #e5e7eb;background:#fff;font:inherit
     }
-    .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .step {
-      margin-bottom: 2rem;
-    }
-    blockquote {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      margin: 1rem 0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: white;
-    }
-    .footer-nav {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .cta-button {
-        transition: none;
-      }
-    }
+    input:focus,textarea:focus,select:focus{outline:2px solid #93c5fd;outline-offset:1px;border-color:#93c5fd}
+    .privacy{font-size:.9rem;color:var(--muted)}
+
+    /* Footer */
+    footer{background:#fff;border-top:1px solid #eee;padding:2rem 0}
+    .footer-grid{display:grid;gap:1rem}
+    @media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
+
+    /* Motion pref */
+    @media (prefers-reduced-motion:reduce){.btn{transition:none}}
   </style>
+
+  <!-- JSON-LD LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "name":"Prime Local Growth",
+    "url":"https://www.primelocalgrowth.com/",
+    "image":"https://www.primelocalgrowth.com/Logo.webp",
+    "description":"Local Authority Systems for solo service businesses. Free visibility audit in 24 hours.",
+    "areaServed":{"@type":"Place","name":"San Antonio, TX"},
+    "address":{"@type":"PostalAddress","addressLocality":"Cibolo","addressRegion":"TX","addressCountry":"US"},
+    "sameAs": ["https://www.facebook.com/PrimeLocalGrowth","https://www.instagram.com/PrimeLocalGrowth"]
+  }
+  </script>
+
+  <!-- GA4 placeholder
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)}
+    gtag('js', new Date()); gtag('config', 'G-XXXXXXX');
+  </script>
+  -->
 </head>
 
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+
   <header>
-    <img src="Logo.webp" alt="Prime Local Growth Logo" class="logo" width="160" height="80">
-    <h1>Why Can't Local Customers Find Your Business?</h1>
-    <p>Get your free visibility report in 24 hours</p>
-    <a href="#audit-form" class="cta-button">Get Free Report →</a>
+    <div class="container">
+      <div class="brand" aria-label="Prime Local Growth">
+        <img src="Logo.webp" alt="Prime Local Growth logo" width="160" height="80" decoding="async" fetchpriority="high" />
+      </div>
+      <div class="kicker">Free 24 hour visibility report</div>
+      <h1>Own your local market in 90 days</h1>
+      <p class="lead">We build simple systems that turn searches into booked jobs. Fix Google Business, reviews, and booking friction fast.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#audit-form" aria-label="Get your free visibility report">Get free report →</a>
+        <a class="btn btn-outlined" href="#proof" aria-label="See client proof">See proof</a>
+      </div>
+    </div>
   </header>
 
-  <main role="main">
-    <div class="container">
-      <h2>Our 3-Step Visibility Fix</h2>
-      
-      <div class="step">
-        <h3>1. Free Audit</h3>
-        <p>We analyze your online presence across 50+ local directories</p>
+  <main id="main" role="main">
+    <!-- Offer snapshot -->
+    <section>
+      <div class="container grid grid-3">
+        <div class="card">
+          <h3>Local Authority Jumpstart</h3>
+          <ul class="check">
+            <li>Fix Google Business and NAP conflicts</li>
+            <li>Review engine with request and reply scripts</li>
+            <li>Posting cadence and offer blocks</li>
+            <li>Booking cleanup and link hygiene</li>
+            <li>Weekly scorecard with calls, direction requests, CTR</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What you get</h3>
+          <p class="muted">Actionable changes in 7 days. Measurable lift in 30 days. Compounding gains in 90 days.</p>
+          <ul class="check">
+            <li>Faster map pack visibility</li>
+            <li>More calls and direction requests</li>
+            <li>Cleaner booking path</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Why it works</h3>
+          <p class="muted">We remove friction, standardize data, and publish signals Google trusts.</p>
+          <ul class="check">
+            <li>Mobile-first pages under 2.5s LCP</li>
+            <li>Schema and review velocity</li>
+            <li>Consistent category and service signals</li>
+          </ul>
+        </div>
       </div>
-      
-      <div class="step">
-        <h3>2. Action Plan</h3>
-        <p>Receive prioritized fixes you can implement yourself</p>
+    </section>
+
+    <!-- Process -->
+    <section>
+      <div class="container">
+        <h2>Our three step system</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>1. Audit</h3>
+            <p>We analyze 50 plus listings, GBP, reviews, categories, and your booking path.</p>
+          </div>
+          <div class="card">
+            <h3>2. Fixes</h3>
+            <p>We implement the highest leverage changes first and remove technical debt.</p>
+          </div>
+          <div class="card">
+            <h3>3. Compounding</h3>
+            <p>We publish purposeful updates and measure weekly so wins stack, not stall.</p>
+          </div>
+        </div>
       </div>
-      
-      <div class="step">
-        <h3>3. Ongoing Support</h3>
-        <p>Monthly monitoring and expert help when needed</p>
+    </section>
+
+    <!-- Proof -->
+    <section id="proof" aria-labelledby="proof-title">
+      <div class="container stack">
+        <h2 id="proof-title">Local results</h2>
+        <div class="grid">
+          <blockquote>
+            “Phone calls up 38 percent in 30 days. Direction requests up 51 percent. Bookings up 22 percent.”
+            <cite>Client report excerpt</cite>
+          </blockquote>
+          <blockquote>
+            “Our phone started ringing within a week of the fixes.”
+            <cite>Maria’s Diner, Downtown SA</cite>
+          </blockquote>
+          <blockquote>
+            “Clear plan. Clean execution. No fluff.”
+            <cite>Joe’s Auto Repair</cite>
+          </blockquote>
+        </div>
       </div>
-    </div>
-    
-    <div class="container">
-      <h2>Local Business Success Stories</h2>
-      <blockquote>
-        "Our phone started ringing within a week of implementing their recommendations!"
-        <cite>- Maria's Diner, Downtown SA</cite>
-      </blockquote>
-      <blockquote>
-        "Finally understand how local search works. Worth every penny!"
-        <cite>- Joe's Auto Repair</cite>
-      </blockquote>
-    </div>
+    </section>
+
+    <!-- Lead form -->
+    <section id="audit-form" aria-labelledby="audit-title">
+      <div class="container">
+        <div class="card">
+          <h2 id="audit-title">Get your free visibility report</h2>
+          <p class="muted">24 hour turnaround. We only ask for what we need.</p>
+
+          <!-- Replace action with your Basin or Getform endpoint -->
+          <form method="POST" action="https://usebasin.com/f/your-endpoint">
+            <div class="grid" style="grid-template-columns:1fr;gap:.75rem">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <label for="business">Business</label>
+                <input id="business" name="business" type="text" required />
+              </div>
+              <div class="field">
+                <label for="city">City and state</label>
+                <input id="city" name="city" type="text" placeholder="Example San Antonio TX" required />
+              </div>
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+              </div>
+              <div class="field">
+                <label for="url">Website or Google Business link</label>
+                <input id="url" name="url" type="url" placeholder="https:// or GBP link" required />
+              </div>
+              <input type="hidden" name="utm_source" id="utm_source" />
+              <input type="hidden" name="utm_medium" id="utm_medium" />
+              <input type="hidden" name="utm_campaign" id="utm_campaign" />
+            </div>
+            <p class="privacy">By submitting you agree to be contacted about your audit. No spam. No list resale.</p>
+            <button class="btn btn-primary" type="submit">Send my report →</button>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer role="contentinfo">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Prime Local Growth</p>
-    <nav class="footer-nav">
-  <p>Prime Local Growth</p>
-    </nav>
+    <div class="container footer-grid">
+      <div>
+        <strong>Prime Local Growth</strong>
+        <p class="muted">Local Authority Systems for solo service businesses in the San Antonio area.</p>
+        <p class="muted">Cibolo TX • Service area San Antonio and surrounding cities</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="/review.html">Reviews</a><br />
+        <a href="/success.html">Success</a><br />
+        <a href="/robots.txt">Robots</a>
+      </nav>
+      <div>
+        <a class="btn btn-outlined" href="#audit-form">Get free report</a>
+      </div>
+    </div>
+    <div class="container" style="margin-top:1rem;text-align:center">
+      <small class="muted">© <span id="year"></span> Prime Local Growth</small>
+    </div>
   </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Lightweight UTM carryover
+    const params = new URLSearchParams(location.search);
+    const setIf = (id,key)=>{ const el=document.getElementById(id); if(el && params.get(key)) el.value=params.get(key) };
+    setIf('utm_source','utm_source'); setIf('utm_medium','utm_medium'); setIf('utm_campaign','utm_campaign');
+  </script>
 </body>
 </html>

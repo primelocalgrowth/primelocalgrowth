@@ -13,26 +13,11 @@
 
   <!-- Review Page -->
   <url>
-    <loc>https://www.primelocalgrowth.com/review</loc>
+    <loc>https://www.primelocalgrowth.com/review.html</loc>
     <lastmod>2025-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Success Page -->
-  <url>
-    <loc>https://www.primelocalgrowth.com/success</loc>
-    <lastmod>2025-08-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- 404 Page (optional to list) -->
-  <url>
-    <loc>https://www.primelocalgrowth.com/404</loc>
-    <lastmod>2025-08-07</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.1</priority>
-  </url>
 
 </urlset>

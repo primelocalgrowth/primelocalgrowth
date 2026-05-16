@@ -4,12 +4,12 @@ export default {
       output: {
         dir: 'dist'
           }
+            external: [/^\/_vercel\//, /^\/__manus__\//, /^\/__/],
     },
     target: 'es2020',
           minify: 'terser',
           sourcemap: false
       },
-        external: [/^\/_vercel\//]
         server: {
     port: 5173
       }

@@ -29,14 +29,81 @@
             document.addEventListener('DOMContentLoaded', function() {
                     const forms = document.querySelectorAll('form');
                     forms.forEach(form => {
-                              form.addEventListener('submit', function(e) {
-                                          // Track form submission event
-                                          gtag('event', 'lead_form_submission', {
-                                                        'value': 50,
-                                                        'currency': 'USD',
-                                                        'form_name': form.getAttribute('name') || form.id || 'contact_form'
-                                          });
-                              });
+form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate form fields
+        const name = form.querySelector('input[placeholder*="John"]')?.value.trim();
+        const email = form.querySelector('input[type="email"]')?.value.trim();
+        const businessType = form.querySelector('input[placeholder*="Plumbing"]')?.value.trim();
+        
+        // Validation checks
+        if (!name || !email || !businessType) {
+                  alert('Please fill in all fields');
+                  return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+                  alert('Please enter a valid email address');
+                  return;
+        }
+        
+        // Add loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        // Track form submission event in GA4
+        gtag('event', 'lead_form_submission', {
+                  'value': 50,
+                  'currency': 'USD',
+                  'form_name': form.getAttribute('name') || form.id || 'contact_form',
+                  'lead_name': name,
+                  'business_type': businessType
+        });
+        
+        // Track detailed conversion event
+        gtag('event', 'close_convert_Lead', {
+                  'value': 50,
+                  'currency': 'USD',
+                  'form_name': form.getAttribute('name') || form.id || 'contact_form'
+        });
+        
+        // Send email via FormSubmit.co (free service)
+        fetch('https://formsubmit.co/adam@primelocalgrowth.com', {
+                  method: 'POST',
+                  body: new FormData(form),
+                  headers: {
+                              'Accept': 'application/json'
+                  }
+        })
+                .then(response => {
+                          if (response.ok) {
+                                      // Success - show message and reset form
+                                      submitBtn.textContent = '✓ Message Sent!';
+                                      submitBtn.style.backgroundColor = '#28a745';
+                                      form.reset();
+                                      
+                                      // Reset after 3 seconds
+                                      setTimeout(() => {
+                                                    submitBtn.textContent = originalText;
+                                                    submitBtn.disabled = false;
+                                                    submitBtn.style.backgroundColor = '';
+                                      }, 3000);
+                          } else {
+                                      throw new Error('Form submission failed');
+                          }
+                })
+                .catch(error => {
+                          console.error('Error:', error);
+                          submitBtn.textContent = 'Try Again';
+                          submitBtn.disabled = false;
+                          alert('There was an error sending your message. Please try again or email us directly at adam@primelocalgrowth.com');
+                });
+});;
                     });
             });
       </script>

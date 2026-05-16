@@ -73,10 +73,8 @@ form.addEventListener('submit', function(e) {
         });
         
         // Send email via FormSubmit.co (free service)
-        fetch('https://formsubmit.co/adam@primelocalgrowth.com', {
-                  method: 'POST',
-                  body: new FormData(form),
-                  headers: {
+      fetch('/api/submit-form', {                  method: 'POST',
+        body: JSON.stringify({ name, email, businessType }),                  headers: {
                               'Accept': 'application/json'
                   }
         })

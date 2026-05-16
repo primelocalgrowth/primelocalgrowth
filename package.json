@@ -16,6 +16,9 @@
   "author": "Prime Local Growth",
   "license": "ISC",
   "dependencies": {
-    "@vercel/speed-insights": "^2.0.0"
+    "@vercel/speed-insights": "^2.0.0",
+      "devDependencies": {
+            "vite": "^5.0.0"
+      }
   }
 }

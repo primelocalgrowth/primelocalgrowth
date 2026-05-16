@@ -22,6 +22,25 @@
     <script type="module" crossorigin src="/assets/index-Z18OqgIu.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-B9Xg233O.css">
     <script src="/__manus__/debug-collector.js" defer></script>
+
+      <!-- Form Submission Tracking -->
+      <script>
+            // Track form submissions for lead generation
+            document.addEventListener('DOMContentLoaded', function() {
+                    const forms = document.querySelectorAll('form');
+                    forms.forEach(form => {
+                              form.addEventListener('submit', function(e) {
+                                          // Track form submission event
+                                          gtag('event', 'lead_form_submission', {
+                                                        'value': 50,
+                                                        'currency': 'USD',
+                                                        'form_name': form.getAttribute('name') || form.id || 'contact_form'
+                                          });
+                              });
+                    });
+            });
+      </script>
+      </script>
   </head>
 
   <body>

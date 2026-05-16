@@ -1,0 +1,21 @@
+{
+  "name": "primelocalgrowth",
+  "version": "1.0.0",
+  "description": "Prime Local Growth - Get Found By Customers",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "local-business",
+    "marketing",
+    "seo"
+  ],
+  "author": "Prime Local Growth",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}

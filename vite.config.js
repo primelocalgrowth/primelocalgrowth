@@ -9,6 +9,7 @@ export default {
           minify: 'terser',
           sourcemap: false
       },
+        external: [/^\/_vercel\//]
         server: {
     port: 5173
       }

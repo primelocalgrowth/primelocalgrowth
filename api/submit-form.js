@@ -1,14 +1,20 @@
 /**
- * Prime Local Growth - Enhanced Form Handler
- * Handles form submissions with:
- * 1. Email notification (Resend)
- * 2. Beehiiv subscriber addition
- * 3. Google Sheets logging
- * 4. Thank-you page redirect
+ * Prime Local Growth - Form Handler
+ * Handles form submissions with email, Beehiiv, and Google Sheets integration
  */
 
 export default async function handler(req, res) {
-  // Only allow POST requests
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -28,43 +34,37 @@ export default async function handler(req, res) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({
-        error: 'Please enter a valid email address',
-        email: email
+        error: 'Please enter a valid email address'
       });
     }
 
-    // Run all integrations in parallel
     const timestamp = new Date().toISOString();
 
-    const [emailResult, beehiivResult, sheetsResult] = await Promise.allSettled([
+    // Run all integrations in parallel (don't fail if one fails)
+    const results = await Promise.allSettled([
       sendEmailNotification(name, email, phone, businessType, timestamp),
       addToBeehiiv(name, email, phone, businessType),
       appendToGoogleSheets(name, email, phone, businessType, timestamp)
     ]);
 
-    // Log results (don't fail if individual integrations error)
-    console.log('Email result:', emailResult.status);
-    console.log('Beehiiv result:', beehiivResult.status);
-    console.log('Sheets result:', sheetsResult.status);
+    console.log('Integration results:', {
+      email: results[0].status,
+      beehiiv: results[1].status,
+      sheets: results[2].status
+    });
 
-    // Return success response with redirect URL
+    // Return success regardless of integration status
     return res.status(200).json({
       success: true,
       message: 'Form submitted successfully!',
       redirectUrl: '/thank-you',
-      data: {
-        name,
-        email,
-        phone,
-        businessType,
-        submittedAt: timestamp
-      }
+      data: { name, email, phone, businessType, submittedAt: timestamp }
     });
 
   } catch (error) {
     console.error('Form submission error:', error);
     return res.status(500).json({
-      error: 'An error occurred while processing your submission',
+      error: 'Server error processing submission',
       details: error.message
     });
   }

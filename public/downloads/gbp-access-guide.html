@@ -517,12 +517,24 @@
     .closer-contact .c-name { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: #fff; }
     .closer-contact .c-detail { font-size: 14px; color: var(--amber); }
 
+    /* ── PAGE BREAK CONTROLS ── */
+    .benefit-card, .callout, .permission-row, .security-card,
+    .tl-item, .action-list li, .step-header, .email-box,
+    .closer-contact, .cover-stats, .benefit-grid, .security-grid,
+    .timeline, .permission-body { page-break-inside: avoid; break-inside: avoid; }
+    .section-label, .page-title { page-break-after: avoid; break-after: avoid; }
+    .step-header + ul { page-break-before: avoid; break-before: avoid; }
+
     /* ── PRINT ── */
     @media print {
       @page { margin: 0; size: letter; }
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .cover { min-height: 100vh; }
-      .page { padding: 48px 56px 64px; }
+      .cover { min-height: 100vh; page-break-after: always; }
+      .page  { padding: 48px 56px 64px; page-break-after: always; }
+      .closer { page-break-after: auto; }
+      .benefit-card, .callout, .permission-row, .security-card,
+      .tl-item, .action-list li, .step-header, .email-box,
+      .benefit-grid, .security-grid, .timeline { page-break-inside: avoid; break-inside: avoid; }
     }
   </style>
 </head>
@@ -557,7 +569,7 @@
   <div class="cover-footer">
     <div class="cover-brand">Prime <span>Local</span> Growth</div>
     <div class="cover-contact">
-      adam@primelocalgrowth.com<br>
+      primelocalgrowth@gmail.com<br>
       210-646-1436 · primelocalgrowth.com
     </div>
   </div>
@@ -765,7 +777,7 @@
 
   <div class="email-box">
     <div class="email-box-label">Enter this email address exactly</div>
-    <div class="email-box-addr">adam@primelocalgrowth.com</div>
+    <div class="email-box-addr">primelocalgrowth@gmail.com</div>
     <div class="email-box-note">Copy and paste to avoid typos</div>
   </div>
 
@@ -846,7 +858,7 @@
   <ul class="action-list">
     <li>
       <div class="action-num">1</div>
-      <div class="action-text">After you click Invite, Google sends a notification to <strong>adam@primelocalgrowth.com.</strong> The invitation expires after <strong>30 days</strong> if not accepted.</div>
+      <div class="action-text">After you click Invite, Google sends a notification to <strong>primelocalgrowth@gmail.com.</strong> The invitation expires after <strong>30 days</strong> if not accepted.</div>
     </li>
     <li>
       <div class="action-num">2</div>
@@ -862,7 +874,7 @@
     <div class="callout-icon">📬</div>
     <div class="callout-body">
       <div class="callout-title">Didn't hear from us within 24 hours?</div>
-      <div class="callout-text">Text or call us at 210-646-1436, or email adam@primelocalgrowth.com. We'll confirm receipt and check that the invite came through correctly.</div>
+      <div class="callout-text">Text or call us at 210-646-1436, or email primelocalgrowth@gmail.com. We'll confirm receipt and check that the invite came through correctly.</div>
     </div>
   </div>
 
@@ -870,7 +882,7 @@
     <div class="callout-icon">💡</div>
     <div class="callout-body">
       <div class="callout-title">How to verify access was granted</div>
-      <div class="callout-text">Go back to Business Profile settings → Managers. You should see "adam@primelocalgrowth.com" listed with the role "Manager." If it shows "Pending," we haven't accepted yet — that's normal. Check back in 24 hours.</div>
+      <div class="callout-text">Go back to Business Profile settings → Managers. You should see "primelocalgrowth@gmail.com" listed with the role "Manager." If it shows "Pending," we haven't accepted yet — that's normal. Check back in 24 hours.</div>
     </div>
   </div>
 </div>
@@ -913,7 +925,7 @@
     <div class="security-card">
       <div class="s-icon">✉️</div>
       <div class="s-title">Questions? Reach us directly</div>
-      <div class="s-desc">adam@primelocalgrowth.com or 210-646-1436. If anything ever feels off, contact us and we will resolve it immediately.</div>
+      <div class="s-desc">primelocalgrowth@gmail.com or 210-646-1436. If anything ever feels off, contact us and we will resolve it immediately.</div>
     </div>
   </div>
 </div>
@@ -982,7 +994,7 @@
   <div class="closer-contact">
     <div class="c-label">Questions? Reach us directly</div>
     <div class="c-name">Prime Local Growth</div>
-    <div class="c-detail">adam@primelocalgrowth.com</div>
+    <div class="c-detail">primelocalgrowth@gmail.com</div>
     <div class="c-detail">210-646-1436</div>
     <div class="c-detail" style="color:#6b7280;font-size:13px;margin-top:4px;">primelocalgrowth.com</div>
   </div>

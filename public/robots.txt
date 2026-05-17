@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /thank-you
+
+Sitemap: https://primelocalgrowth.com/sitemap.xml

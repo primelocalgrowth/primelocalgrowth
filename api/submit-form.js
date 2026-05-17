@@ -125,10 +125,10 @@ async function sendEmailNotification(name, email, phone, businessType, timestamp
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      from: 'onboarding@resend.dev',
+      from: 'Prime Local Growth <adam@primelocalgrowth.com>',
       to: 'adam@primelocalgrowth.com',
       replyTo: email,
-      subject: `New Lead: ${name} (${businessType})`,
+      subject: `🔥 New Lead: ${name} — ${businessType}`,
       html: emailHtml
     })
   });

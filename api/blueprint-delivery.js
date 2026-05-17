@@ -281,32 +281,38 @@ export default async function handler(req, res) {
     return res.status(200).json({ received: true, action: 'no_email' });
   }
 
-  // 6. Get price IDs from line items (expand was set on the payment link, or use metadata)
-  //    Stripe sends line_items in the session for payment links
-  const priceMap    = getPriceMap();
-  let blueprints    = [];
+  // 6. Fetch line items from Stripe API (not included in webhook payload by default)
+  const priceMap = getPriceMap();
+  let blueprints = [];
 
-  // Try line_items first
-  if (session.line_items?.data?.length) {
-    for (const item of session.line_items.data) {
-      const priceId = item.price?.id;
-      if (priceId && priceMap[priceId]) {
-        blueprints.push(...priceMap[priceId]);
+  try {
+    const liRes = await fetch(
+      `https://api.stripe.com/v1/checkout/sessions/${session.id}/line_items?limit=10`,
+      { headers: { Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}` } }
+    );
+    const liData = await liRes.json();
+
+    if (liData.data?.length) {
+      for (const item of liData.data) {
+        const priceId = item.price?.id;
+        if (priceId && priceMap[priceId]) {
+          blueprints.push(...priceMap[priceId]);
+        }
       }
     }
+  } catch (err) {
+    console.error('Failed to fetch line items:', err);
   }
 
-  // Fallback: check metadata set on payment link
+  // Fallback: check session metadata
   if (blueprints.length === 0 && session.metadata?.blueprint) {
     const key = session.metadata.blueprint.toUpperCase();
     if (BLUEPRINTS[key]) blueprints.push(BLUEPRINTS[key]);
     if (key === 'BUNDLE')  blueprints.push(...ALL_FOUR);
   }
 
-  // Fallback: check payment link ID via env vars
   if (blueprints.length === 0) {
-    console.warn('Could not map price to blueprint. Session:', session.id, 'Line items:', JSON.stringify(session.line_items));
-    // Still return 200 so Stripe doesn't retry
+    console.warn('Could not map price to blueprint. Session:', session.id);
     return res.status(200).json({ received: true, action: 'unmapped_product', session: session.id });
   }
 

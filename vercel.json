@@ -24,6 +24,10 @@
       "dest": "/services.html"
     },
     {
+      "src": "/playbooks",
+      "dest": "/playbooks.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

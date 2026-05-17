@@ -991,11 +991,83 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
   .stats-bar-inner { grid-template-columns:repeat(2,1fr); gap:16px; }
   .why-callout { padding:28px 20px; }
 }
+
+/* ============================================================
+   INDUSTRY CHIPS
+   ============================================================ */
+.industry-chip {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  background:var(--bg-secondary);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:var(--radius-md);
+  padding:20px 12px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--text-muted);
+  text-align:center;
+  transition:background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+  cursor:default;
+}
+.industry-chip svg { color:var(--amber); flex-shrink:0; }
+.industry-chip:hover {
+  background:var(--amber-glow);
+  border-color:var(--amber-border);
+  color:var(--text-primary);
+  transform:translateY(-2px);
+}
+
+/* ============================================================
+   COMPARISON TABLE
+   ============================================================ */
+.compare-table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:40px;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+}
+.compare-table th {
+  padding:16px 20px;
+  font-family:'Poppins',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  text-align:center;
+  background:var(--bg-secondary);
+  color:var(--text-primary);
+  border-bottom:2px solid var(--amber-border);
+}
+.compare-table th:first-child { text-align:left; }
+.compare-table th.col-plg { background:rgba(245,158,11,0.12); color:var(--amber); }
+.compare-table td {
+  padding:14px 20px;
+  font-size:14px;
+  color:var(--text-body);
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.compare-table td:first-child { text-align:left; font-weight:500; color:var(--text-primary); }
+.compare-table td.col-plg { background:rgba(245,158,11,0.05); }
+.compare-table tr:last-child td { border-bottom:none; }
+.compare-check { color:#4ade80; font-weight:700; }
+.compare-x { color:#6b7280; }
+.compare-partial { color:#f59e0b; }
+@media (max-width:640px) {
+  .compare-table { font-size:12px; }
+  .compare-table th, .compare-table td { padding:10px 12px; }
+}
 </style>
 </head>
 <body>
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ANNOUNCEMENT BAR -->
+<div style="background:linear-gradient(90deg,#d97706,#f59e0b,#d97706);background-size:200% auto;animation:shimmer-text 4s linear infinite;padding:10px 20px;text-align:center;font-size:13px;font-weight:600;color:#000;z-index:201;position:relative;">
+  🎉 New: <a href="/playbooks" style="color:#000;text-decoration:underline;font-weight:700;">Local Growth Playbooks</a> — step-by-step guides starting at $27. <a href="/playbooks" style="color:#000;text-decoration:underline;font-weight:700;">Get yours →</a>
+</div>
 
 <!-- STICKY CTA -->
 <button class="sticky-cta" onclick="scrollToForm()" aria-label="Get your strategy">Get Your Free Kit →</button>
@@ -1214,7 +1286,7 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
   <div class="section-inner section-center">
     <div class="reveal" style="margin-bottom:40px;">
       <h2 class="section-title" id="form-heading">Get your free Jumpstart Kit</h2>
-      <p class="section-sub">Enter your info and we'll send the full kit to your inbox instantly — plus Adam will personally review your Google profile.</p>
+      <p class="section-sub">Enter your info and we'll send the full kit to your inbox instantly — plus our team will personally review your Google profile within 24 hours.</p>
     </div>
 
     <div class="form-card reveal">
@@ -1321,7 +1393,7 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
     <div class="reveal">
       <span class="section-label">Why Prime Local Growth</span>
       <h2 class="section-title" id="why-heading">Built different. On purpose.</h2>
-      <p class="section-sub">Not a big agency. Not outsourced. Just Adam — with the credentials to back it up.</p>
+      <p class="section-sub">Not a bloated agency. No account managers. No outsourcing. A focused team with the credentials to back up every result.</p>
     </div>
 
     <div class="why-grid">
@@ -1336,8 +1408,8 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
         <div class="why-icon" aria-hidden="true">
           <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
         </div>
-        <h4>Direct access to Adam</h4>
-        <p>You work directly with Adam. No account managers, no hand-offs. Direct communication, real accountability.</p>
+        <h4>Direct team access</h4>
+        <p>You work directly with our specialists — no account managers, no hand-offs, no ticket queues. Real people, real accountability.</p>
       </div>
       <div class="why-item reveal stagger-3">
         <div class="why-icon" aria-hidden="true">
@@ -1425,7 +1497,7 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
       <div class="process-step reveal stagger-2">
         <div class="process-num" aria-hidden="true">02</div>
         <h4>Visibility audit</h4>
-        <p>Adam personally analyzes where you currently show up and what's holding you back.</p>
+        <p>Our team personally analyzes where you currently show up on Google and exactly what's holding you back.</p>
       </div>
       <div class="process-step reveal stagger-3">
         <div class="process-num" aria-hidden="true">03</div>
@@ -1443,13 +1515,170 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
 
 <div class="section-divider"></div>
 
+<!-- INDUSTRIES -->
+<section class="section" style="background:var(--bg-primary);" aria-labelledby="industries-heading">
+  <div class="section-inner section-center">
+    <div class="reveal">
+      <span class="section-label">Who We Serve</span>
+      <h2 class="section-title" id="industries-heading">Built for local service businesses</h2>
+      <p class="section-sub">If customers search Google to find you, we can get you to the top.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;max-width:900px;margin:0 auto;" role="list" aria-label="Industries we serve">
+      <!-- Row 1 -->
+      <div class="industry-chip reveal stagger-1" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        HVAC
+      </div>
+      <div class="industry-chip reveal stagger-2" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        Plumbing
+      </div>
+      <div class="industry-chip reveal stagger-3" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Roofing
+      </div>
+      <div class="industry-chip reveal stagger-4" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        Landscaping
+      </div>
+      <div class="industry-chip reveal stagger-1" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Legal
+      </div>
+      <div class="industry-chip reveal stagger-2" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        Dental
+      </div>
+      <div class="industry-chip reveal stagger-3" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Electrical
+      </div>
+      <div class="industry-chip reveal stagger-4" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+        Auto Repair
+      </div>
+      <div class="industry-chip reveal stagger-1" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+        Cleaning
+      </div>
+      <div class="industry-chip reveal stagger-2" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        Med Spa
+      </div>
+      <div class="industry-chip reveal stagger-3" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+        Contracting
+      </div>
+      <div class="industry-chip reveal stagger-4" role="listitem">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        + Many More
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COMPARISON TABLE -->
+<section class="section" style="background:linear-gradient(135deg,#1a1f26,#0f1419);" aria-labelledby="compare-heading">
+  <div class="section-inner section-center">
+    <div class="reveal">
+      <span class="section-label">Why Prime Local Growth</span>
+      <h2 class="section-title" id="compare-heading">We're not like other agencies.</h2>
+      <p class="section-sub">See exactly how we compare — and why local businesses choose us.</p>
+    </div>
+    <div style="overflow-x:auto;" class="reveal">
+      <table style="width:100%;max-width:820px;margin:0 auto;border-collapse:separate;border-spacing:0;font-size:14px;" role="table" aria-label="Comparison table">
+        <thead>
+          <tr>
+            <th style="padding:14px 20px;text-align:left;color:var(--text-muted);font-weight:500;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);">Feature</th>
+            <th style="padding:14px 20px;text-align:center;color:var(--amber);font-weight:700;font-size:13px;border-bottom:2px solid var(--amber);background:rgba(245,158,11,0.06);border-radius:8px 8px 0 0;">Prime Local Growth</th>
+            <th style="padding:14px 20px;text-align:center;color:var(--text-muted);font-weight:500;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);">Big Agency</th>
+            <th style="padding:14px 20px;text-align:center;color:var(--text-muted);font-weight:500;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);">DIY</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="compare-row">
+            <td style="padding:13px 20px;color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,0.04);">Monthly cost</td>
+            <td style="padding:13px 20px;text-align:center;color:var(--amber);font-weight:700;background:rgba(245,158,11,0.04);border-bottom:1px solid rgba(245,158,11,0.08);">$297–$697</td>
+            <td style="padding:13px 20px;text-align:center;color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,0.04);">$2,000–$5,000+</td>
+            <td style="padding:13px 20px;text-align:center;color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,0.04);">Your time</td>
+          </tr>
+          <tr class="compare-row">
+            <td style="padding:13px 20px;color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,0.04);">Contract required</td>
+            <td style="padding:13px 20px;text-align:center;background:rgba(245,158,11,0.04);border-bottom:1px solid rgba(245,158,11,0.08);">
+              <svg style="color:#22c55e;" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="No"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <svg style="color:#ef4444;" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="Yes"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <svg style="color:#6b7280;" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="N/A"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
+            </td>
+          </tr>
+          <tr class="compare-row">
+            <td style="padding:13px 20px;color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,0.04);">Local SEO expertise</td>
+            <td style="padding:13px 20px;text-align:center;background:rgba(245,158,11,0.04);border-bottom:1px solid rgba(245,158,11,0.08);">
+              <svg style="color:var(--amber);" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="Yes"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <svg style="color:var(--text-muted);" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-label="Sometimes"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <svg style="color:#ef4444;" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="No"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </td>
+          </tr>
+          <tr class="compare-row">
+            <td style="padding:13px 20px;color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,0.04);">Direct specialist access</td>
+            <td style="padding:13px 20px;text-align:center;background:rgba(245,158,11,0.04);border-bottom:1px solid rgba(245,158,11,0.08);">
+              <svg style="color:var(--amber);" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="Yes"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <svg style="color:#ef4444;" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="No"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <svg style="color:#6b7280;" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="N/A"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
+            </td>
+          </tr>
+          <tr class="compare-row">
+            <td style="padding:13px 20px;color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,0.04);">Results in 30 days</td>
+            <td style="padding:13px 20px;text-align:center;background:rgba(245,158,11,0.04);border-bottom:1px solid rgba(245,158,11,0.08);">
+              <svg style="color:var(--amber);" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="Yes"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <svg style="color:#ef4444;" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="No"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <svg style="color:var(--text-muted);" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-label="Maybe"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </td>
+          </tr>
+          <tr class="compare-row">
+            <td style="padding:13px 20px;color:var(--text-muted);">All communication by email</td>
+            <td style="padding:13px 20px;text-align:center;background:rgba(245,158,11,0.04);border-radius:0 0 8px 8px;">
+              <svg style="color:var(--amber);" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="Yes"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;">
+              <svg style="color:#ef4444;" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="No"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </td>
+            <td style="padding:13px 20px;text-align:center;">
+              <svg style="color:#6b7280;" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-label="N/A"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- BOTTOM FORM -->
 <section id="contact" class="section form-section" aria-labelledby="contact-heading">
   <div class="section-inner section-center">
     <div class="reveal" style="margin-bottom:40px;">
       <span class="section-label">Get Started</span>
       <h2 class="section-title" id="contact-heading">Ready to get found by your customers?</h2>
-      <p class="section-sub">No calls. No pressure. Just send your info and Adam will personally respond with exactly what your business needs.</p>
+      <p class="section-sub">No calls. No pressure. Send your info and our team will personally respond within 24 hours with exactly what your business needs.</p>
     </div>
 
     <div class="form-card reveal">
@@ -1633,7 +1862,7 @@ document.querySelectorAll('form[data-form="lead-form"]').forEach(form => {
     .catch(() => {
       btn.textContent = 'Try Again';
       btn.disabled = false;
-      alert('Error submitting form. Please email adam@primelocalgrowth.com directly.');
+      alert('Error submitting form. Please email hello@primelocalgrowth.com directly.');
     });
   });
 });

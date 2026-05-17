@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Growth Playbooks | Prime Local Growth</title>
+  <meta name="description" content="Step-by-step playbooks for local businesses. Get found on Google, generate more reviews, and dominate your local market — starting at $27.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      background:#0f1419;
+      color:#d1d5db;
+      line-height:1.6;
+    }
+
+    /* NAV */
+    nav {
+      background:rgba(15,20,25,0.97);
+      border-bottom:1px solid rgba(245,158,11,0.15);
+      padding:18px 40px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(12px);
+    }
+    .nav-brand {
+      font-family:'Poppins',sans-serif;
+      font-size:18px;
+      font-weight:700;
+      color:#fff;
+      text-decoration:none;
+    }
+    .nav-brand span { color:#f59e0b; }
+    .nav-links { display:flex; gap:28px; align-items:center; }
+    .nav-links a {
+      color:#9ca3af;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:500;
+      transition:color 0.2s;
+    }
+    .nav-links a:hover { color:#f59e0b; }
+    .nav-cta {
+      background:#f59e0b !important;
+      color:#fff !important;
+      padding:8px 20px;
+      border-radius:6px;
+      font-weight:600 !important;
+    }
+    .nav-cta:hover { background:#d97706 !important; }
+
+    /* HERO */
+    .hero {
+      text-align:center;
+      padding:80px 20px 60px;
+      background:linear-gradient(180deg,#1a1f26 0%,#0f1419 100%);
+      border-bottom:1px solid rgba(245,158,11,0.1);
+    }
+    .hero-tag {
+      display:inline-block;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#f59e0b;
+      background:rgba(245,158,11,0.1);
+      border:1px solid rgba(245,158,11,0.25);
+      padding:6px 16px;
+      border-radius:20px;
+      margin-bottom:20px;
+    }
+    .hero h1 {
+      font-family:'Poppins',sans-serif;
+      font-size:44px;
+      font-weight:700;
+      color:#fff;
+      line-height:1.2;
+      margin-bottom:18px;
+    }
+    .hero h1 span { color:#f59e0b; }
+    .hero p {
+      font-size:18px;
+      color:#9ca3af;
+      max-width:580px;
+      margin:0 auto 16px;
+      line-height:1.7;
+    }
+    .hero-note {
+      font-size:13px;
+      color:#6b7280;
+      margin-top:8px;
+    }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background:#1a1f26;
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      padding:16px 20px;
+      text-align:center;
+    }
+    .trust-bar p { font-size:13px; color:#6b7280; }
+    .trust-bar strong { color:#d1d5db; }
+
+    /* SECTION */
+    .section {
+      max-width:1100px;
+      margin:0 auto;
+      padding:70px 20px;
+    }
+    .section-label {
+      text-align:center;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#f59e0b;
+      margin-bottom:12px;
+    }
+    .section-title {
+      text-align:center;
+      font-family:'Poppins',sans-serif;
+      font-size:32px;
+      font-weight:700;
+      color:#fff;
+      margin-bottom:10px;
+    }
+    .section-sub {
+      text-align:center;
+      font-size:16px;
+      color:#9ca3af;
+      margin-bottom:50px;
+      max-width:560px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    /* PLAYBOOK CARDS */
+    .playbook-grid {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:28px;
+    }
+    .playbook-card {
+      background:#1a1f26;
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px;
+      padding:36px 32px;
+      position:relative;
+      transition:transform 0.25s cubic-bezier(0.4,0,0.2,1), border-color 0.25s, box-shadow 0.25s;
+    }
+    .playbook-card:hover {
+      transform:translateY(-4px);
+      border-color:rgba(245,158,11,0.35);
+      box-shadow:0 8px 40px rgba(245,158,11,0.12);
+    }
+    .playbook-card.featured {
+      border-color:#f59e0b;
+      background:linear-gradient(180deg,rgba(245,158,11,0.08) 0%,#1a1f26 100%);
+    }
+    .playbook-badge {
+      position:absolute;
+      top:-13px;
+      left:28px;
+      background:#f59e0b;
+      color:#0f1419;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      padding:4px 14px;
+      border-radius:20px;
+    }
+    .playbook-icon {
+      width:52px;
+      height:52px;
+      background:rgba(245,158,11,0.1);
+      border:1px solid rgba(245,158,11,0.2);
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:20px;
+      color:#f59e0b;
+    }
+    .playbook-card h3 {
+      font-family:'Poppins',sans-serif;
+      font-size:22px;
+      font-weight:700;
+      color:#fff;
+      margin-bottom:8px;
+      line-height:1.3;
+    }
+    .playbook-price {
+      font-family:'Poppins',sans-serif;
+      font-size:36px;
+      font-weight:700;
+      color:#f59e0b;
+      margin-bottom:4px;
+    }
+    .playbook-price-note {
+      font-size:12px;
+      color:#6b7280;
+      margin-bottom:16px;
+    }
+    .playbook-desc {
+      font-size:14px;
+      color:#9ca3af;
+      line-height:1.7;
+      margin-bottom:20px;
+      padding-bottom:20px;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .playbook-features {
+      list-style:none;
+      margin-bottom:28px;
+    }
+    .playbook-features li {
+      font-size:14px;
+      color:#d1d5db;
+      padding:6px 0;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      line-height:1.5;
+    }
+    .playbook-features li .check {
+      color:#f59e0b;
+      font-weight:700;
+      flex-shrink:0;
+    }
+    .playbook-btn {
+      display:block;
+      text-align:center;
+      padding:13px 24px;
+      border-radius:6px;
+      font-weight:600;
+      font-size:15px;
+      text-decoration:none;
+      transition:all 0.2s;
+      background:#f59e0b;
+      color:#fff;
+    }
+    .playbook-btn:hover { background:#d97706; transform:translateY(-1px); }
+    .playbook-btn-outline {
+      background:transparent;
+      color:#f59e0b;
+      border:1px solid rgba(245,158,11,0.4);
+    }
+    .playbook-btn-outline:hover { background:rgba(245,158,11,0.08); transform:translateY(-1px); }
+
+    /* BUNDLE */
+    .bundle-section {
+      background:#1a1f26;
+      border-top:1px solid rgba(255,255,255,0.05);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      padding:60px 20px;
+      text-align:center;
+    }
+    .bundle-card {
+      max-width:700px;
+      margin:0 auto;
+      background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04));
+      border:2px solid rgba(245,158,11,0.4);
+      border-radius:16px;
+      padding:48px 40px;
+    }
+    .bundle-card h2 {
+      font-family:'Poppins',sans-serif;
+      font-size:30px;
+      font-weight:700;
+      color:#fff;
+      margin-bottom:10px;
+    }
+    .bundle-card p {
+      font-size:16px;
+      color:#9ca3af;
+      margin-bottom:24px;
+      line-height:1.7;
+    }
+    .bundle-price-row {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+    }
+    .bundle-was {
+      font-size:20px;
+      color:#6b7280;
+      text-decoration:line-through;
+    }
+    .bundle-now {
+      font-family:'Poppins',sans-serif;
+      font-size:48px;
+      font-weight:700;
+      color:#f59e0b;
+    }
+    .bundle-save {
+      background:#f59e0b;
+      color:#0f1419;
+      font-size:12px;
+      font-weight:700;
+      padding:4px 12px;
+      border-radius:20px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    /* FAQ */
+    .faq-section {
+      max-width:800px;
+      margin:0 auto;
+      padding:70px 20px;
+    }
+    .faq-grid {
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      margin-top:40px;
+    }
+    .faq-item {
+      background:#1a1f26;
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:8px;
+      padding:22px 26px;
+    }
+    .faq-item h4 {
+      font-size:15px;
+      font-weight:600;
+      color:#fff;
+      margin-bottom:8px;
+    }
+    .faq-item p { font-size:14px; color:#9ca3af; line-height:1.7; }
+
+    /* UPGRADE CTA */
+    .upgrade-section {
+      background:linear-gradient(180deg,#0f1419,#1a1f26);
+      padding:80px 20px;
+      text-align:center;
+    }
+    .upgrade-section h2 {
+      font-family:'Poppins',sans-serif;
+      font-size:32px;
+      font-weight:700;
+      color:#fff;
+      margin-bottom:14px;
+    }
+    .upgrade-section p {
+      font-size:17px;
+      color:#9ca3af;
+      max-width:520px;
+      margin:0 auto 32px;
+      line-height:1.7;
+    }
+    .cta-buttons {
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .btn-primary {
+      background:#f59e0b;
+      color:#fff;
+      padding:15px 36px;
+      border-radius:6px;
+      font-weight:700;
+      font-size:16px;
+      text-decoration:none;
+      transition:all 0.2s;
+    }
+    .btn-primary:hover { background:#d97706; transform:translateY(-2px); }
+    .btn-secondary {
+      background:transparent;
+      color:#f59e0b;
+      padding:15px 36px;
+      border-radius:6px;
+      font-weight:600;
+      font-size:16px;
+      text-decoration:none;
+      border:1px solid rgba(245,158,11,0.4);
+      transition:all 0.2s;
+    }
+    .btn-secondary:hover { background:rgba(245,158,11,0.08); }
+
+    /* FOOTER */
+    footer {
+      background:#0a0e13;
+      border-top:1px solid rgba(245,158,11,0.1);
+      padding:30px 40px;
+      text-align:center;
+    }
+    footer p { font-size:13px; color:#4b5563; }
+    footer a { color:#6b7280; text-decoration:none; }
+    footer a:hover { color:#f59e0b; }
+
+    @media (max-width:768px) {
+      .playbook-grid { grid-template-columns:1fr; }
+      .hero h1 { font-size:30px; }
+      nav { padding:16px 20px; }
+      .nav-links { gap:16px; }
+      .bundle-card { padding:32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-brand">Prime <span>Local</span> Growth</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/playbooks">Playbooks</a>
+      <a href="mailto:hello@primelocalgrowth.com" class="nav-cta">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Local Growth Playbooks</div>
+    <h1>Do it yourself.<br><span>Do it right.</span></h1>
+    <p>Step-by-step guides built specifically for local business owners who want real results without hiring an agency.</p>
+    <p class="hero-note">One-time purchase. Instant delivery. No subscriptions.</p>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <p><strong>✓ Instant PDF download &nbsp;&nbsp;✓ Written by local SEO specialists &nbsp;&nbsp;✓ No fluff — just proven tactics &nbsp;&nbsp;✓ 30-day money-back guarantee</strong></p>
+  </div>
+
+  <!-- PLAYBOOKS -->
+  <div class="section">
+    <p class="section-label">The Playbooks</p>
+    <h2 class="section-title">Pick your growth area</h2>
+    <p class="section-sub">Each playbook is a focused, actionable guide. Read it once, implement it in a weekend.</p>
+
+    <div class="playbook-grid">
+
+      <!-- GBP PLAYBOOK -->
+      <div class="playbook-card featured">
+        <div class="playbook-badge">Best Seller</div>
+        <div class="playbook-icon">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3>The GBP Playbook</h3>
+        <div class="playbook-price">$47</div>
+        <p class="playbook-price-note">One-time · Instant download</p>
+        <p class="playbook-desc">The complete guide to optimizing your Google Business Profile from zero to top-3. Everything the pros do — written in plain English.</p>
+        <ul class="playbook-features">
+          <li><span class="check">✓</span> Full GBP audit checklist (never miss a setting)</li>
+          <li><span class="check">✓</span> Keyword strategy for your business category</li>
+          <li><span class="check">✓</span> Google Posts templates (copy & paste ready)</li>
+          <li><span class="check">✓</span> Photo optimization guide — what Google wants to see</li>
+          <li><span class="check">✓</span> Q&amp;A section setup to capture more searches</li>
+          <li><span class="check">✓</span> 30-day "activation" posting plan included</li>
+        </ul>
+        <a href="https://buy.stripe.com/placeholder_gbp" target="_blank" class="playbook-btn">Get The GBP Playbook →</a>
+      </div>
+
+      <!-- REVIEW MACHINE -->
+      <div class="playbook-card">
+        <div class="playbook-icon">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+        </div>
+        <h3>The Review Machine</h3>
+        <div class="playbook-price">$37</div>
+        <p class="playbook-price-note">One-time · Instant download</p>
+        <p class="playbook-desc">How to build a steady stream of 5-star Google reviews — without begging, bribing, or violating Google's terms.</p>
+        <ul class="playbook-features">
+          <li><span class="check">✓</span> The exact ask sequence that gets 3x more reviews</li>
+          <li><span class="check">✓</span> SMS &amp; email templates (copy and send)</li>
+          <li><span class="check">✓</span> How to handle negative reviews professionally</li>
+          <li><span class="check">✓</span> Response templates for every review type</li>
+          <li><span class="check">✓</span> QR code setup guide for in-person requests</li>
+          <li><span class="check">✓</span> Review velocity strategy — pace matters</li>
+        </ul>
+        <a href="https://buy.stripe.com/placeholder_reviews" target="_blank" class="playbook-btn playbook-btn-outline">Get The Review Machine →</a>
+      </div>
+
+      <!-- LOCAL SOCIAL PLAYBOOK -->
+      <div class="playbook-card">
+        <div class="playbook-icon">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+        </div>
+        <h3>The Local Social Playbook</h3>
+        <div class="playbook-price">$47</div>
+        <p class="playbook-price-note">One-time · Instant download</p>
+        <p class="playbook-desc">How to use Facebook, Instagram, and Nextdoor to drive local visibility and leads — without spending hours on content.</p>
+        <ul class="playbook-features">
+          <li><span class="check">✓</span> 30-day content calendar (plug-and-play)</li>
+          <li><span class="check">✓</span> Caption templates for 12 post types</li>
+          <li><span class="check">✓</span> Facebook &amp; Instagram profile optimization guide</li>
+          <li><span class="check">✓</span> Nextdoor strategy for local service businesses</li>
+          <li><span class="check">✓</span> How to repurpose Google Posts as social content</li>
+          <li><span class="check">✓</span> Local hashtag research system</li>
+        </ul>
+        <a href="https://buy.stripe.com/placeholder_social" target="_blank" class="playbook-btn playbook-btn-outline">Get The Social Playbook →</a>
+      </div>
+
+      <!-- NAP & CITATIONS -->
+      <div class="playbook-card">
+        <div class="playbook-icon">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>NAP &amp; Citations Master Guide</h3>
+        <div class="playbook-price">$27</div>
+        <p class="playbook-price-note">One-time · Instant download</p>
+        <p class="playbook-desc">The silent ranking killer most owners don't know about. Fix your business listing inconsistencies across every major platform — step by step.</p>
+        <ul class="playbook-features">
+          <li><span class="check">✓</span> The top 40 directories that matter most</li>
+          <li><span class="check">✓</span> Step-by-step audit to find inconsistencies</li>
+          <li><span class="check">✓</span> How to claim and optimize each listing</li>
+          <li><span class="check">✓</span> Priority fix order (biggest impact first)</li>
+          <li><span class="check">✓</span> Free tools to track your listing health</li>
+          <li><span class="check">✓</span> Monthly maintenance checklist</li>
+        </ul>
+        <a href="https://buy.stripe.com/placeholder_nap" target="_blank" class="playbook-btn playbook-btn-outline">Get The NAP Guide →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BUNDLE -->
+  <div class="bundle-section">
+    <div class="bundle-card">
+      <h2>Get All 4 Playbooks</h2>
+      <p>The complete local growth toolkit. GBP, reviews, social, and citations — everything you need to dominate your local market.</p>
+      <div class="bundle-price-row">
+        <span class="bundle-was">$158</span>
+        <span class="bundle-now">$97</span>
+        <span class="bundle-save">Save $61</span>
+      </div>
+      <a href="https://buy.stripe.com/placeholder_bundle" target="_blank" class="btn-primary" style="display:inline-block;">Get The Complete Bundle →</a>
+      <p style="margin-top:16px;font-size:13px;color:#6b7280;">Instant download. 30-day money-back guarantee.</p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <p class="section-label" style="text-align:center;">Questions</p>
+    <h2 class="section-title">Common questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>How are these delivered?</h4>
+        <p>Instantly after purchase. You'll receive a download link via email within seconds of your payment going through.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Are these beginner-friendly?</h4>
+        <p>Yes. Written for business owners, not marketers. No jargon, no assumed knowledge — just clear steps you can follow immediately.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if I want someone to just do it for me?</h4>
+        <p>That's what our managed plans are for. Starting at $297/month, our team handles everything. <a href="/services" style="color:#f59e0b;text-decoration:none;font-weight:600;">See Plans →</a></p>
+      </div>
+      <div class="faq-item">
+        <h4>Is there a money-back guarantee?</h4>
+        <p>Yes. If you're not happy with a playbook within 30 days, email us at hello@primelocalgrowth.com and we'll refund you — no questions asked.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPGRADE CTA -->
+  <section class="upgrade-section">
+    <h2>Want us to handle it for you?</h2>
+    <p>Our team manages your Google Business Profile, reviews, posts, and citations every month — starting at $297/mo. No contracts.</p>
+    <div class="cta-buttons">
+      <a href="/services" class="btn-primary">See Managed Plans →</a>
+      <a href="/" class="btn-secondary">Learn More</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Prime Local Growth &nbsp;·&nbsp; <a href="/privacy">Privacy Policy</a> &nbsp;·&nbsp; <a href="mailto:hello@primelocalgrowth.com">hello@primelocalgrowth.com</a></p>
+  </footer>
+
+</body>
+</html>

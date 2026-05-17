@@ -16,6 +16,14 @@
       "dest": "/thank-you.html"
     },
     {
+      "src": "/privacy",
+      "dest": "/privacy.html"
+    },
+    {
+      "src": "/services",
+      "dest": "/services.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

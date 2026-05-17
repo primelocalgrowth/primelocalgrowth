@@ -184,7 +184,7 @@ async function sendDeliveryEmail(toEmail, toName, blueprints) {
         <tr>
           <td style="background:#0f1419;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center;border-top:1px solid rgba(245,158,11,0.15);">
             <p style="margin:0 0 6px;font-size:13px;font-weight:700;color:#f59e0b;">Prime Local Growth</p>
-            <p style="margin:0 0 4px;font-size:12px;color:#6b7280;">hello@primelocalgrowth.com &nbsp;·&nbsp; primelocalgrowth.com</p>
+            <p style="margin:0 0 4px;font-size:12px;color:#6b7280;">adam@primelocalgrowth.com &nbsp;·&nbsp; primelocalgrowth.com</p>
             <p style="margin:8px 0 0;font-size:11px;color:#4b5563;">
               Questions about your purchase? Reply to this email — we respond personally.
             </p>
@@ -205,7 +205,7 @@ async function sendDeliveryEmail(toEmail, toName, blueprints) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from:    'Prime Local Growth <hello@primelocalgrowth.com>',
+      from:    'Prime Local Growth <adam@primelocalgrowth.com>',
       to:      [toEmail],
       subject: `Your ${isBundle ? 'Local Growth Blueprints are' : `${blueprints[0].name} is`} ready to download`,
       html,

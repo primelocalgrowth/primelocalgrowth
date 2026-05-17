@@ -4,12 +4,19 @@
   "functions": {
     "api/submit-form.js": {
       "maxDuration": 10
+    },
+    "api/blueprint-delivery.js": {
+      "maxDuration": 15
     }
   },
   "routes": [
     {
       "src": "/api/submit-form",
       "dest": "/api/submit-form.js"
+    },
+    {
+      "src": "/api/blueprint-delivery",
+      "dest": "/api/blueprint-delivery.js"
     },
     {
       "src": "/thank-you",

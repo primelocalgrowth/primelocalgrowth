@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grant Access to Your Google Business Profile | Prime Local Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --amber: #f59e0b;
+      --amber-light: #fbbf24;
+      --dark: #0f1419;
+      --dark-card: #161c24;
+      --dark-border: rgba(245,158,11,0.18);
+      --text: #d1d5db;
+      --text-muted: #9ca3af;
+      --text-faint: #6b7280;
+      --white: #ffffff;
+      --green: #10b981;
+      --red: #ef4444;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #1f2937;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: linear-gradient(145deg, #0f1419 0%, #1a2030 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 64px;
+      page-break-after: always;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
+    }
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+      width: fit-content;
+    }
+    .cover-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 0;
+    }
+    .cover-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 20px;
+    }
+    .cover h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 56px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .cover h1 span { color: var(--amber); }
+    .cover-sub {
+      font-size: 18px;
+      color: #9ca3af;
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .cover-stats {
+      display: flex;
+      gap: 40px;
+    }
+    .cover-stat-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .cover-stat-label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .cover-brand {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .cover-brand span { color: var(--amber); }
+    .cover-contact {
+      font-size: 13px;
+      color: #6b7280;
+      text-align: right;
+    }
+    .cover-contact a { color: var(--amber); text-decoration: none; }
+
+    /* ── PAGE LAYOUT ── */
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 64px 80px;
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* ── PAGE HEADING ── */
+    .page-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 34px;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .page-sub {
+      font-size: 16px;
+      color: #6b7280;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid #f3f4f6;
+    }
+    .page-sub strong { color: var(--amber); }
+
+    /* ── CALLOUT BOXES ── */
+    .callout {
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .callout-body { flex: 1; }
+    .callout-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+    .callout-text { font-size: 14px; line-height: 1.65; }
+
+    .callout.tip {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+    }
+    .callout.tip .callout-title { color: #92400e; }
+    .callout.tip .callout-text { color: #78350f; }
+
+    .callout.warning {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+    }
+    .callout.warning .callout-title { color: #991b1b; }
+    .callout.warning .callout-text { color: #7f1d1d; }
+
+    .callout.info {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+    }
+    .callout.info .callout-title { color: #065f46; }
+    .callout.info .callout-text { color: #064e3b; }
+
+    .callout.dark {
+      background: #0f1419;
+      border: 1px solid rgba(245,158,11,0.25);
+    }
+    .callout.dark .callout-title { color: var(--amber); }
+    .callout.dark .callout-text { color: #9ca3af; }
+
+    /* ── BENEFIT GRID (intro page) ── */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 32px 0;
+    }
+    .benefit-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .benefit-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .benefit-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: #111827;
+      margin-bottom: 5px;
+    }
+    .benefit-desc {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    /* ── PERMISSION TABLE ── */
+    .permission-row {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .permission-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+    .permission-header.owner {
+      background: #f9fafb;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .permission-header.manager {
+      background: #0f1419;
+      color: #fff;
+    }
+    .permission-header .role-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .owner .role-badge { background: #e5e7eb; color: #374151; }
+    .manager .role-badge { background: rgba(245,158,11,0.2); color: var(--amber); }
+    .permission-body {
+      padding: 16px 20px;
+    }
+    .permission-body.manager-body {
+      background: #161c24;
+    }
+    .perm-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      padding: 5px 0;
+    }
+    .perm-item.has { color: #374151; }
+    .perm-item.has-manager { color: #d1d5db; }
+    .perm-item.no { color: #9ca3af; text-decoration: line-through; }
+    .perm-check { flex-shrink: 0; font-size: 14px; }
+
+    /* ── STEP LAYOUT ── */
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid #f3f4f6;
+    }
+    .step-num {
+      width: 52px;
+      height: 52px;
+      background: #0f1419;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--amber);
+      flex-shrink: 0;
+    }
+    .step-header-text {}
+    .step-header-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.2;
+    }
+    .step-header-time {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: 3px;
+    }
+
+    /* ── ACTION LIST ── */
+    .action-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .action-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 15px;
+      color: #374151;
+    }
+    .action-list li:last-child { border-bottom: none; }
+    .action-num {
+      width: 26px;
+      height: 26px;
+      background: var(--amber);
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .action-text strong { color: #111827; }
+    .action-url {
+      display: inline-block;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #374151;
+      margin-top: 4px;
+    }
+
+    /* ── EMAIL HIGHLIGHT ── */
+    .email-box {
+      background: #0f1419;
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      text-align: center;
+    }
+    .email-box-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+    .email-box-addr {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--amber);
+      letter-spacing: 0.5px;
+    }
+    .email-box-note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+
+    /* ── SECURITY GRID ── */
+    .security-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 32px 0;
+    }
+    .security-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .security-card .s-icon { font-size: 24px; margin-bottom: 10px; }
+    .security-card .s-title { font-weight: 600; font-size: 14px; color: #111827; margin-bottom: 6px; }
+    .security-card .s-desc { font-size: 13px; color: #6b7280; line-height: 1.6; }
+    .security-card.highlight {
+      background: #0f1419;
+      border-color: rgba(245,158,11,0.25);
+    }
+    .security-card.highlight .s-title { color: var(--amber); }
+    .security-card.highlight .s-desc { color: #9ca3af; }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      margin: 32px 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 28px;
+      bottom: 28px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--amber), #e5e7eb);
+    }
+    .tl-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 0 0 28px 0;
+      position: relative;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .tl-dot.amber { background: var(--amber); }
+    .tl-dot.dark { background: #0f1419; border: 2px solid var(--amber); }
+    .tl-dot.gray { background: #f3f4f6; border: 2px solid #e5e7eb; }
+    .tl-content { padding-top: 8px; }
+    .tl-timing { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--amber); margin-bottom: 4px; }
+    .tl-title { font-weight: 600; font-size: 15px; color: #111827; margin-bottom: 4px; }
+    .tl-desc { font-size: 14px; color: #6b7280; }
+
+    /* ── CLOSER ── */
+    .closer {
+      background: linear-gradient(145deg, #0f1419 0%, #1a2030 100%);
+      padding: 64px;
+      text-align: center;
+      page-break-after: auto;
+    }
+    .closer-check {
+      width: 72px;
+      height: 72px;
+      background: var(--amber);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 32px;
+    }
+    .closer h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .closer p {
+      font-size: 16px;
+      color: #9ca3af;
+      max-width: 460px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .closer-contact {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 12px;
+      padding: 24px 48px;
+    }
+    .closer-contact .c-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #6b7280; }
+    .closer-contact .c-name { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: #fff; }
+    .closer-contact .c-detail { font-size: 14px; color: var(--amber); }
+
+    /* ── PRINT ── */
+    @media print {
+      @page { margin: 0; size: letter; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cover { min-height: 100vh; }
+      .page { padding: 48px 56px 64px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     COVER
+══════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-badge">Client Onboarding Guide</div>
+
+  <div class="cover-main">
+    <p class="cover-label">Google Business Profile</p>
+    <h1>Grant Manager<br>Access in<br><span>5 Steps</span></h1>
+    <p class="cover-sub">A simple guide for business owners. Takes 10 minutes. Your account stays secure and fully under your control.</p>
+    <div class="cover-stats">
+      <div>
+        <div class="cover-stat-num">10</div>
+        <div class="cover-stat-label">Minutes to complete</div>
+      </div>
+      <div>
+        <div class="cover-stat-num">5</div>
+        <div class="cover-stat-label">Simple steps</div>
+      </div>
+      <div>
+        <div class="cover-stat-num">0</div>
+        <div class="cover-stat-label">Passwords shared</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-brand">Prime <span>Local</span> Growth</div>
+    <div class="cover-contact">
+      adam@primelocalgrowth.com<br>
+      210-646-1436 · primelocalgrowth.com
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 2 — WHY THIS MATTERS
+══════════════════════════════════════════ -->
+<div class="page">
+  <span class="section-label">Before We Begin</span>
+  <h2 class="page-title">Why This Matters to You</h2>
+  <p class="page-sub">Granting manager access means your Google Business Profile stays <strong>active, visible, and working for you</strong> — without you having to touch it.</p>
+
+  <div class="benefit-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">⏱</div>
+      <div class="benefit-title">10 Minutes, Done Forever</div>
+      <div class="benefit-desc">Complete these steps once. We handle everything after that — updates, photos, reviews, and more.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🔒</div>
+      <div class="benefit-title">Your Account Stays Secure</div>
+      <div class="benefit-desc">You never share your password. Google built this permission system specifically so owners stay in control while delegating work.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">👑</div>
+      <div class="benefit-title">You Stay the Owner</div>
+      <div class="benefit-desc">You keep full Owner access. You can remove us at any time, with one click, from your own account.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">📱</div>
+      <div class="benefit-title">No Tech Skills Required</div>
+      <div class="benefit-desc">If you can use Gmail, you can do this. Just follow the steps in order. We confirm access on our end.</div>
+    </div>
+  </div>
+
+  <div class="callout dark">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <div class="callout-title">What changes after you grant access</div>
+      <div class="callout-text">We can post updates, manage photos, respond to reviews, and see your analytics. We cannot delete your profile, transfer ownership, or remove you. Those buttons stay locked to you only.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 3 — PERMISSION LEVELS
+══════════════════════════════════════════ -->
+<div class="page">
+  <span class="section-label">What Google Allows</span>
+  <h2 class="page-title">Three Permission Levels</h2>
+  <p class="page-sub">Google has a built-in permission system. Here's exactly what each role can and cannot do.</p>
+
+  <!-- Owner -->
+  <div class="permission-row">
+    <div class="permission-header owner">
+      <span>Owner — <em>Your role. Stays with you.</em></span>
+      <span class="role-badge">Your Account</span>
+    </div>
+    <div class="permission-body">
+      <div class="perm-item has"><span class="perm-check">✓</span> Full control over all settings</div>
+      <div class="perm-item has"><span class="perm-check">✓</span> Add and remove users at any time</div>
+      <div class="perm-item has"><span class="perm-check">✓</span> Transfer or delete the profile</div>
+      <div class="perm-item has"><span class="perm-check">✓</span> Change ownership to someone else</div>
+    </div>
+  </div>
+
+  <!-- Manager -->
+  <div class="permission-row">
+    <div class="permission-header manager">
+      <span>Manager — <em>What we request</em></span>
+      <span class="role-badge">We Request This</span>
+    </div>
+    <div class="permission-body manager-body">
+      <div class="perm-item has-manager"><span class="perm-check" style="color:#10b981;">✓</span> Post updates and offers</div>
+      <div class="perm-item has-manager"><span class="perm-check" style="color:#10b981;">✓</span> Upload and manage photos</div>
+      <div class="perm-item has-manager"><span class="perm-check" style="color:#10b981;">✓</span> Respond to customer reviews</div>
+      <div class="perm-item has-manager"><span class="perm-check" style="color:#10b981;">✓</span> Answer customer Q&amp;A</div>
+      <div class="perm-item has-manager"><span class="perm-check" style="color:#10b981;">✓</span> Update business info and hours</div>
+      <div class="perm-item has-manager"><span class="perm-check" style="color:#10b981;">✓</span> View all analytics and insights</div>
+      <div class="perm-item no" style="color:#4b5563;"><span class="perm-check" style="color:#ef4444;">✗</span> Delete your profile</div>
+      <div class="perm-item no" style="color:#4b5563;"><span class="perm-check" style="color:#ef4444;">✗</span> Remove you as owner</div>
+      <div class="perm-item no" style="color:#4b5563;"><span class="perm-check" style="color:#ef4444;">✗</span> Transfer ownership</div>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-title">Never grant "Owner" access to anyone</div>
+      <div class="callout-text">The Owner role is the only one that can permanently delete or transfer your profile. Keep that role for yourself only. We will only ever ask for Manager access.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     STEP 1
+══════════════════════════════════════════ -->
+<div class="page">
+  <div class="step-header">
+    <div class="step-num">01</div>
+    <div class="step-header-text">
+      <div class="step-header-title">Go to Your Google Business Profile</div>
+      <div class="step-header-time">Takes about 60 seconds</div>
+    </div>
+  </div>
+
+  <ul class="action-list">
+    <li>
+      <div class="action-num">1</div>
+      <div class="action-text">Open your web browser and go to:<br>
+        <span class="action-url">business.google.com</span>
+      </div>
+    </li>
+    <li>
+      <div class="action-num">2</div>
+      <div class="action-text"><strong>Sign in</strong> using the Google account that owns your business listing. This is usually the Gmail you used when you first set up the profile.</div>
+    </li>
+    <li>
+      <div class="action-num">3</div>
+      <div class="action-text">You will see your business dashboard. Your business name should appear at the top. <strong>You are in the right place.</strong></div>
+    </li>
+  </ul>
+
+  <div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <div class="callout-title">Pro Tip — Use the right Google account</div>
+      <div class="callout-text">Check the profile icon in the top right corner. Make sure it shows the email address associated with your business — not a personal Gmail. If you're not sure which account owns the profile, try both and see which one shows the business dashboard.</div>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-title">Don't see your business?</div>
+      <div class="callout-text">You may be signed into the wrong Google account. Click the profile icon in the top right, switch accounts, and try again. If the profile was never created or claimed, contact us first — we'll handle that step together.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     STEP 2
+══════════════════════════════════════════ -->
+<div class="page">
+  <div class="step-header">
+    <div class="step-num">02</div>
+    <div class="step-header-text">
+      <div class="step-header-title">Open Business Profile Settings</div>
+      <div class="step-header-time">Takes about 30 seconds</div>
+    </div>
+  </div>
+
+  <ul class="action-list">
+    <li>
+      <div class="action-num">1</div>
+      <div class="action-text">From your dashboard at <span class="action-url">business.google.com</span>, locate your business listing.</div>
+    </li>
+    <li>
+      <div class="action-num">2</div>
+      <div class="action-text">Click the <strong>three-dot menu</strong> (⋮) next to your business name, then select <strong>"Business Profile settings."</strong></div>
+    </li>
+    <li>
+      <div class="action-num">3</div>
+      <div class="action-text">In the settings panel that opens, click <strong>"Managers."</strong> This is the access control center for your profile.</div>
+    </li>
+  </ul>
+
+  <div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <div class="callout-title">Alternative path — works on desktop too</div>
+      <div class="callout-text">Search your exact business name on Google while signed in. Click "Edit profile" in the result panel. Then look for "Managers" in the left-side menu. Both paths lead to the same place.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     STEP 3
+══════════════════════════════════════════ -->
+<div class="page">
+  <div class="step-header">
+    <div class="step-num">03</div>
+    <div class="step-header-text">
+      <div class="step-header-title">Add a New User</div>
+      <div class="step-header-time">Takes about 60 seconds</div>
+    </div>
+  </div>
+
+  <ul class="action-list">
+    <li>
+      <div class="action-num">1</div>
+      <div class="action-text">On the Managers page, click the <strong>person+ icon</strong> (Add user) in the top right corner of the panel.</div>
+    </li>
+    <li>
+      <div class="action-num">2</div>
+      <div class="action-text">A dialog box will appear asking for an email address. Enter exactly the address below — copy and paste to avoid typos:</div>
+    </li>
+  </ul>
+
+  <div class="email-box">
+    <div class="email-box-label">Enter this email address exactly</div>
+    <div class="email-box-addr">adam@primelocalgrowth.com</div>
+    <div class="email-box-note">Copy and paste to avoid typos</div>
+  </div>
+
+  <ul class="action-list">
+    <li>
+      <div class="action-num">3</div>
+      <div class="action-text">After entering the email, you will be asked to select a <strong>role</strong> for this user. Do not click Invite yet — see Step 4 first.</div>
+    </li>
+  </ul>
+
+  <div class="callout warning">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-title">Type the email carefully</div>
+      <div class="callout-text">If the email address is entered incorrectly, the invite will go to the wrong person or fail entirely. Copy and paste directly from this document to be safe.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     STEP 4
+══════════════════════════════════════════ -->
+<div class="page">
+  <div class="step-header">
+    <div class="step-num">04</div>
+    <div class="step-header-text">
+      <div class="step-header-title">Select "Manager" Permission</div>
+      <div class="step-header-time">Critical — choose the correct role</div>
+    </div>
+  </div>
+
+  <ul class="action-list">
+    <li>
+      <div class="action-num">1</div>
+      <div class="action-text">In the role dropdown, you will see three options: <strong>Owner, Manager,</strong> and Site Manager.</div>
+    </li>
+    <li>
+      <div class="action-num">2</div>
+      <div class="action-text">Select <strong>"Manager."</strong> This gives us everything we need to manage your profile — without any ability to delete it or remove you.</div>
+    </li>
+    <li>
+      <div class="action-num">3</div>
+      <div class="action-text">Click <strong>"Invite."</strong> Google will send an invitation to our email. You will see a confirmation message on screen.</div>
+    </li>
+  </ul>
+
+  <div class="callout dark">
+    <div class="callout-icon">✅</div>
+    <div class="callout-body">
+      <div class="callout-title">Manager vs. Site Manager — what's the difference?</div>
+      <div class="callout-text">"Site Manager" is a limited role that can only manage posts. "Manager" is what we need — it includes photo uploads, review responses, analytics access, and profile edits. Always select Manager, not Site Manager.</div>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-icon">🚫</div>
+    <div class="callout-body">
+      <div class="callout-title">Do not select "Owner"</div>
+      <div class="callout-text">The Owner role gives full administrative control, including the ability to delete the profile and remove you. We only need Manager. If you accidentally select Owner, cancel the invite and start Step 3 again.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     STEP 5
+══════════════════════════════════════════ -->
+<div class="page">
+  <div class="step-header">
+    <div class="step-num">05</div>
+    <div class="step-header-text">
+      <div class="step-header-title">We Accept and Confirm</div>
+      <div class="step-header-time">Nothing more needed from you</div>
+    </div>
+  </div>
+
+  <ul class="action-list">
+    <li>
+      <div class="action-num">1</div>
+      <div class="action-text">After you click Invite, Google sends a notification to <strong>adam@primelocalgrowth.com.</strong> The invitation expires after <strong>30 days</strong> if not accepted.</div>
+    </li>
+    <li>
+      <div class="action-num">2</div>
+      <div class="action-text">We will accept the invitation within <strong>24 hours</strong> and send you a confirmation that access is connected and we've started working.</div>
+    </li>
+    <li>
+      <div class="action-num">3</div>
+      <div class="action-text"><strong>You are done.</strong> No further action needed. We will handle all profile activity from here and keep you updated on what we do.</div>
+    </li>
+  </ul>
+
+  <div class="callout info">
+    <div class="callout-icon">📬</div>
+    <div class="callout-body">
+      <div class="callout-title">Didn't hear from us within 24 hours?</div>
+      <div class="callout-text">Text or call us at 210-646-1436, or email adam@primelocalgrowth.com. We'll confirm receipt and check that the invite came through correctly.</div>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <div class="callout-title">How to verify access was granted</div>
+      <div class="callout-text">Go back to Business Profile settings → Managers. You should see "adam@primelocalgrowth.com" listed with the role "Manager." If it shows "Pending," we haven't accepted yet — that's normal. Check back in 24 hours.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     SECURITY
+══════════════════════════════════════════ -->
+<div class="page">
+  <span class="section-label">Security</span>
+  <h2 class="page-title">You Stay in Complete Control</h2>
+  <p class="page-sub">This is how Google's permission system protects you throughout our entire engagement.</p>
+
+  <div class="security-grid">
+    <div class="security-card highlight">
+      <div class="s-icon">🔑</div>
+      <div class="s-title">You never share your password</div>
+      <div class="s-desc">Manager access is granted through Google's own invitation system — no logins, no passwords, no screen sharing required.</div>
+    </div>
+    <div class="security-card">
+      <div class="s-icon">🛡️</div>
+      <div class="s-title">Revoke access any time</div>
+      <div class="s-desc">Go to Business Profile settings → Managers, click the trash icon next to our name. Access removed instantly. No notice required.</div>
+    </div>
+    <div class="security-card">
+      <div class="s-icon">📋</div>
+      <div class="s-title">Full audit trail</div>
+      <div class="s-desc">Google logs every change made to your profile by every user. You can see exactly what was done and when, at any time.</div>
+    </div>
+    <div class="security-card">
+      <div class="s-icon">👁️</div>
+      <div class="s-title">Transparent activity</div>
+      <div class="s-desc">We will never make a change without telling you. Every post, photo upload, or profile edit is communicated in our regular check-ins.</div>
+    </div>
+    <div class="security-card">
+      <div class="s-icon">🚫</div>
+      <div class="s-title">We cannot delete your profile</div>
+      <div class="s-desc">Only the Owner role can permanently delete a Google Business Profile. That role stays with you. Manager access does not include deletion.</div>
+    </div>
+    <div class="security-card">
+      <div class="s-icon">✉️</div>
+      <div class="s-title">Questions? Reach us directly</div>
+      <div class="s-desc">adam@primelocalgrowth.com or 210-646-1436. If anything ever feels off, contact us and we will resolve it immediately.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TIMELINE
+══════════════════════════════════════════ -->
+<div class="page">
+  <span class="section-label">What Happens Next</span>
+  <h2 class="page-title">Your Profile Timeline</h2>
+  <p class="page-sub">From the moment you grant access, here is exactly what happens and when.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot amber">✓</div>
+      <div class="tl-content">
+        <div class="tl-timing">Day 1 — You complete this guide</div>
+        <div class="tl-title">Manager access granted</div>
+        <div class="tl-desc">You send the invitation. We accept within 24 hours and confirm via text or email. Work begins immediately.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot amber">📋</div>
+      <div class="tl-content">
+        <div class="tl-timing">Days 2–3</div>
+        <div class="tl-title">Full profile audit</div>
+        <div class="tl-desc">We audit every field — name, address, categories, hours, description, photos, Q&amp;A, and review history. We document what's missing and what's hurting your ranking.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot dark">📸</div>
+      <div class="tl-content">
+        <div class="tl-timing">Days 4–7</div>
+        <div class="tl-title">Profile optimization goes live</div>
+        <div class="tl-desc">Description rewritten, categories corrected, photos uploaded and optimized, booking link added, services listed. Your profile is fully built out.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot dark">⭐</div>
+      <div class="tl-content">
+        <div class="tl-timing">Week 2 onward</div>
+        <div class="tl-title">Active management begins</div>
+        <div class="tl-desc">New reviews responded to within 48 hours. Monthly posts published. Updates made as your business changes. You focus on customers — we focus on Google.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot gray">📈</div>
+      <div class="tl-content">
+        <div class="tl-timing">30-Day Checkpoint</div>
+        <div class="tl-title">Results review</div>
+        <div class="tl-desc">We share a before/after ranking comparison, search view data, and any review growth. We set targets for the next 30 days together.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     CLOSER
+══════════════════════════════════════════ -->
+<div class="closer">
+  <div class="closer-check">✓</div>
+  <h2>You're Ready to Go</h2>
+  <p>Five steps. Ten minutes. Then your Google Business Profile works for you every day — without you having to touch it.</p>
+  <div class="closer-contact">
+    <div class="c-label">Questions? Reach us directly</div>
+    <div class="c-name">Prime Local Growth</div>
+    <div class="c-detail">adam@primelocalgrowth.com</div>
+    <div class="c-detail">210-646-1436</div>
+    <div class="c-detail" style="color:#6b7280;font-size:13px;margin-top:4px;">primelocalgrowth.com</div>
+  </div>
+</div>
+
+</body>
+</html>

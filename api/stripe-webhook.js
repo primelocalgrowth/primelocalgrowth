@@ -95,16 +95,18 @@ function detectProduct(session) {
 
   // Match by Stripe Payment Link ID first (most reliable)
   const linkMap = {
+    // Monthly management plans
+    'plink_1TYCQxDczhj1VijZjERavlM2': 'starter',          // $297/mo Starter
+    'plink_1TYCQiDczhj1VijZ2SlD9tIP': 'growth',           // $497/mo Growth
+    'plink_1TYCQSDczhj1VijZaOIR8Veg': 'dominate',         // $697/mo Dominate
+    // One-time services
     'plink_1TYEDeDczhj1VijZtWUwl1bo': 'local-domination', // $397 Local Domination System
-    // Add your other payment link IDs here as you create them:
-    // 'plink_xxx': 'starter',
-    // 'plink_xxx': 'growth',
-    // 'plink_xxx': 'dominate',
-    // 'plink_xxx': 'elite',
-    // 'plink_xxx': 'gbp-setup',
-    // 'plink_xxx': 'audit',
-    // 'plink_xxx': 'nap-fix',
-    // 'plink_xxx': 'review-pack',
+    'plink_1TYCLDDczhj1VijZReoAnmLA': 'gbp-setup',        // $397 GBP Full Setup
+    'plink_1TYCLtDczhj1VijZpz1yL9Sx': 'audit',            // $197 Local Visibility Audit
+    'plink_1TYCLaDczhj1VijZRCuxbFQw': 'nap-fix',          // $247 NAP Consistency Fix
+    'plink_1TYCKbDczhj1VijZUxLWIOGt': 'review-pack',      // $147 Review Response Pack
+    // Elite — add payment link ID when created in Stripe
+    // 'plink_xxx': 'elite',                               // $1,497/mo Elite
   };
   if (linkMap[paymentLink]) return linkMap[paymentLink];
 

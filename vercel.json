@@ -69,6 +69,22 @@
       "dest": "/welcome-video.html"
     },
     {
+      "src": "/san-antonio-hvac-google",
+      "dest": "/san-antonio-hvac-google.html"
+    },
+    {
+      "src": "/san-antonio-dental-google",
+      "dest": "/san-antonio-dental-google.html"
+    },
+    {
+      "src": "/san-antonio-barbershop-google",
+      "dest": "/san-antonio-barbershop-google.html"
+    },
+    {
+      "src": "/san-antonio-plumber-google",
+      "dest": "/san-antonio-plumber-google.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

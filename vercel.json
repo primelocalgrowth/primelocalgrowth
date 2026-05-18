@@ -7,6 +7,9 @@
     },
     "api/blueprint-delivery.js": {
       "maxDuration": 15
+    },
+    "api/newsletter-subscribe.js": {
+      "maxDuration": 10
     }
   },
   "routes": [
@@ -17,6 +20,10 @@
     {
       "src": "/api/blueprint-delivery",
       "dest": "/api/blueprint-delivery.js"
+    },
+    {
+      "src": "/api/newsletter-subscribe",
+      "dest": "/api/newsletter-subscribe.js"
     },
     {
       "src": "/thank-you",
@@ -33,6 +40,14 @@
     {
       "src": "/playbooks",
       "dest": "/playbooks.html"
+    },
+    {
+      "src": "/newsletter",
+      "dest": "/newsletter.html"
+    },
+    {
+      "src": "/local-domination",
+      "dest": "/local-domination.html"
     },
     {
       "handle": "filesystem"

@@ -85,6 +85,10 @@
       "dest": "/san-antonio-plumber-google.html"
     },
     {
+      "src": "/roi-calculator",
+      "dest": "/roi-calculator.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

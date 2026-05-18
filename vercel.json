@@ -109,6 +109,10 @@
       "dest": "/google-business-profile-ranking-2026.html"
     },
     {
+      "src": "/gbp-access",
+      "dest": "/gbp-access.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

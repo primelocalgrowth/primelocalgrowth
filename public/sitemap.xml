@@ -115,6 +115,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Client onboarding -->
+  <url>
+    <loc>https://www.primelocalgrowth.com/gbp-access</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <!-- Supporting pages -->
   <url>
     <loc>https://www.primelocalgrowth.com/privacy</loc>

@@ -105,6 +105,10 @@
       "dest": "/review-defense.html"
     },
     {
+      "src": "/google-business-profile-ranking-2026",
+      "dest": "/google-business-profile-ranking-2026.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

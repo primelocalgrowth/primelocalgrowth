@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Local SEO for High-Revenue Businesses | Prime Local Growth</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWC3DC78Y8"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NWC3DC78Y8');</script>
+  <meta name="description" content="Elite Google Business Profile management for dental practices, HVAC companies, law firms, and multi-location businesses. $1,497/mo. Limited to 10 clients per region.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f1419;
+      color: #d1d5db;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: rgba(15,20,25,0.95);
+      border-bottom: 1px solid rgba(245,158,11,0.15);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .nav-brand {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+    .nav-brand span { color: #f59e0b; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    nav a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #f59e0b; }
+    .nav-cta {
+      background: #f59e0b !important;
+      color: #0f1419 !important;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: #d97706 !important; color: #fff !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: #9ca3af; margin: 5px 0; transition: 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 90px 20px 70px;
+      background: linear-gradient(180deg, #1a1f26 0%, #0f1419 100%);
+      border-bottom: 1px solid rgba(245,158,11,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(245,158,11,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #f59e0b;
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.35);
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+    .hero h1 .amber-grad {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: #9ca3af;
+      max-width: 680px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: #f59e0b;
+      color: #0f1419;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #d97706; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: #f59e0b;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: 1px solid rgba(245,158,11,0.4);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: #f59e0b; background: rgba(245,158,11,0.06); }
+    .hero-note {
+      font-size: 13px;
+      color: #6b7280;
+    }
+    .hero-note strong { color: #9ca3af; }
+
+    /* ── PROBLEM BAR ── */
+    .problem-bar {
+      background: #1a1f26;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 50px 20px;
+    }
+    .problem-bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+    .problem-stat {
+      border-right: 1px solid rgba(255,255,255,0.07);
+      padding: 0 20px;
+    }
+    .problem-stat:last-child { border-right: none; }
+    .problem-stat-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #f59e0b;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .problem-stat p {
+      font-size: 14px;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+
+    /* ── SECTION COMMON ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+    .section-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #f59e0b;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      text-align: center;
+      font-size: 16px;
+      color: #9ca3af;
+      margin-bottom: 54px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── WHO THIS IS FOR ── */
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .who-card {
+      background: #1a1f26;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 32px 28px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .who-card:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 0 20px rgba(245,158,11,0.08);
+    }
+    .who-icon {
+      font-size: 34px;
+      margin-bottom: 14px;
+    }
+    .who-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .who-desc {
+      font-size: 14px;
+      color: #9ca3af;
+      line-height: 1.65;
+    }
+
+    /* ── PRICING CARD ── */
+    .pricing-wrap {
+      background: linear-gradient(180deg, #1a1f26 0%, #0f1419 100%);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 80px 20px;
+    }
+    .elite-card {
+      max-width: 780px;
+      margin: 0 auto;
+      background: linear-gradient(160deg, rgba(245,158,11,0.07) 0%, #1a1f26 60%);
+      border: 2px solid #f59e0b;
+      border-radius: 16px;
+      padding: 50px 44px;
+      position: relative;
+      box-shadow: 0 0 60px rgba(245,158,11,0.12), 0 0 120px rgba(245,158,11,0.05);
+    }
+    .elite-badge {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f59e0b;
+      color: #0f1419;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 22px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .elite-price-row {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .elite-price {
+      font-family: 'Poppins', sans-serif;
+      font-size: 64px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+    .elite-price sup {
+      font-size: 28px;
+      vertical-align: super;
+      line-height: 0;
+      color: #f59e0b;
+    }
+    .elite-price-note {
+      text-align: center;
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 40px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 32px;
+      margin-bottom: 40px;
+    }
+    .feature-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: #d1d5db;
+      line-height: 1.5;
+    }
+    .feature-check {
+      color: #f59e0b;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .elite-cta {
+      text-align: center;
+    }
+    .btn-elite {
+      display: inline-block;
+      background: #f59e0b;
+      color: #0f1419;
+      font-weight: 700;
+      font-size: 17px;
+      padding: 16px 44px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.3);
+    }
+    .btn-elite:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(245,158,11,0.4);
+    }
+
+    /* ── PYRAMID / DESIRE CARDS ── */
+    .pyramid-section {
+      background: #1a1f26;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 80px 20px;
+    }
+    .pyramid-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .pyramid-cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .pyramid-card {
+      background: #0f1419;
+      border: 1px solid rgba(245,158,11,0.15);
+      border-radius: 10px;
+      padding: 26px 18px;
+      text-align: center;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .pyramid-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-3px);
+    }
+    .pyramid-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .pyramid-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #f59e0b;
+      margin-bottom: 8px;
+    }
+    .pyramid-desc {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.55;
+    }
+
+    /* ── COMPARISON TABLE ── */
+    .comparison-section {
+      padding: 80px 20px;
+    }
+    .comparison-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .compare-table th {
+      padding: 14px 18px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+    .compare-table th:first-child { text-align: left; color: #9ca3af; }
+    .compare-table th.col-diy { color: #6b7280; }
+    .compare-table th.col-agency { color: #9ca3af; }
+    .compare-table th.col-plg {
+      color: #f59e0b;
+      position: relative;
+    }
+    .compare-table th.col-plg::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 2px;
+      background: #f59e0b;
+    }
+    .compare-table td {
+      padding: 14px 18px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #9ca3af;
+      line-height: 1.4;
+    }
+    .compare-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: #d1d5db;
+    }
+    .compare-table tr:nth-child(even) td { background: rgba(26,31,38,0.5); }
+    .compare-table tr:nth-child(odd) td { background: rgba(15,20,25,0.3); }
+    .compare-table td.col-plg {
+      color: #fff;
+      font-weight: 600;
+      background: rgba(245,158,11,0.06) !important;
+      border-left: 1px solid rgba(245,158,11,0.15);
+      border-right: 1px solid rgba(245,158,11,0.15);
+    }
+    .check-green { color: #22c55e; font-weight: 700; }
+    .cross-red { color: #ef4444; }
+
+    /* ── APPLICATION CTA ── */
+    .apply-section {
+      background: linear-gradient(180deg, #1a1f26 0%, #0f1419 100%);
+      border-top: 1px solid rgba(245,158,11,0.15);
+      padding: 90px 20px;
+      text-align: center;
+    }
+    .apply-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .apply-section p {
+      font-size: 17px;
+      color: #9ca3af;
+      max-width: 600px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .apply-note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a1f26;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p {
+      font-size: 13px;
+      color: #6b7280;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    footer a {
+      font-size: 13px;
+      color: #6b7280;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: #f59e0b; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .pyramid-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .pyramid-cards .pyramid-card:last-child {
+        grid-column: 1 / -1;
+      }
+      .problem-bar-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .problem-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 28px; }
+      .problem-stat:last-child { border-bottom: none; padding-bottom: 0; }
+      .who-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .elite-card { padding: 40px 26px; }
+      .elite-price { font-size: 52px; }
+    }
+    @media (max-width: 700px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; flex-direction: column; gap: 18px; }
+      .nav-links.open {
+        display: flex;
+        position: absolute;
+        top: 60px; left: 0; right: 0;
+        background: rgba(15,20,25,0.98);
+        border-bottom: 1px solid rgba(245,158,11,0.15);
+        padding: 24px 28px;
+        z-index: 99;
+      }
+      .nav-toggle { display: block; }
+      footer { flex-direction: column; align-items: flex-start; padding: 24px 20px; }
+      .compare-table th, .compare-table td { padding: 10px 10px; font-size: 12px; }
+      .section { padding: 60px 16px; }
+      .apply-section { padding: 70px 16px; }
+      .pyramid-section { padding: 60px 16px; }
+      .comparison-section { padding: 60px 16px; }
+      .pricing-wrap { padding: 60px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="/" class="nav-brand">Prime <span>Local</span> Growth</a>
+  <div class="nav-links" id="nav-links">
+    <a href="/">Home</a>
+    <a href="/services.html">Services</a>
+    <a href="/playbooks.html">Blueprints</a>
+    <a href="/newsletter.html">Newsletter</a>
+    <a href="mailto:adam@primelocalgrowth.com" class="nav-cta">Get Started</a>
+  </div>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">PREMIUM CLIENTS ONLY</div>
+  <h1>Dominate <span class="amber-grad">Google</span> in your market.</h1>
+  <p class="hero-sub">For dental practices, HVAC companies, law firms, and multi-location businesses ready to own the top of local search — and keep competitors locked out.</p>
+  <div class="hero-ctas">
+    <a href="mailto:adam@primelocalgrowth.com?subject=Premium%20Inquiry" class="btn-primary">Apply for Premium →</a>
+    <a href="#pricing" class="btn-outline">See What's Included ↓</a>
+  </div>
+  <p class="hero-note"><strong>Limited to 10 active clients per region.</strong> Currently accepting applications.</p>
+</section>
+
+<!-- PROBLEM BAR -->
+<section class="problem-bar">
+  <div class="problem-bar-inner">
+    <div class="problem-stat">
+      <div class="problem-stat-num">3–5</div>
+      <p>calls per week lost to competitors with better Google listings</p>
+    </div>
+    <div class="problem-stat">
+      <div class="problem-stat-num">75%</div>
+      <p>of all local clicks go to the top 3 Google results — the rest get almost nothing</p>
+    </div>
+    <div class="problem-stat">
+      <div class="problem-stat-num">$8K+</div>
+      <p>in missed leads per month for the average high-revenue business that's invisible on Google</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO THIS IS FOR -->
+<section class="section">
+  <div class="section-label">Who This Is For</div>
+  <h2 class="section-title">Built for businesses where one new client changes the math.</h2>
+  <p class="section-sub">If your average customer is worth $2,000 or more, being invisible on Google is a six-figure problem.</p>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-icon">🦷</div>
+      <div class="who-title">Dental Practices</div>
+      <p class="who-desc">1–5 locations. Each new patient is worth $2,000–$8,000 LTV. You can't afford to be invisible when someone searches "dentist near me" and your competitor shows up first.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🔧</div>
+      <div class="who-title">HVAC &amp; Plumbing</div>
+      <p class="who-desc">High-ticket jobs, year-round demand. Homeowners search Google first, every time. If you're not in the top 3 when an AC fails in July, that job goes to someone else.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">⚖️</div>
+      <div class="who-title">Law Firms</div>
+      <p class="who-desc">One new client case can be worth $5,000–$50,000. Your Google listing is your first impression — and most people never scroll past it to your website.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🏥</div>
+      <div class="who-title">Med Spas &amp; Clinics</div>
+      <p class="who-desc">Premium services attract premium searchers. Patients researching Botox, laser treatments, or aesthetics trust Google more than ads. Own the search results they rely on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ELITE PRICING -->
+<div class="pricing-wrap" id="pricing">
+  <div class="section-label" style="text-align:center;">What You Get</div>
+  <h2 class="section-title">Elite Plan</h2>
+  <p class="section-sub" style="margin-bottom:44px;">Everything you need to own your market on Google — done for you.</p>
+  <div class="elite-card">
+    <div class="elite-badge">ELITE</div>
+    <div class="elite-price-row">
+      <span class="elite-price"><sup>$</sup>1,497</span>
+    </div>
+    <p class="elite-price-note">month-to-month &nbsp;·&nbsp; cancel anytime &nbsp;·&nbsp; email-based</p>
+    <div class="features-grid">
+      <div class="feature-item"><span class="feature-check">✓</span><span>Full GBP domination strategy (multi-location if applicable)</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>Review generation system + response management</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>20+ Google Posts per month (keyword-optimized)</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>GBP photo strategy (professional captions + scheduling)</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>Competitor displacement tracking (weekly)</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>Google Q&amp;A management</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>Citation building (50 directories/mo)</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>Monthly ranking report with competitor gap analysis</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>Priority same-day email response</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>Quarterly visibility audit</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>Dedicated strategy — no account managers, direct access to Adam</span></div>
+      <div class="feature-item"><span class="feature-check">✓</span><span>First-mover protection — we don't work with your direct competitors</span></div>
+    </div>
+    <div class="elite-cta">
+      <a href="mailto:adam@primelocalgrowth.com?subject=Elite%20Plan%20Application" class="btn-elite">Apply for Elite →</a>
+    </div>
+  </div>
+</div>
+
+<!-- DESIRE PYRAMID -->
+<section class="pyramid-section">
+  <div class="pyramid-inner">
+    <div class="section-label">The Premium Advantage</div>
+    <h2 class="section-title">Why premium clients choose PLG</h2>
+    <p class="section-sub">This isn't just SEO. It's a competitive moat built around your business.</p>
+    <div class="pyramid-cards">
+      <div class="pyramid-card">
+        <div class="pyramid-icon">⏳</div>
+        <div class="pyramid-label">Scarcity</div>
+        <p class="pyramid-desc">Limited to 10 active clients per region. When we're full, we're full.</p>
+      </div>
+      <div class="pyramid-card">
+        <div class="pyramid-icon">🔒</div>
+        <div class="pyramid-label">Exclusivity</div>
+        <p class="pyramid-desc">We don't work with your competitors. Your market position is protected.</p>
+      </div>
+      <div class="pyramid-card">
+        <div class="pyramid-icon">⚡</div>
+        <div class="pyramid-label">Convenience</div>
+        <p class="pyramid-desc">Zero calls. All email. Completely done-for-you. You run your business.</p>
+      </div>
+      <div class="pyramid-card">
+        <div class="pyramid-icon">🛡️</div>
+        <div class="pyramid-label">Privacy</div>
+        <p class="pyramid-desc">Your strategy, your rankings data, and your competitive intel stay confidential.</p>
+      </div>
+      <div class="pyramid-card">
+        <div class="pyramid-icon">🏆</div>
+        <div class="pyramid-label">Status</div>
+        <p class="pyramid-desc">Be the #1 result in your market — the one your competitors can't touch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="comparison-section">
+  <div class="comparison-inner">
+    <div class="section-label">How We Stack Up</div>
+    <h2 class="section-title">PLG Elite vs. DIY vs. Agency</h2>
+    <p class="section-sub" style="margin-bottom:44px;">Not all options are equal. Here's what each actually costs you.</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="col-diy">DIY</th>
+          <th class="col-agency">Big Agency</th>
+          <th class="col-plg">PLG Elite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monthly Cost</td>
+          <td class="col-diy">$0</td>
+          <td class="col-agency">$2,000–$5,000</td>
+          <td class="col-plg">$1,497</td>
+        </tr>
+        <tr>
+          <td>Time Required</td>
+          <td class="col-diy">10+ hrs/month</td>
+          <td class="col-agency">2–4 hrs (calls + reviews)</td>
+          <td class="col-plg">0 hrs (done-for-you)</td>
+        </tr>
+        <tr>
+          <td>Calls Required</td>
+          <td class="col-diy">None</td>
+          <td class="col-agency">Weekly check-ins required</td>
+          <td class="col-plg">Email only — no calls, ever</td>
+        </tr>
+        <tr>
+          <td>Results Timeline</td>
+          <td class="col-diy">Inconsistent / slow</td>
+          <td class="col-agency">90+ days</td>
+          <td class="col-plg">30–60 days</td>
+        </tr>
+        <tr>
+          <td>Who You Work With</td>
+          <td class="col-diy">Yourself</td>
+          <td class="col-agency">Rotating account managers</td>
+          <td class="col-plg">Direct access to Adam</td>
+        </tr>
+        <tr>
+          <td>Competitor Protection</td>
+          <td class="col-diy"><span class="cross-red">✗</span></td>
+          <td class="col-agency"><span class="cross-red">✗</span> They may serve your competitors too</td>
+          <td class="col-plg"><span class="check-green">✓</span> Competitor-free zone</td>
+        </tr>
+        <tr>
+          <td>Scalable to Multiple Locations</td>
+          <td class="col-diy"><span class="cross-red">✗</span></td>
+          <td class="col-agency"><span class="check-green">✓</span> (at extra cost)</td>
+          <td class="col-plg"><span class="check-green">✓</span> Included</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- APPLICATION CTA -->
+<section class="apply-section">
+  <h2>Ready to own your market?</h2>
+  <p>Send your business name, city, and current situation. We'll review your GBP and tell you exactly what it would take to get you to #1.</p>
+  <a href="mailto:adam@primelocalgrowth.com?subject=Elite%20Plan%20Application&body=Business%20Name%3A%0ACity%3A%0AIndustry%3A%0ACurrent%20situation%3A" class="btn-elite">Send Your Application →</a>
+  <p class="apply-note">Responses within 24 hours. No sales calls, ever.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Prime Local Growth</p>
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy</a>
+    <a href="mailto:adam@primelocalgrowth.com">adam@primelocalgrowth.com</a>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>

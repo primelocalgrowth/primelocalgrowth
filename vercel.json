@@ -50,6 +50,14 @@
       "dest": "/local-domination.html"
     },
     {
+      "src": "/premium",
+      "dest": "/premium.html"
+    },
+    {
+      "src": "/acquire",
+      "dest": "/acquire.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

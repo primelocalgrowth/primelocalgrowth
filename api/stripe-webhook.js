@@ -77,37 +77,64 @@ export default async function handler(req, res) {
 }
 
 // ─────────────────────────────────────────────
-// DETECT PRODUCT from line items or metadata
+// DETECT PRODUCT from payment link ID or amount
+//
+// Products that need GBP access guide:
+//   starter, growth, dominate, elite         — ongoing management
+//   gbp-setup                                — one-time build/optimize
+//   review-pack                              — needs access to respond
+//   nap-fix                                  — send just in case
+//
+// Products that do NOT need GBP access guide:
+//   local-domination                         — DIY system, no access needed
+//   audit                                    — report only, no access needed
 // ─────────────────────────────────────────────
 function detectProduct(session) {
-  // Tag products in Stripe metadata or use payment link IDs
   const paymentLink = session.payment_link || '';
   const amount      = session.amount_total || 0;
 
-  // Local Domination System — $397 one-time
-  if (paymentLink === 'plink_1TYEDeDczhj1VijZtWUwl1bo' || amount === 39700) {
-    return 'local-domination';
-  }
-  // Monthly plans — GBP management
-  if (amount === 29700) return 'starter';
-  if (amount === 49700) return 'growth';
-  if (amount === 69700) return 'dominate';
-  if (amount === 149700) return 'elite';
+  // Match by Stripe Payment Link ID first (most reliable)
+  const linkMap = {
+    'plink_1TYEDeDczhj1VijZtWUwl1bo': 'local-domination', // $397 Local Domination System
+    // Add your other payment link IDs here as you create them:
+    // 'plink_xxx': 'starter',
+    // 'plink_xxx': 'growth',
+    // 'plink_xxx': 'dominate',
+    // 'plink_xxx': 'elite',
+    // 'plink_xxx': 'gbp-setup',
+    // 'plink_xxx': 'audit',
+    // 'plink_xxx': 'nap-fix',
+    // 'plink_xxx': 'review-pack',
+  };
+  if (linkMap[paymentLink]) return linkMap[paymentLink];
+
+  // Fallback: match by amount
+  if (amount === 39700) return 'local-domination'; // $397
+  if (amount === 29700) return 'starter';           // $297/mo
+  if (amount === 49700) return 'growth';            // $497/mo
+  if (amount === 69700) return 'dominate';          // $697/mo
+  if (amount === 149700) return 'elite';            // $1,497/mo
+  if (amount === 19700) return 'audit';             // $197 audit
+  if (amount === 24700) return 'nap-fix';           // $247 NAP fix
+  if (amount === 14700) return 'review-pack';       // $147 review pack
 
   return 'general';
+}
+
+// Does this product require GBP Manager access?
+function needsGbpAccess(productId) {
+  const noAccessProducts = ['local-domination', 'audit'];
+  return !noAccessProducts.includes(productId);
 }
 
 // ─────────────────────────────────────────────
 // EMAIL TEMPLATES per product
 // ─────────────────────────────────────────────
-function getEmailContent(firstName, productId) {
+function getEmailContent(firstName, productId, sendGuide = true) {
   const guideUrl = 'https://primelocalgrowth.com/downloads/gbp-access-guide';
-  // 🎬 VIDEO: When your walkthrough video is ready, replace null below with the URL
-  const videoUrl = null; // e.g. 'https://www.loom.com/share/...' or HeyGen/Synthesia link
+  const videoUrl = 'https://primelocalgrowth.com/welcome-video'; // 🎬 live
 
-  const videoLine = videoUrl
-    ? `<p style="margin:16px 0;"><a href="${videoUrl}" style="display:inline-block;background:#1a1f26;color:#f59e0b;border:1px solid rgba(245,158,11,0.4);text-decoration:none;font-weight:600;font-size:14px;padding:10px 22px;border-radius:6px;">▶ Watch the 2-Minute Walkthrough Video →</a></p>`
-    : '';
+  const videoLine = `<p style="margin:16px 0;"><a href="${videoUrl}" style="display:inline-block;background:#1a1f26;color:#f59e0b;border:1px solid rgba(245,158,11,0.4);text-decoration:none;font-family:Arial,sans-serif;font-weight:600;font-size:14px;padding:10px 22px;border-radius:6px;">▶ Watch the 2-Minute Walkthrough First →</a></p>`;
 
   const base = `
     <div style="font-family:'Georgia',serif;max-width:600px;margin:0 auto;color:#1a1a1a;font-size:16px;line-height:1.7;">
@@ -144,28 +171,34 @@ function getEmailContent(firstName, productId) {
     };
   }
 
-  // Monthly management plans — send GBP access guide
-  const planNames = { starter: 'Starter', growth: 'Growth', dominate: 'Dominate', elite: 'Elite', general: '' };
+  // GBP management plans + one-time services that need access
+  const planNames = { starter: 'Starter', growth: 'Growth', dominate: 'Dominate', elite: 'Elite', 'gbp-setup': 'GBP Setup', 'nap-fix': 'NAP Fix', 'review-pack': 'Review Pack', general: '' };
   const planName  = planNames[productId] || '';
 
+  const guideBlock = sendGuide ? `
+      <p><strong>Step 2 — Grant Manager access (3 minutes):</strong></p>
+      <p style="margin:20px 0;">
+        <a href="${guideUrl}" style="display:inline-block;background:#f59e0b;color:#000;text-decoration:none;font-family:Arial,sans-serif;font-weight:700;font-size:15px;padding:14px 32px;border-radius:6px;">Open the Step-by-Step Access Guide →</a>
+      </p>
+      <p style="font-size:14px;color:#666;">Add <strong>primelocalgrowth@gmail.com</strong> as a <strong>Manager</strong> (not Owner). You stay in full control at all times.</p>
+  ` : '';
+
   return {
-    subject: `Welcome to PLG${planName ? ' ' + planName : ''} — one quick step to get started`,
+    subject: `Welcome to PLG${planName ? ' ' + planName : ''} — watch this first (2 min)`,
     html: base + `
       <p>Hi ${firstName},</p>
-      <p>Welcome — I'm excited to get to work on your Google listing.</p>
-      <p><strong>One thing I need from you before we can start:</strong> Manager access to your Google Business Profile. It takes about 4 steps and roughly 3 minutes.</p>
-      <p style="margin:24px 0;">
-        <a href="${guideUrl}" style="display:inline-block;background:#f59e0b;color:#000;text-decoration:none;font-family:Arial,sans-serif;font-weight:700;font-size:15px;padding:14px 32px;border-radius:6px;">Open the Access Guide →</a>
-      </p>
+      <p>Welcome — I'm excited to get started on your Google listing.</p>
+      <p><strong>Step 1 — Watch this 2-minute video</strong> so you know exactly what we're doing and why:</p>
       ${videoLine}
+      ${guideBlock}
       <p><strong>What happens once you grant access:</strong></p>
       <ul style="padding-left:20px;">
         <li style="margin-bottom:8px;"><strong>Hour 0–2:</strong> I accept your invitation and run a full diagnostic audit</li>
         <li style="margin-bottom:8px;"><strong>Hours 2–12:</strong> Full 360° optimization — keywords, photos, services, Q&A, NAP</li>
         <li style="margin-bottom:8px;"><strong>Hours 12–24:</strong> Posting schedule, review monitoring, competitor tracking activated</li>
       </ul>
-      <p style="background:#1a1f26;border-left:3px solid #f59e0b;padding:14px 18px;border-radius:0 6px 6px 0;font-size:14px;color:#d1d5db;">You stay the Primary Owner at all times. Manager access means I can post and edit — I cannot transfer or delete your listing.</p>
-      <p>Once access is granted, I'll send you a confirmation and your first optimization report within 24 hours.</p>
+      <p style="background:#1a1f26;border-left:3px solid #f59e0b;padding:14px 18px;border-radius:0 6px 6px 0;font-size:14px;color:#d1d5db;">You stay the Primary Owner at all times. Manager access means I can post and optimize — I cannot transfer or delete your listing.</p>
+      <p>I'll send you a confirmation when access is accepted and again when your first optimization is complete — typically within 24 hours.</p>
     ` + footer
   };
 }
@@ -179,7 +212,7 @@ async function sendWelcomeEmail(email, firstName, productId, session) {
     return;
   }
 
-  const { subject, html } = getEmailContent(firstName, productId);
+  const { subject, html } = getEmailContent(firstName, productId, needsGbpAccess(productId));
 
   try {
     const r = await fetch('https://api.resend.com/emails', {

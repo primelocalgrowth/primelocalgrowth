@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch First — Prime Local Growth</title>
+  <meta name="robots" content="noindex,nofollow">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWC3DC78Y8"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NWC3DC78Y8');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f1419;
+      color: #d1d5db;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    /* Brand */
+    .brand {
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 32px;
+      letter-spacing: -0.3px;
+    }
+    .brand span { color: #f59e0b; }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #f59e0b;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: #f59e0b;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(26px, 5vw, 38px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .header h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header p {
+      font-size: 16px;
+      color: #9ca3af;
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Video container */
+    .video-wrap {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(245,158,11,0.2);
+      box-shadow: 0 0 60px rgba(245,158,11,0.08), 0 20px 60px rgba(0,0,0,0.5);
+      background: #000;
+      margin-bottom: 28px;
+    }
+    .video-wrap video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+    }
+
+    /* Next step card */
+    .next-step {
+      background: rgba(26,31,38,0.8);
+      border: 1px solid rgba(245,158,11,0.15);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+    .next-step h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .next-step h3::before {
+      content: '↓';
+      color: #f59e0b;
+      font-size: 20px;
+    }
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+    .step-num {
+      width: 24px;
+      height: 24px;
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #f59e0b;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .btn-guide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #f59e0b;
+      color: #000;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 32px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      margin-bottom: 16px;
+    }
+    .btn-guide:hover {
+      background: #d97706;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(245,158,11,0.35);
+    }
+
+    .help-note {
+      text-align: center;
+      font-size: 13px;
+      color: #4b5563;
+    }
+    .help-note a { color: #6b7280; text-decoration: underline; }
+    .help-note a:hover { color: #f59e0b; }
+
+    @media (max-width: 480px) {
+      .next-step { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="brand">Prime <span>Local</span> Growth</div>
+
+    <div class="header">
+      <div style="display:flex;justify-content:center;margin-bottom:16px;">
+        <span class="badge"><span class="badge-dot"></span>Watch before you start</span>
+      </div>
+      <h1>Stand out on <em>Google.</em><br>Here's how it works.</h1>
+      <p>2-minute overview of what we do and the one step you need to take to get started.</p>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="video-wrap">
+      <video
+        controls
+        preload="metadata"
+        poster=""
+        playsinline
+      >
+        <source src="/assets/stand-out-on-google.mp4" type="video/mp4">
+        Your browser doesn't support HTML5 video. <a href="/assets/stand-out-on-google.mp4" style="color:#f59e0b;">Download the video →</a>
+      </video>
+    </div>
+
+    <!-- NEXT STEP -->
+    <div class="next-step">
+      <h3>Your next step — grant Manager access</h3>
+      <ul class="steps-list">
+        <li>
+          <span class="step-num">1</span>
+          <span>Takes about 3 minutes — follow the step-by-step guide below</span>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <span>Add <strong style="color:#fff;">primelocalgrowth@gmail.com</strong> as a <strong style="color:#fff;">Manager</strong> (not Owner)</span>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <span>We accept within 2 hours and begin your 360° optimization — you'll hear from us within 24 hours</span>
+        </li>
+      </ul>
+    </div>
+
+    <a href="/downloads/gbp-access-guide" class="btn-guide">
+      Open the Access Guide →
+    </a>
+
+    <p class="help-note">
+      Questions? Email <a href="mailto:adam@primelocalgrowth.com">adam@primelocalgrowth.com</a> — Adam responds personally.
+    </p>
+
+  </div>
+
+  <script>
+    // GA event when video plays
+    const video = document.querySelector('video');
+    let tracked = false;
+    video.addEventListener('play', () => {
+      if (!tracked && typeof gtag !== 'undefined') {
+        gtag('event', 'video_play', { event_category: 'onboarding', event_label: 'stand_out_on_google' });
+        tracked = true;
+      }
+    });
+  </script>
+</body>
+</html>

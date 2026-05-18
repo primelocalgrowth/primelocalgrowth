@@ -65,6 +65,10 @@
       "dest": "/acquire.html"
     },
     {
+      "src": "/welcome-video",
+      "dest": "/welcome-video.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

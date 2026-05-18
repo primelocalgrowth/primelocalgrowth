@@ -517,11 +517,137 @@
     .closer-contact .c-name { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: #fff; }
     .closer-contact .c-detail { font-size: 14px; color: var(--amber); }
 
+    /* ── ASSET CONTROL TABLE ── */
+    .asset-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(245,158,11,0.2);
+    }
+    .asset-table thead tr {
+      background: #1a1f26;
+    }
+    .asset-table thead th {
+      padding: 13px 18px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .asset-table thead th:not(:first-child) {
+      text-align: center;
+    }
+    .asset-table tbody tr {
+      border-top: 1px solid rgba(245,158,11,0.08);
+    }
+    .asset-table tbody tr:nth-child(odd) {
+      background: #0f1419;
+    }
+    .asset-table tbody tr:nth-child(even) {
+      background: #131820;
+    }
+    .asset-table tbody td {
+      padding: 12px 18px;
+      font-size: 14px;
+      color: #d1d5db;
+    }
+    .asset-table tbody td:not(:first-child) {
+      text-align: center;
+      font-size: 17px;
+    }
+    .asset-table .check-yes { color: #f59e0b; }
+    .asset-table .check-no  { color: #ef4444; }
+
+    .asset-callout {
+      background: #1a1f26;
+      border-left: 4px solid var(--amber);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+    .asset-callout p {
+      font-size: 14px;
+      color: var(--amber);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── LAUNCH TIMELINE CARDS ── */
+    .launch-timeline {
+      display: flex;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .launch-card {
+      flex: 1;
+      background: #0f1419;
+      border: 1px solid rgba(245,158,11,0.18);
+      border-radius: 10px;
+      padding: 22px 20px;
+    }
+    .launch-num {
+      width: 36px;
+      height: 36px;
+      background: var(--amber);
+      color: #0f1419;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+    .launch-timing {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+    .launch-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .launch-desc {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.65;
+    }
+    .launch-amber-callout {
+      background: #1a1f26;
+      border-left: 4px solid var(--amber);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    .launch-amber-callout p {
+      font-size: 14px;
+      color: var(--amber);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .launch-timeline { flex-direction: column; }
+    }
+
     /* ── PAGE BREAK CONTROLS ── */
     .benefit-card, .callout, .permission-row, .security-card,
     .tl-item, .action-list li, .step-header, .email-box,
     .closer-contact, .cover-stats, .benefit-grid, .security-grid,
-    .timeline, .permission-body { page-break-inside: avoid; break-inside: avoid; }
+    .timeline, .permission-body,
+    .asset-table, .asset-callout, .launch-card, .launch-amber-callout { page-break-inside: avoid; break-inside: avoid; }
     .section-label, .page-title { page-break-after: avoid; break-after: avoid; }
     .step-header + ul { page-break-before: avoid; break-before: avoid; }
 
@@ -534,7 +660,8 @@
       .closer { page-break-after: auto; }
       .benefit-card, .callout, .permission-row, .security-card,
       .tl-item, .action-list li, .step-header, .email-box,
-      .benefit-grid, .security-grid, .timeline { page-break-inside: avoid; break-inside: avoid; }
+      .benefit-grid, .security-grid, .timeline,
+      .asset-table, .asset-callout, .launch-card, .launch-amber-callout { page-break-inside: avoid; break-inside: avoid; }
     }
   </style>
 </head>
@@ -664,6 +791,62 @@
       <div class="callout-title">Never grant "Owner" access to anyone</div>
       <div class="callout-text">The Owner role is the only one that can permanently delete or transfer your profile. Keep that role for yourself only. We will only ever ask for Manager access.</div>
     </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     YOUR ASSET. YOUR CONTROL.
+══════════════════════════════════════════ -->
+<div class="page" style="background:#0f1419; color:#d1d5db;">
+  <span class="section-label">Access &amp; Ownership</span>
+  <h2 class="page-title" style="color:#fff;">Your Asset. Your Control.</h2>
+  <p class="page-sub" style="color:#9ca3af; border-bottom-color:rgba(245,158,11,0.15);">We only need Manager access — never Owner. Here's exactly what that means.</p>
+
+  <table class="asset-table">
+    <thead>
+      <tr>
+        <th>Permission</th>
+        <th>Primary Owner (You)</th>
+        <th>Manager<br>(Prime Local Growth)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Edit Business Info &amp; Add Photos</td>
+        <td><span class="check-yes">✓</span></td>
+        <td><span class="check-yes">✓</span></td>
+      </tr>
+      <tr>
+        <td>Respond to Customer Reviews</td>
+        <td><span class="check-yes">✓</span></td>
+        <td><span class="check-yes">✓</span></td>
+      </tr>
+      <tr>
+        <td>Publish Google Posts</td>
+        <td><span class="check-yes">✓</span></td>
+        <td><span class="check-yes">✓</span></td>
+      </tr>
+      <tr>
+        <td>Add or Remove Other Users</td>
+        <td><span class="check-yes">✓</span></td>
+        <td><span class="check-no">✗</span></td>
+      </tr>
+      <tr>
+        <td>Transfer Ownership or Delete Profile</td>
+        <td><span class="check-yes">✓</span></td>
+        <td><span class="check-no">✗</span></td>
+      </tr>
+      <tr>
+        <td>View Insights &amp; Analytics</td>
+        <td><span class="check-yes">✓</span></td>
+        <td><span class="check-yes">✓</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="asset-callout">
+    <p>You remain the Primary Owner at all times. We can never remove you, transfer your listing, or delete your profile. Manager access is reversible — you can remove us in 30 seconds if you ever choose to.</p>
   </div>
 </div>
 
@@ -884,6 +1067,41 @@
       <div class="callout-title">How to verify access was granted</div>
       <div class="callout-text">Go back to Business Profile settings → Managers. You should see "primelocalgrowth@gmail.com" listed with the role "Manager." If it shows "Pending," we haven't accepted yet — that's normal. Check back in 24 hours.</div>
     </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     WHAT HAPPENS AFTER YOU GRANT ACCESS
+══════════════════════════════════════════ -->
+<div class="page" style="background:#0f1419; color:#d1d5db;">
+  <span class="section-label">24-Hour Launch Sequence</span>
+  <h2 class="page-title" style="color:#fff;">What Happens After You Grant Access</h2>
+  <p class="page-sub" style="color:#9ca3af; border-bottom-color:rgba(245,158,11,0.15);">Here's our 24-hour launch sequence — starts the moment your invitation is accepted.</p>
+
+  <div class="launch-timeline">
+    <div class="launch-card">
+      <div class="launch-num">1</div>
+      <div class="launch-timing">Hour 0–2</div>
+      <div class="launch-title">Access Granted</div>
+      <div class="launch-desc">We receive your invitation, accept it instantly, and run a full diagnostic audit of your current GBP. We document every gap, error, and opportunity.</div>
+    </div>
+    <div class="launch-card">
+      <div class="launch-num">2</div>
+      <div class="launch-timing">Hours 2–12</div>
+      <div class="launch-title">The 360° Polish</div>
+      <div class="launch-desc">We inject keyword-optimized content, upload high-quality media strategy, restructure your service menus, seed Q&amp;A with your most common questions, and ensure your NAP data is consistent everywhere.</div>
+    </div>
+    <div class="launch-card">
+      <div class="launch-num">3</div>
+      <div class="launch-timing">Hours 12–24</div>
+      <div class="launch-title">The Growth Engine</div>
+      <div class="launch-desc">We establish your posting schedule, review monitoring cadence, and set up competitor tracking. You receive your first performance baseline report.</div>
+    </div>
+  </div>
+
+  <div class="launch-amber-callout">
+    <p>You'll receive an email confirmation when access is accepted and again when your initial optimization is complete — typically within 24 hours.</p>
   </div>
 </div>
 

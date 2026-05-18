@@ -113,6 +113,18 @@
       "dest": "/gbp-access.html"
     },
     {
+      "src": "/dallas-barbershop-google",
+      "dest": "/dallas-barbershop-google.html"
+    },
+    {
+      "src": "/houston-plumber-google",
+      "dest": "/houston-plumber-google.html"
+    },
+    {
+      "src": "/phoenix-dental-google",
+      "dest": "/phoenix-dental-google.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

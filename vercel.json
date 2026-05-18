@@ -89,6 +89,18 @@
       "dest": "/roi-calculator.html"
     },
     {
+      "src": "/austin-barbershop-google",
+      "dest": "/austin-barbershop-google.html"
+    },
+    {
+      "src": "/austin-hair-salon-google",
+      "dest": "/austin-hair-salon-google.html"
+    },
+    {
+      "src": "/austin-hvac-google",
+      "dest": "/austin-hvac-google.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

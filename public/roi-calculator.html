@@ -662,6 +662,7 @@
         <h3 id="ctaTitle">Ready to fix this?</h3>
         <p id="ctaDesc">We'll audit your Google listing, identify every gap, and fix it for you — typically within 24 hours.</p>
         <a href="/#contact" class="cta-main" id="ctaBtn" onclick="trackCTA()">Get My Free GBP Audit →</a>
+        <p style="font-size:12px;color:var(--faint);margin-top:12px;">Your score is passed to the contact form so we know exactly where you stand before we respond.</p>
         <div class="cta-note">No calls required · Results in 24 hours · Cancel anytime</div>
       </div>
 
@@ -922,9 +923,14 @@ function animateCount(id, start, end, duration) {
 }
 
 function trackCTA() {
+  const score = document.getElementById('scoreNum').textContent;
+  const biz   = state.biz || 'general';
   if (typeof gtag !== 'undefined') {
-    gtag('event', 'calculator_cta_click', { biz_type: state.biz, score: document.getElementById('scoreNum').textContent });
+    gtag('event', 'calculator_cta_click', { biz_type: biz, score: score });
   }
+  // Pass score + biz type to contact form via URL params
+  const btn = document.getElementById('ctaBtn');
+  btn.href = `/#contact?score=${score}&type=${encodeURIComponent(biz)}`;
 }
 
 // Init slider visuals

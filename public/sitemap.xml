@@ -99,6 +99,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Add-on service pages -->
+  <url>
+    <loc>https://primelocalgrowth.com/review-defense</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Supporting pages -->
   <url>
     <loc>https://primelocalgrowth.com/privacy</loc>

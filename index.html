@@ -1914,11 +1914,17 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
     <div class="reveal" style="margin-bottom:40px;">
       <span class="section-label">Get Started</span>
       <h2 class="section-title" id="contact-heading">Ready to get found by your customers?</h2>
-      <p class="section-sub">No calls. No pressure. Send your info and our team will personally respond within 24 hours with exactly what your business needs.</p>
+      <p class="section-sub" id="contact-sub">No calls. No pressure. Send your info and we'll personally respond within 24 hours with exactly what your business needs.</p>
+    </div>
+
+    <div class="form-card reveal" id="contact-score-banner" style="display:none;background:var(--amber-glow);border:1px solid var(--amber-border);border-radius:var(--radius-md);padding:16px 20px;margin-bottom:24px;text-align:center;">
+      <p style="font-size:0.9rem;color:var(--text-body);">Your visibility score: <strong id="contact-score-display" style="color:var(--amber);font-family:'Poppins',sans-serif;font-size:1.1rem;"></strong> — we already know where to start.</p>
     </div>
 
     <div class="form-card reveal">
       <form data-form="lead-form" novalidate>
+        <input type="hidden" id="calc-score" name="calcScore" value="">
+        <input type="hidden" id="calc-type" name="calcBizType" value="">
         <div class="form-group">
           <label for="name-bottom">Your Name</label>
           <input type="text" id="name-bottom" name="name" placeholder="John Smith" autocomplete="name" required>
@@ -1935,7 +1941,7 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
           <label for="biz-bottom">What type of business?</label>
           <input type="text" id="biz-bottom" name="businessType" placeholder="e.g., Plumbing, HVAC, Dental" autocomplete="organization" required>
         </div>
-        <button type="submit" class="btn-primary form-submit">Get Your Strategy →</button>
+        <button type="submit" class="btn-primary form-submit" id="contact-submit-btn">Get Your Strategy →</button>
       </form>
     </div>
   </div>
@@ -1964,6 +1970,54 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
      JAVASCRIPT
      ============================================================ -->
 <script>
+// ── ROI Calculator param pre-fill ───────────────────────────
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const score  = params.get('score');
+  const type   = params.get('type');
+  if (score) {
+    // Show score banner
+    const banner = document.getElementById('contact-score-banner');
+    const display = document.getElementById('contact-score-display');
+    if (banner && display) {
+      display.textContent = score + ' / 100';
+      banner.style.display = 'block';
+    }
+    // Store in hidden fields
+    const sf = document.getElementById('calc-score');
+    if (sf) sf.value = score;
+    // Personalize heading
+    const scoreNum = parseInt(score, 10);
+    const heading  = document.getElementById('contact-heading');
+    const sub      = document.getElementById('contact-sub');
+    if (heading) {
+      if (scoreNum < 40) {
+        heading.textContent = "Your listing has real gaps — let's fix them.";
+        if (sub) sub.textContent = "Based on your score, there are specific things holding your Google listing back. Tell us where to reach you and we'll send a breakdown within 24 hours.";
+      } else if (scoreNum < 70) {
+        heading.textContent = "Good foundation — let's take it to the top.";
+        if (sub) sub.textContent = "Your listing is doing some things right but there's room to capture more customers. We'll show you exactly where to focus.";
+      } else {
+        heading.textContent = "Strong score — but there's still revenue to unlock.";
+        if (sub) sub.textContent = "You're ahead of most businesses. Let's close the remaining gaps and keep competitors from catching up.";
+      }
+    }
+    // Pre-fill business type
+    if (type) {
+      const sf2 = document.getElementById('calc-type');
+      if (sf2) sf2.value = type;
+      const biz = document.getElementById('biz-bottom');
+      const labels = { barbershop:'Barbershop', 'hair-salon':'Hair Salon', hvac:'HVAC', dental:'Dental Practice', plumber:'Plumbing', medspa:'Med Spa', restaurant:'Restaurant' };
+      if (biz && labels[type]) biz.value = labels[type];
+    }
+    // Scroll contact into view after short delay
+    setTimeout(() => {
+      const section = document.getElementById('contact');
+      if (section) section.scrollIntoView({ behavior:'smooth', block:'start' });
+    }, 400);
+  }
+})();
+
 // ── Scroll to form ──────────────────────────────────────────
 function scrollToForm() {
   document.getElementById('form-section').scrollIntoView({ behavior:'smooth' });

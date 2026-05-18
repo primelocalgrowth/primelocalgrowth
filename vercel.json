@@ -101,6 +101,10 @@
       "dest": "/austin-hvac-google.html"
     },
     {
+      "src": "/review-defense",
+      "dest": "/review-defense.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

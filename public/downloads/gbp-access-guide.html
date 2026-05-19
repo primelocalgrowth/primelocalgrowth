@@ -11,11 +11,11 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --amber: #f59e0b;
-      --amber-light: #fbbf24;
+      --amber: #0ea5e9;
+      --amber-light: #38bdf8;
       --dark: #0f1419;
       --dark-card: #161c24;
-      --dark-border: rgba(245,158,11,0.18);
+      --dark-border: rgba(14,165,233,0.18);
       --text: #d1d5db;
       --text-muted: #9ca3af;
       --text-faint: #6b7280;
@@ -50,14 +50,14 @@
       top: -120px; right: -120px;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 70%);
     }
     .cover-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(245,158,11,0.1);
-      border: 1px solid rgba(245,158,11,0.3);
+      background: rgba(14,165,233,0.1);
+      border: 1px solid rgba(14,165,233,0.3);
       border-radius: 100px;
       padding: 6px 16px;
       font-size: 11px;
@@ -212,7 +212,7 @@
 
     .callout.dark {
       background: #0f1419;
-      border: 1px solid rgba(245,158,11,0.25);
+      border: 1px solid rgba(14,165,233,0.25);
     }
     .callout.dark .callout-title { color: var(--amber); }
     .callout.dark .callout-text { color: #9ca3af; }
@@ -279,7 +279,7 @@
       border-radius: 100px;
     }
     .owner .role-badge { background: #e5e7eb; color: #374151; }
-    .manager .role-badge { background: rgba(245,158,11,0.2); color: var(--amber); }
+    .manager .role-badge { background: rgba(14,165,233,0.2); color: var(--amber); }
     .permission-body {
       padding: 16px 20px;
     }
@@ -380,7 +380,7 @@
     /* ── EMAIL HIGHLIGHT ── */
     .email-box {
       background: #0f1419;
-      border: 1px solid rgba(245,158,11,0.3);
+      border: 1px solid rgba(14,165,233,0.3);
       border-radius: 10px;
       padding: 20px 24px;
       margin: 24px 0;
@@ -424,7 +424,7 @@
     .security-card .s-desc { font-size: 13px; color: #6b7280; line-height: 1.6; }
     .security-card.highlight {
       background: #0f1419;
-      border-color: rgba(245,158,11,0.25);
+      border-color: rgba(14,165,233,0.25);
     }
     .security-card.highlight .s-title { color: var(--amber); }
     .security-card.highlight .s-desc { color: #9ca3af; }
@@ -508,8 +508,8 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      background: rgba(245,158,11,0.08);
-      border: 1px solid rgba(245,158,11,0.2);
+      background: rgba(14,165,233,0.08);
+      border: 1px solid rgba(14,165,233,0.2);
       border-radius: 12px;
       padding: 24px 48px;
     }
@@ -524,7 +524,7 @@
       margin: 24px 0;
       border-radius: 10px;
       overflow: hidden;
-      border: 1px solid rgba(245,158,11,0.2);
+      border: 1px solid rgba(14,165,233,0.2);
     }
     .asset-table thead tr {
       background: #1a1f26;
@@ -542,7 +542,7 @@
       text-align: center;
     }
     .asset-table tbody tr {
-      border-top: 1px solid rgba(245,158,11,0.08);
+      border-top: 1px solid rgba(14,165,233,0.08);
     }
     .asset-table tbody tr:nth-child(odd) {
       background: #0f1419;
@@ -559,7 +559,7 @@
       text-align: center;
       font-size: 17px;
     }
-    .asset-table .check-yes { color: #f59e0b; }
+    .asset-table .check-yes { color: #0ea5e9; }
     .asset-table .check-no  { color: #ef4444; }
 
     .asset-callout {
@@ -585,7 +585,7 @@
     .launch-card {
       flex: 1;
       background: #0f1419;
-      border: 1px solid rgba(245,158,11,0.18);
+      border: 1px solid rgba(14,165,233,0.18);
       border-radius: 10px;
       padding: 22px 20px;
     }
@@ -801,7 +801,7 @@
 <div class="page" style="background:#0f1419; color:#d1d5db;">
   <span class="section-label">Access &amp; Ownership</span>
   <h2 class="page-title" style="color:#fff;">Your Asset. Your Control.</h2>
-  <p class="page-sub" style="color:#9ca3af; border-bottom-color:rgba(245,158,11,0.15);">We only need Manager access — never Owner. Here's exactly what that means.</p>
+  <p class="page-sub" style="color:#9ca3af; border-bottom-color:rgba(14,165,233,0.15);">We only need Manager access — never Owner. Here's exactly what that means.</p>
 
   <table class="asset-table">
     <thead>
@@ -1077,14 +1077,14 @@
 <div class="page" style="background:#0f1419; color:#d1d5db;">
   <span class="section-label">24-Hour Launch Sequence</span>
   <h2 class="page-title" style="color:#fff;">What Happens After You Grant Access</h2>
-  <p class="page-sub" style="color:#9ca3af; border-bottom-color:rgba(245,158,11,0.15);">Here's our 24-hour launch sequence — starts the moment your invitation is accepted.</p>
+  <p class="page-sub" style="color:#9ca3af; border-bottom-color:rgba(14,165,233,0.15);">Here's our 24-hour launch sequence — starts the moment your invitation is accepted.</p>
 
   <div class="launch-timeline">
     <div class="launch-card">
       <div class="launch-num">1</div>
       <div class="launch-timing">Hour 0–2</div>
       <div class="launch-title">Access Granted</div>
-      <div class="launch-desc">We receive your invitation, accept it instantly, and run a full diagnostic audit of your current GBP. We document every gap, error, and opportunity.</div>
+      <div class="launch-desc">We receive your invitation, accept it instantly, and run a full diagnostic audit of your current Google listing. We document every gap, error, and opportunity.</div>
     </div>
     <div class="launch-card">
       <div class="launch-num">2</div>

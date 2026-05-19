@@ -481,6 +481,36 @@
       color: #6b7280;
     }
 
+    /* ── APPLY FORM ── */
+    .apply-form { max-width: 560px; margin: 0 auto; text-align: left; }
+    .apply-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+    .apply-group { display: flex; flex-direction: column; gap: 6px; }
+    .apply-group--full { grid-column: 1 / -1; }
+    .apply-group label { font-size: 13px; font-weight: 600; color: #cbd5e1; }
+    .apply-group input,
+    .apply-group textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(14,165,233,0.25);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #f8fafc;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+      width: 100%;
+    }
+    .apply-group input::placeholder,
+    .apply-group textarea::placeholder { color: #4b5563; }
+    .apply-group input:focus,
+    .apply-group textarea:focus { border-color: #0ea5e9; }
+    .apply-submit { width: 100%; cursor: pointer; border: none; font-family: 'Inter', sans-serif; }
+    .apply-msg { margin-top: 12px; font-size: 14px; text-align: center; min-height: 20px; }
+    .apply-msg.success { color: #10b981; }
+    .apply-msg.error { color: #ef4444; }
+    @media (max-width: 520px) { .apply-fields { grid-template-columns: 1fr; } }
+
     /* ── FOOTER ── */
     footer {
       background: #1a1f26;
@@ -592,7 +622,7 @@
     </div>
     <div class="problem-stat">
       <div class="problem-stat-num">$8K+</div>
-      <p>in missed leads per month for the average high-revenue business that's invisible on Google</p>
+      <p>in missed revenue per month — based on 4 lost leads × avg. $2K customer value for service businesses</p>
     </div>
   </div>
 </section>
@@ -759,8 +789,29 @@
 <!-- APPLICATION CTA -->
 <section class="apply-section">
   <h2>Ready to own your market?</h2>
-  <p>Send your business name, city, and current situation. We'll review your Google listing and tell you exactly what it would take to get you to #1.</p>
-  <a href="mailto:adam@primelocalgrowth.com?subject=Elite%20Plan%20Application&body=Business%20Name%3A%0ACity%3A%0AIndustry%3A%0ACurrent%20situation%3A" class="btn-elite">Send Your Application →</a>
+  <p>Tell us about your business. Adam reviews every application personally and responds within 24 hours — no sales calls, ever.</p>
+  <form class="apply-form" id="applyForm" novalidate>
+    <div class="apply-fields">
+      <div class="apply-group">
+        <label for="apply-name">Business name</label>
+        <input type="text" id="apply-name" name="businessName" placeholder="e.g., Austin Family Dental" autocomplete="organization" required>
+      </div>
+      <div class="apply-group">
+        <label for="apply-city">City &amp; state</label>
+        <input type="text" id="apply-city" name="city" placeholder="e.g., Austin, TX" required>
+      </div>
+      <div class="apply-group">
+        <label for="apply-email">Your email</label>
+        <input type="email" id="apply-email" name="email" placeholder="you@business.com" autocomplete="email" required>
+      </div>
+      <div class="apply-group apply-group--full">
+        <label for="apply-situation">Biggest challenge right now</label>
+        <textarea id="apply-situation" name="situation" placeholder="e.g., We're not showing up when people search for us in our city…" rows="3"></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn-elite apply-submit">Send My Application →</button>
+    <p id="applyMsg" class="apply-msg" aria-live="polite"></p>
+  </form>
   <p class="apply-note">Responses within 24 hours. No sales calls, ever.</p>
 </section>
 
@@ -786,6 +837,42 @@
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
+
+  // Application form
+  const applyForm = document.getElementById('applyForm');
+  const applyMsg  = document.getElementById('applyMsg');
+  if (applyForm) {
+    applyForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = applyForm.querySelector('.apply-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      applyMsg.className = 'apply-msg';
+      applyMsg.textContent = '';
+      const data = {
+        businessName: applyForm.businessName.value.trim(),
+        city:         applyForm.city.value.trim(),
+        email:        applyForm.email.value.trim(),
+        situation:    applyForm.situation.value.trim(),
+        source:       'premium-page'
+      };
+      try {
+        const res = await fetch('/api/submit-form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          applyForm.innerHTML = '<p style="color:#10b981;font-size:16px;font-weight:600;text-align:center;">Application received — Adam will be in touch within 24 hours.</p>';
+        } else { throw new Error(); }
+      } catch {
+        applyMsg.className = 'apply-msg error';
+        applyMsg.textContent = 'Something went wrong. Email adam@primelocalgrowth.com directly.';
+        btn.disabled = false;
+        btn.textContent = 'Send My Application →';
+      }
+    });
+  }
 </script>
 </body>
 </html>

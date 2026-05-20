@@ -22,6 +22,7 @@
  */
 
 import crypto from 'crypto';
+import { sendEmail } from './utils/email.js';
 
 // Disable Vercel's automatic body parsing — required for Stripe signature verification
 export const config = {
@@ -198,25 +199,12 @@ async function sendDeliveryEmail(toEmail, toName, blueprints) {
 </body>
 </html>`;
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from:    'Prime Local Growth <adam@primelocalgrowth.com>',
-      to:      [toEmail],
-      subject: `Your ${isBundle ? 'Local Growth Blueprints are' : `${blueprints[0].name} is`} ready to download`,
-      html,
-    }),
+  return await sendEmail({
+    to: toEmail,
+    from: 'Prime Local Growth <adam@primelocalgrowth.com>',
+    subject: `Your ${isBundle ? 'Local Growth Blueprints are' : `${blueprints[0].name} is`} ready to download`,
+    html,
   });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Resend error: ${err}`);
-  }
-  return res.json();
 }
 
 // ─── Main handler ──────────────────────────────────────────────────────────────

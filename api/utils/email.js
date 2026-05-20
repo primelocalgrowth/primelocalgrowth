@@ -1,0 +1,281 @@
+/**
+ * Email utilities — shared across all API handlers
+ * Eliminates duplication, ensures consistency, optimizes for cost/speed
+ */
+
+const RESEND_BASE = 'https://api.resend.com/emails';
+const FROM_ADAM = 'Adam Rome <adam@primelocalgrowth.com>';
+const FROM_PLG = 'Prime Local Growth <adam@primelocalgrowth.com>';
+
+/**
+ * Send email via Resend API
+ * @param {Object} config - { to, from, subject, html, replyTo? }
+ * @returns {Promise}
+ */
+export async function sendEmail(config) {
+  const { to, from, subject, html, replyTo } = config;
+
+  if (!process.env.RESEND_API_KEY) {
+    console.warn('No RESEND_API_KEY — email skipped:', subject);
+    return null;
+  }
+
+  try {
+    const response = await fetch(RESEND_BASE, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from,
+        to: Array.isArray(to) ? to : [to],
+        subject,
+        html,
+        ...(replyTo && { reply_to: replyTo })
+      })
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Resend error ${response.status}: ${error}`);
+    }
+
+    return await response.json();
+  } catch (err) {
+    console.error('Email send failed:', err.message);
+    throw err;
+  }
+}
+
+/**
+ * Send notification to Adam about form submission
+ */
+export async function notifyAdamOfLead(lead) {
+  const { name, email, phone, businessType, timestamp } = lead;
+
+  const html = `
+    <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+      <div style="background:#0f1419;color:#fff;padding:20px;border-radius:8px 8px 0 0;">
+        <h2 style="margin:0;color:#f59e0b;">🔥 New Lead: ${escapeHtml(name)}</h2>
+      </div>
+      <div style="background:#fff;padding:20px;border:1px solid #e5e5e5;border-top:none;">
+        <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+        <p><strong>Business:</strong> ${escapeHtml(businessType)}</p>
+        <p><strong>Phone:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></p>
+        <p><strong>Submitted:</strong> ${new Date(timestamp).toLocaleString()}</p>
+        <p style="margin-top:20px;padding-top:20px;border-top:1px solid #e5e5e5;">
+          <a href="https://primelocalgrowth.com/dashboard?lead=${email}" style="background:#f59e0b;color:#000;padding:10px 20px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;">
+            View in Dashboard
+          </a>
+        </p>
+      </div>
+    </div>
+  `;
+
+  return sendEmail({
+    to: 'adam@primelocalgrowth.com',
+    from: FROM_PLG,
+    subject: `🔥 New Lead: ${name} — ${businessType}`,
+    html,
+    replyTo: email
+  });
+}
+
+/**
+ * Send auto-reply to lead with next steps
+ */
+export async function sendLeadAutoReply(lead) {
+  const { name, email, businessType } = lead;
+  const firstName = name.split(' ')[0];
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin:0;padding:0;background:#f3f4f6;font-family:Georgia,serif;">
+    <div style="max-width:600px;margin:0 auto;background:#fff;">
+      <div style="background:#0f1419;padding:24px 32px;border-radius:8px 8px 0 0;">
+        <p style="margin:0;font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#fff;">Prime <span style="color:#f59e0b;">Local</span> Growth</p>
+        <p style="margin:4px 0 0;font-size:13px;color:#9ca3af;font-family:Arial,sans-serif;">Google Business Profile Management</p>
+      </div>
+      <div style="padding:32px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 8px 8px;">
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">Hi ${escapeHtml(firstName)},</p>
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">Got your message about your ${escapeHtml(businessType)} listing. I run comprehensive audits for every prospect — analyzing 20+ platforms, identifying gaps, and grading your current visibility.</p>
+        <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:20px 24px;margin:24px 0;">
+          <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.05em;">Want your audit?</p>
+          <p style="margin:0 0 16px;font-size:15px;color:#1a1a1a;line-height:1.6;">Reply to this email. I'll run it personally and send you the full report within 24 hours — no cost, no obligation.</p>
+        </div>
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">The audit shows you exactly where you stand and what moves will move the needle fastest. If we're a fit, we'll talk next steps. If not, you'll have actionable intelligence either way.</p>
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:32px 0;">
+        <p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;">
+          Questions before we talk? Just reply to this email — I read every one personally.<br>
+          — Adam Rome · Prime Local Growth · <a href="https://www.primelocalgrowth.com" style="color:#f59e0b;">primelocalgrowth.com</a>
+        </p>
+      </div>
+    </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: email,
+    from: FROM_ADAM,
+    subject: `Got it, ${firstName} — one quick thing before we connect`,
+    html,
+    replyTo: 'adam@primelocalgrowth.com'
+  });
+}
+
+/**
+ * Send welcome email to new paid customer
+ */
+export async function sendCustomerWelcome(customer, productId) {
+  const { email, name } = customer;
+  const firstName = name ? name.split(' ')[0] : 'there';
+  const videoUrl = 'https://primelocalgrowth.com/welcome-video';
+  const guideUrl = 'https://primelocalgrowth.com/downloads/gbp-access-guide';
+
+  const noAccessProducts = ['local-domination', 'audit'];
+  const sendGuide = !noAccessProducts.includes(productId);
+
+  const html = `
+    <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#1a1a1a;font-size:16px;line-height:1.7;">
+      <div style="background:#0f1419;padding:24px 32px;border-radius:8px 8px 0 0;margin-bottom:0;">
+        <p style="margin:0;font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#fff;">Prime <span style="color:#f59e0b;">Local</span> Growth</p>
+      </div>
+      <div style="background:#fff;padding:32px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 8px 8px;">
+        <p>Hi ${escapeHtml(firstName)},</p>
+        <p>Welcome — I'm excited to get started on your Google listing.</p>
+        <p><strong>Step 1 — Watch this 2-minute video</strong> so you know exactly what we're doing:</p>
+        <p style="margin:16px 0;">
+          <a href="${videoUrl}" style="display:inline-block;background:#1a1f26;color:#f59e0b;border:1px solid rgba(245,158,11,0.4);text-decoration:none;font-family:Arial,sans-serif;font-weight:600;font-size:14px;padding:10px 22px;border-radius:6px;">
+            ▶ Watch the 2-Minute Walkthrough →
+          </a>
+        </p>
+        ${sendGuide ? `
+          <p><strong>Step 2 — Grant Manager access (3 minutes):</strong></p>
+          <p style="margin:20px 0;">
+            <a href="${guideUrl}" style="display:inline-block;background:#f59e0b;color:#000;text-decoration:none;font-family:Arial,sans-serif;font-weight:700;font-size:15px;padding:14px 32px;border-radius:6px;">
+              Open the Step-by-Step Access Guide →
+            </a>
+          </p>
+          <p style="font-size:14px;color:#666;">Add <strong>primelocalgrowth@gmail.com</strong> as a <strong>Manager</strong> (not Owner). You stay in full control.</p>
+        ` : ''}
+        <p><strong>What happens next:</strong></p>
+        <ul style="padding-left:20px;">
+          <li><strong>Hour 0–2:</strong> I accept your invitation and run a full diagnostic audit</li>
+          <li><strong>Hours 2–12:</strong> Full 360° optimization — keywords, photos, services, Q&A</li>
+          <li><strong>Hours 12–24:</strong> Posting schedule, review monitoring activated</li>
+        </ul>
+        <p style="background:#1a1f26;border-left:3px solid #f59e0b;padding:14px 18px;border-radius:0 6px 6px 0;font-size:14px;color:#d1d5db;">
+          You stay the Primary Owner. Manager access means I can optimize — I cannot transfer or delete your listing.
+        </p>
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:28px 0;">
+        <p style="font-size:14px;color:#666;">
+          Questions? Hit reply — I read every email personally.<br>
+          — Adam Rome · Prime Local Growth · adam@primelocalgrowth.com
+        </p>
+      </div>
+    </div>
+  `;
+
+  return sendEmail({
+    to: email,
+    from: FROM_ADAM,
+    subject: `Welcome to PLG — watch this first (2 min)`,
+    html,
+    replyTo: 'adam@primelocalgrowth.com'
+  });
+}
+
+/**
+ * Send onboarding checklist email after payment
+ */
+export async function sendOnboardingChecklist(customer, productId) {
+  const { email, name } = customer;
+  const firstName = name ? name.split(' ')[0] : 'there';
+
+  const html = `
+    <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#1a1a1a;">
+      <div style="background:#0f1419;padding:24px 32px;border-radius:8px 8px 0 0;">
+        <h2 style="margin:0;color:#fff;font-size:24px;">Here's What Happens Next</h2>
+        <p style="margin:8px 0 0;color:#f59e0b;font-size:14px;">Your onboarding timeline</p>
+      </div>
+      <div style="background:#fff;padding:32px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 8px 8px;font-size:16px;line-height:1.7;">
+        <p>Hi ${escapeHtml(firstName)},</p>
+        <p>Your payment is confirmed. Here's exactly what happens from here:</p>
+
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
+          <tr>
+            <td style="background:#fffbeb;border-left:4px solid #f59e0b;padding:16px;border-radius:6px;margin-bottom:16px;">
+              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">Today</p>
+              <p style="margin:0;color:#1a1a1a;">You get the GBP access guide. Follow it to add me as Manager to your listing.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="background:#fffbeb;border-left:4px solid #f59e0b;padding:16px;border-radius:6px;margin-bottom:16px;margin-top:16px;">
+              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">24 Hours</p>
+              <p style="margin:0;color:#1a1a1a;">I'll run your complete GBP audit and send you a report showing exactly what's working and what needs to change.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="background:#fffbeb;border-left:4px solid #f59e0b;padding:16px;border-radius:6px;margin-bottom:16px;margin-top:16px;">
+              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">48 Hours</p>
+              <p style="margin:0;color:#1a1a1a;">First optimization complete — photos optimized, keywords updated, services added, Q&A seeded.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="background:#fffbeb;border-left:4px solid #f59e0b;padding:16px;border-radius:6px;margin-top:16px;">
+              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">Weekly</p>
+              <p style="margin:0;color:#1a1a1a;">Google Posts every week, review monitoring, competitor tracking. I send you a report every Friday.</p>
+            </td>
+          </tr>
+        </table>
+
+        <p><strong>Reply to this email if:</strong></p>
+        <ul style="padding-left:20px;">
+          <li>You have questions about the process</li>
+          <li>Your GBP login isn't working</li>
+          <li>You need to reschedule the Manager handoff</li>
+          <li>Anything else comes up</li>
+        </ul>
+
+        <p>I read and respond to every email personally — usually within an hour.</p>
+
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:28px 0;">
+        <p style="font-size:14px;color:#666;margin:0;">
+          — Adam Rome · Prime Local Growth · adam@primelocalgrowth.com
+        </p>
+      </div>
+    </div>
+  `;
+
+  return sendEmail({
+    to: email,
+    from: FROM_ADAM,
+    subject: `Your onboarding timeline (starts today)`,
+    html,
+    replyTo: 'adam@primelocalgrowth.com'
+  });
+}
+
+/**
+ * HTML escape utility
+ */
+function escapeHtml(text) {
+  if (!text) return '';
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+export { escapeHtml };

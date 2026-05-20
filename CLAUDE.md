@@ -17,16 +17,20 @@ Live marketing site for Prime Local Growth. Deployed on Vercel, auto-deploys fro
 - Local dev: `npx serve public` or `python3 -m http.server 5173`
 
 ## Integrations
-- **Anthropic Claude API**: ANTHROPIC_API_KEY — triggers instant audit on form submission via /plg-internet-visibility-audit
 - **Beehiiv**: pub_0044836f-7866-4885-8bff-804d13fe76e1 — newsletter + automation
-- **Resend**: RESEND_API_KEY — transactional email (form alerts, auto-replies, audit reports)
-- **Stripe**: payment links for Starter/Growth/Dominate/Elite plans — keys via env vars only
+- **Resend**: RESEND_API_KEY — transactional email (form alerts, auto-replies, welcome sequences, delivery)
+- **Stripe**: payment links for Starter/Growth/Dominate/Elite plans — webhook at /api/stripe-webhook for auto-delivery
 - **Google Review link**: https://g.page/r/CSRlPk-HmJb0EAI/review
+- **Audits**: Manual via /plg-internet-visibility-audit skill (Claude API called by Adam, not auto-triggered)
 
 ## Key Files
 - `index.html` — all page content, edit here for copy/layout changes
 - `vercel.json` — routing rules, never break this
-- `api/` — form handler and integrations
+- `api/submit-form.js` — lead form submission → email to Adam + auto-reply + Beehiiv + Sheets
+- `api/stripe-webhook.js` — Stripe payment completion → welcome email + onboarding checklist
+- `api/blueprint-delivery.js` — Blueprint purchase → auto-deliver PDF via email
+- `api/newsletter-subscribe.js` — Newsletter signup → add to Beehiiv + notify Adam
+- `api/utils/email.js` — centralized email utilities (sendEmail, notifyAdamOfLead, sendLeadAutoReply, sendCustomerWelcome, sendOnboardingChecklist)
 - `public/downloads/` — lead magnets and guides
 
 ## Rules

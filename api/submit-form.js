@@ -4,6 +4,8 @@
  * Audit: Manual via /plg-internet-visibility-audit skill (free), delivered by Adam
  */
 
+import { notifyAdamOfLead, sendLeadAutoReply } from './utils/email.js';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -28,20 +30,21 @@ export default async function handler(req, res) {
     }
 
     const timestamp = new Date().toISOString();
+    const lead = { name, email, phone, businessType, timestamp };
 
-    // Send email notification (Resend) — internal alert to Adam
+    // Send email notification to Adam
     if (process.env.RESEND_API_KEY) {
       try {
-        await sendEmailNotification(name, email, phone, businessType, timestamp);
+        await notifyAdamOfLead(lead);
       } catch (err) {
-        console.error('Email send failed:', err);
+        console.error('Lead notification send failed:', err);
       }
     }
 
-    // Send auto-reply to lead with access guide + audit request
+    // Send auto-reply to lead
     if (process.env.RESEND_API_KEY) {
       try {
-        await sendAutoReply(name, email, businessType);
+        await sendLeadAutoReply(lead);
       } catch (err) {
         console.error('Auto-reply send failed:', err);
       }
@@ -88,141 +91,6 @@ export default async function handler(req, res) {
   }
 }
 
-// ============================================================
-// EMAIL (Resend)
-// ============================================================
-
-async function sendEmailNotification(name, email, phone, businessType, timestamp) {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return;
-
-  const phoneDisplay = phone ? `<div class="field"><div class="label">Phone:</div><div class="value"><a href="tel:${phone}">${escapeHtml(phone)}</a></div></div>` : '';
-
-  const emailHtml = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="UTF-8">
-        <style>
-          body { font-family: Arial, sans-serif; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-          .header { border-bottom: 3px solid #f59e0b; padding-bottom: 15px; margin-bottom: 20px; }
-          .field { margin: 15px 0; padding: 10px; background-color: #f9fafb; border-left: 4px solid #f59e0b; }
-          .label { font-weight: bold; color: #1f2937; }
-          .value { color: #4b5563; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header"><h1>New Lead: ${escapeHtml(name)}</h1></div>
-          <div class="field"><div class="label">Name:</div><div class="value">${escapeHtml(name)}</div></div>
-          <div class="field"><div class="label">Email:</div><div class="value"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></div></div>
-          ${phoneDisplay}
-          <div class="field"><div class="label">Business:</div><div class="value">${escapeHtml(businessType)}</div></div>
-          <div class="field"><div class="label">Submitted:</div><div class="value">${new Date(timestamp).toLocaleString('en-US', { timeZone: 'America/Chicago' })}</div></div>
-        </div>
-      </body>
-    </html>
-  `;
-
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      from: 'Prime Local Growth <adam@primelocalgrowth.com>',
-      to: 'adam@primelocalgrowth.com',
-      replyTo: email,
-      subject: `🔥 New Lead: ${name} — ${businessType}`,
-      html: emailHtml
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error(`Resend error: ${response.status}`);
-  }
-
-  return await response.json();
-}
-
-// ============================================================
-// AUTO-REPLY TO LEAD — sends access guide + infographic
-// ============================================================
-
-async function sendAutoReply(name, email, businessType) {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return;
-
-  const firstName = name.split(' ')[0];
-
-  const html = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin:0;padding:0;background:#f3f4f6;font-family:'Georgia',serif;">
-<div style="max-width:600px;margin:0 auto;background:#fff;">
-
-  <!-- Header -->
-  <div style="background:#0f1419;padding:24px 32px;border-radius:8px 8px 0 0;">
-    <p style="margin:0;font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#fff;">Prime <span style="color:#f59e0b;">Local</span> Growth</p>
-    <p style="margin:4px 0 0;font-size:13px;color:#9ca3af;font-family:Arial,sans-serif;">Google Business Profile Management</p>
-  </div>
-
-  <!-- Body -->
-  <div style="padding:32px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 8px 8px;">
-
-    <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">Hi ${escapeHtml(firstName)},</p>
-
-    <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">Got your message — thanks for reaching out about your ${escapeHtml(businessType)} listing.</p>
-
-    <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">I run comprehensive audits for every prospective client — 20+ platform analysis, competitive gap assessment, and a letter grade on your current visibility. It shows you exactly where you stand on Google and what moves will move the needle fastest.</p>
-
-    <!-- CTA Box -->
-    <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:20px 24px;margin:24px 0;">
-      <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.05em;">Want your audit?</p>
-      <p style="margin:0 0 16px;font-size:15px;color:#1a1a1a;line-height:1.6;">Just reply to this email and let me know. I'll run it personally and send you the full report within 24 hours — no cost, no obligation.</p>
-    </div>
-
-    <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">The audit tells you everything. If it looks like we're a fit, we'll talk next steps. If not, you'll have actionable intelligence either way.</p>
-
-    <hr style="border:none;border-top:1px solid #e5e5e5;margin:32px 0;">
-
-    <p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;">
-      Questions before we talk? Just reply to this email — I read every one personally.<br>
-      — Adam Rome · Prime Local Growth · <a href="https://www.primelocalgrowth.com" style="color:#f59e0b;">primelocalgrowth.com</a>
-    </p>
-
-  </div>
-</div>
-</body>
-</html>`;
-
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      from: 'Adam Rome <adam@primelocalgrowth.com>',
-      to: email,
-      replyTo: 'adam@primelocalgrowth.com',
-      subject: `Got it, ${firstName} — one quick thing before we connect`,
-      html
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error(`Resend auto-reply error: ${response.status}`);
-  }
-
-  return await response.json();
-}
 
 // ============================================================
 // BEEHIIV INTEGRATION
@@ -299,18 +167,3 @@ async function appendToGoogleSheets(name, email, phone, businessType, timestamp)
   return await response.json();
 }
 
-// ============================================================
-// UTILITIES
-// ============================================================
-
-function escapeHtml(text) {
-  if (!text) return '';
-  const map = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
-  };
-  return text.replace(/[&<>"']/g, (m) => map[m]);
-}

@@ -2,6 +2,9 @@
  * Newsletter Subscribe — adds directly to Beehiiv
  * Used by the /newsletter landing page (name + email only, no business type required)
  */
+
+import { sendEmail } from './utils/email.js';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
@@ -47,18 +50,11 @@ export default async function handler(req, res) {
   // Notify Adam
   if (process.env.RESEND_API_KEY) {
     try {
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          from: 'Prime Local Growth <adam@primelocalgrowth.com>',
-          to: 'adam@primelocalgrowth.com',
-          subject: `📧 New newsletter subscriber: ${name}`,
-          html: `<p><strong>${name}</strong> (${email}) just subscribed via the newsletter page.</p>`
-        })
+      await sendEmail({
+        to: 'adam@primelocalgrowth.com',
+        from: 'Prime Local Growth <adam@primelocalgrowth.com>',
+        subject: `📧 New newsletter subscriber: ${name}`,
+        html: `<p><strong>${name}</strong> (${email}) just subscribed via the newsletter page.</p>`
       });
     } catch (err) { /* non-critical */ }
   }

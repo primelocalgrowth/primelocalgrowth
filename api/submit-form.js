@@ -1,7 +1,9 @@
 /**
  * Vercel Serverless Function - Enhanced Form Handler
- * Handles: Email (Resend) + Beehiiv subscription + Google Sheets logging + Redirect
+ * Handles: Email (Resend) + Beehiiv subscription + Google Sheets logging + Instant Audit + Redirect
  */
+
+import { triggerInstantAudit } from './instant-audit.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -28,45 +30,31 @@ export default async function handler(req, res) {
 
     const timestamp = new Date().toISOString();
 
-    // Send email notification (Resend) — internal alert to Adam
-    if (process.env.RESEND_API_KEY) {
-      try {
-        await sendEmailNotification(name, email, phone, businessType, timestamp);
-      } catch (err) {
-        console.error('Email send failed:', err);
-        // Continue - don't fail the form
-      }
-    }
+    // Run all operations in parallel — don't fail form if any fail
+    const results = await Promise.allSettled([
+      // Email notification (Resend) — internal alert to Adam
+      process.env.RESEND_API_KEY ? sendEmailNotification(name, email, phone, businessType, timestamp) : Promise.resolve(),
 
-    // Send auto-reply to lead with access guide
-    if (process.env.RESEND_API_KEY) {
-      try {
-        await sendAutoReply(name, email, businessType);
-      } catch (err) {
-        console.error('Auto-reply send failed:', err);
-        // Continue - don't fail the form
-      }
-    }
+      // Auto-reply to lead with access guide
+      process.env.RESEND_API_KEY ? sendAutoReply(name, email, businessType) : Promise.resolve(),
 
-    // Add to Beehiiv
-    if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
-      try {
-        await addToBeehiiv(name, email, phone, businessType);
-      } catch (err) {
-        console.error('Beehiiv add failed:', err);
-        // Continue - don't fail the form
-      }
-    }
+      // Add to Beehiiv
+      (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) ? addToBeehiiv(name, email, phone, businessType) : Promise.resolve(),
 
-    // Add to Google Sheets
-    if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
-      try {
-        await appendToGoogleSheets(name, email, phone, businessType, timestamp);
-      } catch (err) {
-        console.error('Google Sheets append failed:', err);
-        // Continue - don't fail the form
+      // Add to Google Sheets
+      process.env.GOOGLE_SHEETS_WEBHOOK_URL ? appendToGoogleSheets(name, email, phone, businessType, timestamp) : Promise.resolve(),
+
+      // Trigger instant audit via Claude
+      process.env.ANTHROPIC_API_KEY ? triggerInstantAudit(name, '', businessType, email) : Promise.resolve()
+    ]);
+
+    // Log any failures but don't fail the form
+    results.forEach((result, index) => {
+      if (result.status === 'rejected') {
+        const labels = ['Email notification', 'Auto-reply', 'Beehiiv', 'Google Sheets', 'Instant Audit'];
+        console.warn(`${labels[index]} failed:`, result.reason);
       }
-    }
+    });
 
     // Return success with redirect
     return res.status(200).json({

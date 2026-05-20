@@ -8,6 +8,25 @@ const FROM_ADAM = 'Adam Rome <adam@primelocalgrowth.com>';
 const FROM_PLG = 'Prime Local Growth <adam@primelocalgrowth.com>';
 
 /**
+ * Standard unsubscribe footer for all emails
+ */
+function getEmailFooter() {
+  return `
+    <hr style="border:none;border-top:1px solid #e5e5e5;margin:28px 0 20px;">
+    <div style="font-size:12px;color:#999;text-align:center;">
+      <p style="margin:0;padding:0;line-height:1.6;">
+        Prime Local Growth · <a href="tel:210-646-1436" style="color:#0ea5e9;text-decoration:none;">210-646-1436</a> ·
+        <a href="mailto:adam@primelocalgrowth.com" style="color:#0ea5e9;text-decoration:none;">adam@primelocalgrowth.com</a>
+      </p>
+      <p style="margin:4px 0 0;padding:0;">
+        <a href="https://www.primelocalgrowth.com/newsletter" style="color:#0ea5e9;text-decoration:none;">Subscribe to Newsletter</a> ·
+        <a href="https://www.primelocalgrowth.com/preferences" style="color:#0ea5e9;text-decoration:none;">Manage Preferences</a>
+      </p>
+    </div>
+  `;
+}
+
+/**
  * Send email via Resend API
  * @param {Object} config - { to, from, subject, html, replyTo? }
  * @returns {Promise}
@@ -64,6 +83,7 @@ export async function notifyAdamOfLead(lead) {
         <p><strong>Business:</strong> ${escapeHtml(businessType)}</p>
         <p><strong>Phone:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></p>
         <p><strong>Submitted:</strong> ${new Date(timestamp).toLocaleString()}</p>
+        ${getEmailFooter()}
       </div>
     </div>
   `;
@@ -110,6 +130,7 @@ export async function sendLeadAutoReply(lead) {
           Questions before we talk? Just reply to this email — I read every one personally.<br>
           — Adam Rome · Prime Local Growth · <a href="https://www.primelocalgrowth.com" style="color:#f59e0b;">primelocalgrowth.com</a>
         </p>
+        ${getEmailFooter()}
       </div>
     </div>
     </body>
@@ -167,8 +188,8 @@ export async function sendCustomerWelcome(customer, productId) {
           <li><strong>Hours 12–24:</strong> Posting schedule, review monitoring activated</li>
         </ul>
         <p style="background:#1a1f26;border-left:3px solid #f59e0b;padding:14px 18px;border-radius:0 6px 6px 0;font-size:14px;color:#d1d5db;">You stay the Primary Owner. Manager access means I can optimize — I cannot transfer or delete your listing.</p>
-        <hr style="border:none;border-top:1px solid #e5e5e5;margin:28px 0;">
         <p style="font-size:14px;color:#666;">Questions? Hit reply — I read every email personally.<br>— Adam Rome · Prime Local Growth · adam@primelocalgrowth.com</p>
+        ${getEmailFooter()}
       </div>
     </div>
   `;
@@ -236,10 +257,10 @@ export async function sendOnboardingChecklist(customer, productId) {
 
         <p>I read and respond to every email personally — usually within an hour.</p>
 
-        <hr style="border:none;border-top:1px solid #e5e5e5;margin:28px 0;">
         <p style="font-size:14px;color:#666;margin:0;">
           — Adam Rome · Prime Local Growth · adam@primelocalgrowth.com
         </p>
+        ${getEmailFooter()}
       </div>
     </div>
   `;
@@ -290,8 +311,8 @@ export async function sendReviewRequest(customer) {
           </a>
         </p>
         <p>It only takes 60 seconds and makes a huge difference in helping local customers find you.</p>
-        <hr style="border:none;border-top:1px solid #e5e5e5;margin:28px 0;">
         <p style="font-size:14px;color:#666;margin:0;">— Adam Rome · Prime Local Growth · adam@primelocalgrowth.com</p>
+        ${getEmailFooter()}
       </div>
     </div>
   `;

@@ -36,7 +36,7 @@ export default async function handler(req, res) {
     try {
       // Manual HMAC verification (no Stripe SDK needed)
       const crypto = await import('crypto');
-      const parts = sig.split(',');
+      const parts = sig.split(',').map(p => p.trim());
       const timestamp = parts[0].split('=')[1];
       const v1 = parts[1].split('=')[1];
       const payload = `${timestamp}.${rawBody.toString()}`;

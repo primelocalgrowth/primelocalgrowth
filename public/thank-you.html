@@ -17,24 +17,55 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg: #0f172a;
+      --bg2: #1e2a3a;
+      --sky: #0ea5e9;
+      --sky-dark: #0284c7;
+      --text: #f8fafc;
+      --body: #cbd5e1;
+      --muted: #94a3b8;
+      --faint: #8899b0;
+      --radius: 8px;
+      --radius-lg: 12px;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f1419, #1a1f26);
+      background: var(--bg);
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 20px;
+      padding: 0 0 40px;
     }
+
+    /* NAV */
+    .nav {
+      width: 100%;
+      background: rgba(15,23,42,0.95);
+      border-bottom: 1px solid rgba(14,165,233,0.12);
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      margin-bottom: 40px;
+    }
+    .nav-brand { text-decoration: none; display: flex; align-items: center; }
+    .nav-home { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-home:hover { color: var(--sky); }
+    @media (max-width: 640px) { .nav { padding: 14px 20px; } }
 
     .container {
       max-width: 600px;
+      width: 100%;
       text-align: center;
-      background: rgba(15, 20, 25, 0.8);
+      background: rgba(30,42,58,0.6);
       padding: 60px 40px;
-      border-radius: 12px;
-      border: 1px solid rgba(14, 165, 233, 0.2);
-      animation: slideUp 0.8s ease-out;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(14,165,233,0.2);
+      animation: slideUp 0.7s cubic-bezier(0.22,1,0.36,1);
     }
 
     @keyframes slideUp {
@@ -49,92 +80,94 @@
     }
 
     .checkmark {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 30px;
-      background: #0ea5e9;
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 28px;
+      background: var(--sky);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 48px;
+      box-shadow: 0 0 32px rgba(14,165,233,0.35);
     }
+    .checkmark svg { color: #000; }
 
     h1 {
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 700;
-      color: #fff;
-      margin-bottom: 15px;
+      color: var(--text);
+      margin-bottom: 14px;
       font-family: 'Poppins', sans-serif;
+      line-height: 1.2;
     }
 
     .subtitle {
-      font-size: 18px;
-      color: #d1d5db;
-      margin-bottom: 30px;
-      line-height: 1.6;
+      font-size: 17px;
+      color: var(--body);
+      margin-bottom: 28px;
+      line-height: 1.65;
     }
 
     .next-steps {
-      background: rgba(14, 165, 233, 0.08);
-      border-left: 4px solid #0ea5e9;
-      padding: 25px;
-      border-radius: 8px;
-      margin: 40px 0;
+      background: rgba(14,165,233,0.07);
+      border-left: 3px solid var(--sky);
+      padding: 24px;
+      border-radius: var(--radius);
+      margin: 36px 0;
       text-align: left;
     }
 
     .next-steps h3 {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
-      color: #0ea5e9;
-      margin-bottom: 15px;
+      color: var(--sky);
+      margin-bottom: 14px;
     }
 
     .next-steps ol {
-      margin-left: 20px;
-      color: #d1d5db;
+      margin-left: 18px;
+      color: var(--body);
       line-height: 1.8;
     }
 
     .next-steps li {
-      margin-bottom: 10px;
+      margin-bottom: 9px;
     }
 
     .next-steps strong {
-      color: #fff;
+      color: var(--text);
     }
 
     .cta-button {
       display: inline-block;
-      background: #0ea5e9;
-      color: #fff;
-      padding: 15px 40px;
-      border-radius: 6px;
+      background: var(--sky);
+      color: #000;
+      padding: 14px 36px;
+      border-radius: var(--radius);
       text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
+      font-weight: 700;
+      font-size: 15px;
       margin-top: 20px;
-      transition: all 0.3s;
+      transition: background 0.2s, transform 0.15s;
       border: none;
       cursor: pointer;
     }
 
     .cta-button:hover {
-      background: #0284c7;
-      transform: translateY(-2px);
+      background: var(--sky-dark);
+      transform: translateY(-1px);
     }
 
     .contact-info {
-      margin-top: 40px;
-      padding-top: 30px;
-      border-top: 1px solid rgba(14, 165, 233, 0.2);
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(14,165,233,0.15);
       font-size: 14px;
-      color: #9ca3af;
+      color: var(--muted);
     }
 
     .contact-info a {
-      color: #0ea5e9;
+      color: var(--sky);
       text-decoration: none;
       font-weight: 600;
     }
@@ -145,9 +178,9 @@
 
     .blueprint-upsell {
       margin: 36px 0 0;
-      background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(14,165,233,0.03));
-      border: 1px solid rgba(14,165,233,0.3);
-      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(14,165,233,0.08), rgba(14,165,233,0.02));
+      border: 1px solid rgba(14,165,233,0.25);
+      border-radius: var(--radius-lg);
       padding: 28px 28px 24px;
       text-align: left;
     }
@@ -157,7 +190,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #0ea5e9;
+      color: var(--sky);
       background: rgba(14,165,233,0.1);
       border: 1px solid rgba(14,165,233,0.25);
       padding: 4px 12px;
@@ -168,13 +201,13 @@
       font-family: 'Poppins', sans-serif;
       font-size: 18px;
       font-weight: 700;
-      color: #fff;
+      color: var(--text);
       margin-bottom: 8px;
       line-height: 1.35;
     }
     .blueprint-upsell p {
       font-size: 14px;
-      color: #9ca3af;
+      color: var(--muted);
       line-height: 1.7;
       margin-bottom: 18px;
     }
@@ -187,8 +220,8 @@
     .upsell-pill {
       font-size: 12px;
       font-weight: 500;
-      color: #d1d5db;
-      background: rgba(255,255,255,0.05);
+      color: var(--body);
+      background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
       padding: 4px 12px;
       border-radius: 20px;
@@ -196,30 +229,30 @@
     .upsell-btn {
       display: block;
       text-align: center;
-      background: #0ea5e9;
-      color: #fff;
+      background: var(--sky);
+      color: #000;
       padding: 13px 24px;
-      border-radius: 8px;
+      border-radius: var(--radius);
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
-      transition: all 0.2s;
+      transition: background 0.2s, transform 0.15s;
     }
-    .upsell-btn:hover { background: #0284c7; transform: translateY(-1px); }
+    .upsell-btn:hover { background: var(--sky-dark); transform: translateY(-1px); }
     .upsell-note {
       text-align: center;
       font-size: 12px;
-      color: #8899b0;
+      color: var(--faint);
       margin-top: 10px;
     }
 
     @media (max-width: 640px) {
       .container {
-        padding: 40px 20px;
+        padding: 36px 20px;
       }
 
       h1 {
-        font-size: 28px;
+        font-size: 26px;
       }
 
       .subtitle {
@@ -229,8 +262,36 @@
   </style>
 </head>
 <body>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav-brand" aria-label="Prime Local Growth — Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 52" height="32" role="img" aria-hidden="true">
+        <circle cx="26" cy="26" r="5" fill="#1B3A6B"/>
+        <line x1="26" y1="26" x2="10" y2="10" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="10" cy="10" r="4" fill="#1B3A6B"/>
+        <line x1="26" y1="26" x2="42" y2="10" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="42" cy="10" r="4" fill="#5B9BD5"/>
+        <line x1="26" y1="26" x2="48" y2="26" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="48" cy="26" r="4" fill="#1B3A6B"/>
+        <line x1="26" y1="26" x2="42" y2="42" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="42" cy="42" r="4" fill="#1B3A6B"/>
+        <line x1="26" y1="26" x2="10" y2="42" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="10" cy="42" r="4" fill="#1B3A6B"/>
+        <line x1="26" y1="26" x2="4" y2="26" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="4" cy="26" r="4" fill="#1B3A6B"/>
+        <text x="62" y="24" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="#f8fafc" letter-spacing="1.5">PRIME</text>
+        <text x="63" y="38" font-family="Poppins,sans-serif" font-weight="500" font-size="9" fill="#5B9BD5" letter-spacing="2.8">LOCAL GROWTH</text>
+      </svg>
+    </a>
+    <a href="/" class="nav-home">← Back to home</a>
+  </nav>
+
   <div class="container">
-    <div class="checkmark">✓</div>
+    <div class="checkmark">
+      <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
 
     <h1>Got it! We're on it.</h1>
 
@@ -248,7 +309,7 @@
       </ol>
     </div>
 
-    <p style="color: #d1d5db; font-size: 16px; margin: 30px 0;">
+    <p style="color: #cbd5e1; font-size: 16px; margin: 30px 0;">
       In the meantime, here's a quick win: <strong>Make sure your Google Business Profile is complete</strong> — name, address, phone, hours, and at least 5 photos. It's the single biggest factor in local Google ranking.
     </p>
 

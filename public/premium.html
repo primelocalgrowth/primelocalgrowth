@@ -14,16 +14,29 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    :root {
+      --bg: #0f172a;
+      --bg2: #1e2a3a;
+      --sky: #0ea5e9;
+      --sky-dark: #0284c7;
+      --text: #f8fafc;
+      --body: #cbd5e1;
+      --muted: #94a3b8;
+      --faint: #8899b0;
+      --radius: 8px;
+      --radius-lg: 12px;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      background: #0f1419;
-      color: #d1d5db;
+      background: var(--bg);
+      color: var(--body);
     }
 
     /* ── NAV ── */
     nav {
-      background: rgba(15,20,25,0.95);
-      border-bottom: 1px solid rgba(14,165,233,0.15);
+      background: rgba(15,23,42,0.95);
+      border-bottom: 1px solid rgba(14,165,233,0.12);
       padding: 18px 40px;
       display: flex;
       justify-content: space-between;
@@ -33,42 +46,35 @@
       z-index: 100;
       backdrop-filter: blur(8px);
     }
-    .nav-brand {
-      font-family: 'Poppins', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      text-decoration: none;
-    }
-    .nav-brand span { color: #0ea5e9; }
+    .nav-brand { text-decoration: none; display: flex; align-items: center; }
     .nav-links { display: flex; gap: 28px; align-items: center; }
     nav a {
-      color: #9ca3af;
+      color: var(--muted);
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
       transition: color 0.2s;
     }
-    nav a:hover { color: #0ea5e9; }
+    nav a:hover { color: var(--sky); }
     .nav-cta {
-      background: #0ea5e9 !important;
-      color: #0f1419 !important;
+      background: var(--sky) !important;
+      color: #000 !important;
       padding: 8px 20px;
       border-radius: 6px;
       font-weight: 700 !important;
     }
-    .nav-cta:hover { background: #0284c7 !important; color: #fff !important; }
+    .nav-cta:hover { background: var(--sky-dark) !important; }
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
     .nav-toggle span {
       display: block; width: 22px; height: 2px;
-      background: #9ca3af; margin: 5px 0; transition: 0.3s;
+      background: var(--muted); margin: 5px 0; transition: 0.3s;
     }
 
     /* ── HERO ── */
     .hero {
       text-align: center;
       padding: 90px 20px 70px;
-      background: linear-gradient(180deg, #1a1f26 0%, #0f1419 100%);
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
       border-bottom: 1px solid rgba(14,165,233,0.1);
       position: relative;
       overflow: hidden;
@@ -110,7 +116,7 @@
     }
     .hero-sub {
       font-size: clamp(16px, 2vw, 19px);
-      color: #9ca3af;
+      color: var(--muted);
       max-width: 680px;
       margin: 0 auto 36px;
       line-height: 1.7;
@@ -124,8 +130,8 @@
     }
     .btn-primary {
       display: inline-block;
-      background: #0ea5e9;
-      color: #0f1419;
+      background: var(--sky);
+      color: #000;
       font-weight: 700;
       font-size: 15px;
       padding: 14px 30px;
@@ -133,11 +139,11 @@
       text-decoration: none;
       transition: background 0.2s, transform 0.15s;
     }
-    .btn-primary:hover { background: #0284c7; transform: translateY(-1px); }
+    .btn-primary:hover { background: var(--sky-dark); transform: translateY(-1px); }
     .btn-outline {
       display: inline-block;
       background: transparent;
-      color: #0ea5e9;
+      color: var(--sky);
       font-weight: 600;
       font-size: 15px;
       padding: 13px 28px;
@@ -155,7 +161,7 @@
 
     /* ── PROBLEM BAR ── */
     .problem-bar {
-      background: #1a1f26;
+      background: var(--bg2);
       border-bottom: 1px solid rgba(255,255,255,0.05);
       border-top: 1px solid rgba(255,255,255,0.05);
       padding: 50px 20px;
@@ -227,7 +233,7 @@
       gap: 24px;
     }
     .who-card {
-      background: #1a1f26;
+      background: var(--bg2);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
       padding: 32px 28px;
@@ -238,8 +244,15 @@
       box-shadow: 0 0 20px rgba(14,165,233,0.08);
     }
     .who-icon {
-      font-size: 34px;
-      margin-bottom: 14px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14,165,233,0.08);
+      border: 1px solid rgba(14,165,233,0.2);
+      border-radius: 10px;
+      margin-bottom: 16px;
     }
     .who-title {
       font-family: 'Poppins', sans-serif;
@@ -256,7 +269,7 @@
 
     /* ── PRICING CARD ── */
     .pricing-wrap {
-      background: linear-gradient(180deg, #1a1f26 0%, #0f1419 100%);
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
       border-top: 1px solid rgba(255,255,255,0.05);
       border-bottom: 1px solid rgba(255,255,255,0.05);
       padding: 80px 20px;
@@ -264,7 +277,7 @@
     .elite-card {
       max-width: 780px;
       margin: 0 auto;
-      background: linear-gradient(160deg, rgba(14,165,233,0.07) 0%, #1a1f26 60%);
+      background: linear-gradient(160deg, rgba(14,165,233,0.07) 0%, var(--bg2) 60%);
       border: 2px solid #0ea5e9;
       border-radius: 16px;
       padding: 50px 44px;
@@ -276,8 +289,8 @@
       top: -16px;
       left: 50%;
       transform: translateX(-50%);
-      background: #0ea5e9;
-      color: #0f1419;
+      background: var(--sky);
+      color: #000;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 2px;
@@ -320,22 +333,21 @@
       gap: 10px;
       align-items: flex-start;
       font-size: 14px;
-      color: #d1d5db;
+      color: var(--body);
       line-height: 1.5;
     }
     .feature-check {
-      color: #0ea5e9;
-      font-weight: 700;
+      color: var(--sky);
       flex-shrink: 0;
-      margin-top: 1px;
+      margin-top: 2px;
     }
     .elite-cta {
       text-align: center;
     }
     .btn-elite {
       display: inline-block;
-      background: #0ea5e9;
-      color: #0f1419;
+      background: var(--sky);
+      color: #000;
       font-weight: 700;
       font-size: 17px;
       padding: 16px 44px;
@@ -345,14 +357,14 @@
       box-shadow: 0 4px 20px rgba(14,165,233,0.3);
     }
     .btn-elite:hover {
-      background: #0284c7;
+      background: var(--sky-dark);
       transform: translateY(-2px);
       box-shadow: 0 6px 28px rgba(14,165,233,0.4);
     }
 
     /* ── PYRAMID / DESIRE CARDS ── */
     .pyramid-section {
-      background: #1a1f26;
+      background: var(--bg2);
       border-top: 1px solid rgba(255,255,255,0.05);
       border-bottom: 1px solid rgba(255,255,255,0.05);
       padding: 80px 20px;
@@ -367,7 +379,7 @@
       gap: 16px;
     }
     .pyramid-card {
-      background: #0f1419;
+      background: var(--bg);
       border: 1px solid rgba(14,165,233,0.15);
       border-radius: 10px;
       padding: 26px 18px;
@@ -379,8 +391,15 @@
       transform: translateY(-3px);
     }
     .pyramid-icon {
-      font-size: 28px;
-      margin-bottom: 12px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14,165,233,0.08);
+      border: 1px solid rgba(14,165,233,0.18);
+      border-radius: 10px;
+      margin: 0 auto 14px;
     }
     .pyramid-label {
       font-family: 'Poppins', sans-serif;
@@ -442,8 +461,8 @@
       font-weight: 500;
       color: #d1d5db;
     }
-    .compare-table tr:nth-child(even) td { background: rgba(26,31,38,0.5); }
-    .compare-table tr:nth-child(odd) td { background: rgba(15,20,25,0.3); }
+    .compare-table tr:nth-child(even) td { background: rgba(30,42,58,0.5); }
+    .compare-table tr:nth-child(odd) td { background: rgba(15,23,42,0.3); }
     .compare-table td.col-plg {
       color: #fff;
       font-weight: 600;
@@ -456,7 +475,7 @@
 
     /* ── APPLICATION CTA ── */
     .apply-section {
-      background: linear-gradient(180deg, #1a1f26 0%, #0f1419 100%);
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
       border-top: 1px solid rgba(14,165,233,0.15);
       padding: 90px 20px;
       text-align: center;
@@ -513,7 +532,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: #1a1f26;
+      background: var(--bg2);
       border-top: 1px solid rgba(255,255,255,0.07);
       padding: 28px 40px;
       display: flex;
@@ -584,7 +603,25 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <a href="/" class="nav-brand">Prime <span>Local</span> Growth</a>
+  <a href="/" class="nav-brand" aria-label="Prime Local Growth — Home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 52" height="34" role="img" aria-hidden="true">
+      <circle cx="26" cy="26" r="5" fill="#1B3A6B"/>
+      <line x1="26" y1="26" x2="10" y2="10" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="10" cy="10" r="4" fill="#1B3A6B"/>
+      <line x1="26" y1="26" x2="42" y2="10" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="42" cy="10" r="4" fill="#5B9BD5"/>
+      <line x1="26" y1="26" x2="48" y2="26" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="48" cy="26" r="4" fill="#1B3A6B"/>
+      <line x1="26" y1="26" x2="42" y2="42" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="42" cy="42" r="4" fill="#1B3A6B"/>
+      <line x1="26" y1="26" x2="10" y2="42" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="10" cy="42" r="4" fill="#1B3A6B"/>
+      <line x1="26" y1="26" x2="4" y2="26" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="4" cy="26" r="4" fill="#1B3A6B"/>
+      <text x="62" y="24" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="#f8fafc" letter-spacing="1.5">PRIME</text>
+      <text x="63" y="38" font-family="Poppins,sans-serif" font-weight="500" font-size="9" fill="#5B9BD5" letter-spacing="2.8">LOCAL GROWTH</text>
+    </svg>
+  </a>
   <div class="nav-links" id="nav-links">
     <a href="/">Home</a>
     <a href="/services.html">Services</a>
@@ -634,22 +671,30 @@
   <p class="section-sub">If your average customer is worth $2,000 or more, being invisible on Google is a six-figure problem.</p>
   <div class="who-grid">
     <div class="who-card">
-      <div class="who-icon">🦷</div>
+      <div class="who-icon">
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0ea5e9" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2C9.5 2 7.5 3.8 7 6.2c-.2.8-.3 1.7-.3 2.8 0 2.4.8 4.6 1.3 6 .5 1.4.9 2.5 1 3.5.1 1 .5 1.5 1 2s1 .5 1.5.5.9 0 1.5-.5.9-1 1-2c.1-1 .5-2.1 1-3.5.5-1.4 1.3-3.6 1.3-6 0-1.1-.1-2-.3-2.8C16.5 3.8 14.5 2 12 2z"/></svg>
+      </div>
       <div class="who-title">Dental Practices</div>
       <p class="who-desc">1–5 locations. Each new patient is worth $2,000–$8,000 LTV. You can't afford to be invisible when someone searches "dentist near me" and your competitor shows up first.</p>
     </div>
     <div class="who-card">
-      <div class="who-icon">🔧</div>
+      <div class="who-icon">
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0ea5e9" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      </div>
       <div class="who-title">HVAC &amp; Plumbing</div>
       <p class="who-desc">High-ticket jobs, year-round demand. Homeowners search Google first, every time. If you're not in the top 3 when an AC fails in July, that job goes to someone else.</p>
     </div>
     <div class="who-card">
-      <div class="who-icon">⚖️</div>
+      <div class="who-icon">
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0ea5e9" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l9-3 9 3M3 6v12l9 3m-9-3l9 3m0 0l9-3V6m-9 15V6m9-3v12"/></svg>
+      </div>
       <div class="who-title">Law Firms</div>
       <p class="who-desc">One new client case can be worth $5,000–$50,000. Your Google listing is your first impression — and most people never scroll past it to your website.</p>
     </div>
     <div class="who-card">
-      <div class="who-icon">🏥</div>
+      <div class="who-icon">
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#0ea5e9" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+      </div>
       <div class="who-title">Med Spas &amp; Clinics</div>
       <p class="who-desc">Premium services attract premium searchers. Patients researching Botox, laser treatments, or aesthetics trust Google more than ads. Own the search results they rely on.</p>
     </div>
@@ -668,18 +713,18 @@
     </div>
     <p class="elite-price-note">month-to-month &nbsp;·&nbsp; cancel anytime &nbsp;·&nbsp; email-based</p>
     <div class="features-grid">
-      <div class="feature-item"><span class="feature-check">✓</span><span>Full GBP domination strategy (multi-location if applicable)</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>Review generation system + response management</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>20+ Google Posts per month (keyword-optimized)</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>GBP photo strategy (professional captions + scheduling)</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>Competitor displacement tracking (weekly)</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>Google Q&amp;A management</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>Citation building (50 directories/mo)</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>Monthly ranking report with competitor gap analysis</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>Priority same-day email response</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>Quarterly visibility audit</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>Dedicated strategy — no account managers, direct access to Adam</span></div>
-      <div class="feature-item"><span class="feature-check">✓</span><span>First-mover protection — we don't work with your direct competitors</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Full GBP domination strategy (multi-location if applicable)</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Review generation system + response management</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>20+ Google Posts per month (keyword-optimized)</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>GBP photo strategy (professional captions + scheduling)</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Competitor displacement tracking (weekly)</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Google Q&amp;A management</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Citation building (50 directories/mo)</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Monthly ranking report with competitor gap analysis</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Priority same-day email response</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Quarterly visibility audit</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Dedicated strategy — no account managers, direct access to Adam</span></div>
+      <div class="feature-item"><svg class="feature-check" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>First-mover protection — we don't work with your direct competitors</span></div>
     </div>
     <div class="elite-cta">
       <a href="mailto:adam@primelocalgrowth.com?subject=Elite%20Plan%20Application" class="btn-elite">Apply for Elite →</a>
@@ -695,27 +740,27 @@
     <p class="section-sub">This isn't just SEO. It's a competitive moat built around your business.</p>
     <div class="pyramid-cards">
       <div class="pyramid-card">
-        <div class="pyramid-icon">⏳</div>
+        <div class="pyramid-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#0ea5e9" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg></div>
         <div class="pyramid-label">Scarcity</div>
         <p class="pyramid-desc">Limited to 10 active clients per region. When we're full, we're full.</p>
       </div>
       <div class="pyramid-card">
-        <div class="pyramid-icon">🔒</div>
+        <div class="pyramid-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#0ea5e9" stroke-width="1.75" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
         <div class="pyramid-label">Exclusivity</div>
         <p class="pyramid-desc">We don't work with your competitors. Your market position is protected.</p>
       </div>
       <div class="pyramid-card">
-        <div class="pyramid-icon">⚡</div>
+        <div class="pyramid-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#0ea5e9" stroke-width="1.75" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
         <div class="pyramid-label">Convenience</div>
         <p class="pyramid-desc">Zero calls. All email. Completely done-for-you. You run your business.</p>
       </div>
       <div class="pyramid-card">
-        <div class="pyramid-icon">🛡️</div>
+        <div class="pyramid-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#0ea5e9" stroke-width="1.75" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
         <div class="pyramid-label">Privacy</div>
         <p class="pyramid-desc">Your strategy, your rankings data, and your competitive intel stay confidential.</p>
       </div>
       <div class="pyramid-card">
-        <div class="pyramid-icon">🏆</div>
+        <div class="pyramid-icon"><svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#0ea5e9" stroke-width="1.75" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3h14l-2 9H7L5 3zm0 0L3 1m16 2l2-2M9 12v9m6-9v9m-7 0h8"/></svg></div>
         <div class="pyramid-label">Status</div>
         <p class="pyramid-desc">Be the #1 result in your market — the one your competitors can't touch.</p>
       </div>

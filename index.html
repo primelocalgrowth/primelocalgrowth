@@ -1355,6 +1355,87 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
 
 <div class="section-divider"></div>
 
+<!-- REVIEWS — moved above the fold for social proof before kit/form -->
+<section id="reviews" class="section" aria-labelledby="reviews-heading">
+  <div class="section-inner">
+    <div class="section-center reveal">
+      <span class="section-label">From Google</span>
+      <h2 class="section-title" id="reviews-heading">What our clients say</h2>
+      <p class="section-sub">Real reviews from real business owners — pulled directly from Google.</p>
+    </div>
+
+    <!-- Bento grid — auto-populated from /reviews.json, falls back to static -->
+    <div class="reviews-bento" id="reviewsBento" aria-live="polite">
+      <!-- Static fallback cards (replaced by JS if fetch succeeds) -->
+      <div class="review-card reveal stagger-1">
+        <div class="review-google-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </div>
+        <span class="review-stars" aria-label="5 stars">★★★★★</span>
+        <p class="review-quote">Adam is a strategic powerhouse. He didn't just help me build the brand — he provided the military-grade precision and digital roadmap I needed to scale my professional presence.</p>
+        <div class="review-author-row">
+          <div class="review-initials">BH</div>
+          <div><p class="review-author">Barry Hoehne</p><p class="review-role">UBFSHN Brand</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal stagger-2">
+        <div class="review-google-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </div>
+        <span class="review-stars" aria-label="5 stars">★★★★★</span>
+        <p class="review-quote">Hiring Prime Local Growth was the best business decision we've made! Adam thoroughly researched and responded to our reviews. Real differentiation from competitors.</p>
+        <div class="review-author-row">
+          <div class="review-initials">AM</div>
+          <div><p class="review-author">Australia Manning</p><p class="review-role">Aggie Laundry</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal stagger-3">
+        <div class="review-google-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </div>
+        <span class="review-stars" aria-label="5 stars">★★★★★</span>
+        <p class="review-quote">I had a little "tune up" done. Within 1 day my phones started ringing again. Most definitely worth the money!</p>
+        <div class="review-author-row">
+          <div class="review-initials">BR</div>
+          <div><p class="review-author">Bushwacked Paint & Renovations</p><p class="review-role">San Antonio, TX</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal stagger-4">
+        <div class="review-google-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </div>
+        <span class="review-stars" aria-label="5 stars">★★★★★</span>
+        <p class="review-quote">Our experience with Prime Local Growth (Adam) has been phenomenal. As a high school tournament angler, Adam has been able to help us transform a social media presence, secure a boat wrap/primary sponsor, and other gunnel sponsors. We will continue to value his expertise and recommend that you contact him to see how he can help you, too!</p>
+        <div class="review-author-row">
+          <div class="review-initials">RW</div>
+          <div><p class="review-author">Regina Wood</p><p class="review-role">K Wood Fishing</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA row -->
+    <div class="reviews-cta-row reveal" style="margin-top:32px;">
+      <a href="https://g.page/r/CSRlPk-HmJb0EAI/review" target="_blank" rel="noopener" class="btn-leave-review" aria-label="Leave us a review on Google">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Leave us a review
+      </a>
+      <a href="https://g.page/r/CSRlPk-HmJb0EAI/review" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:none;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;">
+        View all Google reviews
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- JUMPSTART KIT -->
 <section id="jumpstart" class="section" style="background:var(--bg-primary);" aria-labelledby="kit-heading">
   <div class="section-inner section-center">
@@ -1778,116 +1859,35 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
 
 <div class="section-divider"></div>
 
-<!-- REVIEWS -->
-<section id="reviews" class="section" aria-labelledby="reviews-heading">
-  <div class="section-inner">
-    <div class="section-center reveal">
-      <span class="section-label">From Google</span>
-      <h2 class="section-title" id="reviews-heading">What our clients say</h2>
-      <p class="section-sub">Real reviews from real business owners — pulled directly from Google.</p>
-    </div>
-
-    <!-- Bento grid — auto-populated from /reviews.json, falls back to static -->
-    <div class="reviews-bento" id="reviewsBento" aria-live="polite">
-      <!-- Static fallback cards (replaced by JS if fetch succeeds) -->
-      <div class="review-card reveal stagger-1">
-        <div class="review-google-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Google
-        </div>
-        <span class="review-stars" aria-label="5 stars">★★★★★</span>
-        <p class="review-quote">Adam is a strategic powerhouse. He didn't just help me build the brand — he provided the military-grade precision and digital roadmap I needed to scale my professional presence.</p>
-        <div class="review-author-row">
-          <div class="review-initials">BH</div>
-          <div><p class="review-author">Barry Hoehne</p><p class="review-role">UBFSHN Brand</p></div>
-        </div>
-      </div>
-
-      <div class="review-card reveal stagger-2">
-        <div class="review-google-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Google
-        </div>
-        <span class="review-stars" aria-label="5 stars">★★★★★</span>
-        <p class="review-quote">Hiring Prime Local Growth was the best business decision we've made! Adam thoroughly researched and responded to our reviews. Real differentiation from competitors.</p>
-        <div class="review-author-row">
-          <div class="review-initials">AM</div>
-          <div><p class="review-author">Australia Manning</p><p class="review-role">Aggie Laundry</p></div>
-        </div>
-      </div>
-
-      <div class="review-card reveal stagger-3">
-        <div class="review-google-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Google
-        </div>
-        <span class="review-stars" aria-label="5 stars">★★★★★</span>
-        <p class="review-quote">I had a little "tune up" done. Within 1 day my phones started ringing again. Most definitely worth the money!</p>
-        <div class="review-author-row">
-          <div class="review-initials">BR</div>
-          <div><p class="review-author">Bushwacked Paint & Renovations</p><p class="review-role">San Antonio, TX</p></div>
-        </div>
-      </div>
-
-      <div class="review-card reveal stagger-4">
-        <div class="review-google-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Google
-        </div>
-        <span class="review-stars" aria-label="5 stars">★★★★★</span>
-        <p class="review-quote">Our experience with Prime Local Growth (Adam) has been phenomenal. As a high school tournament angler, Adam has been able to help us transform a social media presence, secure a boat wrap/primary sponsor, and other gunnel sponsors. We will continue to value his expertise and recommend that you contact him to see how he can help you, too!</p>
-        <div class="review-author-row">
-          <div class="review-initials">RW</div>
-          <div><p class="review-author">Regina Wood</p><p class="review-role">K Wood Fishing</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CTA row -->
-    <div class="reviews-cta-row reveal" style="margin-top:32px;">
-      <a href="https://g.page/r/CSRlPk-HmJb0EAI/review" target="_blank" rel="noopener" class="btn-leave-review" aria-label="Leave us a review on Google">
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        Leave us a review
-      </a>
-      <a href="https://g.page/r/CSRlPk-HmJb0EAI/review" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:none;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;">
-        View all Google reviews
-        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
 <!-- HOW IT WORKS -->
 <section class="section" style="background:linear-gradient(135deg,#1a1f26,#0f1419);" aria-labelledby="process-heading">
   <div class="section-inner section-center">
     <div class="reveal">
       <span class="section-label">The Process</span>
       <h2 class="section-title" id="process-heading">How it works</h2>
-      <p class="section-sub">We handle everything by email. You keep running your business.</p>
+      <p class="section-sub">Everything happens over email. You keep running your business.</p>
     </div>
 
     <div class="process-grid">
       <div class="process-step reveal stagger-1">
         <div class="process-num" aria-hidden="true">01</div>
-        <h4>Get the free kit</h4>
-        <p>Submit your info and receive the Local Visibility Jumpstart Kit instantly in your inbox.</p>
+        <h4>Submit your info (2 minutes)</h4>
+        <p>Fill out a short form — name, email, and business type. No calls. No sign-up. That's it.</p>
       </div>
       <div class="process-step reveal stagger-2">
         <div class="process-num" aria-hidden="true">02</div>
-        <h4>Visibility audit</h4>
-        <p>Adam personally analyzes where you currently show up on Google and exactly what's holding you back.</p>
+        <h4>Your audit lands in 24 hours</h4>
+        <p>Adam personally reviews your Google listing and sends back a clear breakdown of what's hurting you and what to fix first.</p>
       </div>
       <div class="process-step reveal stagger-3">
         <div class="process-num" aria-hidden="true">03</div>
-        <h4>Custom plan</h4>
-        <p>A specific, written plan for your business. Not generic. Based on what actually works for you.</p>
+        <h4>We get to work</h4>
+        <p>Your Google Business Profile, reviews, and directory listings are fixed and optimized. Most clients are live within 7–10 days.</p>
       </div>
       <div class="process-step reveal stagger-4">
         <div class="process-num" aria-hidden="true">04</div>
-        <h4>Results</h4>
-        <p>We execute the plan. You start getting found. Monthly reports show exactly what's working.</p>
+        <h4>Your phone starts ringing</h4>
+        <p>You get a monthly report showing calls, searches, and direction requests. Most clients see a measurable lift within 30 days.</p>
       </div>
     </div>
   </div>

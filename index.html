@@ -177,8 +177,8 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
 }
 
 @keyframes pulse-glow {
-  0%,100% { box-shadow:0 0 20px rgba(14,165,233,0.3); }
-  50%      { box-shadow:0 0 40px rgba(14,165,233,0.6); }
+  0%,100% { box-shadow:0 0 12px rgba(14,165,233,0.15); }
+  50%      { box-shadow:0 0 20px rgba(14,165,233,0.25); }
 }
 
 @keyframes shimmer-btn {
@@ -266,8 +266,8 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
 }
 
 @keyframes glow-pulse {
-  0%,100% { filter:drop-shadow(0 0 12px rgba(14,165,233,0.6)); }
-  50% { filter:drop-shadow(0 0 24px rgba(14,165,233,0.9)); }
+  0%,100% { filter:drop-shadow(0 0 8px rgba(14,165,233,0.2)); }
+  50% { filter:drop-shadow(0 0 14px rgba(14,165,233,0.35)); }
 }
 
 @keyframes accent-line-flow {
@@ -422,8 +422,8 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
   height:300px;
   top:-100px;
   right:-150px;
-  opacity:0.6;
-  animation:blob-rotate 20s ease-in-out infinite, blob-pulse 8s ease-in-out infinite;
+  opacity:0.08;
+  animation:blob-rotate 40s ease-in-out infinite;
   z-index:0;
   filter:blur(40px);
   will-change:transform;
@@ -435,8 +435,8 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
   height:250px;
   bottom:-80px;
   left:-100px;
-  opacity:0.4;
-  animation:blob-rotate 25s ease-in-out infinite reverse, blob-pulse 10s ease-in-out infinite;
+  opacity:0.06;
+  animation:blob-rotate 45s ease-in-out infinite reverse;
   z-index:0;
   filter:blur(50px);
   will-change:transform;

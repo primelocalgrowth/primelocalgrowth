@@ -3426,8 +3426,15 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
+// Observe all reveal elements, but immediately show those already in viewport
 document.querySelectorAll('.reveal').forEach(el => {
-  revealObserver.observe(el);
+  const rect = el.getBoundingClientRect();
+  // If element is already visible on page load, make it visible immediately
+  if (rect.top < window.innerHeight && rect.bottom > 0) {
+    el.classList.add('visible');
+  } else {
+    revealObserver.observe(el);
+  }
 });
 
 // Parallax effect on hero section (0.8x scroll speed)

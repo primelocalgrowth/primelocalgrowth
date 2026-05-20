@@ -1,36 +1,34 @@
-# Instant Audit Feature — Deployment Checklist
+# Free Audit Workflow — Deployment Checklist
 
 ## What Changed
-- `api/instant-audit.js` — new file, triggers Claude audit on form submission
-- `api/submit-form.js` — updated to parallel-execute instant audit alongside other lead integrations
+- `api/submit-form.js` — updated auto-reply email to request audit instead of instant delivery
+- Auto-reply asks lead to reply if they want audit run
+- Adam runs `/plg-internet-visibility-audit` skill manually, emails report back
 
-## Vercel Environment Variables Required
-Add these to Vercel project settings (Settings → Environment Variables):
-
+## Vercel Environment Variables
+No new API keys needed. Existing setup:
 ```
-ANTHROPIC_API_KEY=sk_... (from Anthropic console)
-RESEND_API_KEY=... (already set, used by instant-audit.js for email)
-BEEHIIV_API_KEY=... (already set)
-BEEHIIV_PUBLICATION_ID=... (already set)
-GOOGLE_SHEETS_WEBHOOK_URL=... (already set)
+RESEND_API_KEY=... (for auto-reply email)
+BEEHIIV_API_KEY=... (subscriber management)
+BEEHIIV_PUBLICATION_ID=...
+GOOGLE_SHEETS_WEBHOOK_URL=... (lead logging)
 ```
 
 ## Deployment Flow
 1. Form submission → `api/submit-form.js` handler
-2. Parallel execution:
-   - Email notification to Adam
-   - Auto-reply to lead with GBP access guide
+2. Execute:
+   - Email notification to Adam (lead alert)
+   - Auto-reply to lead (asks if they want audit)
    - Add to Beehiiv
    - Append to Google Sheets
-   - **NEW**: Trigger instant audit via Claude (non-blocking)
-3. Return 200 success (regardless of audit outcome)
-4. Audit generates within 2-3 minutes, emails result to lead
+3. Return 200 success
+4. **Lead replies "yes, I want my audit"**
+5. **Adam runs `/plg-internet-visibility-audit` skill** (free, Claude session)
+6. **Adam emails report back** via Resend
 
 ## Testing Locally
 ```bash
-# Set env vars in .env.local
-ANTHROPIC_API_KEY=sk_...
-RESEND_API_KEY=...
+# No special env vars needed, just standard ones
 
 # Test form submission
 curl -X POST http://localhost:3000/api/submit-form \
@@ -44,22 +42,23 @@ curl -X POST http://localhost:3000/api/submit-form \
 ```
 
 ## Expected Behavior
-- Form succeeds immediately with 200 response
-- Within 2-3 min: Adam receives lead alert email
-- Within 2-3 min: Lead receives auto-reply with GBP access guide
-- Within 3-5 min: Lead receives instant audit report email (if ANTHROPIC_API_KEY set)
-- Google Sheets logs entry within 30 sec
-- Beehiiv adds subscriber (if API keys set)
+- Form succeeds with 200 response
+- Within 30 sec: Adam receives lead alert email
+- Within 30 sec: Lead receives auto-reply asking if they want audit
+- Lead replies "yes" (or similar)
+- Adam runs: `/plg-internet-visibility-audit "Test Business" "city" "plumbing"`
+- Adam gets audit report, forwards to lead via email
+- **Cost: $0 (skill execution is free)**
 
-## Rollback
-If instant audit fails:
-1. Remove triggerInstantAudit import from submit-form.js
-2. Remove the instant audit call from Promise.allSettled array
-3. Redeploy
-
-Form will continue working normally; leads just won't get instant audits.
+## Workflow Steps
+1. Lead fills form → gets auto-reply asking for audit request
+2. Lead replies → Adam sees it in inbox
+3. Adam runs `/plg-internet-visibility-audit [businessName] [city] [serviceType]`
+4. Audit generates → Adam emails result via Resend (cheap, one email)
+5. Lead gets report → calls Adam to discuss results
 
 ## Notes
-- Empty city string passed to Claude (form doesn't capture location)
-- Claude skill `/plg-internet-visibility-audit` handles missing location gracefully
-- Audit is best-effort; form submission succeeds even if audit fails
+- Zero API call costs (skill execution within Claude session)
+- Only paid action: Resend email delivery (~$0.01 per email)
+- Audit delivery slower (manual), but filters self-qualified leads (ask if they want it)
+- Higher conversion: leads who ask for audit are more committed

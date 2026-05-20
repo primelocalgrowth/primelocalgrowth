@@ -1,9 +1,8 @@
 /**
  * Vercel Serverless Function - Enhanced Form Handler
- * Handles: Email (Resend) + Beehiiv subscription + Google Sheets logging + Instant Audit + Redirect
+ * Handles: Email (Resend) + Beehiiv subscription + Google Sheets logging + Redirect
+ * Audit: Manual via /plg-internet-visibility-audit skill (free), delivered by Adam
  */
-
-import { triggerInstantAudit } from './instant-audit.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -30,31 +29,41 @@ export default async function handler(req, res) {
 
     const timestamp = new Date().toISOString();
 
-    // Run all operations in parallel — don't fail form if any fail
-    const results = await Promise.allSettled([
-      // Email notification (Resend) — internal alert to Adam
-      process.env.RESEND_API_KEY ? sendEmailNotification(name, email, phone, businessType, timestamp) : Promise.resolve(),
-
-      // Auto-reply to lead with access guide
-      process.env.RESEND_API_KEY ? sendAutoReply(name, email, businessType) : Promise.resolve(),
-
-      // Add to Beehiiv
-      (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) ? addToBeehiiv(name, email, phone, businessType) : Promise.resolve(),
-
-      // Add to Google Sheets
-      process.env.GOOGLE_SHEETS_WEBHOOK_URL ? appendToGoogleSheets(name, email, phone, businessType, timestamp) : Promise.resolve(),
-
-      // Trigger instant audit via Claude
-      process.env.ANTHROPIC_API_KEY ? triggerInstantAudit(name, '', businessType, email) : Promise.resolve()
-    ]);
-
-    // Log any failures but don't fail the form
-    results.forEach((result, index) => {
-      if (result.status === 'rejected') {
-        const labels = ['Email notification', 'Auto-reply', 'Beehiiv', 'Google Sheets', 'Instant Audit'];
-        console.warn(`${labels[index]} failed:`, result.reason);
+    // Send email notification (Resend) — internal alert to Adam
+    if (process.env.RESEND_API_KEY) {
+      try {
+        await sendEmailNotification(name, email, phone, businessType, timestamp);
+      } catch (err) {
+        console.error('Email send failed:', err);
       }
-    });
+    }
+
+    // Send auto-reply to lead with access guide + audit request
+    if (process.env.RESEND_API_KEY) {
+      try {
+        await sendAutoReply(name, email, businessType);
+      } catch (err) {
+        console.error('Auto-reply send failed:', err);
+      }
+    }
+
+    // Add to Beehiiv
+    if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
+      try {
+        await addToBeehiiv(name, email, phone, businessType);
+      } catch (err) {
+        console.error('Beehiiv add failed:', err);
+      }
+    }
+
+    // Add to Google Sheets
+    if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
+      try {
+        await appendToGoogleSheets(name, email, phone, businessType, timestamp);
+      } catch (err) {
+        console.error('Google Sheets append failed:', err);
+      }
+    }
 
     // Return success with redirect
     return res.status(200).json({
@@ -169,28 +178,17 @@ async function sendAutoReply(name, email, businessType) {
 
     <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">Hi ${escapeHtml(firstName)},</p>
 
-    <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">Got your message — I'll personally review your ${escapeHtml(businessType)} listing and reach out within 24 hours.</p>
+    <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">Got your message — thanks for reaching out about your ${escapeHtml(businessType)} listing.</p>
 
-    <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">In the meantime, here's one thing you can do right now that will let us hit the ground running the moment we connect:</p>
+    <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">I run comprehensive audits for every prospective client — 20+ platform analysis, competitive gap assessment, and a letter grade on your current visibility. It shows you exactly where you stand on Google and what moves will move the needle fastest.</p>
 
     <!-- CTA Box -->
     <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:20px 24px;margin:24px 0;">
-      <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.05em;">Quick win — takes 60 seconds</p>
-      <p style="margin:0 0 16px;font-size:15px;color:#1a1a1a;line-height:1.6;">Add me as a manager on your Google Business Profile. It lets me start optimizing your listing immediately — you keep full ownership and can remove me anytime.</p>
-      <a href="https://www.primelocalgrowth.com/gbp-access" style="display:inline-block;background:#f59e0b;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;font-family:Arial,sans-serif;">View the 3-Step Access Guide →</a>
+      <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.05em;">Want your audit?</p>
+      <p style="margin:0 0 16px;font-size:15px;color:#1a1a1a;line-height:1.6;">Just reply to this email and let me know. I'll run it personally and send you the full report within 24 hours — no cost, no obligation.</p>
     </div>
 
-    <!-- Infographic -->
-    <p style="font-size:14px;color:#6b7280;margin:0 0 12px;">Here's the quick visual version:</p>
-    <img src="https://www.primelocalgrowth.com/gbp-manager-access.png"
-         alt="How to add Prime Local Growth as a manager on your Google Business Profile — 3 simple steps"
-         style="width:100%;border-radius:8px;border:1px solid #e5e5e5;display:block;">
-
-    <p style="font-size:13px;color:#9ca3af;margin:12px 0 0;line-height:1.6;">
-      Step 1: Go to business.google.com → Business Profile Settings<br>
-      Step 2: People and access → Add → enter <strong>adam@primelocalgrowth.com</strong><br>
-      Step 3: Choose Manager role → Invite
-    </p>
+    <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">The audit tells you everything. If it looks like we're a fit, we'll talk next steps. If not, you'll have actionable intelligence either way.</p>
 
     <hr style="border:none;border-top:1px solid #e5e5e5;margin:32px 0;">
 

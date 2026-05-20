@@ -1,0 +1,42 @@
+{
+  "source": "Google",
+  "rating": 5.0,
+  "total": 4,
+  "place_id": "REPLACE_WITH_YOUR_GOOGLE_PLACE_ID",
+  "reviews_url": "https://g.page/r/CSRlPk-HmJb0EAI/review",
+  "reviews": [
+    {
+      "author": "Barry Hoehne",
+      "business": "UBFSHN Brand",
+      "rating": 5,
+      "text": "Adam is a strategic powerhouse. He didn't just help me build the brand — he provided the military-grade precision and digital roadmap I needed to scale my professional presence.",
+      "source": "Google",
+      "initials": "BH"
+    },
+    {
+      "author": "Australia Manning",
+      "business": "Aggie Laundry",
+      "rating": 5,
+      "text": "Hiring Prime Local Growth was the best business decision we've made! Adam thoroughly researched and responded to our reviews. Real differentiation from competitors.",
+      "source": "Google",
+      "initials": "AM"
+    },
+    {
+      "author": "Bushwacked Renovations",
+      "business": "Bushwacked Renovations",
+      "rating": 5,
+      "text": "Within 1 day my phones started ringing again. We had a little tune up done and the results were immediate. Most definitely worth it.",
+      "source": "Google",
+      "location": "San Antonio, TX",
+      "initials": "BR"
+    },
+    {
+      "author": "Regina Wood",
+      "business": "K Wood Fishing",
+      "rating": 5,
+      "text": "Add Regina's review text here — copy it from your Google Business Profile reviews page.",
+      "source": "Google",
+      "initials": "RW"
+    }
+  ]
+}

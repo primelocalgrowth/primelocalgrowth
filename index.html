@@ -840,28 +840,42 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
 .why-stars      { font-size:20px; color:var(--amber); letter-spacing:4px; }
 
 /* ============================================================
-   TESTIMONIALS CAROUSEL
+   SCROLL PROGRESS BAR
    ============================================================ */
-.reviews-carousel-wrap {
-  position:relative;
-  overflow:hidden;
+#scroll-progress {
+  position:fixed;
+  top:0;left:0;
+  height:2px;
+  width:0%;
+  background:linear-gradient(90deg,#1B3A6B,#0ea5e9);
+  z-index:9999;
+  transition:width 0.1s linear;
 }
-.reviews-track {
-  display:flex;
-  transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
-  will-change:transform;
-}
-.review-card {
-  flex:0 0 100%;
-  max-width:680px;
+
+/* ============================================================
+   REVIEWS BENTO GRID
+   ============================================================ */
+.reviews-bento {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  max-width:900px;
   margin:0 auto;
+}
+@media(max-width:640px){ .reviews-bento { grid-template-columns:1fr; } }
+
+.review-card {
   position:relative;
   background:var(--bg-card);
-  border:1px solid rgba(14,165,233,0.12);
+  border:1px solid rgba(255,255,255,0.07);
   border-radius:var(--radius-lg);
-  padding:40px 44px;
+  padding:26px 24px 22px;
   overflow:hidden;
   box-sizing:border-box;
+  display:flex;flex-direction:column;
+  transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transform-style:preserve-3d;
+  will-change:transform;
 }
 .review-card::before {
   content:'';
@@ -869,57 +883,54 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
   top:0;left:0;right:0;
   height:2px;
   background:linear-gradient(90deg,transparent,var(--amber),transparent);
-  opacity:1;
 }
-.review-stars { color:var(--amber); font-size:16px; letter-spacing:4px; margin-bottom:20px; }
-.review-quote {
-  font-size:16px;
-  color:var(--text-body);
-  line-height:1.8;
-  margin-bottom:24px;
-  font-style:italic;
+.review-card:hover {
+  border-color:rgba(14,165,233,0.28);
+  box-shadow:0 12px 40px rgba(14,165,233,0.1);
 }
-.review-quote::before { content:'\201C'; font-size:48px; color:var(--amber); line-height:0; vertical-align:-20px; margin-right:6px; font-style:normal; }
-.review-author { font-weight:600; color:var(--text-primary); font-size:15px; }
-.review-role   { font-size:13px; color:var(--text-faint); margin-top:3px; }
-/* Dots */
-.reviews-dots {
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin-top:28px;
-}
-.reviews-dot {
-  width:8px;height:8px;
-  border-radius:50%;
-  background:rgba(14,165,233,0.25);
-  border:none;cursor:pointer;padding:0;
-  transition:background 0.3s,transform 0.3s;
-}
-.reviews-dot.active {
-  background:var(--amber);
-  transform:scale(1.35);
-}
-/* Nav arrows */
-.reviews-arrow {
+/* Google badge top-right */
+.review-google-badge {
   position:absolute;
-  top:50%;transform:translateY(-50%);
-  background:rgba(14,165,233,0.12);
-  border:1px solid rgba(14,165,233,0.25);
+  top:16px;right:16px;
+  display:flex;align-items:center;gap:4px;
+  font-size:9px;font-weight:700;
+  color:var(--text-faint);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+.review-stars { color:#F59E0B; font-size:13px; letter-spacing:3px; margin-bottom:12px; display:block; }
+.review-quote {
+  font-size:14px;
+  color:var(--text-body);
+  line-height:1.75;
+  margin-bottom:18px;
+  font-style:italic;
+  flex:1;
+}
+.review-quote::before { content:'\201C'; font-size:36px; color:var(--amber); line-height:0; vertical-align:-14px; margin-right:3px; font-style:normal;opacity:0.5; }
+.review-author-row { display:flex; align-items:center; gap:10px; }
+.review-initials {
+  width:34px;height:34px;
+  background:linear-gradient(135deg,var(--navy),#0ea5e9);
   border-radius:50%;
-  width:40px;height:40px;
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:var(--amber);
-  transition:background 0.2s;
-  z-index:2;
+  font-family:'Poppins',sans-serif;
+  font-weight:700;font-size:11px;color:#fff;
+  flex-shrink:0;
 }
-.reviews-arrow:hover { background:rgba(14,165,233,0.25); }
-.reviews-arrow.prev { left:0; }
-.reviews-arrow.next { right:0; }
-@media(max-width:640px){
-  .reviews-arrow { display:none; }
-  .review-card { padding:28px 24px; }
+.review-author { font-weight:600; color:var(--text-primary); font-size:14px; }
+.review-role   { font-size:12px; color:var(--text-faint); margin-top:1px; }
+/* Loading skeleton */
+.review-skeleton {
+  background:linear-gradient(90deg,var(--bg-secondary) 25%,rgba(255,255,255,0.04) 50%,var(--bg-secondary) 75%);
+  background-size:200% 100%;
+  animation:skeleton-shimmer 1.5s infinite;
+  border-radius:6px;height:13px;margin-bottom:8px;
 }
+@keyframes skeleton-shimmer {
+  0%{background-position:200% 0}100%{background-position:-200% 0}
+}
+@media(max-width:640px){ .review-card { padding:22px 18px; } }
 /* Review CTA row */
 .reviews-cta-row {
   display:flex;
@@ -1162,6 +1173,7 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
 </head>
 <body>
 
+<div id="scroll-progress" aria-hidden="true"></div>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- ANNOUNCEMENT BAR -->
@@ -1770,58 +1782,71 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
 <section id="reviews" class="section" aria-labelledby="reviews-heading">
   <div class="section-inner">
     <div class="section-center reveal">
-      <span class="section-label">Client Results</span>
+      <span class="section-label">From Google</span>
       <h2 class="section-title" id="reviews-heading">What our clients say</h2>
-      <p class="section-sub">From business owners we've worked with.</p>
+      <p class="section-sub">Real reviews from real business owners — pulled directly from Google.</p>
     </div>
 
-    <div class="reviews-carousel-wrap reveal" style="max-width:720px;margin:0 auto;padding:0 48px;">
-      <!-- Prev arrow -->
-      <button class="reviews-arrow prev" aria-label="Previous review">
-        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-      </button>
-
-      <div class="reviews-track" id="reviewsTrack">
-        <div class="review-card">
-          <div class="review-stars" aria-label="5 stars">★★★★★</div>
-          <p class="review-quote">Adam is a strategic powerhouse. He didn't just help me build the brand — he provided the military-grade precision and digital roadmap I needed to scale my professional presence.</p>
-          <p class="review-author">Barry Hoehne</p>
-          <p class="review-role">UBFSHN Brand</p>
+    <!-- Bento grid — auto-populated from /reviews.json, falls back to static -->
+    <div class="reviews-bento" id="reviewsBento" aria-live="polite">
+      <!-- Static fallback cards (replaced by JS if fetch succeeds) -->
+      <div class="review-card reveal stagger-1">
+        <div class="review-google-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
         </div>
-        <div class="review-card">
-          <div class="review-stars" aria-label="5 stars">★★★★★</div>
-          <p class="review-quote">Hiring Prime Local Growth was the best business decision we've made! Adam thoroughly researched and responded to our reviews. Real differentiation from competitors.</p>
-          <p class="review-author">Australia Manning</p>
-          <p class="review-role">Business Owner</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars" aria-label="5 stars">★★★★★</div>
-          <p class="review-quote">Within 1 day my phones started ringing again. We had a little tune up done and the results were immediate. Most definitely worth it.</p>
-          <p class="review-author">Home Services Client</p>
-          <p class="review-role">San Antonio, TX</p>
+        <span class="review-stars" aria-label="5 stars">★★★★★</span>
+        <p class="review-quote">Adam is a strategic powerhouse. He didn't just help me build the brand — he provided the military-grade precision and digital roadmap I needed to scale my professional presence.</p>
+        <div class="review-author-row">
+          <div class="review-initials">BH</div>
+          <div><p class="review-author">Barry Hoehne</p><p class="review-role">UBFSHN Brand</p></div>
         </div>
       </div>
 
-      <!-- Next arrow -->
-      <button class="reviews-arrow next" aria-label="Next review">
-        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      </button>
+      <div class="review-card reveal stagger-2">
+        <div class="review-google-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </div>
+        <span class="review-stars" aria-label="5 stars">★★★★★</span>
+        <p class="review-quote">Hiring Prime Local Growth was the best business decision we've made! Adam thoroughly researched and responded to our reviews. Real differentiation from competitors.</p>
+        <div class="review-author-row">
+          <div class="review-initials">AM</div>
+          <div><p class="review-author">Australia Manning</p><p class="review-role">Aggie Laundry</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal stagger-3">
+        <div class="review-google-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </div>
+        <span class="review-stars" aria-label="5 stars">★★★★★</span>
+        <p class="review-quote">Within 1 day my phones started ringing again. We had a little tune up done and the results were immediate. Most definitely worth it.</p>
+        <div class="review-author-row">
+          <div class="review-initials">BR</div>
+          <div><p class="review-author">Bushwacked Renovations</p><p class="review-role">San Antonio, TX</p></div>
+        </div>
+      </div>
+
+      <div class="review-card reveal stagger-4">
+        <div class="review-google-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </div>
+        <span class="review-stars" aria-label="5 stars">★★★★★</span>
+        <p class="review-quote" id="regina-quote"><!-- Loaded from reviews.json --></p>
+        <div class="review-author-row">
+          <div class="review-initials">RW</div>
+          <div><p class="review-author">Regina Wood</p><p class="review-role">K Wood Fishing</p></div>
+        </div>
+      </div>
     </div>
 
-    <!-- Dots -->
-    <div class="reviews-dots" id="reviewsDots" aria-label="Review navigation"></div>
-
     <!-- CTA row -->
-    <div class="reviews-cta-row reveal">
-      <!-- Google "Leave a review" button -->
+    <div class="reviews-cta-row reveal" style="margin-top:32px;">
       <a href="https://g.page/r/CSRlPk-HmJb0EAI/review" target="_blank" rel="noopener" class="btn-leave-review" aria-label="Leave us a review on Google">
-        <!-- Google G logo -->
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
-          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-        </svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         Leave us a review
       </a>
       <a href="https://g.page/r/CSRlPk-HmJb0EAI/review" target="_blank" rel="noopener" style="color:var(--amber);text-decoration:none;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;">
@@ -2236,18 +2261,87 @@ document.querySelectorAll('.btn-primary, .roi-cta-btn').forEach(btn => {
   });
 });
 
-// ── Testimonial card subtle tilt on hover ────────────────────
-document.querySelectorAll('.review-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width  - 0.5;
-    const y = (e.clientY - rect.top)  / rect.height - 0.5;
-    card.style.transform = `perspective(600px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg) translateY(-4px)`;
+// ── Scroll progress bar ──────────────────────────────────────
+const progressBar = document.getElementById('scroll-progress');
+if (progressBar) {
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+  }, { passive: true });
+}
+
+// ── Review cards: 3D tilt on hover ───────────────────────────
+function bindReviewTilt() {
+  document.querySelectorAll('.review-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width  - 0.5;
+      const y = (e.clientY - rect.top)  / rect.height - 0.5;
+      card.style.transform = `perspective(700px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
-});
+}
+bindReviewTilt();
+
+// ── Auto-populate reviews from /reviews.json ─────────────────
+// Tries Cloudflare Worker first (/reviews), falls back to static JSON.
+// When a new review comes in: add it to public/reviews.json and it
+// appears on the site without any code changes.
+// To activate live Google sync: set GOOGLE_PLACES_API_KEY and
+// GOOGLE_PLACE_ID secrets in your Cloudflare Worker.
+(async function loadReviews() {
+  const bento = document.getElementById('reviewsBento');
+  if (!bento) return;
+
+  const GOOGLE_SVG = `<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>`;
+
+  function buildCard(r, i) {
+    const initials = r.initials || r.author.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+    const stagger = ['stagger-1','stagger-2','stagger-3','stagger-4'][i % 4];
+    const card = document.createElement('div');
+    card.className = `review-card reveal ${stagger}`;
+    card.innerHTML = `
+      <div class="review-google-badge">${GOOGLE_SVG} Google</div>
+      <span class="review-stars" aria-label="5 stars">★★★★★</span>
+      <p class="review-quote">${r.text || ''}</p>
+      <div class="review-author-row">
+        <div class="review-initials">${initials}</div>
+        <div>
+          <p class="review-author">${r.author}</p>
+          <p class="review-role">${r.business || r.location || ''}</p>
+        </div>
+      </div>`;
+    return card;
+  }
+
+  // Try static JSON first (always available on GitHub Pages)
+  try {
+    const res = await fetch('/reviews.json');
+    if (!res.ok) return; // keep static fallback HTML
+    const data = await res.json();
+    if (!data.reviews?.length) return;
+
+    // Patch Regina's quote into static card if text is placeholder
+    const reginaCard = document.getElementById('regina-quote');
+    const regina = data.reviews.find(r => r.author === 'Regina Wood');
+    if (reginaCard && regina?.text && !regina.text.startsWith('Add Regina')) {
+      reginaCard.textContent = regina.text;
+    }
+
+    // If data has MORE reviews than the 4 static cards, render all dynamically
+    if (data.reviews.length > 4) {
+      bento.innerHTML = '';
+      data.reviews.forEach((r, i) => {
+        if (r.text && !r.text.startsWith('Add')) bento.appendChild(buildCard(r, i));
+      });
+      bindReviewTilt();
+      // Re-trigger reveal observer on new cards
+      document.querySelectorAll('.review-card.reveal').forEach(el => observer.observe(el));
+    }
+  } catch { /* keep static fallback */ }
+})();
 
 // ── Problem card hover: add left border accent ───────────────
 document.querySelectorAll('.problem-card').forEach(card => {
@@ -2317,61 +2411,7 @@ document.querySelectorAll('form[data-form="lead-form"]').forEach(form => {
   });
 });
 
-/* ============================================================
-   REVIEWS CAROUSEL
-   ============================================================ */
-(function() {
-  const track  = document.getElementById('reviewsTrack');
-  const dotsEl = document.getElementById('reviewsDots');
-  if (!track) return;
-
-  const cards  = Array.from(track.querySelectorAll('.review-card'));
-  const total  = cards.length;
-  let current  = 0;
-  let timer;
-
-  // Build dots
-  cards.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'reviews-dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', 'Go to review ' + (i + 1));
-    d.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(d);
-  });
-
-  function goTo(idx) {
-    current = (idx + total) % total;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    dotsEl.querySelectorAll('.reviews-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === current);
-    });
-    resetTimer();
-  }
-
-  function resetTimer() {
-    clearInterval(timer);
-    timer = setInterval(() => goTo(current + 1), 5000);
-  }
-
-  // Arrow buttons
-  const wrap = track.closest('.reviews-carousel-wrap');
-  wrap.querySelector('.prev').addEventListener('click', () => goTo(current - 1));
-  wrap.querySelector('.next').addEventListener('click', () => goTo(current + 1));
-
-  // Pause on hover
-  wrap.addEventListener('mouseenter', () => clearInterval(timer));
-  wrap.addEventListener('mouseleave', resetTimer);
-
-  // Touch/swipe support
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
-  });
-
-  resetTimer();
-})();
+// (carousel removed — replaced with bento grid + auto-populate above)
 </script>
   <script src="/phase1-fixes.js"></script>
 </body>

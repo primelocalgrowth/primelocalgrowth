@@ -3412,29 +3412,31 @@ document.querySelectorAll('form[data-form="lead-form"] input').forEach(input => 
 });
 
 // ── Phase 5: Scroll-Triggered Reveals & Parallax ────────────
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
+window.addEventListener('load', () => {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all reveal elements, but immediately show those already in viewport
+  document.querySelectorAll('.reveal').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    // If element is already visible on page load, make it visible immediately
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      revealObserver.observe(el);
     }
   });
-}, observerOptions);
-
-// Observe all reveal elements, but immediately show those already in viewport
-document.querySelectorAll('.reveal').forEach(el => {
-  const rect = el.getBoundingClientRect();
-  // If element is already visible on page load, make it visible immediately
-  if (rect.top < window.innerHeight && rect.bottom > 0) {
-    el.classList.add('visible');
-  } else {
-    revealObserver.observe(el);
-  }
 });
 
 // Parallax effect on hero section (0.8x scroll speed)

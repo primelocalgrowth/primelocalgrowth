@@ -344,7 +344,7 @@
 
 <section class="hero">
   <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-badge"><div class="pulse-dot" aria-hidden="true"></div> Free Tool — No Email Required</div>
+  <div class="hero-badge"><div class="pulse-dot" aria-hidden="true"></div> Free Tool -- No Email Required</div>
   <h1>How Much Revenue Is Your<br><em>Google Listing Costing You?</em></h1>
   <p>Takes about 2 minutes. Get your visibility score and see the exact monthly revenue you're leaving on the table.</p>
 </section>
@@ -464,7 +464,7 @@
         </div>
         <div class="radio-grid" id="popGrid" role="radiogroup" aria-label="City size">
           <div class="radio-opt selected" data-pop="0.6" onclick="selectPop(this)" role="radio" aria-checked="true">Small (&lt;50k)</div>
-          <div class="radio-opt" data-pop="1.0" onclick="selectPop(this)" role="radio" aria-checked="false">Medium (50–200k)</div>
+          <div class="radio-opt" data-pop="1.0" onclick="selectPop(this)" role="radio" aria-checked="false">Medium (50-200k)</div>
           <div class="radio-opt" data-pop="1.6" onclick="selectPop(this)" role="radio" aria-checked="false">Large (200k+)</div>
         </div>
       </div>
@@ -478,14 +478,14 @@
     <!-- STEP 3 -->
     <div class="panel" id="panel3">
       <div class="panel-title">How is your Google listing set up?</div>
-      <div class="panel-sub">Be honest — this is just for your score. No one else sees it.</div>
+      <div class="panel-sub">Be honest -- this is just for your score. No one else sees it.</div>
 
       <div class="field">
         <div class="field-label"><span>How many Google reviews do you have?</span></div>
         <div class="radio-grid" id="reviewGrid" role="radiogroup">
-          <div class="radio-opt" data-reviews="0" onclick="selectRadio(this,'reviewGrid','reviews')">0–5</div>
-          <div class="radio-opt" data-reviews="1" onclick="selectRadio(this,'reviewGrid','reviews')">6–20</div>
-          <div class="radio-opt" data-reviews="2" onclick="selectRadio(this,'reviewGrid','reviews')">21–50</div>
+          <div class="radio-opt" data-reviews="0" onclick="selectRadio(this,'reviewGrid','reviews')">0-5</div>
+          <div class="radio-opt" data-reviews="1" onclick="selectRadio(this,'reviewGrid','reviews')">6-20</div>
+          <div class="radio-opt" data-reviews="2" onclick="selectRadio(this,'reviewGrid','reviews')">21-50</div>
           <div class="radio-opt selected" data-reviews="3" onclick="selectRadio(this,'reviewGrid','reviews')">50+</div>
         </div>
       </div>
@@ -503,9 +503,9 @@
       <div class="field">
         <div class="field-label"><span>How many photos on your listing?</span></div>
         <div class="radio-grid" id="photoGrid" role="radiogroup">
-          <div class="radio-opt" data-photos="0" onclick="selectRadio(this,'photoGrid','photos')">0–2</div>
-          <div class="radio-opt selected" data-photos="1" onclick="selectRadio(this,'photoGrid','photos')">3–9</div>
-          <div class="radio-opt" data-photos="2" onclick="selectRadio(this,'photoGrid','photos')">10–25</div>
+          <div class="radio-opt" data-photos="0" onclick="selectRadio(this,'photoGrid','photos')">0-2</div>
+          <div class="radio-opt selected" data-photos="1" onclick="selectRadio(this,'photoGrid','photos')">3-9</div>
+          <div class="radio-opt" data-photos="2" onclick="selectRadio(this,'photoGrid','photos')">10-25</div>
           <div class="radio-opt" data-photos="3" onclick="selectRadio(this,'photoGrid','photos')">25+</div>
         </div>
       </div>
@@ -549,7 +549,7 @@
 
       <div class="cta-box">
         <h3 id="ctaTitle">Ready to fix this?</h3>
-        <p id="ctaDesc">We'll audit your Google listing, find every gap, and fix it — typically within 24 hours.</p>
+        <p id="ctaDesc">We'll audit your Google listing, find every gap, and fix it -- typically within 24 hours.</p>
         <a href="/#contact" class="cta-main" id="ctaBtn" onclick="trackCTA()">Get My Free Google Listing Audit →</a>
         <p style="font-size:12px;color:var(--faint);margin-top:12px;">Your score is shared with the contact form so we know where you stand before we respond.</p>
         <div class="cta-note">No calls required · Results in 24 hours · No contracts</div>
@@ -697,7 +697,7 @@ function calcResults() {
   document.getElementById('metricsGrid').innerHTML = metrics.map((m,i) => `
     <div class="metric-card" style="animation-delay:${i*0.1}s">
       <div class="metric-label">${m.label}</div>
-      <div class="metric-val ${m.cls}" id="${m.id}">—</div>
+      <div class="metric-val ${m.cls}" id="${m.id}">--</div>
       <div class="metric-sub">${m.sub}</div>
     </div>
   `).join('');
@@ -725,7 +725,7 @@ function calcResults() {
     ${issues.map((iss,i) => `
       <div class="issue-item" style="animation-delay:${0.5 + i*0.1}s">
         <div class="issue-icon" aria-hidden="true">${iss.icon}</div>
-        <div class="issue-text"><strong>${iss.title}</strong> — ${iss.body}</div>
+        <div class="issue-text"><strong>${iss.title}</strong> -- ${iss.body}</div>
       </div>
     `).join('')}
   `;
@@ -733,9 +733,9 @@ function calcResults() {
   if (revenueUpside > 5000) {
     document.getElementById('ctaTitle').textContent = `You're leaving $${revenueUpside.toLocaleString()}/mo on the table`;
     document.getElementById('ctaDesc').textContent = `That's $${(revenueUpside*12).toLocaleString()} per year going to competitors. We can fix your listing in 24 hours.`;
-    document.getElementById('ctaBtn').textContent = 'Fix My Listing — Get Free Audit →';
+    document.getElementById('ctaBtn').textContent = 'Fix My Listing -- Get Free Audit →';
   } else if (total >= 80) {
-    document.getElementById('ctaTitle').textContent = 'Strong listing — let\'s make it #1';
+    document.getElementById('ctaTitle').textContent = 'Strong listing -- let\'s make it #1';
     document.getElementById('ctaDesc').textContent = 'You\'re doing better than most, but staying at the top requires consistent work. Let us handle it.';
   }
 }

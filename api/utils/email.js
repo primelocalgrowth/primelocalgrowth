@@ -64,11 +64,6 @@ export async function notifyAdamOfLead(lead) {
         <p><strong>Business:</strong> ${escapeHtml(businessType)}</p>
         <p><strong>Phone:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></p>
         <p><strong>Submitted:</strong> ${new Date(timestamp).toLocaleString()}</p>
-        <p style="margin-top:20px;padding-top:20px;border-top:1px solid #e5e5e5;">
-          <a href="https://primelocalgrowth.com/dashboard?lead=${email}" style="background:#f59e0b;color:#000;padding:10px 20px;text-decoration:none;border-radius:6px;font-weight:bold;display:inline-block;">
-            View in Dashboard
-          </a>
-        </p>
       </div>
     </div>
   `;
@@ -171,14 +166,9 @@ export async function sendCustomerWelcome(customer, productId) {
           <li><strong>Hours 2–12:</strong> Full 360° optimization — keywords, photos, services, Q&A</li>
           <li><strong>Hours 12–24:</strong> Posting schedule, review monitoring activated</li>
         </ul>
-        <p style="background:#1a1f26;border-left:3px solid #f59e0b;padding:14px 18px;border-radius:0 6px 6px 0;font-size:14px;color:#d1d5db;">
-          You stay the Primary Owner. Manager access means I can optimize — I cannot transfer or delete your listing.
-        </p>
+        <p style="background:#1a1f26;border-left:3px solid #f59e0b;padding:14px 18px;border-radius:0 6px 6px 0;font-size:14px;color:#d1d5db;">You stay the Primary Owner. Manager access means I can optimize — I cannot transfer or delete your listing.</p>
         <hr style="border:none;border-top:1px solid #e5e5e5;margin:28px 0;">
-        <p style="font-size:14px;color:#666;">
-          Questions? Hit reply — I read every email personally.<br>
-          — Adam Rome · Prime Local Growth · adam@primelocalgrowth.com
-        </p>
+        <p style="font-size:14px;color:#666;">Questions? Hit reply — I read every email personally.<br>— Adam Rome · Prime Local Growth · adam@primelocalgrowth.com</p>
       </div>
     </div>
   `;
@@ -276,6 +266,43 @@ function escapeHtml(text) {
     "'": '&#039;'
   };
   return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+/**
+ * Send review request to customer
+ */
+export async function sendReviewRequest(customer) {
+  const { email, name } = customer;
+  const firstName = name ? name.split(' ')[0] : 'there';
+  const reviewUrl = 'https://g.page/r/CSRlPk-HmJb0EAI/review';
+
+  const html = `
+    <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#1a1a1a;font-size:16px;line-height:1.7;">
+      <div style="background:#0f1419;padding:24px 32px;border-radius:8px 8px 0 0;">
+        <p style="margin:0;font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#fff;">Prime <span style="color:#f59e0b;">Local</span> Growth</p>
+      </div>
+      <div style="background:#fff;padding:32px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 8px 8px;">
+        <p>Hi ${escapeHtml(firstName)},</p>
+        <p>Your Google listing is live and optimized. If your business is getting results, we'd love a review to help others find you.</p>
+        <p style="margin:24px 0;">
+          <a href="${reviewUrl}" style="display:inline-block;background:#f59e0b;color:#000;text-decoration:none;font-family:Arial,sans-serif;font-weight:700;font-size:15px;padding:14px 32px;border-radius:6px;">
+            Leave a Review on Google →
+          </a>
+        </p>
+        <p>It only takes 60 seconds and makes a huge difference in helping local customers find you.</p>
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:28px 0;">
+        <p style="font-size:14px;color:#666;margin:0;">— Adam Rome · Prime Local Growth · adam@primelocalgrowth.com</p>
+      </div>
+    </div>
+  `;
+
+  return sendEmail({
+    to: email,
+    from: 'Adam Rome <adam@primelocalgrowth.com>',
+    subject: `${firstName}, your Google listing is ready for reviews`,
+    html,
+    replyTo: 'adam@primelocalgrowth.com'
+  });
 }
 
 export { escapeHtml };

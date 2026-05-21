@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fades Barbershop LLC — Internet Visibility Audit</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 0.75in;
+      @bottom-center { content: counter(page); }
+    }
+    @media print {
+      body { margin: 0; padding: 0; }
+      .page-break { page-break-after: always; }
+      .avoid-break { page-break-inside: avoid; }
+      h2 { page-break-after: avoid; }
+      section { page-break-inside: avoid; }
+    }
+
+    * { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1f2937;
+      line-height: 1.6;
+      background: #f9fafb;
+      font-size: 14px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 0.75in;
+    }
+
+    /* HEADER PAGE 1 */
+    .header {
+      border-bottom: 3px solid #f59e0b;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      page-break-after: avoid;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 6px;
+      color: #0f1419;
+    }
+    .subheader {
+      font-size: 12px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .addr { font-size: 12px; color: #6b7280; margin-top: 4px; }
+
+    /* SCORE CARD */
+    .score-card {
+      background: linear-gradient(135deg, #0f1419 0%, #1a2f4d 100%);
+      color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: center;
+      page-break-inside: avoid;
+      border: 2px solid #f59e0b;
+    }
+    .score-number {
+      font-size: 60px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .score-grade {
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: #f59e0b;
+      font-weight: 700;
+    }
+    .score-label {
+      font-size: 12px;
+      color: #d1d5db;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .score-card p {
+      font-size: 12px;
+      color: #d1d5db;
+      margin-top: 8px;
+    }
+
+    /* SECTIONS */
+    section {
+      margin-bottom: 30px;
+      page-break-inside: avoid;
+    }
+    h2 {
+      font-size: 16px;
+      color: #0f1419;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    section p {
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* COMPETITIVE RANKING */
+    .ranking-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 12px;
+    }
+    .ranking-table th, .ranking-table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .ranking-table th {
+      background: #f3f4f6;
+      font-weight: 700;
+      color: #0f1419;
+    }
+    .ranking-table tr.your-row {
+      background: #fef3c7;
+      font-weight: 600;
+    }
+    .rank-num {
+      font-weight: 700;
+      color: #0f1419;
+      min-width: 30px;
+    }
+    .rank-gold { color: #b45309; }
+
+    /* OPPORTUNITY BOX */
+    .opportunity {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+      border: 2px solid #10b981;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      page-break-inside: avoid;
+    }
+    .opportunity h3 {
+      color: #047857;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .opportunity p {
+      font-size: 13px;
+      color: #15803d;
+      margin-bottom: 8px;
+    }
+    .opportunity strong { color: #166534; }
+
+    /* PUZZLE BOX */
+    .puzzle {
+      background: #f0f9ff;
+      border-left: 4px solid #0ea5e9;
+      padding: 16px;
+      border-radius: 4px;
+      margin: 20px 0;
+      page-break-inside: avoid;
+    }
+    .puzzle h3 {
+      color: #0369a1;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .puzzle p {
+      font-size: 12px;
+      color: #0c4a6e;
+      margin-bottom: 6px;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: linear-gradient(135deg, #fef3c7 0%, #fef08a 100%);
+      border: 2px solid #f59e0b;
+      padding: 24px;
+      border-radius: 6px;
+      margin: 30px 0;
+      page-break-inside: avoid;
+    }
+    .cta-section h2 {
+      border: none;
+      color: #b45309;
+      margin-bottom: 14px;
+    }
+    .cta-section p { font-size: 13px; margin-bottom: 10px; color: #92400e; }
+
+    /* OPTIONS */
+    .option {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      padding: 16px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      border-left: 4px solid #f59e0b;
+      page-break-inside: avoid;
+    }
+    .option h3 {
+      font-size: 14px;
+      color: #0f1419;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    .price {
+      font-size: 16px;
+      font-weight: 700;
+      color: #f59e0b;
+      margin-bottom: 10px;
+    }
+    .option-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 10px;
+    }
+    .option-list li {
+      padding: 4px 0;
+      font-size: 12px;
+      color: #4b5563;
+    }
+    .option-list li:before {
+      content: "→ ";
+      color: #10b981;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    .expected {
+      font-size: 12px;
+      color: #166534;
+      padding: 8px;
+      background: #ecfdf5;
+      border-radius: 4px;
+      margin-top: 8px;
+      border-left: 3px solid #10b981;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 20px;
+      margin-top: 30px;
+      font-size: 12px;
+      color: #6b7280;
+      page-break-inside: avoid;
+    }
+    .footer p { margin-bottom: 6px; }
+    .footer strong { color: #1f2937; }
+
+    /* PAGE 2 BREAK */
+    .page-2 { page-break-before: always; padding-top: 20px; }
+
+    .highlight { color: #dc2626; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============ PAGE 1 ============ -->
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="subheader">Google Maps Visibility Audit</div>
+    <h1>Fades Barbershop LLC</h1>
+    <div class="addr">4201 S Congress Ave, Austin, TX 78745</div>
+  </div>
+
+  <!-- SCORE CARD -->
+  <div class="score-card">
+    <div class="score-label">Current Ranking</div>
+    <div class="score-number">#5</div>
+    <div class="score-grade">Room to Dominate</div>
+    <p>You're competitive, but not yet unstoppable. Here's what's possible.</p>
+  </div>
+
+  <!-- THE OPPORTUNITY -->
+  <section>
+    <h2>The #1 Barber Opportunity</h2>
+    <p>Miguel, you have an excellent barbershop. Your customers know it (4.8★, 86 reviews). But Austin's customers searching "barber near me" see you at <span class="highlight">#5</span>.</p>
+    <p>That's the gap.</p>
+    <p>The barber at #1 isn't better than you. The barbershop at #2 doesn't have better service than you. They're just more visible when people are looking.</p>
+    <p>Every person searching for a barber in your zip code who lands on someone else first? That's a customer you could have had.</p>
+  </section>
+
+  <!-- COMPETITIVE LANDSCAPE -->
+  <section>
+    <h2>The Competitive Landscape</h2>
+    <table class="ranking-table">
+      <tr>
+        <th>Rank</th>
+        <th>Shop</th>
+        <th>Rating</th>
+        <th>Reviews</th>
+        <th>Website</th>
+      </tr>
+      <tr>
+        <td class="rank-num rank-gold">1</td>
+        <td>FADED DEPT</td>
+        <td>5.0★</td>
+        <td>46</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="rank-num">#2</td>
+        <td>Winners Circle</td>
+        <td>5.0★</td>
+        <td>171</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td class="rank-num">#3</td>
+        <td>Og Barber Studio</td>
+        <td>4.9★</td>
+        <td>74</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td class="rank-num">#4</td>
+        <td>Common Space</td>
+        <td>5.0★</td>
+        <td>133</td>
+        <td>✓</td>
+      </tr>
+      <tr class="your-row">
+        <td class="rank-num">#5</td>
+        <td><strong>Fades Barbershop</strong></td>
+        <td><strong>4.8★</strong></td>
+        <td><strong>86</strong></td>
+        <td><strong>✓ (Booksy)</strong></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- THE PUZZLE -->
+  <div class="puzzle">
+    <h3>🤔 Here's What's Interesting:</h3>
+    <p>FADED DEPT ranks #1 with only 46 reviews (you have 86).</p>
+    <p>Common Space ranks #4 with 133 reviews — nearly 2x yours.</p>
+    <p>Yet you're at #5.</p>
+    <p><strong>The question:</strong> What determines Google Maps ranking if it's not just review count or rating?</p>
+  </div>
+
+  <!-- THE OPPORTUNITY (GREEN BOX) -->
+  <div class="opportunity">
+    <h3>💰 The Money on the Table</h3>
+    <p>Austin's South Congress corridor is packed with people searching for barbers.</p>
+    <p>Let's be conservative: <strong>5 customers per month search "barber near me" and land on #1 instead of you.</strong></p>
+    <p>That's <strong>60 customers/year × $35 avg = $2,100 in annual revenue</strong> going to someone else.</p>
+    <p><strong style="color: #166534;">Move from #5 to #1, and you reverse that flow.</strong></p>
+  </div>
+
+  <!-- ============ PAGE 2 ============ -->
+  <div class="page-2">
+    <section>
+      <h2>What Makes #1 Different</h2>
+      <p>The shops ranking above you aren't doing anything magical. They're just optimizing for how Google's algorithm ranks local businesses. There are specific signals Google looks for — and most barbershops miss them entirely.</p>
+      <p>You're close. You have the foundation (reviews, bookings, presence). You're just missing the visibility accelerators that turn "good" into "dominant."</p>
+    </section>
+
+    <!-- CTA SECTION -->
+    <div class="cta-section">
+      <h2>Next Step: Find Out Why</h2>
+      <p>I can run a detailed competitive analysis and show you exactly what's keeping you at #5 instead of #1.</p>
+      <p>It's not complicated. It's just specific.</p>
+      <p style="margin-bottom: 0; margin-top: 14px;"><strong>Ready to understand the gap and own the top spot?</strong></p>
+    </div>
+
+    <!-- OPTIONS -->
+    <section>
+      <h2>Your Options</h2>
+
+      <div class="option">
+        <h3>Insight Session (Free)</h3>
+        <p style="font-size: 12px; color: #6b7280; margin-bottom: 10px;">15-minute call where I walk you through exactly why competitors rank higher</p>
+        <ul class="option-list">
+          <li>Specific gaps preventing #1 ranking</li>
+          <li>What your competitors are doing (and you're not)</li>
+          <li>3 quick wins you could implement</li>
+        </ul>
+        <p style="font-size: 12px; color: #6b7280;">Cost: Your time. No obligation.</p>
+      </div>
+
+      <div class="option">
+        <h3>Dominance Plan (Recommended)</h3>
+        <div class="price">$1,497 one-time</div>
+        <ul class="option-list">
+          <li>Complete competitive analysis report</li>
+          <li>Strategy to move from #5 → #1</li>
+          <li>30-day implementation guide (step-by-step)</li>
+          <li>Weekly check-ins for first month</li>
+        </ul>
+        <div class="expected"><strong>Expected:</strong> #5 → #2-3 in 30 days. #1 within 60-90 days. +$2,100+/year in new customer revenue.</div>
+      </div>
+
+      <div class="option">
+        <h3>Ongoing Management</h3>
+        <div class="price">$497/month</div>
+        <ul class="option-list">
+          <li>Everything above + sustained #1 ranking</li>
+          <li>Monthly optimization & competitive monitoring</li>
+          <li>Google algorithm updates handled</li>
+          <li>New review response system</li>
+        </ul>
+        <div class="expected"><strong>Expected:</strong> Maintain #1 ranking long-term. Consistent new customer flow.</div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section>
+      <h2>Ready?</h2>
+      <p>Reply to this email or call 210-646-1436.</p>
+      <p>Let's get you to #1.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p><strong>Adam Rome</strong><br>
+      Prime Local Growth<br>
+      adam@primelocalgrowth.com<br>
+      210-646-1436</p>
+      <p style="margin-top: 14px; font-size: 11px; color: #9ca3af;">
+        P.S. — Right now, 5+ customers searching for a barber each month land on your competitor. That could be you. Let's fix it.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

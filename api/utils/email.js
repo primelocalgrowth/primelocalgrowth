@@ -71,17 +71,19 @@ export async function sendEmail(config) {
  * Send notification to Adam about form submission
  */
 export async function notifyAdamOfLead(lead) {
-  const { name, email, phone, businessType, timestamp } = lead;
+  const { name, email, phone, businessName, businessType, timestamp } = lead;
 
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
-      <div style="background:#0f1419;color:#fff;padding:20px;border-radius:8px 8px 0 0;">
-        <h2 style="margin:0;color:#f59e0b;">🔥 New Lead: ${escapeHtml(name)}</h2>
+      <div style="background:#0f172a;color:#fff;padding:20px;border-radius:8px 8px 0 0;">
+        <h2 style="margin:0;color:#0ea5e9;">New Lead: ${escapeHtml(name)}</h2>
       </div>
-      <div style="background:#fff;padding:20px;border:1px solid #e5e5e5;border-top:none;">
+      <div style="background:#fff;padding:20px;border:1px solid #e5e5e5;border-top:none;font-family:Arial,sans-serif;">
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Business:</strong> ${escapeHtml(businessName)}</p>
+        <p><strong>Type:</strong> ${escapeHtml(businessType)}</p>
         <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
-        <p><strong>Business:</strong> ${escapeHtml(businessType)}</p>
-        <p><strong>Phone:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></p>
+        <p><strong>Phone:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone) || 'N/A'}</a></p>
         <p><strong>Submitted:</strong> ${new Date(timestamp).toLocaleString()}</p>
         ${getEmailFooter()}
       </div>
@@ -91,7 +93,7 @@ export async function notifyAdamOfLead(lead) {
   return sendEmail({
     to: 'adam@primelocalgrowth.com',
     from: FROM_PLG,
-    subject: `🔥 New Lead: ${name} — ${businessType}`,
+    subject: `New Lead: ${name} — ${businessName}`,
     html,
     replyTo: email
   });
@@ -101,7 +103,7 @@ export async function notifyAdamOfLead(lead) {
  * Send auto-reply to lead with next steps
  */
 export async function sendLeadAutoReply(lead) {
-  const { name, email, businessType } = lead;
+  const { name, email, businessName, businessType } = lead;
   const firstName = name.split(' ')[0];
 
   const html = `
@@ -111,25 +113,22 @@ export async function sendLeadAutoReply(lead) {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin:0;padding:0;background:#f3f4f6;font-family:Georgia,serif;">
+    <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
     <div style="max-width:600px;margin:0 auto;background:#fff;">
-      <div style="background:#0f1419;padding:24px 32px;border-radius:8px 8px 0 0;">
-        <p style="margin:0;font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#fff;">Prime <span style="color:#f59e0b;">Local</span> Growth</p>
-        <p style="margin:4px 0 0;font-size:13px;color:#9ca3af;font-family:Arial,sans-serif;">Google Business Profile Management</p>
+      <div style="background:#1b3a6b;padding:24px 32px;">
+        <p style="margin:0;font-size:18px;font-weight:700;color:#fff;">Prime Local Growth</p>
       </div>
-      <div style="padding:32px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 8px 8px;">
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">Hi ${escapeHtml(firstName)},</p>
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">Got your message about your ${escapeHtml(businessType)} listing. I run comprehensive audits for every prospect — analyzing 20+ platforms, identifying gaps, and grading your current visibility.</p>
-        <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:20px 24px;margin:24px 0;">
-          <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.05em;">Want your audit?</p>
-          <p style="margin:0 0 16px;font-size:15px;color:#1a1a1a;line-height:1.6;">Reply to this email. I'll run it personally and send you the full report within 24 hours — no cost, no obligation.</p>
-        </div>
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.7;">The audit shows you exactly where you stand and what moves will move the needle fastest. If we're a fit, we'll talk next steps. If not, you'll have actionable intelligence either way.</p>
-        <hr style="border:none;border-top:1px solid #e5e5e5;margin:32px 0;">
-        <p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;">
-          Questions before we talk? Just reply to this email — I read every one personally.<br>
-          — Adam Rome · Prime Local Growth · <a href="https://www.primelocalgrowth.com" style="color:#f59e0b;">primelocalgrowth.com</a>
-        </p>
+      <div style="padding:32px;border:1px solid #e5e5e5;border-top:none;">
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Hi ${escapeHtml(firstName)},</p>
+
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Got your info for ${escapeHtml(businessName)}. I'm running your free Google visibility audit right now — checking your Google Business Profile, reviews, keywords, and comparing you to local competitors.</p>
+
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;"><strong>You'll get the full report within 24 hours</strong> showing exactly what's working and what's holding you back.</p>
+
+        <p style="font-size:14px;color:#666;line-height:1.6;margin:0;">Questions in the meantime? Just reply to this email — I read every one personally.</p>
+
+        <p style="font-size:14px;color:#666;line-height:1.6;margin:16px 0 0;">— Adam Rome<br>Prime Local Growth<br><a href="tel:210-646-1436" style="color:#0ea5e9;text-decoration:none;">210-646-1436</a></p>
+
         ${getEmailFooter()}
       </div>
     </div>
@@ -140,7 +139,7 @@ export async function sendLeadAutoReply(lead) {
   return sendEmail({
     to: email,
     from: FROM_ADAM,
-    subject: `Got it, ${firstName} — one quick thing before we connect`,
+    subject: `Your audit is underway, ${firstName}`,
     html,
     replyTo: 'adam@primelocalgrowth.com'
   });

@@ -3011,8 +3011,12 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
           <input type="email" id="email-bottom" name="email" placeholder="you@business.com" autocomplete="email" required>
         </div>
         <div class="form-group">
-          <label for="biz-bottom">What type of business?</label>
-          <input type="text" id="biz-bottom" name="businessType" placeholder="e.g., Plumbing, HVAC, Dental" autocomplete="organization" required>
+          <label for="business-name-bottom">Business Name</label>
+          <input type="text" id="business-name-bottom" name="businessName" placeholder="e.g., Smith's HVAC" autocomplete="organization" required>
+        </div>
+        <div class="form-group">
+          <label for="biz-type-bottom">Business Type</label>
+          <input type="text" id="biz-type-bottom" name="businessType" placeholder="e.g., HVAC, Plumbing, Dental" autocomplete="organization-title" required>
         </div>
         <div class="form-group">
           <label for="phone-bottom">Phone <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(optional -- for faster reply)</span></label>
@@ -3309,12 +3313,13 @@ document.querySelectorAll('form[data-form="lead-form"]').forEach(form => {
     const name         = form.querySelector('input[name="name"]')?.value.trim();
     const email        = form.querySelector('input[name="email"]')?.value.trim();
     const phone        = form.querySelector('input[name="phone"]')?.value.trim() || '';
+    const businessName = form.querySelector('input[name="businessName"]')?.value.trim();
     const businessType = form.querySelector('input[name="businessType"]')?.value.trim();
 
-    if (!name || !email || !businessType) {
+    if (!name || !email || !businessName || !businessType) {
       feedbackEl.className = 'form-feedback form-feedback--error';
       feedbackEl.textContent = 'Please fill in all required fields.';
-      form.querySelector('input[name="' + (!name ? 'name' : !email ? 'email' : 'businessType') + '"]').focus();
+      form.querySelector('input[name="' + (!name ? 'name' : !email ? 'email' : !businessName ? 'businessName' : 'businessType') + '"]').focus();
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -3338,7 +3343,7 @@ document.querySelectorAll('form[data-form="lead-form"]').forEach(form => {
     fetch('/api/submit-form', {
       method:'POST',
       headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
-      body:JSON.stringify({ name, email, phone, businessType })
+      body:JSON.stringify({ name, email, phone, businessName, businessType })
     })
     .then(r => { if (r.ok) return r.json(); throw new Error('Submission failed'); })
     .then(data => {
@@ -3383,7 +3388,7 @@ document.querySelectorAll('form[data-form="lead-form"] input').forEach(input => 
       if (!value) return;
       const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
       input.classList.add(isValid ? 'valid' : 'error');
-    } else if (name === 'name' || name === 'businessType') {
+    } else if (name === 'name' || name === 'businessName' || name === 'businessType') {
       if (value.length >= 2) {
         input.classList.add('valid');
       } else if (value.length > 0) {

@@ -12,10 +12,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, phone, businessName, businessType } = req.body;
+    const { name, email, phone, businessName, city, businessType } = req.body;
 
     // Validate required fields
-    if (!name || !email || !businessName || !businessType) {
+    if (!name || !email || !businessName || !city || !businessType) {
       return res.status(400).json({
         error: 'Please fill in all required fields'
       });
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     }
 
     const timestamp = new Date().toISOString();
-    const lead = { name, email, phone, businessName, businessType, timestamp };
+    const lead = { name, email, phone, businessName, city, businessType, timestamp };
 
     // Send email notification to Adam
     if (process.env.RESEND_API_KEY) {
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
     // Add to Beehiiv
     if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
       try {
-        await addToBeehiiv(name, email, phone, businessName, businessType);
+        await addToBeehiiv(name, email, phone, businessName, city, businessType);
       } catch (err) {
         console.error('Beehiiv add failed:', err);
       }
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
     // Add to Google Sheets
     if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
       try {
-        await appendToGoogleSheets(name, email, phone, businessName, businessType, timestamp);
+        await appendToGoogleSheets(name, email, phone, businessName, city, businessType, timestamp);
       } catch (err) {
         console.error('Google Sheets append failed:', err);
       }
@@ -78,6 +78,7 @@ export default async function handler(req, res) {
         email,
         phone,
         businessName,
+        city,
         businessType,
         timestamp
       }
@@ -97,7 +98,7 @@ export default async function handler(req, res) {
 // BEEHIIV INTEGRATION
 // ============================================================
 
-async function addToBeehiiv(name, email, phone, businessName, businessType) {
+async function addToBeehiiv(name, email, phone, businessName, city, businessType) {
   const apiKey = process.env.BEEHIIV_API_KEY;
   const pubId = process.env.BEEHIIV_PUBLICATION_ID;
 
@@ -124,6 +125,7 @@ async function addToBeehiiv(name, email, phone, businessName, businessType) {
           { name: 'last_name', value: lastName },
           { name: 'phone', value: phone || '' },
           { name: 'business_name', value: businessName },
+          { name: 'city', value: city || '' },
           { name: 'business_type', value: businessType }
         ]
       })
@@ -142,7 +144,7 @@ async function addToBeehiiv(name, email, phone, businessName, businessType) {
 // GOOGLE SHEETS INTEGRATION
 // ============================================================
 
-async function appendToGoogleSheets(name, email, phone, businessName, businessType, timestamp) {
+async function appendToGoogleSheets(name, email, phone, businessName, city, businessType, timestamp) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (!webhookUrl) return;
 
@@ -155,6 +157,7 @@ async function appendToGoogleSheets(name, email, phone, businessName, businessTy
       email,
       phone: phone || '',
       business_name: businessName,
+      city: city || '',
       business_type: businessType,
       source: 'website-form',
       segment: 'Cold Leads',

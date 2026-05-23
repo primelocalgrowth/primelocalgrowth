@@ -26,12 +26,13 @@ export default async function handler(req, res) {
     const timestamp = new Date().toISOString();
     const lead = { name, email, phone, businessName, city, businessType, timestamp };
 
-    // ============================================================
-    // 1. TRIGGER MASTER APPS SCRIPT WEBHOOK (AUDIT GENERATION)
+  // ============================================================
+    // 1. TRIGGER MASTER APPS SCRIPT WEBHOOK (FIRE & FORGET)
     // ============================================================
     try {
       const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxrQMcS2jdABKRocVKlN7WzeMZXTnI1VQfDXAvV5Nathbh4OEqe-R-eiioC8VREXtI_/exec';
-      await fetch(WEBHOOK_URL, {
+      // Notice there is NO "await" here! It sends the data and moves on instantly.
+      fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -42,7 +43,7 @@ export default async function handler(req, res) {
           city: city,
           businessType: businessType
         })
-      });
+      }).catch(err => console.error('Webhook error:', err));
     } catch (err) {
       console.error('Apps Script Webhook trigger failed:', err);
     }

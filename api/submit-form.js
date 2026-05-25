@@ -159,8 +159,8 @@ async function appendToGoogleSheets(name, email, phone, businessName, city, busi
       business_name: businessName,
       city: city || '',
       business_type: businessType,
-      source: 'website-form',
-      segment: 'Cold Leads',
+      source: 'inbound',
+      segment: 'Inbound Leads',
       status: 'New',
       notes: ''
     })

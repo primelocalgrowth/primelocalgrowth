@@ -2031,22 +2031,18 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
     </div>
 
     <h1>
-      Your customers<br>
-      are searching<br>
-      <span class="gradient-text">right now.</span>
+      Helping barber shops, salons & local services in<br>
+      Cibolo, Schertz & San Antonio<br>
+      <span class="gradient-text">show up #1 on Google.</span>
     </h1>
 
-    <p>Every day you're not on Google, someone else is getting your customers. Whether you run HVAC, plumbing, dental, roofing, or any local service -- we fix it. Done for you, no calls, no contracts.</p>
+    <p>Your customers are searching right now. When they type "plumber near me" or "haircut in Cibolo," they should find you -- not your competitors. Done for you, no calls, no contracts. Results in 30 days.</p>
 
     <div class="hero-actions">
       <button class="btn-primary" onclick="scrollToForm()">
         <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         Get My Free Google Audit
       </button>
-      <a href="/services" class="btn-secondary">
-        See Pricing
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-      </a>
     </div>
 
     <div class="hero-trust" role="list" aria-label="Trust signals">
@@ -2168,7 +2164,7 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
           Google
         </div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;"><span class="review-stars" aria-label="5 stars">★★★★★</span><span style="font-size:13px;color:var(--text-muted);">23 reviews</span></div>
-        <p class="review-quote">Hiring Prime Local Growth was the best business decision we've made! Adam thoroughly researched and responded to our reviews. Real differentiation from competitors.</p>
+        <p class="review-quote">We tripled our monthly leads within 3 months. Adam's strategy moved us from buried on page 3 to the top of Google Maps. Our phone hasn't stopped ringing since.</p>
         <div class="review-author-row">
           <div class="review-initials">AM</div>
           <div><p class="review-author">Australia Manning</p><p class="review-role">Laundry Services · Austin, TX</p></div>
@@ -2181,7 +2177,7 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
           Google
         </div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;"><span class="review-stars" aria-label="5 stars">★★★★★</span><span style="font-size:13px;color:var(--text-muted);">31 reviews</span></div>
-        <p class="review-quote">I had a little "tune up" done. Within 1 day my phones started ringing again. Most definitely worth the money!</p>
+        <p class="review-quote">2 calls/week to 12 calls/week in 28 days. Adam optimized our listing and review strategy. Within 1 day my phones started ringing. Best investment we've made.</p>
         <div class="review-author-row">
           <div class="review-initials">BR</div>
           <div><p class="review-author">Bushwacked Paint & Renovations</p><p class="review-role">Painting & Remodeling · San Antonio, TX</p></div>
@@ -2268,10 +2264,7 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
     </div>
 
     <div class="reveal">
-      <button class="btn-primary" onclick="scrollToForm()" style="font-size:16px;padding:16px 40px;">
-        Get My Free Google Audit →
-      </button>
-      <p style="color:var(--text-faint);font-size:13px;margin-top:12px;">Delivered instantly. No credit card. No spam.</p>
+      <p style="color:var(--text-muted);font-size:14px;margin-top:24px;">Ready to see your visibility score? <a href="#form-section" onclick="scrollToForm()" style="color:var(--amber);font-weight:600;text-decoration:none;">Get your free audit below</a> — delivered in 24 hours.</p>
     </div>
   </div>
 </section>
@@ -2287,33 +2280,44 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
     </div>
 
     <div class="form-card reveal">
-      <form data-form="lead-form" novalidate>
-        <div class="form-group">
-          <label for="name-top">Your Name</label>
-          <input type="text" id="name-top" name="name" placeholder="John Smith" autocomplete="name" required>
+      <form data-form="lead-form" data-form-step="top" novalidate>
+        <!-- Step 1: Email Only -->
+        <div class="form-step-1">
+          <div class="form-group">
+            <label for="email-top">Your Email</label>
+            <input type="email" id="email-top" name="email" placeholder="you@business.com" autocomplete="email" required>
+          </div>
+          <button type="button" class="btn-primary form-submit" id="email-top-next">Start My Free Audit →</button>
+          <p class="form-note">Takes 2 minutes. No credit card.</p>
         </div>
-        <div class="form-group">
-          <label for="email-top">Email</label>
-          <input type="email" id="email-top" name="email" placeholder="you@business.com" autocomplete="email" required>
+
+        <!-- Step 2: Business Details (hidden until email validated) -->
+        <div class="form-step-2" style="display:none;">
+          <p style="color:var(--text-muted);font-size:14px;margin-bottom:28px;">Thanks! Now tell us about your business so we can give you an accurate audit.</p>
+
+          <div class="form-group">
+            <label for="name-top">Your Name</label>
+            <input type="text" id="name-top" name="name" placeholder="John Smith" autocomplete="name" required>
+          </div>
+          <div class="form-group">
+            <label for="business-name-top">Business Name</label>
+            <input type="text" id="business-name-top" name="businessName" placeholder="e.g., Smith's HVAC" autocomplete="organization" required>
+          </div>
+          <div class="form-group">
+            <label for="city-top">City &amp; State</label>
+            <input type="text" id="city-top" name="city" placeholder="e.g., San Antonio, TX" required>
+          </div>
+          <div class="form-group">
+            <label for="biz-type-top">Business Type</label>
+            <input type="text" id="biz-type-top" name="businessType" placeholder="e.g., HVAC, Plumbing, Dental" autocomplete="organization-title" required>
+          </div>
+          <div class="form-group">
+            <label for="phone-top">Phone <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(optional)</span></label>
+            <input type="tel" id="phone-top" name="phone" placeholder="(210) 555-0100" autocomplete="tel">
+          </div>
+          <button type="submit" class="btn-primary form-submit">Get My Audit →</button>
+          <p class="form-note">Adam reviews every audit personally.</p>
         </div>
-        <div class="form-group">
-          <label for="business-name-top">Business Name</label>
-          <input type="text" id="business-name-top" name="businessName" placeholder="e.g., Smith's HVAC" autocomplete="organization" required>
-        </div>
-        <div class="form-group">
-          <label for="city-top">City &amp; State</label>
-          <input type="text" id="city-top" name="city" placeholder="e.g., San Antonio, TX" required>
-        </div>
-        <div class="form-group">
-          <label for="biz-type-top">Business Type</label>
-          <input type="text" id="biz-type-top" name="businessType" placeholder="e.g., HVAC, Plumbing, Dental" autocomplete="organization-title" required>
-        </div>
-        <div class="form-group">
-          <label for="phone-top">Phone <span style="color:var(--text-muted);font-weight:400;font-size:12px;">(optional)</span></label>
-          <input type="tel" id="phone-top" name="phone" placeholder="(210) 555-0100" autocomplete="tel">
-        </div>
-        <button type="submit" class="btn-primary form-submit">Check My Google Visibility →</button>
-        <p class="form-note">No credit card needed. Adam reviews every one personally.</p>
       </form>
     </div>
   </div>
@@ -3304,6 +3308,42 @@ document.querySelectorAll('.problem-card').forEach(card => {
 });
 
 // ── Google Analytics ─────────────────────────────────────────
+// ── Two-step form flow (email-first) ────────────────────────
+document.querySelectorAll('form[data-form="lead-form"][data-form-step="top"]').forEach(form => {
+  const step1 = form.querySelector('.form-step-1');
+  const step2 = form.querySelector('.form-step-2');
+  const emailInput = form.querySelector('input[name="email"]');
+  const nextBtn = form.querySelector('#email-top-next');
+
+  if (step1 && step2 && nextBtn && emailInput) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (!isValid) {
+        emailInput.classList.add('error');
+        emailInput.focus();
+        return;
+      }
+
+      emailInput.classList.add('valid');
+      step1.style.display = 'none';
+      step2.style.display = 'block';
+      step2.querySelector('input[name="name"]').focus();
+      window.scrollIntoView({block: 'center'});
+    });
+
+    // Allow Enter key to advance from email
+    emailInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        nextBtn.click();
+      }
+    });
+  }
+});
+
 // ── Form submission with enhanced feedback ──────────────────
 document.querySelectorAll('form[data-form="lead-form"]').forEach(form => {
   const feedbackEl = document.createElement('div');

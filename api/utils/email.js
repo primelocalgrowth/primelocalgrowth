@@ -299,7 +299,7 @@ function escapeHtml(text) {
 export async function sendReviewRequest(customer) {
   const { email, name } = customer;
   const firstName = name ? name.split(' ')[0] : 'there';
-  const reviewUrl = 'https://g.page/r/CSRlPk-HmJb0EAI/review';
+  const reviewUrl = 'https://g.page/r/CSRlPk-HmJb0EBM/review';
 
   const html = `
     <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;color:#1a1a1a;font-size:16px;line-height:1.7;">

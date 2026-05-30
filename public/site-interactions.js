@@ -19,7 +19,7 @@ if (scoreForm && scoreResult) {
   });
 }
 
-const revealTargets = document.querySelectorAll('.card, .problem-item, .result-card, .proof-image-card, .review-proof-note, .audit-check, .faq-item, .cta-band, .score-tool, .compare-table, .form-trust');
+const revealTargets = document.querySelectorAll('.card, .problem-item, .result-card, .proof-image-card, .reviews-panel, .review-card, .review-proof-note, .audit-check, .faq-item, .cta-band, .score-tool, .compare-table, .form-trust');
 revealTargets.forEach((element, index) => {
   element.classList.add('reveal-item');
   element.style.transitionDelay = `${Math.min(index % 6, 5) * 45}ms`;

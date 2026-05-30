@@ -17,6 +17,10 @@ document.querySelectorAll('[data-lead-form]').forEach(form => {
     data.phone = data.phone || '';
     data.city = data.city || '';
     data.businessType = data.businessType || 'local-service';
+    data.pagePath = window.location.pathname;
+    data.pageUrl = window.location.href;
+    data.referrer = document.referrer || '';
+    data.attribution = typeof window.plgGetAttribution === 'function' ? window.plgGetAttribution() : {};
 
     if (!data.name || !data.email || !data.businessName) {
       feedback.textContent = 'Please fill in your name, email, and business name.';
@@ -38,11 +42,23 @@ document.querySelectorAll('[data-lead-form]').forEach(form => {
       if (!response.ok) throw new Error('Submission failed');
       feedback.textContent = 'Success. Check your email for next steps.';
       feedback.className = 'form-feedback form-feedback--success';
+      if (typeof window.plgTrack === 'function') {
+        window.plgTrack('lead_form_submit_success', {
+          form_name: form.getAttribute('data-form-name') || 'visibility_audit',
+          city: data.city,
+          business_type: data.businessType
+        });
+      }
       form.reset();
       setTimeout(() => { window.location.href = '/thank-you'; }, 900);
     } catch {
       feedback.textContent = 'Something went wrong. Please email adam@primelocalgrowth.com.';
       feedback.className = 'form-feedback form-feedback--error';
+      if (typeof window.plgTrack === 'function') {
+        window.plgTrack('lead_form_submit_error', {
+          form_name: form.getAttribute('data-form-name') || 'visibility_audit'
+        });
+      }
       button.disabled = false;
       button.textContent = originalText;
     }

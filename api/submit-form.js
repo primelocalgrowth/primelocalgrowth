@@ -16,7 +16,11 @@ export default async function handler(req, res) {
       phone = '',
       businessName,
       city = '',
-      businessType = 'local-service'
+      businessType = 'local-service',
+      pagePath = '',
+      pageUrl = '',
+      referrer = '',
+      attribution = {}
     } = req.body;
 
     // Validate required fields
@@ -31,7 +35,7 @@ export default async function handler(req, res) {
     }
 
     const timestamp = new Date().toISOString();
-    const lead = { name, email, phone, businessName, city, businessType, timestamp };
+    const lead = { name, email, phone, businessName, city, businessType, pagePath, pageUrl, referrer, attribution, timestamp };
 
   // ============================================================
     // 1. TRIGGER MASTER APPS SCRIPT WEBHOOK (FIRE & FORGET)
@@ -46,7 +50,11 @@ export default async function handler(req, res) {
           phone: phone,
           businessName: businessName,
           city: city,
-          businessType: businessType
+          businessType: businessType,
+          pagePath,
+          pageUrl,
+          referrer,
+          attribution
         })
       }).catch(err => console.error('Webhook error:', err));
     }
@@ -83,7 +91,7 @@ export default async function handler(req, res) {
     // ============================================================
     if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
       try {
-        await appendToGoogleSheets(name, email, phone, businessName, city, businessType, timestamp);
+        await appendToGoogleSheets(lead);
       } catch (err) {
         console.error('Google Sheets append failed:', err);
       }
@@ -144,9 +152,10 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
   return await response.json();
 }
 
-async function appendToGoogleSheets(name, email, phone, businessName, city, businessType, timestamp) {
+async function appendToGoogleSheets(lead) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (!webhookUrl) return;
+  const { name, email, phone, businessName, city, businessType, pagePath, pageUrl, referrer, attribution, timestamp } = lead;
 
   const response = await fetch(webhookUrl, {
     method: 'POST',
@@ -162,7 +171,16 @@ async function appendToGoogleSheets(name, email, phone, businessName, city, busi
       source: 'inbound',
       segment: 'Inbound Leads',
       status: 'New',
-      notes: ''
+      page_path: pagePath || '',
+      page_url: pageUrl || '',
+      referrer: referrer || '',
+      utm_source: attribution?.utm_source || '',
+      utm_medium: attribution?.utm_medium || '',
+      utm_campaign: attribution?.utm_campaign || '',
+      utm_term: attribution?.utm_term || '',
+      utm_content: attribution?.utm_content || '',
+      gclid: attribution?.gclid || '',
+      notes: attribution ? JSON.stringify(attribution) : ''
     })
   });
 

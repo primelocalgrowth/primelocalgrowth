@@ -71,7 +71,8 @@ export async function sendEmail(config) {
  * Send notification to Adam about form submission
  */
 export async function notifyAdamOfLead(lead) {
-  const { name, email, phone, businessName, businessType, timestamp } = lead;
+  const { name, email, phone, businessName, businessType, pagePath, pageUrl, referrer, attribution = {}, timestamp } = lead;
+  const sourceLabel = attribution.utm_source || attribution.gclid || attribution.fbclid || referrer || 'direct / unknown';
 
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
@@ -84,6 +85,9 @@ export async function notifyAdamOfLead(lead) {
         <p><strong>Type:</strong> ${escapeHtml(businessType)}</p>
         <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
         <p><strong>Phone:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone) || 'N/A'}</a></p>
+        <p><strong>Source:</strong> ${escapeHtml(sourceLabel)}</p>
+        <p><strong>Landing/Page:</strong> ${escapeHtml(pagePath || pageUrl || 'N/A')}</p>
+        ${attribution.utm_campaign ? `<p><strong>Campaign:</strong> ${escapeHtml(attribution.utm_campaign)}</p>` : ''}
         <p><strong>Submitted:</strong> ${new Date(timestamp).toLocaleString()}</p>
         ${getEmailFooter()}
       </div>

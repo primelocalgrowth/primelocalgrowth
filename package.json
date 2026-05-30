@@ -1,7 +1,7 @@
 {
     "name": "primelocalgrowth",
     "version": "1.0.0",
-    "description": "Prime Local Growth - Get Found By Customers",
+    "description": "Prime Local Growth helps local service businesses get found on Google, stay visible, and win more local customers.",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -10,8 +10,9 @@
     },
     "keywords": [
         "local-business",
-        "marketing",
-        "seo"
+        "google-visibility",
+        "local-seo",
+        "google-business-profile"
     ],
     "author": "Prime Local Growth",
     "license": "ISC",

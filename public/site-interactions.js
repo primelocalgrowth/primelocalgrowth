@@ -2,7 +2,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 const navToggle = document.querySelector('[data-nav-toggle]');
 const navLinks = document.querySelector('[data-nav-links]');
-if (navToggle && navLinks) {
+if (navToggle && navLinks && !navToggle.dataset.navBound) {
+  navToggle.dataset.navBound = 'true';
   navToggle.addEventListener('click', () => {
     const open = navLinks.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', String(open));

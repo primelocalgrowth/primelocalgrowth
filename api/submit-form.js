@@ -17,6 +17,7 @@ export default async function handler(req, res) {
       businessName,
       city = '',
       businessType = 'local-service',
+      situation = '',
       pagePath = '',
       pageUrl = '',
       referrer = '',
@@ -35,7 +36,7 @@ export default async function handler(req, res) {
     }
 
     const timestamp = new Date().toISOString();
-    const lead = { name, email, phone, businessName, city, businessType, pagePath, pageUrl, referrer, attribution, timestamp };
+    const lead = { name, email, phone, businessName, city, businessType, situation, pagePath, pageUrl, referrer, attribution, timestamp };
 
   // ============================================================
     // 1. TRIGGER MASTER APPS SCRIPT WEBHOOK (FIRE & FORGET)
@@ -51,6 +52,7 @@ export default async function handler(req, res) {
           businessName: businessName,
           city: city,
           businessType: businessType,
+          situation,
           pagePath,
           pageUrl,
           referrer,
@@ -155,7 +157,7 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
 async function appendToGoogleSheets(lead) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (!webhookUrl) return;
-  const { name, email, phone, businessName, city, businessType, pagePath, pageUrl, referrer, attribution, timestamp } = lead;
+  const { name, email, phone, businessName, city, businessType, situation, pagePath, pageUrl, referrer, attribution, timestamp } = lead;
 
   const response = await fetch(webhookUrl, {
     method: 'POST',
@@ -168,6 +170,7 @@ async function appendToGoogleSheets(lead) {
       business_name: businessName,
       city: city || '',
       business_type: businessType,
+      situation: situation || '',
       source: 'inbound',
       segment: 'Inbound Leads',
       status: 'New',
@@ -180,7 +183,7 @@ async function appendToGoogleSheets(lead) {
       utm_term: attribution?.utm_term || '',
       utm_content: attribution?.utm_content || '',
       gclid: attribution?.gclid || '',
-      notes: attribution ? JSON.stringify(attribution) : ''
+      notes: [situation, attribution ? JSON.stringify(attribution) : ''].filter(Boolean).join('\n\n')
     })
   });
 

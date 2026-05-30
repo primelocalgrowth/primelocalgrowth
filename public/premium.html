@@ -843,6 +843,10 @@
         <input type="text" id="apply-name" name="businessName" placeholder="e.g., Austin Family Dental" autocomplete="organization" required>
       </div>
       <div class="apply-group">
+        <label for="apply-contact">Your name</label>
+        <input type="text" id="apply-contact" name="name" placeholder="e.g., Jordan Smith" autocomplete="name" required>
+      </div>
+      <div class="apply-group">
         <label for="apply-city">City &amp; state</label>
         <input type="text" id="apply-city" name="city" placeholder="e.g., Austin, TX" required>
       </div>
@@ -896,10 +900,16 @@
       applyMsg.className = 'apply-msg';
       applyMsg.textContent = '';
       const data = {
+        name:         applyForm.name.value.trim(),
         businessName: applyForm.businessName.value.trim(),
         city:         applyForm.city.value.trim(),
         email:        applyForm.email.value.trim(),
         situation:    applyForm.situation.value.trim(),
+        businessType: 'premium-application',
+        pagePath:     window.location.pathname,
+        pageUrl:      window.location.href,
+        referrer:     document.referrer || '',
+        attribution:  typeof window.plgGetAttribution === 'function' ? window.plgGetAttribution() : {},
         source:       'premium-page'
       };
       try {

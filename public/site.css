@@ -486,13 +486,55 @@ h3 {
   padding: 20px;
 }
 .result-kpi {
-  font-size: 34px;
+  font-size: 30px;
   line-height: 1;
   font-weight: 900;
   letter-spacing: -0.05em;
   color: var(--blue-dark);
 }
 .result-card p { margin: 10px 0 0; color: var(--muted); font-weight: 700; }
+.proof-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  margin-top: 34px;
+}
+.proof-image-card {
+  margin: 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+}
+.proof-image-card.featured {
+  grid-row: span 2;
+}
+.proof-image-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.proof-image-card figcaption {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.proof-image-card figcaption strong {
+  color: var(--ink);
+  font-size: 16px;
+}
+.review-proof-note {
+  margin-top: 22px;
+  padding: 16px 18px;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  background: #eff6ff;
+  color: #1e3a8a;
+  font-weight: 750;
+}
 .audit-check-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -648,6 +690,25 @@ input:focus, textarea:focus, select:focus {
   color: var(--muted);
   font-size: 13px;
 }
+.form-trust {
+  margin: 18px 0 0;
+  padding: 14px;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  background: #eff6ff;
+}
+.form-trust h3 {
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+.form-trust ol {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--ink-2);
+  font-size: 14px;
+  font-weight: 650;
+}
+.form-trust li + li { margin-top: 6px; }
 .form-feedback {
   margin-top: 14px;
   font-weight: 800;
@@ -760,9 +821,11 @@ input:focus, textarea:focus, select:focus {
   .cta-band,
   .results-grid,
   .audit-check-grid,
+  .proof-gallery,
   .score-tool {
     grid-template-columns: 1fr;
   }
+  .proof-image-card.featured { grid-row: auto; }
   .system-flow::before { display: none; }
   .nav-toggle {
     display: inline-flex;

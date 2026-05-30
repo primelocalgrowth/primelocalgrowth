@@ -1,349 +1,89 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You | Prime Local Growth</title>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWC3DC78Y8"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NWC3DC78Y8');</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #0f172a;
-      --bg2: #1e2a3a;
-      --sky: #0ea5e9;
-      --sky-dark: #0284c7;
-      --text: #f8fafc;
-      --body: #cbd5e1;
-      --muted: #94a3b8;
-      --faint: #8899b0;
-      --radius: 8px;
-      --radius-lg: 12px;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 0 40px;
-    }
-
-    /* NAV */
-    .nav {
-      width: 100%;
-      background: rgba(15,23,42,0.95);
-      border-bottom: 1px solid rgba(14,165,233,0.12);
-      padding: 16px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(8px);
-      margin-bottom: 40px;
-    }
-    .nav-brand { text-decoration: none; display: flex; align-items: center; }
-    .nav-home { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .nav-home:hover { color: var(--sky); }
-    @media (max-width: 640px) { .nav { padding: 14px 20px; } }
-
-    .container {
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-      background: rgba(30,42,58,0.6);
-      padding: 60px 40px;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(14,165,233,0.2);
-      animation: slideUp 0.7s cubic-bezier(0.22,1,0.36,1);
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .checkmark {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 28px;
-      background: var(--sky);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 32px rgba(14,165,233,0.35);
-    }
-    .checkmark svg { color: #000; }
-
-    h1 {
-      font-size: 34px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 14px;
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.2;
-    }
-
-    .subtitle {
-      font-size: 17px;
-      color: var(--body);
-      margin-bottom: 28px;
-      line-height: 1.65;
-    }
-
-    .next-steps {
-      background: rgba(14,165,233,0.07);
-      border-left: 3px solid var(--sky);
-      padding: 24px;
-      border-radius: var(--radius);
-      margin: 36px 0;
-      text-align: left;
-    }
-
-    .next-steps h3 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--sky);
-      margin-bottom: 14px;
-    }
-
-    .next-steps ol {
-      margin-left: 18px;
-      color: var(--body);
-      line-height: 1.8;
-    }
-
-    .next-steps li {
-      margin-bottom: 9px;
-    }
-
-    .next-steps strong {
-      color: var(--text);
-    }
-
-    .cta-button {
-      display: inline-block;
-      background: var(--sky);
-      color: #000;
-      padding: 14px 36px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 15px;
-      margin-top: 20px;
-      transition: background 0.2s, transform 0.15s;
-      border: none;
-      cursor: pointer;
-    }
-
-    .cta-button:hover {
-      background: var(--sky-dark);
-      transform: translateY(-1px);
-    }
-
-    .contact-info {
-      margin-top: 36px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(14,165,233,0.15);
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .contact-info a {
-      color: var(--sky);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
-
-    .blueprint-upsell {
-      margin: 36px 0 0;
-      background: linear-gradient(135deg, rgba(14,165,233,0.08), rgba(14,165,233,0.02));
-      border: 1px solid rgba(14,165,233,0.25);
-      border-radius: var(--radius-lg);
-      padding: 28px 28px 24px;
-      text-align: left;
-    }
-    .upsell-tag {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--sky);
-      background: rgba(14,165,233,0.1);
-      border: 1px solid rgba(14,165,233,0.25);
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 12px;
-    }
-    .blueprint-upsell h3 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.35;
-    }
-    .blueprint-upsell p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-    .upsell-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-    .upsell-pill {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--body);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 4px 12px;
-      border-radius: 20px;
-    }
-    .upsell-btn {
-      display: block;
-      text-align: center;
-      background: var(--sky);
-      color: #000;
-      padding: 13px 24px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 15px;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .upsell-btn:hover { background: var(--sky-dark); transform: translateY(-1px); }
-    .upsell-note {
-      text-align: center;
-      font-size: 12px;
-      color: var(--faint);
-      margin-top: 10px;
-    }
-
-    @media (max-width: 640px) {
-      .container {
-        padding: 36px 20px;
-      }
-
-      h1 {
-        font-size: 26px;
-      }
-
-      .subtitle {
-        font-size: 16px;
-      }
-    }
-  </style>
+  <title>Audit Request Received | Prime Local Growth</title>
+  <meta name="description" content="Your Prime Local Growth visibility audit request has been received. Here is what happens next.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://www.primelocalgrowth.com/thank-you">
+  <meta property="og:title" content="Audit Request Received | Prime Local Growth">
+  <meta property="og:description" content="Your free local visibility audit request has been received.">
+  <meta property="og:url" content="https://www.primelocalgrowth.com/thank-you">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/site.css">
   <script defer src="/site-analytics.js"></script>
 </head>
 <body>
-  <!-- NAV -->
-  <nav class="nav">
-    <a href="/" class="nav-brand" aria-label="Prime Local Growth "” Home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 52" height="32" role="img" aria-hidden="true">
-        <circle cx="26" cy="26" r="5" fill="#1B3A6B"/>
-        <line x1="26" y1="26" x2="10" y2="10" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="10" cy="10" r="4" fill="#1B3A6B"/>
-        <line x1="26" y1="26" x2="42" y2="10" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="42" cy="10" r="4" fill="#5B9BD5"/>
-        <line x1="26" y1="26" x2="48" y2="26" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="48" cy="26" r="4" fill="#1B3A6B"/>
-        <line x1="26" y1="26" x2="42" y2="42" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="42" cy="42" r="4" fill="#1B3A6B"/>
-        <line x1="26" y1="26" x2="10" y2="42" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="10" cy="42" r="4" fill="#1B3A6B"/>
-        <line x1="26" y1="26" x2="4" y2="26" stroke="#1B3A6B" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="4" cy="26" r="4" fill="#1B3A6B"/>
-        <text x="62" y="24" font-family="Poppins,sans-serif" font-weight="700" font-size="17" fill="#f8fafc" letter-spacing="1.5">PRIME</text>
-        <text x="63" y="38" font-family="Poppins,sans-serif" font-weight="500" font-size="9" fill="#5B9BD5" letter-spacing="2.8">LOCAL GROWTH</text>
-      </svg>
-    </a>
-    <a href="/" class="nav-home">→ Back to home</a>
-  </nav>
-
-  <div class="container">
-    <div class="checkmark">
-      <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-      </svg>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="Prime Local Growth home">
+        <img src="/assets/plg-logo.png" alt="" width="38" height="38">
+        <span>Prime Local Growth <small>The Google Visibility Company</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/services">Services</a>
+        <a href="/the-system">The System</a>
+        <a href="/contact">Contact</a>
+      </nav>
     </div>
+  </header>
 
-    <h1>Got it! We're on it.</h1>
-
-    <p class="subtitle">
-      Your information has been received. Adam will be in touch within the next 24 hours.
-    </p>
-
-    <div class="next-steps">
-      <h3>Here's what happens next:</h3>
-      <ol>
-        <li><strong>Check your inbox</strong> "” Your Local Visibility Jumpstart Kit is on its way now</li>
-        <li><strong>Read the kit</strong> "” 5 tools you can use immediately to start getting found on Google</li>
-        <li><strong>Reply with your situation</strong> "” Hit reply on any email and tell us what's not working. Adam responds personally.</li>
-        <li><strong>Get a custom plan</strong> "” Based on your business, we'll put together exactly what you need to rank locally.</li>
-      </ol>
-    </div>
-
-    <p style="color: #cbd5e1; font-size: 16px; margin: 30px 0;">
-      In the meantime, here's a quick win: <strong>Make sure your Google Business Profile is complete</strong> "” name, address, phone, hours, and at least 5 photos. It's the single biggest factor in local Google ranking.
-    </p>
-
-    <a href="/" class="cta-button">Back to Home</a>
-
-    <!-- GBP ACCESS INFOGRAPHIC -->
-    <div style="margin:40px 0;text-align:left;">
-      <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0ea5e9;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);padding:4px 12px;border-radius:20px;margin-bottom:16px;">While you wait "” do this one thing</div>
-      <p style="color:#cbd5e1;font-size:15px;line-height:1.7;margin-bottom:18px;">Once we connect, granting manager access takes 60 seconds. Here's exactly how "” no technical knowledge needed:</p>
-      <img src="/gbp-manager-access.png" alt="How to add Prime Local Growth as a manager on your Google Business Profile" style="width:100%;border-radius:10px;border:1px solid rgba(14,165,233,0.2);">
-      <a href="mailto:adam@primelocalgrowth.com?subject=Access%20Granted%20-%20Ready%20to%20Start" style="display:block;text-align:center;margin-top:16px;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);color:#0ea5e9;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">✉ Email me once you've added access →’ adam@primelocalgrowth.com</a>
-    </div>
-
-    <!-- LOCAL DOMINATION UPSELL -->
-    <div class="blueprint-upsell">
-      <div class="upsell-tag">While you wait</div>
-      <h3>Want to dominate Google yourself "” in 30 days?</h3>
-      <p>The Local Domination System is the exact framework we use with paying clients "” packaged so you can do it yourself. One payment, no monthly fees.</p>
-      <div class="upsell-pills">
-        <span class="upsell-pill">✓ 4-week Google listing roadmap</span>
-        <span class="upsell-pill">✓ Review generation system</span>
-        <span class="upsell-pill">✓ Photo strategy</span>
-        <span class="upsell-pill">✓ Citation cleanup guide</span>
-        <span class="upsell-pill">✓ Email support from Adam</span>
+  <main>
+    <section class="page-hero">
+      <div class="wrap grid grid-2" style="align-items:center;">
+        <div>
+          <p class="eyebrow">Request received</p>
+          <h1>Your free visibility audit is in the queue.</h1>
+          <p class="lead">Adam will review your Google visibility, local trust signals, website call clarity, and competitor gaps. You will get a plain-language breakdown of what to fix first.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/">Back to Home</a>
+            <a class="btn btn-secondary" href="/the-system">See The System</a>
+          </div>
+        </div>
+        <div class="form-card">
+          <h2 style="font-size:30px;">What happens next</h2>
+          <ul class="check-list">
+            <li>Check your inbox for confirmation.</li>
+            <li>Your business is reviewed against local Google visibility signals.</li>
+            <li>You get a simple priority list, not a confusing SEO report.</li>
+            <li>Reply with any competitors or locations you want included.</li>
+          </ul>
+          <p class="form-note">Questions? Email <a href="mailto:adam@primelocalgrowth.com">adam@primelocalgrowth.com</a>.</p>
+        </div>
       </div>
-      <a href="/local-domination" class="upsell-btn">See the Local Domination System "” $397 →’</a>
-      <p class="upsell-note">30-day money-back guarantee · One time · No calls required</p>
-    </div>
+    </section>
 
-    <div class="contact-info">
-      <p>Questions? Just reply to your email or reach out directly:</p>
-      <p><a href="mailto:adam@primelocalgrowth.com">adam@primelocalgrowth.com</a></p>
+    <section class="section alt">
+      <div class="wrap grid grid-2" style="align-items:center;">
+        <figure class="proof-image-card">
+          <img src="/assets/proof-visibility-audit-dashboard.webp" alt="Illustrative visibility audit dashboard" loading="lazy" width="1400" height="900">
+          <figcaption><strong>Your audit should be easy to understand.</strong><span>We look for profile gaps, review signals, map visibility, website trust, and competitor opportunities.</span></figcaption>
+        </figure>
+        <div>
+          <p class="eyebrow">Helpful while you wait</p>
+          <h2>Want a stronger audit? Send your best local competitors.</h2>
+          <p class="sub">The most useful visibility reviews compare your business against the companies customers already see first.</p>
+          <p class="lead" style="font-size:18px;">Reply to the confirmation email with two or three competitors, your top service areas, and any Google reviews you want highlighted as trust proof.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Prime Local Growth</strong>
+        <p>Local visibility systems for service businesses.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/services">Services</a>
+        <a href="/free-visibility-audit">Free Audit</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+      </nav>
     </div>
-  </div>
+  </footer>
 </body>
 </html>

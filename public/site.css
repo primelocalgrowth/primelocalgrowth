@@ -495,9 +495,12 @@ h3 {
 .result-card p { margin: 10px 0 0; color: var(--muted); font-weight: 700; }
 .proof-gallery {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-  gap: 18px;
+  grid-template-columns: 1fr;
+  gap: 22px;
   margin-top: 34px;
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .proof-image-card {
   margin: 0;
@@ -507,13 +510,12 @@ h3 {
   overflow: hidden;
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
 }
-.proof-image-card.featured {
-  grid-row: span 2;
-}
 .proof-image-card img {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #f8fafc;
 }
 .proof-image-card figcaption {
   display: grid;
@@ -875,7 +877,6 @@ input:focus, textarea:focus, select:focus {
   .score-tool {
     grid-template-columns: 1fr;
   }
-  .proof-image-card.featured { grid-row: auto; }
   .review-cards { grid-template-columns: 1fr; }
   .system-flow::before { display: none; }
   .nav-toggle {

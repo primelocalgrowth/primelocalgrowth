@@ -7,7 +7,7 @@
   <meta name="description" content="Prime Local Growth helps local service businesses get found on Google, improve local visibility, grow reviews, and win more customers.">
   <link rel="canonical" href="https://www.primelocalgrowth.com/">
   <meta property="og:title" content="Prime Local Growth | Get Found on Google Locally">
-  <meta property="og:description" content="Get found on Google, stay visible, and win more local customers with a visibility system built for local service businesses.">
+  <meta property="og:description" content="The Google visibility company for local businesses in Texas. Get found, stay visible, and win more local customers.">
   <meta property="og:url" content="https://www.primelocalgrowth.com/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.primelocalgrowth.com/og-image.svg">
@@ -21,22 +21,37 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Prime Local Growth",
-    "url": "https://www.primelocalgrowth.com/",
-    "telephone": "+12106461436",
-    "email": "adam@primelocalgrowth.com",
-    "description": "Local visibility systems for service businesses that need to get found on Google, grow reviews, and win more local customers.",
-    "areaServed": [
-      {"@type":"City","name":"Cibolo"},
-      {"@type":"City","name":"Schertz"},
-      {"@type":"City","name":"Universal City"},
-      {"@type":"City","name":"New Braunfels"},
-      {"@type":"City","name":"San Antonio"}
-    ],
-    "priceRange": "$$",
-    "founder": {"@type":"Person","name":"Adam Rome"},
-    "sameAs": ["https://www.primelocalgrowth.com/services"]
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://www.primelocalgrowth.com/#business",
+        "name": "Prime Local Growth",
+        "url": "https://www.primelocalgrowth.com/",
+        "telephone": "+12106461436",
+        "email": "adam@primelocalgrowth.com",
+        "description": "The Google visibility company for local businesses.",
+        "areaServed": ["Cibolo","Schertz","Universal City","Selma","Live Oak","New Braunfels","San Antonio"],
+        "priceRange": "$$"
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://www.primelocalgrowth.com/#service",
+        "name": "Prime Local Growth",
+        "url": "https://www.primelocalgrowth.com/",
+        "provider": {"@id": "https://www.primelocalgrowth.com/#business"},
+        "serviceType": ["Google Business Profile optimization","Local SEO","Review growth","Local visibility audits"]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.primelocalgrowth.com/#faq",
+        "mainEntity": [
+          {"@type":"Question","name":"How long does local SEO take?","acceptedAnswer":{"@type":"Answer","text":"Most local visibility improvements begin with profile, review, website, and citation fixes. Competitive ranking movement often takes 30 to 90 days depending on the market."}},
+          {"@type":"Question","name":"Can I rank without ads?","acceptedAnswer":{"@type":"Answer","text":"Yes. Local visibility depends on relevance, trust, proximity, profile quality, reviews, website signals, and local authority. Ads can help, but they are not required to improve organic visibility."}},
+          {"@type":"Question","name":"Why am I not showing up on Google?","acceptedAnswer":{"@type":"Answer","text":"Common causes include a weak Google Business Profile, inconsistent business information, low review activity, thin website trust signals, and competitors with stronger local authority."}},
+          {"@type":"Question","name":"What makes Prime Local Growth different?","acceptedAnswer":{"@type":"Answer","text":"Prime Local Growth focuses on local Google visibility systems, not random marketing services. The work is built around helping local businesses get found, stay visible, and win more local customers."}}
+        ]
+      }
+    ]
   }
   </script>
 </head>
@@ -46,7 +61,7 @@
     <div class="nav-inner">
       <a class="brand" href="/" aria-label="Prime Local Growth home">
         <img src="/assets/plg-logo.png" alt="" width="38" height="38">
-        <span>Prime Local Growth <small>Local visibility systems</small></span>
+        <span>Prime Local Growth <small>The Google Visibility Company</small></span>
       </a>
       <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" data-nav-toggle>Menu</button>
       <nav class="nav-links" data-nav-links aria-label="Primary navigation">
@@ -64,38 +79,36 @@
     <section class="hero">
       <div class="hero-inner">
         <div>
-          <p class="eyebrow">Local Google visibility for service businesses</p>
-          <h1>Get Found. Stay Visible. Win More Local Customers.</h1>
+          <p class="eyebrow">The Google Visibility Company for Local Businesses</p>
+          <h1>Get Found on Google. Stay Visible. Win More Local Customers.</h1>
           <p class="lead">Prime Local Growth helps local businesses improve visibility on Google so more customers can find, trust, and choose your business.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="/free-visibility-audit">Get Your Free Visibility Audit</a>
             <a class="btn btn-secondary" href="#system">See How It Works</a>
           </div>
-          <p class="trust-line">Built for local service businesses that need more visibility, more calls, and stronger local authority.</p>
+          <p class="trust-line">Trusted local visibility strategies for service businesses in Texas.</p>
           <div class="local-strip" aria-label="Service areas">
-            <span class="pill">Cibolo</span>
-            <span class="pill">Schertz</span>
-            <span class="pill">Universal City</span>
-            <span class="pill">New Braunfels</span>
-            <span class="pill">San Antonio</span>
+            <span class="pill">Cibolo</span><span class="pill">Schertz</span><span class="pill">Universal City</span><span class="pill">Selma</span><span class="pill">Live Oak</span><span class="pill">New Braunfels</span><span class="pill">San Antonio</span>
           </div>
         </div>
 
-        <aside class="audit-preview" aria-label="Visibility audit preview">
+        <aside class="audit-preview" aria-label="Google visibility mockup">
           <div class="audit-head">
             <div>
-              <p class="eyebrow">Audit preview</p>
-              <h2 style="font-size:28px;">Where calls are leaking</h2>
-              <p class="sub">A clear look at the visibility gaps costing you customers.</p>
+              <p class="eyebrow">Visibility snapshot</p>
+              <h2 style="font-size:28px;">Local map ranking view</h2>
+              <p class="sub">See where customers find you and where competitors are winning.</p>
             </div>
             <div class="audit-score">62%</div>
           </div>
-          <ul class="audit-list">
-            <li>Google profile completeness <span class="status warn">Needs work</span></li>
-            <li>Review growth <span class="status warn">Behind competitors</span></li>
-            <li>Business info consistency <span class="status warn">Mixed signals</span></li>
-            <li>Website trust signals <span class="status good">Fixable fast</span></li>
-          </ul>
+          <div class="map-mock" aria-hidden="true">
+            <div class="map-grid">
+              <span class="map-pin one">Cibolo</span>
+              <span class="map-pin two">Schertz</span>
+              <span class="map-pin three">San Antonio</span>
+            </div>
+            <div class="rank-card"><span class="rank-num">3</span><span>HVAC near me</span><span class="rank-change">+4 spots</span></div>
+          </div>
           <p class="proof-note">If customers cannot find you on Google, they are calling the competitors who show up first.</p>
         </aside>
       </div>
@@ -104,19 +117,18 @@
     <section class="section alt" id="problem">
       <div class="wrap">
         <div class="narrow">
-          <p class="eyebrow">The local visibility problem</p>
-          <h2>Your business may be great. But if customers cannot find you, they will not call you.</h2>
-          <p class="sub">Most local businesses do not have a quality problem. They have a visibility problem.</p>
+          <p class="eyebrow">Great business. Wrong visibility.</p>
+          <h2>If customers cannot find you online, they are calling the competitor they see first.</h2>
         </div>
         <div class="problem-list">
-          <div class="problem-item">Your Google Business Profile is incomplete or outdated</div>
-          <div class="problem-item">Your business information is inconsistent online</div>
-          <div class="problem-item">Competitors show up before you</div>
-          <div class="problem-item">You are not getting enough Google reviews</div>
-          <div class="problem-item">Your website does not turn visitors into calls</div>
-          <div class="problem-item">You rely too much on referrals</div>
+          <div class="problem-item">Your Google Business Profile is weak or incomplete</div>
+          <div class="problem-item">Business information is inconsistent online</div>
+          <div class="problem-item">Competitors outrank you locally</div>
+          <div class="problem-item">You are not generating enough reviews</div>
+          <div class="problem-item">Your website is not converting visitors into calls</div>
+          <div class="problem-item">You rely too heavily on referrals</div>
         </div>
-        <p class="lead narrow" style="text-align:center;">We fix the visibility gaps that cause local businesses to get overlooked.</p>
+        <p class="lead narrow" style="text-align:center;">Visibility problems cost real customers.</p>
       </div>
     </section>
 
@@ -124,52 +136,102 @@
       <div class="wrap">
         <div class="narrow" style="text-align:center;">
           <p class="eyebrow">The Prime Local Growth System</p>
-          <h2>Build visibility. Maintain visibility. Dominate locally.</h2>
-          <p class="sub">A simple system for getting found on Google, staying visible, and becoming the obvious local choice.</p>
+          <h2>The website sells the system. The system wins the market.</h2>
+          <p class="sub">A clear path from hidden online to visible, trusted, and chosen.</p>
         </div>
-        <div class="grid grid-3" style="margin-top:34px;">
+        <div class="grid grid-3 system-flow" style="margin-top:34px;">
           <article class="card highlight">
-            <div class="system-number">1</div>
+            <div class="stage-icon">1</div>
             <span class="tag">Build Visibility</span>
             <h3>Get Found on Google</h3>
-            <p>We build the foundation so local customers can find and trust your business.</p>
+            <p>We build the foundation so customers can find and trust your business.</p>
             <ul class="check-list">
               <li>Google Business Profile optimization</li>
-              <li>Accurate business information across the web</li>
-              <li>Local SEO foundation</li>
-              <li>Review setup</li>
-              <li>Website trust fixes</li>
-              <li>Service-area optimization</li>
+              <li>Accurate business information online</li>
+              <li>Local SEO setup</li>
+              <li>Website trust improvements</li>
+              <li>Service area optimization</li>
+              <li>Review foundation</li>
             </ul>
+            <div class="outcome">Outcome: More opportunities to be found.</div>
+            <p><a class="service-link" href="/free-visibility-audit">Build My Visibility</a></p>
           </article>
           <article class="card">
-            <div class="system-number">2</div>
+            <div class="stage-icon">2</div>
             <span class="tag">Maintain Visibility</span>
             <h3>Stay Visible</h3>
-            <p>We protect and strengthen your visibility so competitors do not take your spot.</p>
+            <p>We strengthen and protect your visibility so competitors do not take your spot.</p>
             <ul class="check-list">
-              <li>Ongoing Google profile updates</li>
+              <li>Google profile management</li>
               <li>Review growth</li>
-              <li>Ranking monitoring</li>
+              <li>Visibility monitoring</li>
               <li>Competitor tracking</li>
               <li>Reputation management</li>
-              <li>Local SEO upkeep</li>
+              <li>Ongoing local SEO</li>
             </ul>
+            <div class="outcome">Outcome: Consistent visibility that keeps customers coming.</div>
+            <p><a class="service-link" href="/free-visibility-audit">Maintain My Visibility</a></p>
           </article>
           <article class="card">
-            <div class="system-number">3</div>
+            <div class="stage-icon">3</div>
             <span class="tag">Dominate Locally</span>
             <h3>Win More Local Customers</h3>
             <p>We expand your visibility so your business becomes the obvious local choice.</p>
             <ul class="check-list">
               <li>Service-area expansion</li>
-              <li>Competitor outranking strategy</li>
-              <li>Local authority building</li>
+              <li>Competitor outranking</li>
+              <li>Authority growth</li>
               <li>Review acceleration</li>
-              <li>Conversion improvements</li>
-              <li>Strategic growth opportunities</li>
+              <li>Conversion optimization</li>
+              <li>Local growth strategy</li>
             </ul>
+            <div class="outcome">Outcome: More market share and stronger local authority.</div>
+            <p><a class="service-link" href="/free-visibility-audit">Dominate My Market</a></p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="difference">
+      <div class="wrap">
+        <div class="narrow" style="text-align:center;">
+          <p class="eyebrow">Why Prime Local Growth?</p>
+          <h2>Simpler. More focused. Built for local visibility.</h2>
+        </div>
+        <table class="compare-table" style="margin-top:30px;">
+          <thead><tr><th>Category</th><th>Prime Local Growth</th><th>Typical Agency</th></tr></thead>
+          <tbody>
+            <tr><td>Focus</td><td>Google visibility</td><td>Random marketing services</td></tr>
+            <tr><td>Communication</td><td>Plain English</td><td>Jargon</td></tr>
+            <tr><td>Strategy</td><td>Local visibility systems</td><td>Scattered tactics</td></tr>
+            <tr><td>Reporting</td><td>Measurable visibility progress</td><td>Vanity metrics</td></tr>
+            <tr><td>Contracts</td><td>Results-focused</td><td>Long-term lock-ins</td></tr>
+          </tbody>
+        </table>
+        <p class="lead narrow" style="text-align:center;">We focus on helping local businesses get found where customers are already searching.</p>
+      </div>
+    </section>
+
+    <section class="section" id="proof">
+      <div class="wrap">
+        <div class="narrow" style="text-align:center;">
+          <p class="eyebrow">Real visibility results</p>
+          <h2>Proof looks like more visibility, more trust, and more calls.</h2>
+          <p class="sub">Your audit shows the gaps. The system fixes them in order.</p>
+        </div>
+        <div class="results-grid">
+          <div class="result-card"><div class="result-kpi">+4</div><p>ranking positions found in a local map opportunity</p></div>
+          <div class="result-card"><div class="result-kpi">30</div><p>days of Google profile improvement priorities</p></div>
+          <div class="result-card"><div class="result-kpi">5</div><p>trust gaps checked before customers call</p></div>
+          <div class="result-card"><div class="result-kpi">7</div><p>visibility gaps surfaced in a typical audit</p></div>
+        </div>
+        <h3 style="margin-top:34px;">What We Look For In A Visibility Audit</h3>
+        <div class="audit-check-grid">
+          <div class="audit-check">Missing rankings</div>
+          <div class="audit-check">Weak Google profile</div>
+          <div class="audit-check">Competitor gaps</div>
+          <div class="audit-check">Trust issues</div>
+          <div class="audit-check">Missed local opportunities</div>
         </div>
       </div>
     </section>
@@ -178,36 +240,15 @@
       <div class="wrap">
         <div class="narrow">
           <p class="eyebrow">What we help with</p>
-          <h2>Focused local visibility services. No random marketing noise.</h2>
+          <h2>Focused services that support the visibility system.</h2>
         </div>
         <div class="grid grid-3" style="margin-top:30px;">
-          <article class="card">
-            <h3>Google Business Profile Optimization</h3>
-            <p>Fix the profile customers see first when they search locally.</p>
-            <p><a class="service-link" href="/google-business-profile-optimization">View service</a></p>
-          </article>
-          <article class="card">
-            <h3>Local SEO</h3>
-            <p>Build the local search foundation that helps Google understand where and when to show you.</p>
-            <p><a class="service-link" href="/local-seo">View service</a></p>
-          </article>
-          <article class="card">
-            <h3>Review Growth</h3>
-            <p>Get more steady, trustworthy reviews from real customers.</p>
-            <p><a class="service-link" href="/review-growth">View service</a></p>
-          </article>
-          <article class="card">
-            <h3>Reputation Management</h3>
-            <p>Respond well, protect trust, and stop weak reviews from defining your business.</p>
-          </article>
-          <article class="card">
-            <h3>Website Conversion Fixes</h3>
-            <p>Make your website easier to trust, understand, and contact from mobile.</p>
-          </article>
-          <article class="card">
-            <h3>Local Visibility Audits</h3>
-            <p>See where you show up, where you are missing, and what to fix first.</p>
-          </article>
+          <article class="card"><h3>Google Business Profile Optimization</h3><p>Fix the profile customers see first.</p><p><a class="service-link" href="/google-business-profile-optimization">View service</a></p></article>
+          <article class="card"><h3>Local SEO</h3><p>Build the search foundation for nearby customers.</p><p><a class="service-link" href="/local-seo">View service</a></p></article>
+          <article class="card"><h3>Review Growth</h3><p>Earn more recent trust from real customers.</p><p><a class="service-link" href="/review-growth">View service</a></p></article>
+          <article class="card"><h3>Reputation Management</h3><p>Protect trust and respond clearly.</p></article>
+          <article class="card"><h3>Website Conversion Fixes</h3><p>Turn visitors into calls from mobile.</p></article>
+          <article class="card"><h3>Local Visibility Audits</h3><p>Find what to fix first.</p></article>
         </div>
       </div>
     </section>
@@ -215,38 +256,67 @@
     <section class="section">
       <div class="wrap grid grid-2" style="align-items:center;">
         <div>
-          <p class="eyebrow">Built for local service businesses</p>
-          <h2>If customers search locally before they buy, visibility matters.</h2>
-          <p class="sub">Prime Local Growth is built for service businesses in Cibolo, Schertz, Universal City, New Braunfels, San Antonio, and nearby service areas.</p>
+          <p class="eyebrow">Built For Local Service Businesses</p>
+          <h2>If local customers search before they buy, visibility matters.</h2>
+          <p class="sub">Built for businesses competing in the San Antonio metro and nearby service areas.</p>
         </div>
-        <div class="industry-list" aria-label="Business types">
-          <span>Barbershops</span>
-          <span>HVAC companies</span>
-          <span>Plumbers</span>
-          <span>Roofers</span>
-          <span>Contractors</span>
-          <span>Med spas</span>
-          <span>Home service businesses</span>
-          <span>Local professional services</span>
+        <div class="industry-list">
+          <span>Barbershops</span><span>HVAC</span><span>Plumbers</span><span>Roofers</span><span>Contractors</span><span>Med Spas</span><span>Local Professional Services</span>
         </div>
       </div>
     </section>
 
-    <section class="section alt">
-      <div class="wrap grid grid-2" style="align-items:center;">
-        <div>
-          <p class="eyebrow">Why Prime Local Growth?</p>
-          <h2>We focus on Google visibility, not marketing clutter.</h2>
-          <p class="sub">You get plain-language work that makes your business easier to find and trust.</p>
+    <section class="section alt" id="score">
+      <div class="wrap">
+        <div class="score-tool">
+          <div>
+            <p class="eyebrow" style="color:#7dd3fc;">Free Visibility Score Tool</p>
+            <h2>See how many visibility gaps may be costing you calls.</h2>
+            <p class="sub">Enter a few details and we will flag the first issues to review. For a deeper look, request the free 5-minute visibility breakdown.</p>
+            <div class="score-result" data-score-result>We found 7 visibility gaps worth checking first: profile completeness, reviews, citations, service areas, competitor position, website trust, and conversion clarity.</div>
+          </div>
+          <form data-score-form class="form-card">
+            <div class="form-grid">
+              <div class="field"><label for="score-business">Business name</label><input id="score-business" required></div>
+              <div class="field"><label for="score-website">Website</label><input id="score-website" placeholder="https://"></div>
+              <div class="field"><label for="score-city">City</label><input id="score-city" required></div>
+              <div class="field"><label for="score-phone">Phone</label><input id="score-phone" type="tel"></div>
+              <div class="field full"><label for="score-competitors">Top competitors</label><input id="score-competitors" placeholder="Who shows up before you?"></div>
+            </div>
+            <button class="btn btn-primary btn-block" style="margin-top:16px;" type="submit">Check My Visibility Score</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid grid-2">
+        <div class="card highlight">
+          <p class="eyebrow">Visibility Blueprint</p>
+          <h2 style="font-size:32px;">The Local Visibility Blueprint</h2>
+          <p>A simple guide showing how local businesses get found on Google, build trust, and stop losing calls to competitors who show up first.</p>
+          <p><a class="btn btn-secondary" href="/playbooks">Get The Blueprint</a></p>
         </div>
         <div class="card">
-          <ul class="check-list" style="margin-top:0;">
-            <li>We focus on Google visibility, not random marketing noise</li>
-            <li>We make your business easier to find and trust</li>
-            <li>We explain work in plain language</li>
-            <li>We build systems, not one-off tactics</li>
-            <li>We help local businesses compete against bigger, louder competitors</li>
-          </ul>
+          <p class="eyebrow">Video audit option</p>
+          <h2 style="font-size:32px;">Get a Free 5-Minute Visibility Breakdown</h2>
+          <p>Prefer a quick video walkthrough? Request a short visibility breakdown showing what to fix first.</p>
+          <p><a class="btn btn-primary" href="/free-visibility-audit">Request My Breakdown</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="faq">
+      <div class="wrap narrow">
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions local business owners ask first.</h2>
+        <div class="faq-list">
+          <article class="faq-item"><h3>How long does local SEO take?</h3><p>Initial visibility fixes can happen quickly, but competitive ranking movement usually builds over 30 to 90 days.</p></article>
+          <article class="faq-item"><h3>Can I rank without ads?</h3><p>Yes. Ads are optional. Organic local visibility depends on profile quality, reviews, website trust, location signals, and authority.</p></article>
+          <article class="faq-item"><h3>Why am I not showing up on Google?</h3><p>Common reasons include a weak Google profile, inconsistent business information, not enough reviews, and competitors with stronger local signals.</p></article>
+          <article class="faq-item"><h3>Do I need a website?</h3><p>A strong Google profile can drive calls, but a trustworthy website helps customers choose you once they click.</p></article>
+          <article class="faq-item"><h3>How do reviews affect rankings?</h3><p>Reviews help customers trust you and give Google signals about activity, relevance, and reputation.</p></article>
+          <article class="faq-item"><h3>What makes Prime Local Growth different?</h3><p>We focus on local Google visibility systems, not broad marketing packages or confusing SEO jargon.</p></article>
         </div>
       </div>
     </section>
@@ -265,19 +335,18 @@
     </section>
   </main>
 
+  <a class="btn btn-primary sticky-audit" href="/free-visibility-audit">Get Free Visibility Audit</a>
+
   <footer class="footer">
     <div class="footer-inner">
       <div>
         <strong>Prime Local Growth</strong>
-        <p>Local visibility systems for service businesses in Cibolo, Schertz, Universal City, New Braunfels, and San Antonio.</p>
+        <p>Local visibility systems for service businesses.</p>
+        <p class="footer-cities">Cities served: Cibolo, Schertz, Universal City, Selma, Live Oak, New Braunfels, San Antonio.</p>
         <p><a href="mailto:adam@primelocalgrowth.com">adam@primelocalgrowth.com</a> · <a href="tel:+12106461436">210-646-1436</a></p>
       </div>
       <nav class="footer-links" aria-label="Footer navigation">
-        <a href="/services">Services</a>
-        <a href="/the-system">The System</a>
-        <a href="/free-visibility-audit">Free Audit</a>
-        <a href="/contact">Contact</a>
-        <a href="/privacy">Privacy Policy</a>
+        <a href="/services">Services</a><a href="/the-system">The System</a><a href="/free-visibility-audit">Free Audit</a><a href="/contact">Contact</a><a href="/cibolo-local-seo">Cibolo SEO</a><a href="/schertz-google-business-profile">Schertz GBP</a><a href="/san-antonio-local-seo">San Antonio SEO</a><a href="/privacy">Privacy</a>
       </nav>
     </div>
   </footer>
@@ -289,6 +358,15 @@
       navToggle.addEventListener('click', () => {
         const open = navLinks.classList.toggle('open');
         navToggle.setAttribute('aria-expanded', String(open));
+      });
+    }
+    const scoreForm = document.querySelector('[data-score-form]');
+    const scoreResult = document.querySelector('[data-score-result]');
+    if (scoreForm && scoreResult) {
+      scoreForm.addEventListener('submit', event => {
+        event.preventDefault();
+        scoreResult.classList.add('show');
+        scoreResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
     }
   </script>

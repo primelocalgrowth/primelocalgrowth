@@ -45,6 +45,30 @@
       "dest": "/services.html"
     },
     {
+      "src": "/the-system",
+      "dest": "/the-system.html"
+    },
+    {
+      "src": "/free-visibility-audit",
+      "dest": "/free-visibility-audit.html"
+    },
+    {
+      "src": "/contact",
+      "dest": "/contact.html"
+    },
+    {
+      "src": "/google-business-profile-optimization",
+      "dest": "/google-business-profile-optimization.html"
+    },
+    {
+      "src": "/local-seo",
+      "dest": "/local-seo.html"
+    },
+    {
+      "src": "/review-growth",
+      "dest": "/review-growth.html"
+    },
+    {
       "src": "/playbooks",
       "dest": "/playbooks.html"
     },

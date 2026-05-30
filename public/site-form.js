@@ -34,6 +34,15 @@ document.querySelectorAll('[data-lead-form]').forEach(form => {
     feedback.textContent = '';
     feedback.className = 'form-feedback';
 
+    if (typeof window.plgVercelTrack === 'function') {
+      window.plgVercelTrack('Lead Form Submit Attempt', {
+        form_name: form.getAttribute('data-form-name') || 'visibility_audit',
+        city: data.city,
+        business_type: data.businessType,
+        path: window.location.pathname
+      });
+    }
+
     try {
       const response = await fetch('/api/submit-form', {
         method: 'POST',
@@ -50,6 +59,14 @@ document.querySelectorAll('[data-lead-form]').forEach(form => {
           business_type: data.businessType
         });
       }
+      if (typeof window.plgVercelTrack === 'function') {
+        window.plgVercelTrack('Lead Form Submit Success', {
+          form_name: form.getAttribute('data-form-name') || 'visibility_audit',
+          city: data.city,
+          business_type: data.businessType,
+          path: window.location.pathname
+        });
+      }
       form.reset();
       setTimeout(() => { window.location.href = '/thank-you'; }, 900);
     } catch {
@@ -58,6 +75,12 @@ document.querySelectorAll('[data-lead-form]').forEach(form => {
       if (typeof window.plgTrack === 'function') {
         window.plgTrack('lead_form_submit_error', {
           form_name: form.getAttribute('data-form-name') || 'visibility_audit'
+        });
+      }
+      if (typeof window.plgVercelTrack === 'function') {
+        window.plgVercelTrack('Lead Form Submit Error', {
+          form_name: form.getAttribute('data-form-name') || 'visibility_audit',
+          path: window.location.pathname
         });
       }
       button.disabled = false;

@@ -11,6 +11,7 @@
  */
 
 import { sendCustomerWelcome, sendOnboardingChecklist, sendEmail } from './utils/email.js';
+import crypto from 'crypto';
 
 export const config = { api: { bodyParser: false } };
 
@@ -31,27 +32,34 @@ export default async function handler(req, res) {
   const secret  = process.env.STRIPE_WEBHOOK_SECRET;
 
   // Verify Stripe signature
-  let event;
-  if (secret) {
-    try {
-      // Manual HMAC verification (no Stripe SDK needed)
-      const crypto = await import('crypto');
-      const parts = sig.split(',').map(p => p.trim());
-      const timestamp = parts[0].split('=')[1];
-      const v1 = parts[1].split('=')[1];
-      const payload = `${timestamp}.${rawBody.toString()}`;
-      const expected = crypto.default
-        .createHmac('sha256', secret)
-        .update(payload)
-        .digest('hex');
-      if (expected !== v1) {
-        console.error('Stripe signature mismatch');
-        return res.status(400).json({ error: 'Invalid signature' });
-      }
-    } catch (err) {
-      console.error('Webhook signature error:', err);
-      return res.status(400).json({ error: 'Signature verification failed' });
+  if (!sig || !secret) {
+    return res.status(400).json({ error: 'Missing signature or webhook secret' });
+  }
+
+  try {
+    // Manual HMAC verification (no Stripe SDK needed)
+    const parts = sig.split(',').map(p => p.trim());
+    const timestamp = parts.find(p => p.startsWith('t='))?.slice(2);
+    const v1 = parts.find(p => p.startsWith('v1='))?.slice(3);
+    if (!timestamp || !v1) {
+      return res.status(400).json({ error: 'Malformed signature' });
     }
+
+    const payload = `${timestamp}.${rawBody.toString()}`;
+    const expected = crypto
+      .createHmac('sha256', secret)
+      .update(payload)
+      .digest('hex');
+
+    const received = Buffer.from(v1, 'hex');
+    const expectedBuffer = Buffer.from(expected, 'hex');
+    if (received.length !== expectedBuffer.length || !crypto.timingSafeEqual(received, expectedBuffer)) {
+      console.error('Stripe signature mismatch');
+      return res.status(400).json({ error: 'Invalid signature' });
+    }
+  } catch (err) {
+    console.error('Webhook signature error:', err);
+    return res.status(400).json({ error: 'Signature verification failed' });
   }
 
   let body;

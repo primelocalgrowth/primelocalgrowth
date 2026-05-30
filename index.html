@@ -27,6 +27,7 @@
 <meta name="twitter:title" content="Prime Local Growth | Show Up on Google">
 <meta name="twitter:description" content="Done-for-you local Google visibility for service businesses. Get more customers in 30 days.">
 <meta name="twitter:image" content="https://www.primelocalgrowth.com/og-image.svg">
+<link rel="canonical" href="https://www.primelocalgrowth.com/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2947,8 +2948,8 @@ h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; color:var(--text-primary); li
 
     <div class="form-card reveal">
       <form data-form="lead-form" novalidate>
-        <input type="hidden" id="calc-score" name="calcScore" value=-->
-        <input type="hidden" id="calc-type" name="calcBizType" value=-->
+        <input type="hidden" id="calc-score" name="calcScore" value="">
+        <input type="hidden" id="calc-type" name="calcBizType" value="">
         <div class="form-group">
           <label for="name-bottom">Your Name <span style="color:var(--text-muted);font-weight:400;font-size:12px;">*</span></label>
           <input type="text" id="name-bottom" name="name" placeholder="John Smith" autocomplete="name" required>
@@ -3293,13 +3294,13 @@ document.querySelectorAll('form[data-form="lead-form"]').forEach(form => {
     const email        = form.querySelector('input[name="email"]')?.value.trim();
     const phone        = form.querySelector('input[name="phone"]')?.value.trim() || '';
     const businessName = form.querySelector('input[name="businessName"]')?.value.trim();
-    const city         = form.querySelector('input[name="city"]')?.value.trim();
-    const businessType = form.querySelector('input[name="businessType"]')?.value.trim();
+    const city         = form.querySelector('input[name="city"]')?.value.trim() || '';
+    const businessType = form.querySelector('input[name="businessType"]')?.value.trim() || 'local-service';
 
-    if (!name || !email || !businessName || !city || !businessType) {
+    if (!name || !email || !businessName) {
       feedbackEl.className = 'form-feedback form-feedback--error';
       feedbackEl.textContent = 'Please fill in all required fields.';
-      form.querySelector('input[name="' + (!name ? 'name' : !email ? 'email' : !businessName ? 'businessName' : !city ? 'city' : 'businessType') + '"]').focus();
+      form.querySelector('input[name="' + (!name ? 'name' : !email ? 'email' : 'businessName') + '"]').focus();
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -3311,7 +3312,7 @@ document.querySelectorAll('form[data-form="lead-form"]').forEach(form => {
 
     const btn = form.querySelector('button[type="submit"]');
     const original = btn.textContent;
-    btn.textContent = '⏳ Sending…';
+    btn.textContent = 'Sending...';
     btn.disabled = true;
     btn.classList.add('loading');
 
@@ -3328,7 +3329,7 @@ document.querySelectorAll('form[data-form="lead-form"]').forEach(form => {
     .then(r => { if (r.ok) return r.json(); throw new Error('Submission failed'); })
     .then(data => {
       btn.classList.remove('loading');
-      btn.textContent = '✓ Success!';
+      btn.textContent = 'Success!';
       btn.classList.add('success');
       feedbackEl.className = 'form-feedback form-feedback--success';
       feedbackEl.textContent = 'Perfect! Check your email within 24 hours for your audit.';

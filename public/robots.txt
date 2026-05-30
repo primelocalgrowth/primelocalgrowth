@@ -4,4 +4,4 @@ Allow: /
 Disallow: /api/
 Disallow: /thank-you
 
-Sitemap: https://primelocalgrowth.com/sitemap.xml
+Sitemap: https://www.primelocalgrowth.com/sitemap.xml

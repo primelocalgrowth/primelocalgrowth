@@ -17,6 +17,9 @@ export default async function handler(req, res) {
       businessName,
       city = '',
       businessType = 'local-service',
+      website = '',
+      mainService = '',
+      visibilityConcern = '',
       situation = '',
       pagePath = '',
       pageUrl = '',
@@ -25,7 +28,7 @@ export default async function handler(req, res) {
     } = req.body;
 
     // Validate required fields
-    if (!name || !email || !businessName) {
+    if (!email || !businessName) {
       return res.status(400).json({ error: 'Please fill in all required fields' });
     }
 
@@ -36,7 +39,8 @@ export default async function handler(req, res) {
     }
 
     const timestamp = new Date().toISOString();
-    const lead = { name, email, phone, businessName, city, businessType, situation, pagePath, pageUrl, referrer, attribution, timestamp };
+    const leadName = name || businessName;
+    const lead = { name: leadName, email, phone, businessName, city, businessType, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, timestamp };
 
   // ============================================================
     // 1. TRIGGER MASTER APPS SCRIPT WEBHOOK (FIRE & FORGET)
@@ -46,12 +50,15 @@ export default async function handler(req, res) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          contactName: name,
+          contactName: leadName,
           email: email,
           phone: phone,
           businessName: businessName,
           city: city,
           businessType: businessType,
+          website,
+          mainService,
+          visibilityConcern,
           situation,
           pagePath,
           pageUrl,
@@ -82,7 +89,7 @@ export default async function handler(req, res) {
     // ============================================================
     if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
       try {
-        await addToBeehiiv(name, email, phone, businessName, city, businessType);
+        await addToBeehiiv(leadName, email, phone, businessName, city, businessType);
       } catch (err) {
         console.error('Beehiiv add failed:', err);
       }
@@ -104,7 +111,7 @@ export default async function handler(req, res) {
       success: true,
       message: 'Form submitted successfully!',
       redirectUrl: '/thank-you',
-      data: { name, email, phone, businessName, city, businessType, timestamp }
+      data: { name: leadName, email, phone, businessName, city, businessType, timestamp }
     });
 
   } catch (error) {
@@ -157,7 +164,7 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
 async function appendToGoogleSheets(lead) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (!webhookUrl) return;
-  const { name, email, phone, businessName, city, businessType, situation, pagePath, pageUrl, referrer, attribution, timestamp } = lead;
+  const { name, email, phone, businessName, city, businessType, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, timestamp } = lead;
 
   const response = await fetch(webhookUrl, {
     method: 'POST',
@@ -170,6 +177,9 @@ async function appendToGoogleSheets(lead) {
       business_name: businessName,
       city: city || '',
       business_type: businessType,
+      website: website || '',
+      main_service: mainService || '',
+      visibility_concern: visibilityConcern || '',
       situation: situation || '',
       source: 'inbound',
       segment: 'Inbound Leads',
@@ -183,7 +193,7 @@ async function appendToGoogleSheets(lead) {
       utm_term: attribution?.utm_term || '',
       utm_content: attribution?.utm_content || '',
       gclid: attribution?.gclid || '',
-      notes: [situation, attribution ? JSON.stringify(attribution) : ''].filter(Boolean).join('\n\n')
+      notes: [visibilityConcern, situation, attribution ? JSON.stringify(attribution) : ''].filter(Boolean).join('\n\n')
     })
   });
 

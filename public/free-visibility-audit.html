@@ -48,10 +48,13 @@
               <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
               <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
               <div class="field"><label for="businessName">Business name</label><input id="businessName" name="businessName" autocomplete="organization" required></div>
-              <div class="field"><label for="phone">Phone optional</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+              <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+              <div class="field"><label for="website">Website</label><input id="website" name="website" placeholder="https://"></div>
               <div class="field"><label for="city">City or service area</label><input id="city" name="city" placeholder="Cibolo, Schertz, San Antonio"></div>
-              <div class="field"><label for="businessType">Business type</label><input id="businessType" name="businessType" placeholder="HVAC, plumber, barbershop"></div>
+              <div class="field"><label for="mainService">Main service</label><input id="mainService" name="mainService" placeholder="HVAC, plumber, barbershop"></div>
+              <div class="field full"><label for="visibilityConcern">Biggest visibility concern</label><textarea id="visibilityConcern" name="visibilityConcern" placeholder="What are customers not finding you for?"></textarea></div>
             </div>
+            <input type="hidden" name="businessType" value="local-service">
             <button class="btn btn-primary btn-block" style="margin-top:18px;" type="submit">Get Your Free Visibility Audit</button>
             <p class="form-note">No spam. No sales pressure. Just a clear local visibility review within 24 hours.</p>
             <div class="form-feedback" role="status" aria-live="polite"></div>

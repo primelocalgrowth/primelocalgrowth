@@ -473,6 +473,34 @@ h3 {
   padding: 16px 18px;
   font-weight: 800;
 }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 32px;
+}
+.price-card {
+  display: flex;
+  flex-direction: column;
+}
+.price-card h3 {
+  font-size: 28px;
+  margin-top: 10px;
+}
+.price-card .btn {
+  margin-top: auto;
+}
+.proof-disclaimer {
+  max-width: 820px;
+  margin: 24px auto 0;
+  padding: 16px 18px;
+  border: 1px solid #fed7aa;
+  border-radius: 14px;
+  background: #fff7ed;
+  color: #7c2d12;
+  font-weight: 750;
+  text-align: center;
+}
 .results-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -870,6 +898,7 @@ input:focus, textarea:focus, select:focus {
   .grid-3,
   .footer-inner,
   .cta-band,
+  .pricing-grid,
   .results-grid,
   .audit-check-grid,
   .proof-gallery,

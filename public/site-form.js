@@ -22,8 +22,8 @@ document.querySelectorAll('[data-lead-form]').forEach(form => {
     data.referrer = document.referrer || '';
     data.attribution = typeof window.plgGetAttribution === 'function' ? window.plgGetAttribution() : {};
 
-    if (!data.name || !data.email || !data.businessName) {
-      feedback.textContent = 'Please fill in your name, email, and business name.';
+    if (!data.email || !data.businessName) {
+      feedback.textContent = 'Please fill in your email and business name.';
       feedback.className = 'form-feedback form-feedback--error';
       return;
     }

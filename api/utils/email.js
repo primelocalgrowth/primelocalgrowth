@@ -71,7 +71,7 @@ export async function sendEmail(config) {
  * Send notification to Adam about form submission
  */
 export async function notifyAdamOfLead(lead) {
-  const { name, email, phone, businessName, businessType, situation, pagePath, pageUrl, referrer, attribution = {}, timestamp } = lead;
+  const { name, email, phone, businessName, businessType, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution = {}, timestamp } = lead;
   const sourceLabel = attribution.utm_source || attribution.gclid || attribution.fbclid || referrer || 'direct / unknown';
 
   const html = `
@@ -83,6 +83,9 @@ export async function notifyAdamOfLead(lead) {
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Business:</strong> ${escapeHtml(businessName)}</p>
         <p><strong>Type:</strong> ${escapeHtml(businessType)}</p>
+        ${website ? `<p><strong>Website:</strong> ${escapeHtml(website)}</p>` : ''}
+        ${mainService ? `<p><strong>Main Service:</strong> ${escapeHtml(mainService)}</p>` : ''}
+        ${visibilityConcern ? `<p><strong>Visibility Concern:</strong><br>${escapeHtml(visibilityConcern)}</p>` : ''}
         <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
         <p><strong>Phone:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone) || 'N/A'}</a></p>
         <p><strong>Source:</strong> ${escapeHtml(sourceLabel)}</p>

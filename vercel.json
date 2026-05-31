@@ -19,6 +19,14 @@
       "dest": "/api/newsletter-subscribe.js"
     },
     {
+      "src": "/api/stripe-webhook",
+      "dest": "/api/disabled.js"
+    },
+    {
+      "src": "/api/blueprint-delivery",
+      "dest": "/api/disabled.js"
+    },
+    {
       "src": "/thank-you",
       "dest": "/thank-you.html"
     },

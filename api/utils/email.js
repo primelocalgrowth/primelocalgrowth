@@ -154,7 +154,7 @@ export async function sendLeadAutoReply(lead) {
 }
 
 /**
- * Send welcome email to new paid customer
+ * Send welcome email after manual onboarding approval
  */
 export async function sendCustomerWelcome(customer, productId) {
   const { email, name } = customer;
@@ -162,7 +162,7 @@ export async function sendCustomerWelcome(customer, productId) {
   const videoUrl = 'https://primelocalgrowth.com/welcome-video';
   const guideUrl = 'https://primelocalgrowth.com/downloads/gbp-access-guide';
 
-  const noAccessProducts = ['local-domination', 'audit'];
+  const noAccessProducts = ['audit'];
   const sendGuide = !noAccessProducts.includes(productId);
 
   const html = `
@@ -211,7 +211,7 @@ export async function sendCustomerWelcome(customer, productId) {
 }
 
 /**
- * Send onboarding checklist email after payment
+ * Send onboarding checklist email after manual approval
  */
 export async function sendOnboardingChecklist(customer, productId) {
   const { email, name } = customer;
@@ -225,7 +225,7 @@ export async function sendOnboardingChecklist(customer, productId) {
       </div>
       <div style="background:#fff;padding:32px;border:1px solid #e5e5e5;border-top:none;border-radius:0 0 8px 8px;font-size:16px;line-height:1.7;">
         <p>Hi ${escapeHtml(firstName)},</p>
-        <p>Your payment is confirmed. Here's exactly what happens from here:</p>
+        <p>Your request is confirmed. Here's exactly what happens from here:</p>
 
         <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
           <tr>

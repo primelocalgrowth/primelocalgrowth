@@ -109,15 +109,11 @@ function trackClick(event) {
     window.plgTrack('audit_cta_click', params);
   }
 
-  if (path === '/playbooks' || lowerLabel.includes('blueprint')) {
-    window.plgTrack('blueprint_cta_click', params);
-  }
-
   if (lowerLabel.includes('breakdown') || lowerLabel.includes('video audit')) {
     window.plgTrack('video_audit_cta_click', params);
   }
 
-  if (/build my visibility|maintain my visibility|dominate my market/i.test(label)) {
+  if (/build visibility|maintain visibility|grow locally/i.test(label)) {
     window.plgTrack('system_cta_click', { ...params, system_stage: label });
   }
 

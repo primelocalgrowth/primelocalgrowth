@@ -44,71 +44,8 @@ export default async function handler(req, res) {
     const niche = mainService || businessType;
     const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, timestamp };
 
-    // ============================================================
-    // 1. TRIGGER AUDIT GENERATOR WEBHOOK
-    // ============================================================
-    if (process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL) {
-      await postWebhook(process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL, {
-        contactName: leadName,
-        name: leadName,
-        firstName,
-        email,
-        phone,
-        businessName,
-        city,
-        businessType,
-        niche,
-        website,
-        mainService,
-        visibilityConcern,
-        situation,
-        pagePath,
-        pageUrl,
-        referrer,
-        attribution,
-        submittedAt: timestamp,
-        timestamp,
-        source: 'Website'
-      }, 'Audit generator');
-    }
-
-    // ============================================================
-    // 2. RESEND EMAIL NOTIFICATIONS
-    // ============================================================
-    if (process.env.RESEND_API_KEY) {
-      try {
-        await notifyAdamOfLead(lead);
-      } catch (err) {
-        console.error('Lead notification send failed:', err);
-      }
-      try {
-        await sendLeadAutoReply(lead);
-      } catch (err) {
-        console.error('Auto-reply send failed:', err);
-      }
-    }
-
-    // ============================================================
-    // 3. BEEHIIV INTEGRATION
-    // ============================================================
-    if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
-      try {
-        await addToBeehiiv(leadName, email, phone, businessName, city, businessType);
-      } catch (err) {
-        console.error('Beehiiv add failed:', err);
-      }
-    }
-
-    // ============================================================
-    // 4. GOOGLE SHEETS INTEGRATION
-    // ============================================================
-    if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
-      try {
-        await appendToGoogleSheets(lead);
-      } catch (err) {
-        console.error('Google Sheets append failed:', err);
-      }
-    }
+    await runRequiredIntegrations(lead);
+    await runOptionalIntegrations(lead);
 
     // Return success with redirect
     return res.status(200).json({
@@ -163,6 +100,79 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
     return null;
   }
   return await response.json();
+}
+
+async function runRequiredIntegrations(lead) {
+  const tasks = [];
+
+  if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
+    tasks.push(appendToGoogleSheets(lead));
+  } else {
+    console.warn('GOOGLE_SHEETS_WEBHOOK_URL is not set; lead was not logged to Sheets.');
+  }
+
+  if (process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL) {
+    tasks.push(triggerAuditGenerator(lead));
+  } else {
+    console.warn('MASTER_APPS_SCRIPT_WEBHOOK_URL is not set; audit doc was not generated.');
+  }
+
+  if (tasks.length === 0) {
+    throw new Error('No lead storage or audit webhook is configured.');
+  }
+
+  await Promise.all(tasks);
+}
+
+async function runOptionalIntegrations(lead) {
+  const tasks = [];
+
+  if (process.env.RESEND_API_KEY) {
+    tasks.push(runOptionalTask('Lead notification email', () => notifyAdamOfLead(lead)));
+    tasks.push(runOptionalTask('Lead auto-reply email', () => sendLeadAutoReply(lead)));
+  }
+
+  if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
+    tasks.push(runOptionalTask('Beehiiv subscription', () => {
+      return addToBeehiiv(lead.name, lead.email, lead.phone, lead.businessName, lead.city, lead.businessType);
+    }));
+  }
+
+  await Promise.all(tasks);
+}
+
+async function runOptionalTask(label, task) {
+  try {
+    return await task();
+  } catch (err) {
+    console.error(`${label} failed:`, err);
+    return null;
+  }
+}
+
+async function triggerAuditGenerator(lead) {
+  return await postWebhook(process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL, {
+    contactName: lead.name,
+    name: lead.name,
+    firstName: lead.firstName,
+    email: lead.email,
+    phone: lead.phone,
+    businessName: lead.businessName,
+    city: lead.city,
+    businessType: lead.businessType,
+    niche: lead.niche,
+    website: lead.website,
+    mainService: lead.mainService,
+    visibilityConcern: lead.visibilityConcern,
+    situation: lead.situation,
+    pagePath: lead.pagePath,
+    pageUrl: lead.pageUrl,
+    referrer: lead.referrer,
+    attribution: lead.attribution,
+    submittedAt: lead.timestamp,
+    timestamp: lead.timestamp,
+    source: 'Website'
+  }, 'Audit generator');
 }
 
 async function appendToGoogleSheets(lead) {

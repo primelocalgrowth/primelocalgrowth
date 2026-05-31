@@ -1,39 +1,38 @@
 # primelocalgrowth-website
 
-Live marketing site for Prime Local Growth. Deployed on Vercel, auto-deploys from main branch.
+Live marketing site for Prime Local Growth. Deployed on Vercel, auto-deploys from the main branch.
 
 ## Stack
-- Static HTML/CSS/JS (no framework build step for the main site)
-- `index.html` — main site entry point
-- `public/` — static assets served directly
-- `api/` — serverless functions (Vercel edge functions)
-- `vercel.json` — routing and deployment config
-- Vite used for bundling where configured
+- Static HTML/CSS/JS
+- `index.html` - main site entry point
+- `public/` - static assets served directly
+- `api/` - Vercel serverless functions
+- `vercel.json` - routing and deployment config
+- Vite build pipeline
 
 ## Deploy
-- **Live URL**: https://primelocalgrowth.com
-- **Deploy**: `npx vercel --prod` or push to main (auto-deploy)
-- **Preview**: `npx vercel` (creates preview URL)
-- Local dev: `npx serve public` or `python3 -m http.server 5173`
+- Live URL: https://primelocalgrowth.com
+- Deploy: push to main for automatic Vercel deployment
+- Preview: `npx vercel`
+- Local dev: `npm run dev`
 
 ## Integrations
-- **Beehiiv**: pub_0044836f-7866-4885-8bff-804d13fe76e1 — newsletter + automation
-- **Resend**: RESEND_API_KEY — transactional email (form alerts, auto-replies, welcome sequences, delivery)
-- **Stripe**: payment links for Starter/Growth/Dominate/Elite plans — webhook at /api/stripe-webhook for auto-delivery
-- **Google Review link**: https://g.page/r/CSRlPk-HmJb0EAI/review
-- **Audits**: Manual via /plg-internet-visibility-audit skill (Claude API called by Adam, not auto-triggered)
+- Beehiiv: newsletter automation
+- Resend: transactional email for form alerts and auto-replies
+- Google Sheets / Apps Script: lead intake via `/api/submit-form`
+- Google Review link: https://g.page/r/CSRlPk-HmJb0EAI/review
+- Audits: free visibility audit flow through `/free-visibility-audit`
 
 ## Key Files
-- `index.html` — all page content, edit here for copy/layout changes
-- `vercel.json` — routing rules, never break this
-- `api/submit-form.js` — lead form submission → email to Adam + auto-reply + Beehiiv + Sheets
-- `api/stripe-webhook.js` — Stripe payment completion → welcome email + onboarding checklist
-- `api/blueprint-delivery.js` — Blueprint purchase → auto-deliver PDF via email
-- `api/newsletter-subscribe.js` — Newsletter signup → add to Beehiiv + notify Adam
-- `api/utils/email.js` — centralized email utilities (sendEmail, notifyAdamOfLead, sendLeadAutoReply, sendCustomerWelcome, sendOnboardingChecklist)
-- `public/downloads/` — lead magnets and guides
+- `index.html` - homepage content and primary conversion path
+- `vercel.json` - routing rules
+- `api/submit-form.js` - lead form submission to email, Beehiiv, Sheets, and audit automation
+- `api/newsletter-subscribe.js` - newsletter signup to Beehiiv and Adam notification
+- `api/utils/email.js` - centralized email utilities
+- `public/site-form.js` - frontend lead form behavior
+- `public/downloads/` - lead magnets and guides
 
 ## Rules
-- Never hardcode API keys — use `process.env.VAR` or Vercel env vars
-- Test locally before pushing to main
-- Keep `robots.txt` and `sitemap.xml` updated after adding new pages
+- Never hardcode API keys; use `process.env.VAR` or Vercel environment variables.
+- Test locally before pushing to main.
+- Keep `robots.txt` and `sitemap.xml` updated after adding or removing public pages.

@@ -40,32 +40,36 @@ export default async function handler(req, res) {
 
     const timestamp = new Date().toISOString();
     const leadName = name || businessName;
-    const lead = { name: leadName, email, phone, businessName, city, businessType, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, timestamp };
+    const firstName = getFirstName(leadName);
+    const niche = mainService || businessType;
+    const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, timestamp };
 
-  // ============================================================
-    // 1. TRIGGER MASTER APPS SCRIPT WEBHOOK (FIRE & FORGET)
+    // ============================================================
+    // 1. TRIGGER AUDIT GENERATOR WEBHOOK
     // ============================================================
     if (process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL) {
-      fetch(process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contactName: leadName,
-          email: email,
-          phone: phone,
-          businessName: businessName,
-          city: city,
-          businessType: businessType,
-          website,
-          mainService,
-          visibilityConcern,
-          situation,
-          pagePath,
-          pageUrl,
-          referrer,
-          attribution
-        })
-      }).catch(err => console.error('Webhook error:', err));
+      await postWebhook(process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL, {
+        contactName: leadName,
+        name: leadName,
+        firstName,
+        email,
+        phone,
+        businessName,
+        city,
+        businessType,
+        niche,
+        website,
+        mainService,
+        visibilityConcern,
+        situation,
+        pagePath,
+        pageUrl,
+        referrer,
+        attribution,
+        submittedAt: timestamp,
+        timestamp,
+        source: 'Website'
+      }, 'Audit generator');
     }
 
     // ============================================================
@@ -111,7 +115,7 @@ export default async function handler(req, res) {
       success: true,
       message: 'Form submitted successfully!',
       redirectUrl: '/thank-you',
-      data: { name: leadName, email, phone, businessName, city, businessType, timestamp }
+      data: { name: leadName, firstName, email, phone, businessName, city, businessType, niche, timestamp }
     });
 
   } catch (error) {
@@ -164,41 +168,72 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
 async function appendToGoogleSheets(lead) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (!webhookUrl) return;
-  const { name, email, phone, businessName, city, businessType, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, timestamp } = lead;
+  const { name, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, timestamp } = lead;
 
-  const response = await fetch(webhookUrl, {
+  return await postWebhook(webhookUrl, {
+    firstName,
+    name,
+    businessName,
+    email,
+    phone: phone || '',
+    city: city || '',
+    niche: niche || '',
+    leadStatus: 'New Lead',
+    status: 'Lead',
+    plan: '',
+    startDate: '',
+    onboardingStep: 0,
+    submittedAt: timestamp,
+    source: 'Website',
+    timestamp,
+    business_name: businessName,
+    business_type: businessType,
+    website: website || '',
+    main_service: mainService || '',
+    visibility_concern: visibilityConcern || '',
+    situation: situation || '',
+    source_detail: 'inbound',
+    segment: 'Inbound Leads',
+    legacy_status: 'New',
+    page_path: pagePath || '',
+    page_url: pageUrl || '',
+    referrer: referrer || '',
+    utm_source: attribution?.utm_source || '',
+    utm_medium: attribution?.utm_medium || '',
+    utm_campaign: attribution?.utm_campaign || '',
+    utm_term: attribution?.utm_term || '',
+    utm_content: attribution?.utm_content || '',
+    gclid: attribution?.gclid || '',
+    notes: [visibilityConcern, situation, attribution ? JSON.stringify(attribution) : ''].filter(Boolean).join('\n\n')
+  }, 'Google Sheets');
+}
+
+function getFirstName(name) {
+  return String(name || '').trim().split(/\s+/)[0] || '';
+}
+
+async function postWebhook(url, payload, label) {
+  const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      timestamp,
-      name,
-      email,
-      phone: phone || '',
-      business_name: businessName,
-      city: city || '',
-      business_type: businessType,
-      website: website || '',
-      main_service: mainService || '',
-      visibility_concern: visibilityConcern || '',
-      situation: situation || '',
-      source: 'inbound',
-      segment: 'Inbound Leads',
-      status: 'New',
-      page_path: pagePath || '',
-      page_url: pageUrl || '',
-      referrer: referrer || '',
-      utm_source: attribution?.utm_source || '',
-      utm_medium: attribution?.utm_medium || '',
-      utm_campaign: attribution?.utm_campaign || '',
-      utm_term: attribution?.utm_term || '',
-      utm_content: attribution?.utm_content || '',
-      gclid: attribution?.gclid || '',
-      notes: [visibilityConcern, situation, attribution ? JSON.stringify(attribution) : ''].filter(Boolean).join('\n\n')
-    })
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
   });
 
-  if (!response.ok) {
-    throw new Error(`Sheets error: ${response.status}`);
+  const text = await response.text();
+  let result = {};
+
+  if (text) {
+    try {
+      result = JSON.parse(text);
+    } catch {
+      result = { raw: text };
+    }
   }
-  return await response.json();
+
+  if (!response.ok || result.success === false) {
+    const reason = result.error || result.message || text || `HTTP ${response.status}`;
+    throw new Error(`${label} webhook failed: ${reason}`);
+  }
+
+  return result;
 }

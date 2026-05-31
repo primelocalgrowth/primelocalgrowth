@@ -25,6 +25,8 @@ async function getRawBody(req) {
 }
 
 export default async function handler(req, res) {
+  return res.status(410).json({ error: 'Stripe payments are disabled for this site.' });
+
   if (req.method !== 'POST') return res.status(405).end();
 
   const rawBody = await getRawBody(req);

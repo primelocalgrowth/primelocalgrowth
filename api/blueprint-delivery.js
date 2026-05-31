@@ -209,6 +209,8 @@ async function sendDeliveryEmail(toEmail, toName, blueprints) {
 
 // ─── Main handler ──────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
+  return res.status(410).json({ error: 'Stripe blueprint delivery is disabled for this site.' });
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }

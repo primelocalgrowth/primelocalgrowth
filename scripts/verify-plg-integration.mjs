@@ -32,6 +32,7 @@ const submitForm = read('api/submit-form.js');
 const siteForm = read('public/site-form.js');
 const vercelConfig = read('vercel.json');
 const envExample = read('.env.example');
+const placesModule = read('google-apps-script/places-audit-enrichment.gs');
 const publicFiles = walk('public').filter(file => /\.(html|js|css)$/i.test(file));
 const publicText = publicFiles.map(file => read(file)).join('\n');
 const retiredWebhookPath = '/api/' + 'str' + 'ipe-webhook';
@@ -103,6 +104,20 @@ addCheck(
   '.env.example documents required automation webhook variables',
   envExample.includes('GOOGLE_SHEETS_WEBHOOK_URL') &&
     envExample.includes('MASTER_APPS_SCRIPT_WEBHOOK_URL')
+);
+
+addCheck(
+  'Places audit enrichment uses protected server-side key and explicit field mask',
+  placesModule.includes('GOOGLE_PLACES_API_KEY') &&
+    placesModule.includes('X-Goog-FieldMask') &&
+    !placesModule.includes('X-Goog-FieldMask": "*"')
+);
+
+addCheck(
+  'Places enrichment includes caching and competitor comparison',
+  placesModule.includes('CacheService.getScriptCache') &&
+    placesModule.includes('chooseTopCompetitor') &&
+    placesModule.includes('reviewGap')
 );
 
 const failed = checks.filter(check => !check.passed);

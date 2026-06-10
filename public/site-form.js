@@ -8,6 +8,21 @@ if (navToggle && navLinks && !navToggle.dataset.navBound) {
   });
 }
 
+document.querySelectorAll('[data-lead-form] input').forEach(input => {
+  input.addEventListener('input', () => {
+    const value = input.value.trim();
+    if (!value) {
+      input.classList.remove('input-valid', 'input-invalid');
+      return;
+    }
+    const valid = input.type === 'email'
+      ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+      : input.checkValidity();
+    input.classList.toggle('input-valid', valid);
+    input.classList.toggle('input-invalid', !valid);
+  });
+});
+
 document.querySelectorAll('[data-lead-form]').forEach(form => {
   form.addEventListener('submit', async event => {
     event.preventDefault();

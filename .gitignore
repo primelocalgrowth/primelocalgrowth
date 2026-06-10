@@ -38,3 +38,6 @@ pnpm-debug.log*
 .cache/
 .vercel/
 .parcel-cache/
+
+# Local prospecting data
+sent-emails.json

@@ -1000,6 +1000,62 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
+/* FAQ accordion */
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent, #0ea5e9);
+  flex-shrink: 0;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item > p {
+  overflow: hidden;
+}
+.faq-item[open] > p {
+  animation: faq-open 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes faq-open {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero entrance */
+.hero-inner > div:first-child > * {
+  animation: hero-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-inner > div:first-child > *:nth-child(2) { animation-delay: 70ms; }
+.hero-inner > div:first-child > *:nth-child(3) { animation-delay: 140ms; }
+.hero-inner > div:first-child > *:nth-child(4) { animation-delay: 210ms; }
+.hero-inner > div:first-child > *:nth-child(5) { animation-delay: 280ms; }
+.hero-inner > div:first-child > *:nth-child(6) { animation-delay: 350ms; }
+.audit-preview { animation: hero-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) 240ms both; }
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Real-time field validation */
+.field { position: relative; }
+.field input.input-valid {
+  border-color: #22c55e;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 38px;
+}
+.field input.input-invalid { border-color: #ef4444; }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

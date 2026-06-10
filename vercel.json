@@ -1,6 +1,7 @@
 {
   "buildCommand": "vite build",
   "outputDirectory": "dist",
+  "cleanUrls": true,
   "functions": {
     "api/submit-form.js": {
       "maxDuration": 10
@@ -9,168 +10,26 @@
       "maxDuration": 10
     }
   },
-  "routes": [
-    {
-      "src": "/api/submit-form",
-      "dest": "/api/submit-form.js"
-    },
-    {
-      "src": "/api/newsletter-subscribe",
-      "dest": "/api/newsletter-subscribe.js"
-    },
-    {
-      "src": "/thank-you",
-      "dest": "/thank-you.html"
-    },
-    {
-      "src": "/privacy",
-      "dest": "/privacy.html"
-    },
-    {
-      "src": "/services",
-      "dest": "/services.html"
-    },
-    {
-      "src": "/the-system",
-      "dest": "/the-system.html"
-    },
-    {
-      "src": "/free-visibility-audit",
-      "dest": "/free-visibility-audit.html"
-    },
-    {
-      "src": "/contact",
-      "dest": "/contact.html"
-    },
-    {
-      "src": "/google-business-profile-optimization",
-      "dest": "/google-business-profile-optimization.html"
-    },
-    {
-      "src": "/local-seo",
-      "dest": "/local-seo.html"
-    },
-    {
-      "src": "/review-growth",
-      "dest": "/review-growth.html"
-    },
-    {
-      "src": "/cibolo-local-seo",
-      "dest": "/cibolo-local-seo.html"
-    },
-    {
-      "src": "/schertz-google-business-profile",
-      "dest": "/schertz-google-business-profile.html"
-    },
-    {
-      "src": "/san-antonio-local-seo",
-      "dest": "/san-antonio-local-seo.html"
-    },
-    {
-      "src": "/new-braunfels-google-business-profile",
-      "dest": "/new-braunfels-google-business-profile.html"
-    },
-    {
-      "src": "/universal-city-local-seo",
-      "dest": "/universal-city-local-seo.html"
-    },
-    {
-      "src": "/selma-google-business-profile",
-      "dest": "/selma-google-business-profile.html"
-    },
-    {
-      "src": "/live-oak-local-seo",
-      "dest": "/live-oak-local-seo.html"
-    },
-    {
-      "src": "/newsletter",
-      "dest": "/newsletter.html"
-    },
-    {
-      "src": "/premium",
-      "dest": "/premium.html"
-    },
-    {
-      "src": "/acquire",
-      "dest": "/acquire.html"
-    },
-    {
-      "src": "/welcome-video",
-      "dest": "/welcome-video.html"
-    },
-    {
-      "src": "/san-antonio-hvac-google",
-      "dest": "/san-antonio-hvac-google.html"
-    },
-    {
-      "src": "/san-antonio-dental-google",
-      "dest": "/san-antonio-dental-google.html"
-    },
-    {
-      "src": "/san-antonio-barbershop-google",
-      "dest": "/san-antonio-barbershop-google.html"
-    },
-    {
-      "src": "/san-antonio-plumber-google",
-      "dest": "/san-antonio-plumber-google.html"
-    },
-    {
-      "src": "/roi-calculator",
-      "dest": "/roi-calculator.html"
-    },
-    {
-      "src": "/austin-barbershop-google",
-      "dest": "/austin-barbershop-google.html"
-    },
-    {
-      "src": "/austin-hair-salon-google",
-      "dest": "/austin-hair-salon-google.html"
-    },
-    {
-      "src": "/austin-hvac-google",
-      "dest": "/austin-hvac-google.html"
-    },
-    {
-      "src": "/review-defense",
-      "dest": "/review-defense.html"
-    },
-    {
-      "src": "/google-business-profile-ranking-2026",
-      "dest": "/google-business-profile-ranking-2026.html"
-    },
-    {
-      "src": "/gbp-access",
-      "dest": "/gbp-access.html"
-    },
-    {
-      "src": "/dallas-barbershop-google",
-      "dest": "/dallas-barbershop-google.html"
-    },
-    {
-      "src": "/houston-plumber-google",
-      "dest": "/houston-plumber-google.html"
-    },
-    {
-      "src": "/phoenix-dental-google",
-      "dest": "/phoenix-dental-google.html"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/(og-image.png|favicon.svg)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }
       ]
     }
   ]

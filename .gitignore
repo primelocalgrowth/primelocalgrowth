@@ -41,3 +41,5 @@ pnpm-debug.log*
 
 # Local prospecting data
 sent-emails.json
+unsubscribes.txt
+cold-email-log.txt

@@ -156,6 +156,7 @@ h1, h2, h3 {
   margin: 0;
   line-height: 1.08;
   letter-spacing: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 h1 {
   font-size: clamp(42px, 7vw, 74px);

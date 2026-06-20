@@ -174,7 +174,20 @@ function trackThankYouConversion() {
   });
 }
 
-loadGa4();
+// Expose globally so cookie-consent.js can call it after user accepts
+window.loadGa4 = loadGa4;
+
+// Load GA4 only if consent was previously accepted
+try {
+  const raw = localStorage.getItem('plg_cookie_consent');
+  if (raw) {
+    const parsed = JSON.parse(raw);
+    if (parsed.value === 'accepted' && Date.now() < parsed.expires) {
+      loadGa4();
+    }
+  }
+} catch {}
+
 getAttribution();
 document.addEventListener('click', trackClick);
 document.addEventListener('DOMContentLoaded', () => {

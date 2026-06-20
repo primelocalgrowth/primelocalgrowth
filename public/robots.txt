@@ -3,5 +3,10 @@ Allow: /
 
 Disallow: /api/
 Disallow: /thank-you
+Disallow: /acquire
+Disallow: /premium
+Disallow: /welcome-video
+Disallow: /gbp-access
+Disallow: /downloads/
 
 Sitemap: https://www.primelocalgrowth.com/sitemap.xml

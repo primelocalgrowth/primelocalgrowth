@@ -8,6 +8,9 @@
     },
     "api/newsletter-subscribe.js": {
       "maxDuration": 10
+    },
+    "api/stripe-webhook.js": {
+      "maxDuration": 10
     }
   },
   "headers": [

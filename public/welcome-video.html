@@ -212,17 +212,45 @@
     </div>
 
     <!-- VIDEO -->
-    <div class="video-wrap">
+    <div class="video-wrap" id="video-container">
       <video
+        id="welcome-video"
         controls
-        preload="metadata"
-        poster=--
+        preload="none"
+        poster="/assets/gbp-results-og.png"
         playsinline
+        style="width:100%;display:block;aspect-ratio:16/9;"
       >
         <source src="/assets/stand-out-on-google.mp4" type="video/mp4">
-        Your browser doesn't support HTML5 video. <a href="/assets/stand-out-on-google.mp4" style="color:#0ea5e9;">Download the video →</a>
       </video>
+      <!-- Shown if video fails to load -->
+      <div id="video-fallback" style="display:none;aspect-ratio:16/9;background:#0f172a;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 24px;text-align:center;">
+        <div style="font-size:48px;">▶</div>
+        <p style="color:#fff;font-weight:700;font-size:18px;margin:0;">What this video covers</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;text-align:left;max-width:340px;">
+          <li style="color:#94a3b8;font-size:14px;">&#10003;&nbsp; What we optimize on your Google listing</li>
+          <li style="color:#94a3b8;font-size:14px;">&#10003;&nbsp; Why Manager access (not Owner) keeps you in full control</li>
+          <li style="color:#94a3b8;font-size:14px;">&#10003;&nbsp; What happens in the first 24 hours after you grant access</li>
+        </ul>
+        <p style="color:#64748b;font-size:13px;margin:8px 0 0;">Skip straight to the access guide below — it covers everything you need.</p>
+      </div>
     </div>
+    <script>
+      (function(){
+        var v = document.getElementById('welcome-video');
+        var fallback = document.getElementById('video-fallback');
+        if (!v) return;
+        v.addEventListener('error', function() {
+          v.style.display = 'none';
+          fallback.style.display = 'flex';
+        });
+        // If source 404s during load
+        v.querySelector('source').addEventListener('error', function() {
+          v.style.display = 'none';
+          fallback.style.display = 'flex';
+        });
+      })();
+    </script>
 
     <!-- NEXT STEP -->
     <div class="next-step">

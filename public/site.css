@@ -1057,6 +1057,16 @@ input:focus, textarea:focus, select:focus {
 }
 .field input.input-invalid { border-color: #ef4444; }
 
+/* Push sticky CTA above cookie banner when banner is present */
+body:has(#plg-cookie-banner) .sticky-audit {
+  bottom: calc(14px + 90px);
+}
+@media (max-width: 480px) {
+  body:has(#plg-cookie-banner) .sticky-audit {
+    bottom: calc(14px + 120px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

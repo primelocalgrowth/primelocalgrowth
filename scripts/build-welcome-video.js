@@ -46,7 +46,7 @@ const SLIDES = [
       { text: "STEP 2",                                           y: 140, size: 20, color: BLUE,  bold: true },
       { text: "You grant Manager access.",                        y: 230, size: 50, color: WHITE, bold: true },
       { text: "Takes 3 minutes with our step-by-step guide.",     y: 316, size: 26, color: MUTED },
-      { text: "Add primelocalgrowth@gmail.com",                   y: 380, size: 26, color: MUTED },
+      { text: "Add adam@primelocalgrowth.com",                    y: 380, size: 26, color: MUTED },
       { text: "Role: Manager (not Owner)",                        y: 426, size: 26, color: MUTED },
       { text: "You stay Primary Owner - always",                  y: 472, size: 26, color: MUTED },
     ],
@@ -75,7 +75,7 @@ const SLIDES = [
     lines: [
       { text: "YOUR NEXT STEP",                                    y: 200, size: 20, color: BLUE,  bold: true },
       { text: "Open the Access Guide below.",                      y: 280, size: 50, color: WHITE, bold: true },
-      { text: "Add primelocalgrowth@gmail.com as Manager.",        y: 370, size: 26, color: MUTED },
+      { text: "Add adam@primelocalgrowth.com as Manager.",         y: 370, size: 26, color: MUTED },
       { text: "Questions? adam@primelocalgrowth.com",              y: 440, size: 22, color: MUTED },
     ],
   },

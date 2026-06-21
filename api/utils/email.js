@@ -186,7 +186,7 @@ export async function sendCustomerWelcome(customer, productId) {
               Open the Step-by-Step Access Guide →
             </a>
           </p>
-          <p style="font-size:14px;color:#666;">Add <strong>primelocalgrowth@gmail.com</strong> as a <strong>Manager</strong> (not Owner). You stay in full control.</p>
+          <p style="font-size:14px;color:#666;">Add <strong>adam@primelocalgrowth.com</strong> as a <strong>Manager</strong> (not Owner). You stay in full control.</p>
         ` : ''}
         <p><strong>What happens next:</strong></p>
         <ul style="padding-left:20px;">

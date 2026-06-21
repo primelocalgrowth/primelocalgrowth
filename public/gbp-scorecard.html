@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GBP Readiness Score | Prime Local Growth</title>
+  <meta name="description" content="Score your Google Business Profile in 60 seconds. Find out exactly where your local visibility is weak — and what to fix first.">
+  <link rel="canonical" href="https://www.primelocalgrowth.com/gbp-scorecard">
+  <meta property="og:title" content="GBP Readiness Score | Prime Local Growth">
+  <meta property="og:description" content="10 questions. 60 seconds. Find out why customers aren't calling you from Google.">
+  <meta property="og:url" content="https://www.primelocalgrowth.com/gbp-scorecard">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.primelocalgrowth.com/assets/gbp-results-og.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css">
+  <script src="/cookie-consent.js"></script>
+  <script defer src="/site-analytics.js"></script>
+  <script defer src="/vercel-insights.js"></script>
+  <style>
+    .scorecard-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .progress-bar-outer {
+      height: 6px;
+      background: var(--line);
+      border-radius: 999px;
+      margin: 28px 0 36px;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 999px;
+      transition: width 400ms ease;
+    }
+    .question-block {
+      display: none;
+      animation: card-rise 320ms ease both;
+    }
+    .question-block.active { display: block; }
+    .question-label {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .question-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.2;
+      margin: 0 0 10px;
+    }
+    .question-sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0 0 28px;
+    }
+    .answer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .answer-btn {
+      padding: 18px 20px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 160ms, background 160ms, transform 140ms;
+    }
+    .answer-btn:hover {
+      border-color: var(--blue);
+      background: #f0f9ff;
+      transform: translateY(-2px);
+    }
+    .answer-btn.selected {
+      border-color: var(--blue);
+      background: #e0f2fe;
+      color: var(--blue-dark);
+    }
+    .answer-btn.yes { }
+    .answer-btn.no { }
+    .next-btn {
+      display: none;
+      margin-top: 8px;
+    }
+    .next-btn.show { display: inline-flex; }
+
+    /* Results */
+    .results-block { display: none; animation: card-rise 400ms ease both; }
+    .results-block.show { display: block; }
+    .score-ring {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    .score-ring svg {
+      position: absolute;
+      inset: 0;
+      transform: rotate(-90deg);
+    }
+    .score-ring-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+    }
+    .score-label {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .score-summary {
+      text-align: center;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 480px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+    .gap-list {
+      display: grid;
+      gap: 10px;
+      margin: 24px 0;
+    }
+    .gap-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+    .gap-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+    .gap-icon.bad { background: #fee2e2; color: #b91c1c; }
+    .gap-icon.warn { background: #fef3c7; color: #92400e; }
+    .gap-icon.good { background: #dcfce7; color: #166534; }
+    .gap-text { font-size: 15px; font-weight: 700; color: var(--ink-2); line-height: 1.4; }
+    .cta-capture {
+      background: var(--ink);
+      color: #fff;
+      border-radius: 18px;
+      padding: 36px;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .cta-capture h2 { font-size: 24px; margin-bottom: 10px; }
+    .cta-capture p { color: #cbd5e1; font-size: 15px; margin: 0 0 24px; }
+    .capture-form { display: grid; gap: 12px; max-width: 400px; margin: 0 auto; }
+    .capture-form input {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      border-radius: 10px;
+    }
+    .capture-form input::placeholder { color: rgba(255,255,255,0.45); }
+    .capture-form input:focus { border-color: var(--blue-light); outline: none; }
+    .already-link {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .already-link a { color: var(--blue-light); }
+    @media (max-width: 560px) {
+      .answer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav"><div class="nav-inner"><a class="brand" href="/"><img src="/assets/plg-logo.png" alt="Prime Local Growth" width="38" height="38"><span>Prime Local Growth <small>The Google Visibility Company</small></span></a><button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" data-nav-toggle>Menu</button><nav class="nav-links" aria-label="Primary navigation" data-nav-links><a href="/">Home</a><a href="/services">Services</a><a href="/the-system">How It Works</a><a href="/results">Results</a><a href="/free-visibility-audit">Free Audit</a><a href="/about">About</a><a href="/contact">Contact</a><a href="tel:+12106461436">210-646-1436</a><a class="btn btn-primary" href="/free-visibility-audit">Get My Free Visibility Audit</a></nav></div></header>
+
+  <main id="main">
+    <section class="page-hero" style="padding-bottom:0;">
+      <div class="wrap">
+        <a class="breadcrumb" href="/">Home</a>
+        <p class="eyebrow">GBP Readiness Score</p>
+        <h1 style="max-width:640px;">Is your Google listing losing you calls right now?</h1>
+        <p class="lead" style="max-width:580px;">10 questions. Under 60 seconds. See your score and find out exactly what's costing you customers.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:40px;">
+      <div class="wrap scorecard-wrap">
+
+        <!-- Progress bar -->
+        <div class="progress-bar-outer" id="progress-bar-outer">
+          <div class="progress-bar-inner" id="progress-bar" style="width:0%"></div>
+        </div>
+
+        <!-- Questions -->
+        <div id="questions">
+
+          <div class="question-block active" data-q="0" data-weight="15">
+            <p class="question-label">Question 1 of 10</p>
+            <h2 class="question-text">Does your Google Business Profile show up when you search your business name on Google?</h2>
+            <p class="question-sub">Search your exact business name right now if you're not sure.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes — it shows up</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-0">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="1" data-weight="15">
+            <p class="question-label">Question 2 of 10</p>
+            <h2 class="question-text">Is your Google profile marked as "verified" by Google?</h2>
+            <p class="question-sub">Verified profiles rank significantly higher in local search.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, it's verified</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-1">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="2" data-weight="10">
+            <p class="question-label">Question 3 of 10</p>
+            <h2 class="question-text">Does your profile have at least 10 Google reviews with a 4.0 or higher rating?</h2>
+            <p class="question-sub">Reviews are one of the top factors Google uses to rank local businesses.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes — 10+ reviews, 4.0+</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-2">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="3" data-weight="10">
+            <p class="question-label">Question 4 of 10</p>
+            <h2 class="question-text">Have you received a new Google review in the last 30 days?</h2>
+            <p class="question-sub">Google favors profiles with recent, ongoing review activity.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes — recent review</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-3">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="4" data-weight="10">
+            <p class="question-label">Question 5 of 10</p>
+            <h2 class="question-text">Are your business name, address, and phone number identical everywhere online — Google, Yelp, your website, Facebook?</h2>
+            <p class="question-sub">Inconsistencies here confuse Google and suppress your rankings.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes — all match</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-4">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="5" data-weight="10">
+            <p class="question-label">Question 6 of 10</p>
+            <h2 class="question-text">Does your Google profile have photos posted in the last 60 days?</h2>
+            <p class="question-sub">Fresh photos signal activity. Profiles without them look abandoned to Google.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes — recent photos</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-5">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="6" data-weight="10">
+            <p class="question-label">Question 7 of 10</p>
+            <h2 class="question-text">Have you posted an update to your Google profile in the last 30 days?</h2>
+            <p class="question-sub">Google Posts show customers — and Google — that your business is active.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes — posted recently</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-6">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="7" data-weight="10">
+            <p class="question-label">Question 8 of 10</p>
+            <h2 class="question-text">Does your profile list your specific services with descriptions — not just your business category?</h2>
+            <p class="question-sub">Profiles with detailed services rank for more search terms.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes — services listed</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-7">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="8" data-weight="5">
+            <p class="question-label">Question 9 of 10</p>
+            <h2 class="question-text">Do you respond to every Google review — including the negative ones?</h2>
+            <p class="question-sub">Response rate is a trust signal Google and customers both notice.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes — respond to all</button>
+              <button class="answer-btn no" data-value="no">No or not all of them</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-8">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="9" data-weight="5">
+            <p class="question-label">Question 10 of 10</p>
+            <h2 class="question-text">Do you appear in the Google map pack (top 3 local results) for your main service + city search?</h2>
+            <p class="question-sub">Try: "[your service] [your city]" in an incognito window right now.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes — I'm in the top 3</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-9">See My Score &rarr;</button>
+          </div>
+
+        </div><!-- /questions -->
+
+        <!-- Results -->
+        <div class="results-block" id="results">
+          <div style="text-align:center; margin-bottom:36px;">
+            <div class="score-ring" id="score-ring">
+              <svg viewBox="0 0 120 120" width="120" height="120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="10"/>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="var(--blue)" stroke-width="10"
+                  stroke-dasharray="326.73" stroke-dashoffset="326.73"
+                  id="score-arc" stroke-linecap="round"/>
+              </svg>
+              <span class="score-ring-num" id="score-num">0</span>
+            </div>
+            <p class="score-label" id="score-label">Calculating...</p>
+            <p class="score-summary" id="score-summary"></p>
+          </div>
+
+          <div class="gap-list" id="gap-list"></div>
+
+          <div class="cta-capture">
+            <h2>Get Adam's full audit of your listing</h2>
+            <p>Your score shows where the gaps are. The audit shows exactly how to fix them — and what it's worth in calls per month.</p>
+            <form class="capture-form" data-lead-form data-form-name="scorecard_cta">
+              <div class="field">
+                <label for="sc-name" style="color:rgba(255,255,255,0.7);">Your name</label>
+                <input id="sc-name" name="name" autocomplete="name" required placeholder="First name">
+              </div>
+              <div class="field">
+                <label for="sc-email" style="color:rgba(255,255,255,0.7);">Email</label>
+                <input id="sc-email" name="email" type="email" autocomplete="email" required placeholder="you@yourbusiness.com">
+              </div>
+              <div class="field">
+                <label for="sc-biz" style="color:rgba(255,255,255,0.7);">Business name</label>
+                <input id="sc-biz" name="businessName" autocomplete="organization" required placeholder="Your business">
+              </div>
+              <input type="hidden" name="businessType" value="local-service">
+              <input type="hidden" name="source" value="gbp-scorecard" id="sc-score-field">
+              <button class="btn btn-primary btn-block" type="submit" style="margin-top:4px;">Get My Free Full Audit</button>
+            </form>
+            <p class="already-link">Already requested an audit? <a href="/contact">Email Adam directly</a></p>
+            <div class="form-feedback" role="status" aria-live="polite" style="margin-top:12px;color:#7dd3fc;font-weight:800;"></div>
+          </div>
+        </div><!-- /results -->
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Prime Local Growth</strong>
+        <p>Veteran-owned. Local visibility systems for service businesses.</p>
+        <p><a href="mailto:adam@primelocalgrowth.com">adam@primelocalgrowth.com</a> &middot; <a href="tel:+12106461436">210-646-1436</a></p>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/services">Services</a><a href="/the-system">How It Works</a><a href="/results">Results</a><a href="/free-visibility-audit">Free Audit</a><a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const questions = document.querySelectorAll('.question-block');
+    const progressBar = document.getElementById('progress-bar');
+    const resultsBlock = document.getElementById('results');
+    const progressOuter = document.getElementById('progress-bar-outer');
+
+    let answers = [];
+    let currentQ = 0;
+
+    const weights = [15, 15, 10, 10, 10, 10, 10, 10, 5, 5];
+    const questionTopics = [
+      'Profile not showing up on Google',
+      'Profile is not verified',
+      'Not enough reviews (need 10+ at 4.0+)',
+      'No recent reviews in the last 30 days',
+      'Business info is inconsistent across the web',
+      'No recent photos on your profile',
+      'No Google Posts in the last 30 days',
+      'Services not listed with descriptions',
+      'Not responding to all reviews',
+      'Not appearing in the map pack top 3'
+    ];
+
+    function updateProgress(q) {
+      progressBar.style.width = ((q / 10) * 100) + '%';
+    }
+
+    questions.forEach((block, idx) => {
+      const btns = block.querySelectorAll('.answer-btn');
+      const nextBtn = block.querySelector('.next-btn');
+
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          nextBtn.classList.add('show');
+          answers[idx] = btn.dataset.value;
+        });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        block.classList.remove('active');
+        if (idx < 9) {
+          questions[idx + 1].classList.add('active');
+          currentQ = idx + 1;
+          updateProgress(currentQ);
+        } else {
+          progressBar.style.width = '100%';
+          progressOuter.style.display = 'none';
+          document.getElementById('questions').style.display = 'none';
+          showResults();
+        }
+      });
+    });
+
+    function showResults() {
+      // Calculate score
+      let score = 0;
+      answers.forEach((a, i) => {
+        if (a === 'yes') score += weights[i];
+      });
+
+      // Animate score ring
+      const circumference = 326.73;
+      const arc = document.getElementById('score-arc');
+      const offset = circumference - (score / 100) * circumference;
+      setTimeout(() => {
+        arc.style.transition = 'stroke-dashoffset 1.2s ease';
+        arc.style.strokeDashoffset = offset;
+        if (score >= 70) arc.style.stroke = 'var(--green)';
+        else if (score >= 40) arc.style.stroke = 'var(--gold)';
+        else arc.style.stroke = '#ef4444';
+      }, 200);
+
+      // Animate number
+      let displayed = 0;
+      const numEl = document.getElementById('score-num');
+      const interval = setInterval(() => {
+        displayed = Math.min(displayed + 2, score);
+        numEl.textContent = displayed;
+        if (displayed >= score) clearInterval(interval);
+      }, 24);
+
+      // Score label + summary
+      const label = document.getElementById('score-label');
+      const summary = document.getElementById('score-summary');
+      if (score >= 80) {
+        label.textContent = 'Strong Foundation';
+        summary.textContent = 'Your profile is in good shape. The gaps below are the final pieces holding you back from the map pack top 3.';
+      } else if (score >= 60) {
+        label.textContent = 'Needs Work';
+        summary.textContent = 'You have the basics in place but meaningful gaps are costing you calls. Fixing these in the right order can move the needle fast.';
+      } else if (score >= 40) {
+        label.textContent = 'Significant Gaps';
+        summary.textContent = 'Customers searching for your service right now are finding competitors first. These gaps are fixable — but they compound the longer they sit.';
+      } else {
+        label.textContent = 'Critical Issues';
+        summary.textContent = 'Your Google presence has serious gaps that are actively costing you calls. This is the most fixable situation — a few targeted changes make the biggest difference.';
+      }
+
+      // Build gap list
+      const gapList = document.getElementById('gap-list');
+      answers.forEach((a, i) => {
+        const item = document.createElement('div');
+        item.className = 'gap-item';
+        if (a === 'yes') {
+          item.innerHTML = `<span class="gap-icon good">&#10003;</span><span class="gap-text">${questionTopics[i].replace('Not e','E').replace('No r','R').replace('No G','G').replace('Not a','A').replace('Not r','R').replace('Profile is not','Profile').replace('Profile not','Profile')}</span>`;
+          // Rewrite for positive framing
+          const positiveTopics = [
+            'Profile is live and findable on Google',
+            'Profile is verified by Google',
+            '10+ reviews at 4.0 or higher',
+            'Recent review activity in last 30 days',
+            'Business info is consistent across the web',
+            'Recent photos on your profile',
+            'Active Google Posts in the last 30 days',
+            'Services listed with descriptions',
+            'Responding to all reviews',
+            'Appearing in the map pack top 3'
+          ];
+          item.innerHTML = `<span class="gap-icon good">&#10003;</span><span class="gap-text">${positiveTopics[i]}</span>`;
+        } else {
+          item.innerHTML = `<span class="gap-icon bad">&#33;</span><span class="gap-text">${questionTopics[i]}</span>`;
+        }
+        gapList.appendChild(item);
+      });
+
+      // Pre-fill hidden score field
+      document.getElementById('sc-score-field').value = 'gbp-scorecard-score-' + score;
+
+      resultsBlock.classList.add('show');
+    }
+  </script>
+  <script src="/site-form.js"></script>
+  <script>const t=document.querySelector('[data-nav-toggle]'),n=document.querySelector('[data-nav-links]');t&&n&&t.addEventListener('click',()=>{const o=n.classList.toggle('open');t.setAttribute('aria-expanded',String(o));});</script>
+  <script defer src="/exit-intent.js"></script>
+</body>
+</html>

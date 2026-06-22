@@ -11,6 +11,9 @@
     },
     "api/stripe-webhook.js": {
       "maxDuration": 10
+    },
+    "api/create-geo-checkout.js": {
+      "maxDuration": 10
     }
   },
   "headers": [

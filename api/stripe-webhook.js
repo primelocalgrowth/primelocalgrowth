@@ -170,6 +170,7 @@ function getPlanFromAmount(amountTotal) {
   if (!amountTotal) return 'unknown';
   const dollars = amountTotal / 100;
   if (dollars >= 1400) return 'Elite';
+  if (dollars >= 950) return 'AI Visibility (GEO)';
   if (dollars >= 650) return 'Dominate';
   if (dollars >= 450) return 'Sprint';
   if (dollars >= 280) return 'Starter';
@@ -180,6 +181,7 @@ function getPlanFromStripePrice(unitAmount) {
   if (!unitAmount) return 'unknown';
   const dollars = unitAmount / 100;
   if (dollars >= 1400) return 'Elite';
+  if (dollars >= 950) return 'AI Visibility (GEO)';
   if (dollars >= 650) return 'Dominate';
   if (dollars >= 450) return 'Sprint';
   if (dollars >= 280) return 'Starter';

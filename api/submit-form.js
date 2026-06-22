@@ -46,6 +46,7 @@ export default async function handler(req, res) {
       pagePath = '',
       pageUrl = '',
       referrer = '',
+      source = '',
       attribution = {}
     } = req.body;
 
@@ -64,7 +65,7 @@ export default async function handler(req, res) {
     const leadName = name || businessName;
     const firstName = getFirstName(leadName);
     const niche = mainService || businessType;
-    const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, timestamp };
+    const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, source, attribution, timestamp };
 
     await runRequiredIntegrations(lead);
     await runOptionalIntegrations(lead);
@@ -86,7 +87,7 @@ export default async function handler(req, res) {
 // ============================================================
 // HELPER FUNCTIONS (BEEHIIV & SHEETS)
 // ============================================================
-async function addToBeehiiv(name, email, phone, businessName, city, businessType) {
+async function addToBeehiiv(name, email, phone, businessName, city, businessType, source = '') {
   const apiKey = process.env.BEEHIIV_API_KEY;
   const pubId = process.env.BEEHIIV_PUBLICATION_ID;
 
@@ -94,6 +95,9 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
 
   const firstName = name.split(' ')[0];
   const lastName = name.split(' ').slice(1).join(' ') || '';
+  // Normalize the lead source so automations can branch on it
+  // (e.g. the GEO nurture triggers when lead_source contains "ai-visibility").
+  const leadSource = /ai-visibility/.test(source) ? 'ai-visibility-scorecard' : (source || 'website');
 
   const response = await fetch(`https://api.beehiiv.com/v2/publications/${pubId}/subscriptions`, {
     method: 'POST',
@@ -105,14 +109,15 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
       email,
       reactivate_existing: false,
       send_welcome_email: false,
-      utm_source: 'website-form',
+      utm_source: leadSource,
       custom_fields: [
         { name: 'first_name', value: firstName },
         { name: 'last_name', value: lastName },
         { name: 'phone', value: phone || '' },
         { name: 'business_name', value: businessName },
         { name: 'city', value: city || '' },
-        { name: 'business_type', value: businessType }
+        { name: 'business_type', value: businessType },
+        { name: 'lead_source', value: leadSource }
       ]
     })
   });
@@ -156,7 +161,7 @@ async function runOptionalIntegrations(lead) {
 
   if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
     tasks.push(runOptionalTask('Beehiiv subscription', () => {
-      return addToBeehiiv(lead.name, lead.email, lead.phone, lead.businessName, lead.city, lead.businessType);
+      return addToBeehiiv(lead.name, lead.email, lead.phone, lead.businessName, lead.city, lead.businessType, lead.source);
     }));
   }
 
@@ -193,7 +198,9 @@ async function triggerAuditGenerator(lead) {
     attribution: lead.attribution,
     submittedAt: lead.timestamp,
     timestamp: lead.timestamp,
-    source: 'Website'
+    source: 'Website',
+    leadSource: lead.source,
+    auditType: /ai-visibility/.test(lead.source || '') ? 'ai-visibility' : 'gbp'
   }, 'Audit generator');
 }
 

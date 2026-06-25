@@ -87,7 +87,7 @@ export default async function handler(req, res) {
 // ============================================================
 // HELPER FUNCTIONS (BEEHIIV & SHEETS)
 // ============================================================
-async function addToBeehiiv(name, email, phone, businessName, city, businessType, source = '') {
+async function addToBeehiiv(name, email, phone, businessName, city, businessType, source = '', pagePath = '') {
   const apiKey = process.env.BEEHIIV_API_KEY;
   const pubId = process.env.BEEHIIV_PUBLICATION_ID;
 
@@ -95,9 +95,12 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
 
   const firstName = name.split(' ')[0];
   const lastName = name.split(' ').slice(1).join(' ') || '';
-  // Normalize the lead source so automations can branch on it
-  // (e.g. the GEO nurture triggers when lead_source contains "ai-visibility").
-  const leadSource = /ai-visibility/.test(source) ? 'ai-visibility-scorecard' : (source || 'website');
+  const combined = `${source}|${pagePath}`;
+  const leadSource = /ai-visibility/.test(combined) ? 'ai-visibility-scorecard'
+    : /gbp-scorecard/.test(combined) ? 'gbp-scorecard'
+    : /roi-calculator/.test(combined) ? 'roi-calculator'
+    : /newsletter/.test(combined) ? 'newsletter'
+    : (source || 'website');
 
   const response = await fetch(`https://api.beehiiv.com/v2/publications/${pubId}/subscriptions`, {
     method: 'POST',
@@ -130,25 +133,10 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
 }
 
 async function runRequiredIntegrations(lead) {
-  const tasks = [];
-
-  if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
-    tasks.push(appendToGoogleSheets(lead));
-  } else {
-    console.warn('GOOGLE_SHEETS_WEBHOOK_URL is not set; lead was not logged to Sheets.');
+  if (!process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
+    throw new Error('GOOGLE_SHEETS_WEBHOOK_URL is not configured.');
   }
-
-  if (process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL) {
-    tasks.push(triggerAuditGenerator(lead));
-  } else {
-    console.warn('MASTER_APPS_SCRIPT_WEBHOOK_URL is not set; audit doc was not generated.');
-  }
-
-  if (tasks.length === 0) {
-    throw new Error('No lead storage or audit webhook is configured.');
-  }
-
-  await Promise.all(tasks);
+  await appendToGoogleSheets(lead);
 }
 
 async function runOptionalIntegrations(lead) {
@@ -159,9 +147,13 @@ async function runOptionalIntegrations(lead) {
     tasks.push(runOptionalTask('Lead auto-reply email', () => sendLeadAutoReply(lead)));
   }
 
+  if (process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL) {
+    tasks.push(runOptionalTask('Audit generator', () => triggerAuditGenerator(lead)));
+  }
+
   if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
     tasks.push(runOptionalTask('Beehiiv subscription', () => {
-      return addToBeehiiv(lead.name, lead.email, lead.phone, lead.businessName, lead.city, lead.businessType, lead.source);
+      return addToBeehiiv(lead.name, lead.email, lead.phone, lead.businessName, lead.city, lead.businessType, lead.source, lead.pagePath);
     }));
   }
 

@@ -111,3 +111,17 @@ if ('IntersectionObserver' in window && !prefersReducedMotion) {
   }, { threshold: 0.5 });
   document.querySelectorAll('.result-kpi, .bento-stat[data-counter]').forEach(element => numberObserver.observe(element));
 }
+
+const stickyAudit = document.querySelector('.sticky-audit');
+if (stickyAudit) {
+  window.addEventListener('scroll', () => {
+    stickyAudit.style.display = window.scrollY > 500 ? 'block' : 'none';
+  }, { passive: true });
+}
+
+const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+document.querySelectorAll('.nav-links a[href]').forEach(link => {
+  if (link.getAttribute('href') === currentPath) {
+    link.setAttribute('aria-current', 'page');
+  }
+});

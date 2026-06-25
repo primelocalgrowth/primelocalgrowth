@@ -186,13 +186,7 @@ h3 {
 .hero {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 78% 20%, rgba(14, 165, 233, 0.18), transparent 32%),
-    radial-gradient(circle at 12% 18%, rgba(20, 184, 166, 0.13), transparent 26%),
-    radial-gradient(circle at 50% 90%, rgba(99, 102, 241, 0.10), transparent 28%),
-    linear-gradient(180deg, #f8fbff 0%, #ffffff 64%, #f8fafc 100%);
-  background-size: 140% 140%, 130% 130%, 120% 120%, 100% 100%;
-  animation: hero-breathe 12s ease-in-out infinite alternate;
+  background: linear-gradient(160deg, #07111f 0%, #0d1f35 55%, #071520 100%);
 }
 .hero::after {
   content: "";
@@ -200,6 +194,54 @@ h3 {
   inset: auto 0 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(14,165,233,0.45), transparent);
+}
+.hero .eyebrow { color: var(--blue-light); }
+.hero h1 { color: #fff; }
+.hero .lead { color: rgba(255,255,255,0.85); }
+.hero .pill {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.82);
+}
+.proof-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.proof-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 38px;
+  text-align: center;
+}
+.proof-bar-item strong {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--ink);
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1;
+}
+.proof-bar-item span {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 700;
+  margin-top: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.proof-bar-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .proof-bar-item { padding: 14px 18px; }
+  .proof-bar-divider { display: none; }
 }
 .hero-inner {
   max-width: 1160px;

@@ -1,5 +1,24 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Announcement bar dismiss
+(function () {
+  const bar = document.getElementById('announce-bar');
+  if (!bar) return;
+  if (localStorage.getItem('plg-ann1')) { bar.remove(); return; }
+  bar.querySelector('.announce-close')?.addEventListener('click', () => {
+    localStorage.setItem('plg-ann1', '1');
+    bar.remove();
+  });
+})();
+
+// Nav scroll shadow
+const navEl = document.querySelector('.nav');
+if (navEl) {
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('nav-scrolled', window.scrollY > 20);
+  }, { passive: true });
+}
+
 const navToggle = document.querySelector('[data-nav-toggle]');
 const navLinks = document.querySelector('[data-nav-links]');
 if (navToggle && navLinks && !navToggle.dataset.navBound) {

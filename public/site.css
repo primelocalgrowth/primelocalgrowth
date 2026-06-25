@@ -244,13 +244,9 @@ h3 {
   .proof-bar-divider { display: none; }
 }
 .hero-inner {
-  max-width: 1160px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 86px 22px 72px;
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.82fr);
-  gap: 52px;
-  align-items: center;
+  padding: 96px 22px 84px;
 }
 .hero-actions,
 .cta-row {

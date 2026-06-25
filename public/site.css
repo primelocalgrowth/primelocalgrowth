@@ -756,6 +756,7 @@ h3 {
   z-index: 12;
   box-shadow: 0 16px 34px rgba(14,165,233,0.32);
   animation: sticky-in 500ms ease both;
+  display: none;
 }
 .system-number {
   width: 42px;

@@ -1074,18 +1074,54 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* Hero entrance */
-.hero-inner > div:first-child > * {
+.hero-inner > div > *:not(.hero-headline) {
   animation: hero-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.hero-inner > div:first-child > *:nth-child(2) { animation-delay: 70ms; }
-.hero-inner > div:first-child > *:nth-child(3) { animation-delay: 140ms; }
-.hero-inner > div:first-child > *:nth-child(4) { animation-delay: 210ms; }
-.hero-inner > div:first-child > *:nth-child(5) { animation-delay: 280ms; }
-.hero-inner > div:first-child > *:nth-child(6) { animation-delay: 350ms; }
-.audit-preview { animation: hero-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) 240ms both; }
+.hero-inner > div > *:nth-child(3) { animation-delay: 1100ms; }
+.hero-inner > div > *:nth-child(4) { animation-delay: 1250ms; }
+.hero-inner > div > *:nth-child(5) { animation-delay: 1400ms; }
 @keyframes hero-rise {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero headline — typographic hierarchy */
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.hero-line-1 {
+  font-size: clamp(16px, 2vw, 26px);
+  font-weight: 700;
+  font-family: Inter, system-ui, sans-serif;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.3;
+  animation: hero-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+.hero-line-2 {
+  font-size: clamp(60px, 10vw, 108px);
+  font-weight: 900;
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #fff;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  animation: hero-line-pop 800ms cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
+}
+.hero-line-3 {
+  font-size: clamp(14px, 1.6vw, 20px);
+  font-weight: 700;
+  font-family: Inter, system-ui, sans-serif;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
+  margin-top: 10px;
+  animation: hero-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) 0.88s both;
+}
+@keyframes hero-line-pop {
+  from { opacity: 0; transform: scale(0.82) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 /* Real-time field validation */

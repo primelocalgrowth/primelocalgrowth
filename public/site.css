@@ -1264,3 +1264,171 @@ body:has(#plg-cookie-banner) .sticky-audit {
   }
 }
 
+/* ── 2026 Design Upgrades ───────────────────────────────────── */
+
+/* Diagonal section entries */
+.section.alt {
+  position: relative;
+  z-index: 1;
+  clip-path: polygon(0 clamp(22px, 3vw, 48px), 100% 0, 100% 100%, 0 100%);
+  margin-top: calc(-1 * clamp(22px, 3vw, 48px));
+  padding-top: calc(84px + clamp(22px, 3vw, 48px));
+}
+.section:not(.alt) { position: relative; z-index: 2; }
+.hero, .proof-bar, .industry-strip, .nav { position: relative; z-index: 4; }
+@media (max-width: 560px) {
+  .section.alt { padding-top: calc(62px + clamp(22px, 3vw, 48px)); }
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(100deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section watermarks */
+.section[data-wm] { overflow: hidden; }
+.section[data-wm]::before {
+  content: attr(data-wm);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(80px, 18vw, 240px);
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--ink);
+  opacity: 0.03;
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  z-index: 0;
+  user-select: none;
+}
+.section[data-wm] > .wrap { position: relative; z-index: 1; }
+
+/* Industry vertical strip */
+.industry-strip {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 22px;
+}
+.industry-strip-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.strip-label {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.industry-chip {
+  padding: 4px 12px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink-2);
+  white-space: nowrap;
+  transition: background 150ms, border-color 150ms, color 150ms;
+}
+.industry-chip:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: var(--blue-dark);
+}
+
+/* Problem items — left accent border */
+.problem-item {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blue);
+  border-radius: 0 12px 12px 0;
+  padding: 16px 18px 16px 20px;
+  font-weight: 800;
+  transition: border-left-color 160ms, background 160ms;
+}
+.problem-item:hover {
+  border-left-color: #0284c7;
+  background: #f0f9ff;
+}
+
+/* VS comparison grid */
+.vs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 32px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.vs-card { border-radius: 20px; padding: 26px 24px; }
+.vs-us {
+  background: var(--navy);
+  color: #fff;
+  box-shadow: 0 24px 60px rgba(7,17,31,0.3);
+}
+.vs-them {
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.vs-head {
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.vs-them .vs-head { border-bottom-color: var(--line); }
+.vs-name {
+  font-size: 17px;
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+}
+.vs-us .vs-name { color: #fff; }
+.vs-them .vs-name { color: var(--muted); }
+.vs-sub { font-size: 12px; margin-top: 3px; }
+.vs-us .vs-sub { color: rgba(255,255,255,0.45); }
+.vs-them .vs-sub { color: var(--muted); }
+.vs-row {
+  display: flex;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+  align-items: flex-start;
+}
+.vs-us .vs-row { color: rgba(255,255,255,0.85); }
+.vs-them .vs-row { border-bottom-color: var(--line); color: var(--muted); }
+.vs-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.vs-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 2px;
+  line-height: 1;
+}
+.vs-us .vs-icon { background: rgba(14,165,233,0.22); color: #7dd3fc; }
+.vs-them .vs-icon { background: #fee2e2; color: #dc2626; }
+@media (max-width: 680px) {
+  .vs-grid { grid-template-columns: 1fr; }
+  .vs-us { order: -1; }
+}
+

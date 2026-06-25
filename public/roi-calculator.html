@@ -554,7 +554,7 @@
       <div class="cta-box">
         <h3 id="ctaTitle">Ready to fix this?</h3>
         <p id="ctaDesc">We'll audit your Google listing, find every gap, and fix it -- typically within 24 hours.</p>
-        <a href="/#contact" class="cta-main" id="ctaBtn" onclick="trackCTA()">Get My Free Google Listing Audit →</a>
+        <a href="/free-visibility-audit" class="cta-main" id="ctaBtn" onclick="trackCTA()">Get My Free Google Listing Audit →</a>
         <p style="font-size:12px;color:var(--faint);margin-top:12px;">Your score is shared with the contact form so we know where you stand before we respond.</p>
         <div class="cta-note">No calls required · Results in 24 hours · No contracts</div>
       </div>
@@ -774,7 +774,7 @@ function trackCTA() {
   const biz = state.biz || 'general';
   if (typeof gtag !== 'undefined') gtag('event', 'calculator_cta_click', { biz_type:biz, score });
   const btn = document.getElementById('ctaBtn');
-  btn.href = `/#contact?score=${score}&type=${encodeURIComponent(biz)}`;
+  btn.href = `/free-visibility-audit?score=${score}&type=${encodeURIComponent(biz)}`;
 }
 
 // Init sliders

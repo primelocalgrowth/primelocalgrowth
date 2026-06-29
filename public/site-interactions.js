@@ -109,13 +109,13 @@ if ('IntersectionObserver' in window && !prefersReducedMotion) {
       }
     });
   }, { threshold: 0.5 });
-  document.querySelectorAll('.result-kpi, .bento-stat[data-counter]').forEach(element => numberObserver.observe(element));
+  document.querySelectorAll('.result-kpi, .bento-stat[data-counter], [data-hero-counter]').forEach(element => numberObserver.observe(element));
 }
 
 const stickyAudit = document.querySelector('.sticky-audit');
 if (stickyAudit) {
   window.addEventListener('scroll', () => {
-    stickyAudit.style.display = window.scrollY > 500 ? 'block' : 'none';
+    stickyAudit.classList.toggle('is-visible', window.scrollY > 500);
   }, { passive: true });
 }
 

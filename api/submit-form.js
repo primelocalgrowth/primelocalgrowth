@@ -3,6 +3,8 @@
  * Handles: Email (Resend) + Beehiiv subscription + Google Sheets logging + Apps Script Audit + Redirect
  */
 import { notifyAdamOfLead, sendLeadAutoReply } from './utils/email.js';
+import { sendMiniAudit } from './utils/mini-audit.js';
+import { scheduleFollowUps } from './utils/follow-up.js';
 
 // In-memory rate limit: max 5 submissions per IP per 10 minutes
 const rateLimitMap = new Map();
@@ -145,6 +147,13 @@ async function runOptionalIntegrations(lead) {
   if (process.env.RESEND_API_KEY) {
     tasks.push(runOptionalTask('Lead notification email', () => notifyAdamOfLead(lead)));
     tasks.push(runOptionalTask('Lead auto-reply email', () => sendLeadAutoReply(lead)));
+
+    if (process.env.GOOGLE_PLACES_API_KEY) {
+      tasks.push(runOptionalTask('Instant mini-audit', () => sendMiniAudit(lead)));
+    }
+    if (process.env.LEAD_FOLLOWUPS_ENABLED === 'true') {
+      tasks.push(runOptionalTask('Follow-up scheduling', () => scheduleFollowUps(lead)));
+    }
   }
 
   if (process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL) {

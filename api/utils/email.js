@@ -10,7 +10,7 @@ const FROM_PLG = 'Prime Local Growth <adam@primelocalgrowth.com>';
 /**
  * Standard unsubscribe footer for all emails
  */
-function getEmailFooter() {
+export function getEmailFooter() {
   return `
     <hr style="border:none;border-top:1px solid #e5e5e5;margin:28px 0 20px;">
     <div style="font-size:12px;color:#999;text-align:center;">
@@ -32,7 +32,7 @@ function getEmailFooter() {
  * @returns {Promise}
  */
 export async function sendEmail(config) {
-  const { to, from, subject, html, replyTo } = config;
+  const { to, from, subject, html, replyTo, scheduledAt } = config;
 
   if (!process.env.RESEND_API_KEY) {
     console.warn('No RESEND_API_KEY — email skipped:', subject);
@@ -51,7 +51,8 @@ export async function sendEmail(config) {
         to: Array.isArray(to) ? to : [to],
         subject,
         html,
-        ...(replyTo && { reply_to: replyTo })
+        ...(replyTo && { reply_to: replyTo }),
+        ...(scheduledAt && { scheduled_at: scheduledAt })
       })
     });
 
@@ -286,7 +287,7 @@ export async function sendOnboardingChecklist(customer, productId) {
 /**
  * HTML escape utility
  */
-function escapeHtml(text) {
+export function escapeHtml(text) {
   if (!text) return '';
   const map = {
     '&': '&amp;',
@@ -334,5 +335,3 @@ export async function sendReviewRequest(customer) {
     replyTo: 'adam@primelocalgrowth.com'
   });
 }
-
-export { escapeHtml };

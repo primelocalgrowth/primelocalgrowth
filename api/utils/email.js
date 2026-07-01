@@ -133,6 +133,8 @@ export async function sendLeadAutoReply(lead) {
 
         <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;"><strong>You'll get the full report within 24 hours</strong> showing exactly what's working and what's holding you back.</p>
 
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;"><strong>Want a sharper audit?</strong> Reply right now with 2–3 competitors customers see before you, plus your top service areas. Audits with competitor targets find the biggest gaps.</p>
+
         <p style="font-size:14px;color:#666;line-height:1.6;margin:0;">Questions in the meantime? Just reply to this email — I read every one personally.</p>
 
         <p style="font-size:14px;color:#666;line-height:1.6;margin:16px 0 0;">— Adam Rome<br>Prime Local Growth<br><a href="tel:210-646-1436" style="color:#0ea5e9;text-decoration:none;">210-646-1436</a></p>

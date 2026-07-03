@@ -351,7 +351,7 @@
           <span class="av" style="background:#FF9F1C">B</span>
           <span class="av" style="background:#1E4A3D">S</span>
         </span>
-        <span>Latest client: <b>4 → 40 Google reviews</b> and <b>#1 in Google Maps</b> — verifiable on their live profile</span>
+        <span>A Cibolo business: <b>4 → 40 Google reviews</b> in 60 days — verifiable on their live profile</span>
       </div>
     </div>
     <div class="simwrap">
@@ -374,7 +374,7 @@
           <span class="live" id="simStatus">not showing up yet</span>
         </div>
       </div>
-      <div class="badge1" id="simBadge">🏆 #1 result</div>
+      <div class="badge1" id="simBadge">🏆 Top of the list</div>
     </div>
   </div>
 </section>
@@ -393,8 +393,8 @@
 <section id="results">
   <div class="wrap">
     <span class="eyebrow rv"><span class="dot"></span>Real client, real numbers</span>
-    <h2 class="rv">From invisible to #1 in Google Maps. In 60 days.</h2>
-    <p class="sub rv">A Cibolo barbershop came to us ranked 4th with a thin profile and 4 reviews. Google Business Profile rebuilt from scratch — every number below is verifiable on their live profile right now.</p>
+    <h2 class="rv">From invisible to the top of the list. In 60 days.</h2>
+    <p class="sub rv">A Cibolo business came to us with a thin profile and 4 reviews. Google Business Profile rebuilt from scratch — every number below is verifiable on their live profile right now.</p>
     <div class="proof-grid">
       <div class="metric rv"><span class="chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#1E8A4C" stroke-width="3.4" stroke-linecap="round"/></svg>Verified</span><div class="num" data-count="232">0</div><div class="lbl">Monthly profile views — up from 2/month before the rebuild</div></div>
       <div class="metric rv"><span class="chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="#1E8A4C" stroke-width="3.4" stroke-linecap="round"/></svg>Verified</span><div class="num" data-count="25">0</div><div class="lbl">Direct calls from Google every month — up from zero</div></div>
@@ -403,7 +403,7 @@
     <div class="chartcard rv">
       <div class="cc-head">
         <h3>Profile views: before and after the rebuild</h3>
-        <div class="cc-key"><span><i style="background:#2EC4B6"></i>DCutz Barbershop · Cibolo, TX</span></div>
+        <div class="cc-key"><span><i style="background:#2EC4B6"></i>A Cibolo, TX service business</span></div>
       </div>
       <svg id="growthChart" viewBox="0 0 720 220" preserveAspectRatio="xMidYMid meet" aria-label="Line chart: monthly profile views rising from 2 to 232 between April and June 2026">
         <defs><linearGradient id="gfade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2EC4B6" stop-opacity=".22"/><stop offset="100%" stop-color="#2EC4B6" stop-opacity="0"/></linearGradient></defs>
@@ -522,7 +522,7 @@
       <p class="rv">No account managers, no outsourcing, no long contracts that bet on you not reading the fine print. If the work doesn't earn next month's invoice, you shouldn't pay it. <b>That's the whole deal.</b></p>
       <div class="quote rv">
         <p>I've been working with Adam for about a month now and I have noticed a huge difference in my business.</p>
-        <span class="who">Alex Arroyo — barbershop owner, Cibolo TX · public Google review</span>
+        <span class="who">Cibolo business owner · public Google review</span>
       </div>
     </div>
     <div class="creds rv">
@@ -681,12 +681,12 @@
   var sim=document.getElementById('sim'), rev=document.getElementById('revCount'),
       status=document.getElementById('simStatus'), badge=document.getElementById('simBadge');
   function runSim(){
-    if(reduce){ rev.textContent='40'; sim.classList.add('play'); status.textContent='#1 on the map'; badge.classList.add('on'); return; }
+    if(reduce){ rev.textContent='40'; sim.classList.add('play'); status.textContent='top of the map'; badge.classList.add('on'); return; }
     var n=0, iv=setInterval(function(){
       n+= n<20?2:3; if(n>=40){n=40;clearInterval(iv);
         status.textContent='climbing…';
         setTimeout(function(){ sim.classList.add('play');
-          status.textContent='#1 on the map'; badge.classList.add('on');
+          status.textContent='top of the map'; badge.classList.add('on');
         },500);
       }
       rev.textContent=n;

@@ -99,7 +99,7 @@
     --teal:#2EC4B6;
     --mist:#5F7268;
     --line:#E2E8E0;
-    --good:#1E8A4C;
+    --good:#146238;
     --r-sm:12px; --r-md:18px; --r-lg:28px; --r-pill:999px;
     --disp:'Bricolage Grotesque', system-ui, sans-serif;
     --body:'Figtree', system-ui, sans-serif;
@@ -183,8 +183,8 @@
   .sim.play .biz.you{order:-1}
   .sim-foot{margin-top:16px;font-size:13px;color:var(--mist);display:flex;justify-content:space-between;align-items:center}
   .sim-foot .live{color:var(--good);font-weight:700}
-  .badge1{position:absolute;top:-18px;right:-10px;background:var(--amber);color:var(--forest);font-family:var(--disp);font-weight:800;font-size:14.5px;border-radius:var(--r-pill);padding:10px 18px;box-shadow:var(--shadow);opacity:0;transform:translateY(8px) scale(.9);transition:opacity .3s ease-out .15s,transform .35s cubic-bezier(.34,1.56,.64,1) .15s}
-  .badge1.on{opacity:1;transform:none}
+  .badge1{position:absolute;top:-18px;right:-10px;background:var(--amber);color:var(--forest);font-family:var(--disp);font-weight:800;font-size:14.5px;border-radius:var(--r-pill);padding:10px 18px;box-shadow:var(--shadow);opacity:1;transform:scale(.9);transition:transform .35s cubic-bezier(.34,1.56,.64,1) .15s}
+  .badge1.on{transform:none}
 
   .trust{background:var(--forest);color:#DFEAE3;padding:22px 0}
   .trust .wrap{display:flex;gap:16px 40px;flex-wrap:wrap;justify-content:center;font-weight:600;font-size:14.5px}
@@ -498,6 +498,7 @@
         <a class="btn" href="#audit">Get my free audit</a>
       </div>
       <div class="tier ai rv">
+        <span class="pop" style="background:var(--amber);color:#14342B">Add-on</span>
         <span class="tname">AI Visibility (GEO)</span>
         <div class="tprice">$997<small style="color:#9DB5A7">/month</small></div>
         <p class="fit">Be the name AI gives out when customers ask "best [service] near me"</p>

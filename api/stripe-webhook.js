@@ -199,7 +199,7 @@ async function getRawBody(req) {
 
 async function verifyStripeWebhook(rawBody, sig, secret) {
   // Manual HMAC verification — avoids requiring stripe npm package on Vercel Edge
-  const { createHmac } = await import('crypto');
+  const { createHmac, timingSafeEqual } = await import('crypto');
 
   const parts = sig.split(',').reduce((acc, part) => {
     const [key, val] = part.split('=');
@@ -221,7 +221,11 @@ async function verifyStripeWebhook(rawBody, sig, secret) {
   const payload = `${timestamp}.${rawBody}`;
   const hmac = createHmac('sha256', secret).update(payload).digest('hex');
 
-  if (hmac !== expectedSig) throw new Error('Signature mismatch');
+  const hmacBuf = Buffer.from(hmac, 'hex');
+  const expectedBuf = Buffer.from(expectedSig, 'hex');
+  if (hmacBuf.length !== expectedBuf.length || !timingSafeEqual(hmacBuf, expectedBuf)) {
+    throw new Error('Signature mismatch');
+  }
 
   return JSON.parse(rawBody);
 }

@@ -6,13 +6,21 @@ import { notifyAdamOfLead, sendLeadAutoReply } from './utils/email.js';
 import { sendMiniAudit } from './utils/mini-audit.js';
 import { scheduleFollowUps } from './utils/follow-up.js';
 
-// In-memory rate limit: max 5 submissions per IP per 10 minutes
+// In-memory rate limit: max 5 submissions per IP per 10 minutes.
+// Per-instance only (Vercel functions aren't guaranteed to share state across
+// invocations), but still bounds abuse from a single warm instance. Expired
+// entries are swept on each call so the map can't grow unbounded over the
+// life of a long-warm instance.
 const rateLimitMap = new Map();
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
 function isRateLimited(ip) {
   const now = Date.now();
+  for (const [key, entry] of rateLimitMap) {
+    if (now - entry.windowStart > RATE_LIMIT_WINDOW_MS) rateLimitMap.delete(key);
+  }
+
   const entry = rateLimitMap.get(ip);
   if (!entry || now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
     rateLimitMap.set(ip, { count: 1, windowStart: now });

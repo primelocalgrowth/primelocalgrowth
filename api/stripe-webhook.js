@@ -41,6 +41,8 @@ export default async function handler(req, res) {
   try {
     if (event.type === 'checkout.session.completed') {
       await handleCheckoutComplete(event.data.object);
+    } else if (event.type === 'invoice.paid') {
+      await handleInvoicePaid(event.data.object);
     } else if (event.type === 'customer.subscription.created') {
       await handleSubscriptionCreated(event.data.object);
     }
@@ -74,10 +76,38 @@ async function handleCheckoutComplete(session) {
   ]);
 }
 
+// Emailed Stripe invoices don't emit checkout.session.completed, so the
+// invoice-first sales motion (free audit → email → invoice) onboards here.
+// Renewals also emit invoice.paid — only the first charge should onboard:
+// 'manual' = a one-off emailed invoice, 'subscription_create' = first cycle.
+async function handleInvoicePaid(invoice) {
+  const reason = invoice.billing_reason;
+  if (reason !== 'manual' && reason !== 'subscription_create') return;
+
+  const email = invoice.customer_email;
+  const name = invoice.customer_name || '';
+  if (!email) {
+    console.warn('invoice.paid: no customer email found');
+    return;
+  }
+
+  const plan = invoice.metadata?.plan || getPlanFromAmount(invoice.amount_paid);
+  const productId = invoice.metadata?.product_id || 'sprint';
+  const customer = { email, name };
+
+  await Promise.allSettled([
+    sendCustomerWelcome(customer, productId),
+    sendOnboardingChecklist(customer, productId),
+    addBeehiivActiveTag(email, name, plan),
+    updateSheetsToActive(email, name, plan),
+    notifyAdamOfNewClient(customer, plan, invoice.amount_paid),
+  ]);
+}
+
 async function handleSubscriptionCreated(subscription) {
   // Fetch customer details from Stripe
   const customerId = subscription.customer;
-  const plan = getPlanFromStripePrice(subscription.items?.data?.[0]?.price?.unit_amount);
+  const plan = getPlanFromAmount(subscription.items?.data?.[0]?.price?.unit_amount);
 
   // We don't have email from the subscription object directly — it comes via customer
   // Rely on checkout.session.completed for the primary onboarding trigger
@@ -166,26 +196,15 @@ async function notifyAdamOfNewClient(customer, plan, amountTotal) {
   });
 }
 
+// Current PLG tiers: $997/mo Growth Management / AI Visibility (GEO),
+// $697 Foundation (one-time), $497/mo legacy Visibility Management.
 function getPlanFromAmount(amountTotal) {
   if (!amountTotal) return 'unknown';
   const dollars = amountTotal / 100;
-  if (dollars >= 1400) return 'Elite';
-  if (dollars >= 950) return 'AI Visibility (GEO)';
-  if (dollars >= 650) return 'Dominate';
-  if (dollars >= 450) return 'Sprint';
-  if (dollars >= 280) return 'Starter';
-  return 'unknown';
-}
-
-function getPlanFromStripePrice(unitAmount) {
-  if (!unitAmount) return 'unknown';
-  const dollars = unitAmount / 100;
-  if (dollars >= 1400) return 'Elite';
-  if (dollars >= 950) return 'AI Visibility (GEO)';
-  if (dollars >= 650) return 'Dominate';
-  if (dollars >= 450) return 'Sprint';
-  if (dollars >= 280) return 'Starter';
-  return 'unknown';
+  if (dollars >= 950) return 'Growth/AI Visibility';
+  if (dollars >= 650) return 'Foundation';
+  if (dollars >= 450) return 'Visibility (legacy)';
+  return 'Custom';
 }
 
 async function getRawBody(req) {

@@ -53,9 +53,22 @@ Audit date: 2026-07-12
 - Moved the hardcoded Google spreadsheet ID to the `PLG_SPREADSHEET_ID` Apps Script property.
 - Aligned confirmation and onboarding email timelines with the actual 30-day sprint.
 
+## Live Google Drive findings
+
+The connected Google account exposes the production `PLG Lead Database` spreadsheet. Its current structure is:
+
+- `Audit Requests`, `PLG Lead Database`, `Onboarding Log`, and `Clients`: headers only, with no operating records.
+- `Reply Log`: two outreach replies; the latest logged reply is from approximately May 22, 2026.
+- `Scraped Log`: 70 prospect rows; the latest scrape is from approximately May 23, 2026.
+- `Log`: 84 rows; the latest recorded batch activity is from approximately May 23, 2026.
+
+This means the Sheet exists and the older prospecting automation ran, but it is not currently functioning as PLG's source of truth. The existing $400/month customer is absent from `Clients`, and no website lead or audit has reached the primary pipeline tabs. Before adding more automation, add the current customer and prove one controlled form submission reaches the Sheet.
+
+The main lead tab also has no explicit `Marketing Consent` column yet. The remediated website sends `marketing_consent`; the Apps Script webhook must map that value to a dedicated column rather than burying it in Notes.
+
 ## Production configuration that still requires account verification
 
-The current authenticated tools did not expose the Vercel project or the Google account that owns the Apps Script deployments. Do not claim these are confirmed until the correct accounts are accessible.
+Google Drive and the production spreadsheet are verified. The current authenticated tools still do not expose the Vercel project, Apps Script source, deployment settings, Script Properties, or execution history. Do not claim those pieces are confirmed until the owning dashboards are accessible.
 
 Verify these production variable names in the actual Prime Local Growth Vercel project:
 
@@ -83,6 +96,8 @@ Verify these Script Properties in the audit-generator Apps Script project:
 8. Confirm the audit deployment uses `enrichAuditLeadWithPlaces`, document template tokens, and `updateLeadPlacesByEmail`.
 9. Set `GOOGLE_PLACES_API_KEY` and `PLG_SPREADSHEET_ID` in Script Properties; do not hardcode either in source.
 10. Use versioned production deployments and inspect recent Executions for failures before an end-to-end test.
+11. Map `marketing_consent` to a dedicated `Marketing Consent` column.
+12. Add the current paying customer to `Clients` so the backend reflects the actual business.
 
 ## End-to-end acceptance test
 
@@ -97,4 +112,4 @@ Use a real PLG-controlled test address, not a fake prospect:
 
 ## Current verdict
 
-The service choices are appropriate for a one-client business. The previous wiring was not: Beehiiv was acting as a CRM, Resend was acting as an uncancellable nurture engine, Google Places logic existed in two places, and Stripe could onboard the same subscription twice. The remediated design keeps the inexpensive tools while giving each one a single job.
+The service choices are appropriate for a one-client business. The previous wiring was not: Beehiiv was acting as a CRM, Resend was acting as an uncancellable nurture engine, Google Places logic existed in two places, and Stripe could onboard the same subscription twice. The remediated design keeps the inexpensive tools while giving each one a single job. The immediate backend priority is now operational adoption and one end-to-end proof, not another platform.

@@ -1,63 +1,84 @@
 /**
- * Newsletter Subscribe — adds directly to Beehiiv
- * Used by the /newsletter landing page (name + email only, no business type required)
+ * Explicit newsletter opt-in endpoint.
+ * Beehiiv owns newsletter contacts and sends its configured welcome email.
+ * Resend is intentionally not used here; it is reserved for transactional mail.
  */
 
-import { sendEmail } from './utils/email.js';
-
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Allow', 'POST');
 
-  const { name, email } = req.body;
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-  if (!name || !email) return res.status(400).json({ error: 'Name and email required' });
+  if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+    return res.status(400).json({ error: 'Invalid request body' });
+  }
+
+  const { name = '', email = '', companyWebsite = '' } = req.body;
+
+  // Honeypot: acknowledge bots without creating a subscription.
+  if (String(companyWebsite).trim()) {
+    return res.status(200).json({ success: true, redirectUrl: '/thank-you' });
+  }
+
+  if (typeof name !== 'string' || typeof email !== 'string' || name.length > 120 || email.length > 254) {
+    return res.status(400).json({ error: 'Invalid name or email' });
+  }
+
+  const cleanName = name.trim();
+  const cleanEmail = email.trim().toLowerCase();
+  if (!cleanName || !cleanEmail) {
+    return res.status(400).json({ error: 'Name and email required' });
+  }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) return res.status(400).json({ error: 'Invalid email address' });
+  if (!emailRegex.test(cleanEmail)) {
+    return res.status(400).json({ error: 'Invalid email address' });
+  }
 
-  const firstName = name.split(' ')[0];
-  const lastName  = name.split(' ').slice(1).join(' ') || '';
+  const apiKey = process.env.BEEHIIV_API_KEY;
+  const publicationId = process.env.BEEHIIV_PUBLICATION_ID;
+  if (!apiKey || !publicationId) {
+    console.error('Newsletter unavailable: Beehiiv environment variables are missing.');
+    return res.status(503).json({ error: 'Newsletter signup is temporarily unavailable.' });
+  }
 
-  // Add to Beehiiv
-  if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
-    try {
-      const r = await fetch(
-        `https://api.beehiiv.com/v2/publications/${process.env.BEEHIIV_PUBLICATION_ID}/subscriptions`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.BEEHIIV_API_KEY}`
-          },
-          body: JSON.stringify({
-            email,
-            reactivate_existing: false,
-            send_welcome_email: true,
-            utm_source: 'newsletter-page',
-            custom_fields: [
-              { name: 'first_name', value: firstName },
-              { name: 'last_name',  value: lastName }
-            ]
-          })
-        }
-      );
-      if (!r.ok) console.error('Beehiiv error:', r.status);
-    } catch (err) {
-      console.error('Beehiiv subscribe error:', err);
+  const firstName = cleanName.split(/\s+/)[0];
+  const lastName = cleanName.split(/\s+/).slice(1).join(' ');
+
+  try {
+    const response = await fetch(
+      `https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          email: cleanEmail,
+          reactivate_existing: true,
+          send_welcome_email: true,
+          utm_source: 'newsletter-page',
+          custom_fields: [
+            { name: 'first_name', value: firstName },
+            { name: 'last_name', value: lastName }
+          ]
+        })
+      }
+    );
+
+    if (!response.ok) {
+      const detail = (await response.text()).slice(0, 500);
+      console.error(`Beehiiv subscription failed (${response.status}): ${detail}`);
+      return res.status(502).json({ error: 'We could not complete the subscription. Please try again.' });
     }
-  }
 
-  // Notify Adam
-  if (process.env.RESEND_API_KEY) {
-    try {
-      await sendEmail({
-        to: 'adam@primelocalgrowth.com',
-        from: 'Prime Local Growth <adam@primelocalgrowth.com>',
-        subject: `📧 New newsletter subscriber: ${name}`,
-        html: `<p><strong>${name}</strong> (${email}) just subscribed via the newsletter page.</p>`
-      });
-    } catch (err) { /* non-critical */ }
+    return res.status(200).json({ success: true, redirectUrl: '/thank-you' });
+  } catch (error) {
+    console.error('Beehiiv subscription request failed:', error.message);
+    return res.status(502).json({ error: 'We could not complete the subscription. Please try again.' });
   }
-
-  return res.status(200).json({ success: true, redirectUrl: '/thank-you' });
 }

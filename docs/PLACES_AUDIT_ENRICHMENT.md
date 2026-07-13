@@ -6,10 +6,11 @@ This module enriches each free audit with Google business and competitor data wh
 
 1. Open the separate Apps Script project used by `MASTER_APPS_SCRIPT_WEBHOOK_URL`.
 2. Add `google-apps-script/places-audit-enrichment.gs`.
-3. In Apps Script Project Settings, add this script property:
+3. In Apps Script Project Settings, add these Script Properties:
 
 ```text
 GOOGLE_PLACES_API_KEY=your Google Places API key
+PLG_SPREADSHEET_ID=your Google Sheets spreadsheet ID
 ```
 
 4. Restrict the key in Google Cloud to Places API (New).

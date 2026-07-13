@@ -19,8 +19,7 @@ export function getEmailFooter() {
         <a href="mailto:adam@primelocalgrowth.com" style="color:#0ea5e9;text-decoration:none;">adam@primelocalgrowth.com</a>
       </p>
       <p style="margin:4px 0 0;padding:0;">
-        <a href="https://www.primelocalgrowth.com/newsletter" style="color:#0ea5e9;text-decoration:none;">Subscribe to Newsletter</a> ·
-        <a href="https://www.primelocalgrowth.com/preferences" style="color:#0ea5e9;text-decoration:none;">Manage Preferences</a>
+        <a href="https://www.primelocalgrowth.com/privacy" style="color:#0ea5e9;text-decoration:none;">Privacy Policy</a>
       </p>
     </div>
   `;
@@ -132,7 +131,7 @@ export async function sendLeadAutoReply(lead) {
 
         <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Got your info for ${escapeHtml(businessName)}. I'm running your free Google visibility audit right now — checking your Google Business Profile, reviews, keywords, and comparing you to local competitors.</p>
 
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;"><strong>You'll get the full report within 24 hours</strong> showing exactly what's working and what's holding you back.</p>
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;"><strong>You'll get the first findings within 24 hours</strong>, followed by an invitation to a focused 15-minute call to decide whether the 30-day sprint is worth doing.</p>
 
         <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;"><strong>Want a sharper audit?</strong> Reply right now with 2–3 competitors customers see before you, plus your top service areas. Audits with competitor targets find the biggest gaps.</p>
 
@@ -193,9 +192,9 @@ export async function sendCustomerWelcome(customer, productId) {
         ` : ''}
         <p><strong>What happens next:</strong></p>
         <ul style="padding-left:20px;">
-          <li><strong>Hour 0–2:</strong> I accept your invitation and run a full diagnostic audit</li>
-          <li><strong>Hours 2–12:</strong> Full 360° optimization — keywords, photos, services, Q&A</li>
-          <li><strong>Hours 12–24:</strong> Posting schedule, review monitoring activated</li>
+          <li><strong>Days 1–3:</strong> I accept access, capture the baseline, and confirm the highest-value gaps</li>
+          <li><strong>Days 4–21:</strong> I complete the agreed profile, review-process, and mobile call-path fixes</li>
+          <li><strong>Day 30:</strong> We review the before-and-after scorecard and decide whether anything should continue</li>
         </ul>
         <p style="background:#1a1f26;border-left:3px solid #f59e0b;padding:14px 18px;border-radius:0 6px 6px 0;font-size:14px;color:#d1d5db;">You stay the Primary Owner. Manager access means I can optimize — I cannot transfer or delete your listing.</p>
         <p style="font-size:14px;color:#666;">Questions? Hit reply — I read every email personally.<br>— Adam Rome · Prime Local Growth · adam@primelocalgrowth.com</p>
@@ -233,26 +232,26 @@ export async function sendOnboardingChecklist(customer, productId) {
         <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
           <tr>
             <td style="background:#fffbeb;border-left:4px solid #f59e0b;padding:16px;border-radius:6px;margin-bottom:16px;">
-              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">Today</p>
-              <p style="margin:0;color:#1a1a1a;">You get the GBP access guide. Follow it to add me as Manager to your listing.</p>
+              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">Days 1–3</p>
+              <p style="margin:0;color:#1a1a1a;">Use the access guide to add me as Manager. I capture the baseline for the three searches we agreed to review.</p>
             </td>
           </tr>
           <tr>
             <td style="background:#fffbeb;border-left:4px solid #f59e0b;padding:16px;border-radius:6px;margin-bottom:16px;margin-top:16px;">
-              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">24 Hours</p>
-              <p style="margin:0;color:#1a1a1a;">I'll run your complete GBP audit and send you a report showing exactly what's working and what needs to change.</p>
+              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">Days 4–10</p>
+              <p style="margin:0;color:#1a1a1a;">I complete the highest-impact Google profile fixes and document what changed.</p>
             </td>
           </tr>
           <tr>
             <td style="background:#fffbeb;border-left:4px solid #f59e0b;padding:16px;border-radius:6px;margin-bottom:16px;margin-top:16px;">
-              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">48 Hours</p>
-              <p style="margin:0;color:#1a1a1a;">First optimization complete — photos optimized, keywords updated, services added, Q&A seeded.</p>
+              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">Days 11–21</p>
+              <p style="margin:0;color:#1a1a1a;">I install the review-request process and check the mobile path from search to phone call.</p>
             </td>
           </tr>
           <tr>
             <td style="background:#fffbeb;border-left:4px solid #f59e0b;padding:16px;border-radius:6px;margin-top:16px;">
-              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">Weekly</p>
-              <p style="margin:0;color:#1a1a1a;">Google Posts every week, review monitoring, competitor tracking. I send you a report every Friday.</p>
+              <p style="margin:0 0 8px;font-weight:bold;color:#92400e;font-size:14px;text-transform:uppercase;">Day 30</p>
+              <p style="margin:0;color:#1a1a1a;">We review the before-and-after scorecard. Ongoing management starts only if the evidence justifies it and you approve it.</p>
             </td>
           </tr>
         </table>

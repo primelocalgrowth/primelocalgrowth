@@ -1,10 +1,9 @@
 /**
  * Vercel Serverless Function - Enhanced Form Handler
- * Handles: Email (Resend) + Beehiiv subscription + Google Sheets logging + Apps Script Audit + Redirect
+ * Handles: Google Sheets lead capture + Apps Script audit + transactional email.
+ * Beehiiv is used only when the lead separately opts in to marketing.
  */
 import { notifyAdamOfLead, sendLeadAutoReply } from './utils/email.js';
-import { sendMiniAudit } from './utils/mini-audit.js';
-import { scheduleFollowUps } from './utils/follow-up.js';
 
 // In-memory rate limit: max 5 submissions per IP per 10 minutes.
 // Per-instance only (Vercel functions aren't guaranteed to share state across
@@ -32,6 +31,9 @@ function isRateLimited(ip) {
 }
 
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Allow', 'POST');
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -42,6 +44,10 @@ export default async function handler(req, res) {
   }
 
   try {
+    if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+      return res.status(400).json({ error: 'Invalid request body' });
+    }
+
     const {
       name,
       email,
@@ -57,8 +63,35 @@ export default async function handler(req, res) {
       pageUrl = '',
       referrer = '',
       source = '',
-      attribution = {}
+      attribution = {},
+      marketingConsent = false,
+      companyWebsite = ''
     } = req.body;
+
+    // Honeypot: bots fill this visually hidden field. Return a generic success
+    // without invoking downstream services so the field does not become an oracle.
+    if (String(companyWebsite || '').trim()) {
+      return res.status(200).json({ success: true, redirectUrl: '/thank-you' });
+    }
+
+    const fields = { name, email, phone, businessName, city, businessType, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, source };
+    const limits = { name: 120, email: 254, phone: 40, businessName: 160, city: 120, businessType: 100, website: 500, mainService: 160, visibilityConcern: 2000, situation: 2000, pagePath: 500, pageUrl: 1000, referrer: 1000, source: 160 };
+    for (const [key, value] of Object.entries(fields)) {
+      if (value != null && typeof value !== 'string') {
+        return res.status(400).json({ error: `Invalid ${key}` });
+      }
+      if (String(value || '').length > limits[key]) {
+        return res.status(400).json({ error: `${key} is too long` });
+      }
+    }
+
+    const cleanAttribution = {};
+    if (attribution && typeof attribution === 'object' && !Array.isArray(attribution)) {
+      for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid']) {
+        const value = attribution[key];
+        if (typeof value === 'string') cleanAttribution[key] = value.slice(0, 250);
+      }
+    }
 
     // Validate required fields
     if (!email || !businessName) {
@@ -75,7 +108,8 @@ export default async function handler(req, res) {
     const leadName = name || businessName;
     const firstName = getFirstName(leadName);
     const niche = mainService || businessType;
-    const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, source, attribution, timestamp };
+    const optedIntoMarketing = marketingConsent === true || marketingConsent === 'true' || marketingConsent === 'on';
+    const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, source, attribution: cleanAttribution, marketingConsent: optedIntoMarketing, timestamp };
 
     await runRequiredIntegrations(lead);
     await runOptionalIntegrations(lead);
@@ -90,7 +124,7 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Form submission error:', error);
-    return res.status(500).json({ error: 'Server error', message: error.message });
+    return res.status(500).json({ error: 'We could not save your request. Please try again or contact Adam directly.' });
   }
 }
 
@@ -120,7 +154,7 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
     },
     body: JSON.stringify({
       email,
-      reactivate_existing: false,
+      reactivate_existing: true,
       send_welcome_email: false,
       utm_source: leadSource,
       custom_fields: [
@@ -156,19 +190,13 @@ async function runOptionalIntegrations(lead) {
     tasks.push(runOptionalTask('Lead notification email', () => notifyAdamOfLead(lead)));
     tasks.push(runOptionalTask('Lead auto-reply email', () => sendLeadAutoReply(lead)));
 
-    if (process.env.GOOGLE_PLACES_API_KEY) {
-      tasks.push(runOptionalTask('Instant mini-audit', () => sendMiniAudit(lead)));
-    }
-    if (process.env.LEAD_FOLLOWUPS_ENABLED === 'true') {
-      tasks.push(runOptionalTask('Follow-up scheduling', () => scheduleFollowUps(lead)));
-    }
   }
 
   if (process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL) {
     tasks.push(runOptionalTask('Audit generator', () => triggerAuditGenerator(lead)));
   }
 
-  if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
+  if (lead.marketingConsent && process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
     tasks.push(runOptionalTask('Beehiiv subscription', () => {
       return addToBeehiiv(lead.name, lead.email, lead.phone, lead.businessName, lead.city, lead.businessType, lead.source, lead.pagePath);
     }));
@@ -216,7 +244,7 @@ async function triggerAuditGenerator(lead) {
 async function appendToGoogleSheets(lead) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (!webhookUrl) return;
-  const { name, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, timestamp } = lead;
+  const { name, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution, marketingConsent, timestamp } = lead;
 
   return await postWebhook(webhookUrl, {
     firstName,
@@ -252,6 +280,7 @@ async function appendToGoogleSheets(lead) {
     utm_term: attribution?.utm_term || '',
     utm_content: attribution?.utm_content || '',
     gclid: attribution?.gclid || '',
+    marketing_consent: marketingConsent ? 'Yes' : 'No',
     notes: [visibilityConcern, situation, attribution ? JSON.stringify(attribution) : ''].filter(Boolean).join('\n\n')
   }, 'Google Sheets');
 }

@@ -2,7 +2,8 @@
  * Prime Local Growth - Google Places audit enrichment
  *
  * Setup:
- * 1. Add GOOGLE_PLACES_API_KEY to Apps Script Project Settings -> Script Properties.
+ * 1. Add GOOGLE_PLACES_API_KEY and PLG_SPREADSHEET_ID to Apps Script
+ *    Project Settings -> Script Properties.
  * 2. Paste this file into the audit-generator Apps Script project.
  * 3. Call enrichAuditLeadWithPlaces(lead) before creating the audit document.
  * 4. Call replacePlacesAuditTags(body, places) while replacing document tags.
@@ -10,7 +11,7 @@
  */
 
 const PLACES_AUDIT_CONFIG = {
-  SPREADSHEET_ID: "1VQUrCVsn97iGlO_lQoK_HHDQqneKDgPN7udZRJWRW-U",
+  SPREADSHEET_ID_PROPERTY: "PLG_SPREADSHEET_ID",
   LEAD_SHEET: "PLG Lead Database",
   API_URL: "https://places.googleapis.com/v1/places:searchText",
   CACHE_SECONDS: 21600,
@@ -209,7 +210,14 @@ function updateLeadPlacesByEmail(email, places) {
   const normalizedEmail = cleanPlacesValue(email).toLowerCase();
   if (!normalizedEmail) return false;
 
-  const ss = SpreadsheetApp.openById(PLACES_AUDIT_CONFIG.SPREADSHEET_ID);
+  const spreadsheetId = PropertiesService
+    .getScriptProperties()
+    .getProperty(PLACES_AUDIT_CONFIG.SPREADSHEET_ID_PROPERTY);
+  if (!spreadsheetId) {
+    throw new Error("Missing PLG_SPREADSHEET_ID script property.");
+  }
+
+  const ss = SpreadsheetApp.openById(spreadsheetId);
   const sheet = ss.getSheetByName(PLACES_AUDIT_CONFIG.LEAD_SHEET);
   if (!sheet || sheet.getLastRow() < 2) return false;
 

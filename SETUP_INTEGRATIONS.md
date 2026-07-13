@@ -1,6 +1,8 @@
 # Website Integration Setup Guide
 
-Your website now has enhanced forms that integrate with **Beehiiv** (email) and **Google Sheets** (lead database). Follow this guide to configure each integration.
+> **Current architecture (July 2026):** Google Sheets is the required lead record, Resend is for transactional email, and Beehiiv is only for the dedicated newsletter form or an optional marketing checkbox. Paying clients and ordinary audit leads must not be added to Beehiiv automatically. `MASTER_APPS_SCRIPT_WEBHOOK_URL` is optional and should exist only for audit-document generation. This boundary supersedes any older instructions below that connect every form directly to Beehiiv.
+
+Your website uses **Google Sheets** for lead records, **Resend** for transactional messages, and **Beehiiv** for explicit newsletter/marketing opt-ins.
 
 ## ✅ Status
 - ✅ Forms updated with phone field
@@ -281,7 +283,7 @@ Business: [Business Type]
 
 **Check:**
 1. Form needs to succeed and get a `redirectUrl` in response
-2. If Beehiiv/Sheets fail, form still succeeds and redirects
+2. If optional Resend, Beehiiv, or audit generation fails, the recorded lead still succeeds; if the required Google Sheets record fails, the form returns an error rather than falsely claiming the lead was saved
 3. Check browser network tab (F12 → Network) to see API response
 
 ---

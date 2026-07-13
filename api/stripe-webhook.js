@@ -1,14 +1,13 @@
 /**
  * Stripe Webhook Handler
- * Fires on: checkout.session.completed, customer.subscription.created
- * Actions: welcome email + onboarding checklist + Beehiiv active tag + Sheets status update
+ * Fires on: checkout.session.completed, invoice.paid
+ * Actions: transactional onboarding email + Google Sheets status update.
+ * Beehiiv is intentionally excluded because payment is not newsletter consent.
  *
  * Setup in Vercel env:
  *   STRIPE_SECRET_KEY
  *   STRIPE_WEBHOOK_SECRET  (from Stripe Dashboard > Webhooks)
  *   RESEND_API_KEY         (shared with submit-form.js)
- *   BEEHIIV_API_KEY
- *   BEEHIIV_PUBLICATION_ID
  *   GOOGLE_SHEETS_WEBHOOK_URL
  */
 
@@ -43,8 +42,6 @@ export default async function handler(req, res) {
       await handleCheckoutComplete(event.data.object);
     } else if (event.type === 'invoice.paid') {
       await handleInvoicePaid(event.data.object);
-    } else if (event.type === 'customer.subscription.created') {
-      await handleSubscriptionCreated(event.data.object);
     }
   } catch (err) {
     // Log but return 200 so Stripe doesn't retry — errors here are our problem, not Stripe's
@@ -70,7 +67,6 @@ async function handleCheckoutComplete(session) {
   await Promise.allSettled([
     sendCustomerWelcome(customer, productId),
     sendOnboardingChecklist(customer, productId),
-    addBeehiivActiveTag(email, name, plan),
     updateSheetsToActive(email, name, plan),
     notifyAdamOfNewClient(customer, plan, session.amount_total),
   ]);
@@ -78,11 +74,11 @@ async function handleCheckoutComplete(session) {
 
 // Emailed Stripe invoices don't emit checkout.session.completed, so the
 // invoice-first sales motion (free audit → email → invoice) onboards here.
-// Renewals also emit invoice.paid — only the first charge should onboard:
-// 'manual' = a one-off emailed invoice, 'subscription_create' = first cycle.
+// Renewals and Checkout subscriptions also emit invoice.paid. Checkout already
+// onboards through checkout.session.completed, so only manual invoices run here.
 async function handleInvoicePaid(invoice) {
   const reason = invoice.billing_reason;
-  if (reason !== 'manual' && reason !== 'subscription_create') return;
+  if (reason !== 'manual') return;
 
   const email = invoice.customer_email;
   const name = invoice.customer_name || '';
@@ -98,52 +94,9 @@ async function handleInvoicePaid(invoice) {
   await Promise.allSettled([
     sendCustomerWelcome(customer, productId),
     sendOnboardingChecklist(customer, productId),
-    addBeehiivActiveTag(email, name, plan),
     updateSheetsToActive(email, name, plan),
     notifyAdamOfNewClient(customer, plan, invoice.amount_paid),
   ]);
-}
-
-async function handleSubscriptionCreated(subscription) {
-  // Fetch customer details from Stripe
-  const customerId = subscription.customer;
-  const plan = getPlanFromAmount(subscription.items?.data?.[0]?.price?.unit_amount);
-
-  // We don't have email from the subscription object directly — it comes via customer
-  // Rely on checkout.session.completed for the primary onboarding trigger
-  // This handler exists to catch subscriptions created outside of Checkout
-  console.log(`Subscription created for customer ${customerId}, plan: ${plan}`);
-}
-
-async function addBeehiivActiveTag(email, name, plan) {
-  const apiKey = process.env.BEEHIIV_API_KEY;
-  const pubId = process.env.BEEHIIV_PUBLICATION_ID;
-  if (!apiKey || !pubId) return;
-
-  const firstName = name.split(' ')[0] || '';
-  const lastName = name.split(' ').slice(1).join(' ') || '';
-
-  const res = await fetch(`https://api.beehiiv.com/v2/publications/${pubId}/subscriptions`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      email,
-      reactivate_existing: true,
-      send_welcome_email: false,
-      utm_source: 'stripe-webhook',
-      custom_fields: [
-        { name: 'first_name', value: firstName },
-        { name: 'last_name', value: lastName },
-        { name: 'client_status', value: 'active' },
-        { name: 'plan', value: plan }
-      ]
-    })
-  });
-
-  if (!res.ok) console.warn(`Beehiiv tag update failed: ${res.status}`);
 }
 
 async function updateSheetsToActive(email, name, plan) {

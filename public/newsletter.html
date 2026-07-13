@@ -280,6 +280,9 @@
             <input type="email" id="email" name="email" placeholder="Your email address" required autocomplete="email" aria-label="Email address">
           </div>
         </div>
+        <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
+          <label>Company website <input type="text" id="companyWebsite" name="companyWebsite" tabindex="-1" autocomplete="off"></label>
+        </div>
         <button type="submit" class="btn-subscribe" id="submitBtn">
           Send Me the Weekly Tips →
         </button>
@@ -343,12 +346,13 @@
 
       const name  = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
+      const companyWebsite = document.getElementById('companyWebsite').value;
 
       try {
         const res = await fetch('/api/newsletter-subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email })
+          body: JSON.stringify({ name, email, companyWebsite })
         });
         const data = await res.json();
 

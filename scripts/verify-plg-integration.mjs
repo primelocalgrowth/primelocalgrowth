@@ -29,7 +29,10 @@ function walk(dir, files = []) {
 }
 
 const submitForm = read('api/submit-form.js');
+const newsletterSubscribe = read('api/newsletter-subscribe.js');
+const stripeWebhook = read('api/stripe-webhook.js');
 const siteForm = read('public/site-form.js');
+const privacyPage = read('public/privacy.html');
 const vercelConfig = read('vercel.json');
 const envExample = read('.env.example');
 const placesModule = read('google-apps-script/places-audit-enrichment.gs');
@@ -72,9 +75,30 @@ addCheck(
 );
 
 addCheck(
-  'Optional email and Beehiiv integrations are isolated from hard failures',
-  submitForm.includes('runOptionalIntegrations') &&
-    submitForm.includes('runOptionalTask')
+  'Transactional email and optional integrations are isolated from the required lead record',
+  submitForm.includes('runOptionalIntegrations') && submitForm.includes('runOptionalTask')
+);
+
+addCheck(
+  'Beehiiv receives only explicit newsletter or marketing opt-ins',
+  submitForm.includes('lead.marketingConsent') &&
+    siteForm.includes('name="marketingConsent"') &&
+    newsletterSubscribe.includes('Explicit newsletter opt-in endpoint') &&
+    !stripeWebhook.includes('addBeehiivActiveTag') &&
+    privacyPage.includes('does not automatically subscribe you to the newsletter')
+);
+
+addCheck(
+  'Lead forms include bot suppression and consent logging',
+  siteForm.includes('name="companyWebsite"') &&
+    submitForm.includes('marketing_consent') &&
+    submitForm.includes('companyWebsite')
+);
+
+addCheck(
+  'Newsletter reports failure when Beehiiv is unavailable',
+  newsletterSubscribe.includes("return res.status(503)") &&
+    newsletterSubscribe.includes("return res.status(502)")
 );
 
 addCheck(
@@ -105,8 +129,10 @@ addCheck(
 addCheck(
   'Places audit enrichment uses protected server-side key and explicit field mask',
   placesModule.includes('GOOGLE_PLACES_API_KEY') &&
+    placesModule.includes('PLG_SPREADSHEET_ID') &&
     placesModule.includes('X-Goog-FieldMask') &&
-    !placesModule.includes('X-Goog-FieldMask": "*"')
+    !placesModule.includes('X-Goog-FieldMask": "*"') &&
+    !placesModule.includes('1VQUrCVsn97iGlO_lQoK_HHDQqneKDgPN7udZRJWRW-U')
 );
 
 addCheck(

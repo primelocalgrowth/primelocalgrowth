@@ -7,7 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "verify:plg": "node --check api/submit-form.js && node --check api/utils/email.js && node scripts/test-places-audit-enrichment.mjs && node scripts/verify-plg-integration.mjs && npm run build"
+        "verify:plg": "node --check api/submit-form.js && node --check api/stripe-webhook.js && node --check api/utils/email.js && node --check api/utils/follow-up.js && node scripts/test-places-audit-enrichment.mjs && node scripts/verify-plg-integration.mjs && npm run build"
     },
     "keywords": [
         "local-business",

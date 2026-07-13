@@ -1,3 +1,4 @@
+(function () {
 const navToggle = document.querySelector('[data-nav-toggle]');
 const navLinks = document.querySelector('[data-nav-links]');
 if (navToggle && navLinks && !navToggle.dataset.navBound) {
@@ -103,3 +104,4 @@ document.querySelectorAll('[data-lead-form]').forEach(form => {
     }
   });
 });
+})();

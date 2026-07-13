@@ -38,6 +38,7 @@ pnpm-debug.log*
 .cache/
 .vercel/
 .parcel-cache/
+.playwright-cli/
 
 # Local prospecting data
 sent-emails.json

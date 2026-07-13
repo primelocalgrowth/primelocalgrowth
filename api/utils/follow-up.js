@@ -34,7 +34,7 @@ function dayThreeEmail(lead) {
   const html = wrapEmail(`
     <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Hi ${escapeHtml(firstName)},</p>
     <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Quick story. A barbershop near San Antonio came to me with the same gaps I flagged in your audit. Solid work, loyal customers — but Google was sending new business to the shop down the road.</p>
-    <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;"><strong>30 days later: 232 profile views a month, 25 calls a month, 40 reviews.</strong> The owner didn't change anything about how he cuts hair. We changed how Google sees him.</p>
+    <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;"><strong>By June: 110 Google Business Profile interactions, 15 calls from Google that month, and 40 five-star reviews.</strong> The owner didn't change anything about how he cuts hair. We changed how Google sees him.</p>
     <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">The fixes in your audit are the same playbook. Every week they sit unfixed, the competitors above you collect the calls that should be yours.</p>
     <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0;">Which fix do you want to start with? Reply and tell me — I'll map out exactly how it works for ${escapeHtml(businessName)}.</p>
   `);
@@ -42,7 +42,7 @@ function dayThreeEmail(lead) {
   return sendEmail({
     to: email,
     from: FROM_ADAM,
-    subject: `The barbershop that went from invisible to 25 calls/month`,
+    subject: `The Cibolo barbershop that reached 15 Google calls in June`,
     html,
     replyTo: 'adam@primelocalgrowth.com',
     scheduledAt: daysFromNow(3)
@@ -55,7 +55,7 @@ function daySevenEmail(lead) {
     <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Hi ${escapeHtml(firstName)},</p>
     <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Last note from me on this — I don't do drip campaigns that never end.</p>
     <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">You requested the audit because something's off: the phone isn't ringing the way it should for the quality of work ${escapeHtml(businessName)} does. The audit showed you why. That "why" doesn't fix itself, and your competitors aren't waiting.</p>
-    <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">If now isn't the time, no hard feelings — keep the audit, it's yours. But if you're ready, one reply starts it. No contract, no calls, everything by email, and you'll see movement inside 30 days.</p>
+    <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">If now isn't the time, no hard feelings — keep the audit, it's yours. If you are ready, reply and we will schedule a focused 15-minute findings call. The $497 sprint is one-time, with no automatic renewal, and you keep every completed fix and the scorecard.</p>
     <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0;">What's the one thing holding you back? Reply and tell me — worst case you get a straight answer.</p>
   `);
 

@@ -196,14 +196,14 @@ async function notifyAdamOfNewClient(customer, plan, amountTotal) {
   });
 }
 
-// Current PLG tiers: $997/mo Growth Management / AI Visibility (GEO),
-// $697 Foundation (one-time), $497/mo legacy Visibility Management.
+// Current primary offer: $497 one-time Opportunity Sprint or $497/mo Visibility Management.
+// Higher amounts are retained for custom or previously issued proposals.
 function getPlanFromAmount(amountTotal) {
   if (!amountTotal) return 'unknown';
   const dollars = amountTotal / 100;
-  if (dollars >= 950) return 'Growth/AI Visibility';
-  if (dollars >= 650) return 'Foundation';
-  if (dollars >= 450) return 'Visibility (legacy)';
+  if (dollars >= 950) return 'Custom Growth';
+  if (dollars >= 650) return 'Custom Foundation';
+  if (dollars >= 450) return 'Opportunity Sprint / Visibility Management';
   return 'Custom';
 }
 

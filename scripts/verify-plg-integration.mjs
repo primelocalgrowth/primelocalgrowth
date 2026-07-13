@@ -35,11 +35,9 @@ const envExample = read('.env.example');
 const placesModule = read('google-apps-script/places-audit-enrichment.gs');
 const publicFiles = walk('public').filter(file => /\.(html|js|css)$/i.test(file));
 const publicText = publicFiles.map(file => read(file)).join('\n');
-const retiredWebhookPath = '/api/' + 'str' + 'ipe-webhook';
 const retiredDeliveryPath = '/api/' + 'blue' + 'print-delivery';
 const retiredResourcePath = '/play' + 'books';
 const retiredGrowthPagePath = '/local-' + 'domin' + 'ation';
-const retiredWebhookFile = 'api/' + 'str' + 'ipe-webhook.js';
 const retiredDeliveryFile = 'api/' + 'blue' + 'print-delivery.js';
 const retiredResourceFile = 'public/play' + 'books.html';
 const retiredGrowthPageFile = 'public/local-' + 'domin' + 'ation.html';
@@ -81,16 +79,14 @@ addCheck(
 
 addCheck(
   'Vercel routes no longer expose retired direct-sale endpoints',
-  !vercelConfig.includes(retiredWebhookPath) &&
-    !vercelConfig.includes(retiredDeliveryPath) &&
+  !vercelConfig.includes(retiredDeliveryPath) &&
     !vercelConfig.includes(retiredResourcePath) &&
     !vercelConfig.includes(retiredGrowthPagePath)
 );
 
 addCheck(
   'Retired direct-sale pages and handlers are removed',
-  !existsSync(join(root, retiredWebhookFile)) &&
-    !existsSync(join(root, retiredDeliveryFile)) &&
+  !existsSync(join(root, retiredDeliveryFile)) &&
     !existsSync(join(root, retiredResourceFile)) &&
     !existsSync(join(root, retiredGrowthPageFile))
 );

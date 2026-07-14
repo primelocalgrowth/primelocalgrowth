@@ -40,6 +40,9 @@ pnpm-debug.log*
 .parcel-cache/
 .playwright-cli/
 
+# Local security operations (project code and IDs stay outside source control)
+ops/apps-script/
+
 # Local prospecting data
 sent-emails.json
 unsubscribes.txt

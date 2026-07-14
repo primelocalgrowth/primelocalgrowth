@@ -20,7 +20,11 @@ export default async function handler(req, res) {
     return res.status(500).send('Checkout is not configured yet. Email adam@primelocalgrowth.com and he will send your link directly.');
   }
 
-  const origin = `https://${req.headers.host || 'www.primelocalgrowth.com'}`;
+  // Pin to the canonical domain. Building this from the attacker-controllable
+  // Host header would let a crafted request redirect success/cancel elsewhere.
+  const ALLOWED_HOSTS = ['www.primelocalgrowth.com', 'primelocalgrowth.com'];
+  const host = String(req.headers.host || '').toLowerCase();
+  const origin = `https://${ALLOWED_HOSTS.includes(host) ? host : 'www.primelocalgrowth.com'}`;
 
   const form = new URLSearchParams({
     'mode': 'subscription',

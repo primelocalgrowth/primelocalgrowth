@@ -16,7 +16,9 @@ const PLG_CONFIG = {
   COMPANY: "Prime Local Growth",
   WEBSITE: "primelocalgrowth.com",
   ACCESS_GUIDE: "https://www.primelocalgrowth.com/gbp-access",
-  DAILY_TRIGGER_HOUR: 8
+  DAILY_TRIGGER_HOUR: 8,
+  SALES_DIGEST_HOUR: 7,
+  SALES_OWNER: "Adam"
 };
 
 const PLG_HEADERS = [
@@ -41,6 +43,11 @@ const PLG_HEADERS = [
   "Submission ID",
   "Payment ID",
   "Last Payment At",
+  "Lead Stage",
+  "Last Contact At",
+  "Next Action At",
+  "Expected MRR",
+  "Owner",
   "Notes"
 ];
 
@@ -170,6 +177,7 @@ function setupPLGSystem() {
   ]);
 
   setupOnboardingTrigger();
+  setupSalesPipelineTrigger();
 
   console.log("PLG lead intake and onboarding system setup complete.");
 }
@@ -188,6 +196,22 @@ function setupOnboardingTrigger() {
     .create();
 
   console.log(`Onboarding trigger set for ${PLG_CONFIG.DAILY_TRIGGER_HOUR}:00 daily.`);
+}
+
+function setupSalesPipelineTrigger() {
+  ScriptApp.getProjectTriggers().forEach(trigger => {
+    if (trigger.getHandlerFunction() === "sendSalesPipelineDigest") {
+      ScriptApp.deleteTrigger(trigger);
+    }
+  });
+
+  ScriptApp.newTrigger("sendSalesPipelineDigest")
+    .timeBased()
+    .atHour(PLG_CONFIG.SALES_DIGEST_HOUR)
+    .everyDays(1)
+    .create();
+
+  console.log(`Sales pipeline digest set for ${PLG_CONFIG.SALES_DIGEST_HOUR}:00 daily.`);
 }
 
 function getPLGSpreadsheet() {
@@ -290,6 +314,11 @@ function normalizeLead(payload) {
     submissionId: clean(payload.submissionId || payload.submission_id),
     paymentId: clean(payload.paymentId || payload.payment_id),
     lastPaymentAt: clean(payload.lastPaymentAt || payload.last_payment_at),
+    leadStage: clean(payload.leadStage || payload.lead_stage || "New"),
+    lastContactAt: clean(payload.lastContactAt || payload.last_contact_at),
+    nextActionAt: clean(payload.nextActionAt || payload.next_action_at || defaultNextActionAt()),
+    expectedMrr: Number(payload.expectedMrr || payload.expected_mrr) || 497,
+    owner: clean(payload.owner || PLG_CONFIG.SALES_OWNER),
     notes: clean(payload.notes || payload.situation)
   };
 }
@@ -363,6 +392,11 @@ function buildLeadRow(sheet, headerMap, lead) {
   setRowValue(row, headerMap, "Submission ID", lead.submissionId);
   setRowValue(row, headerMap, "Payment ID", lead.paymentId);
   setRowValue(row, headerMap, "Last Payment At", lead.lastPaymentAt);
+  setRowValue(row, headerMap, "Lead Stage", lead.leadStage);
+  setRowValue(row, headerMap, "Last Contact At", lead.lastContactAt);
+  setRowValue(row, headerMap, "Next Action At", lead.nextActionAt);
+  setRowValue(row, headerMap, "Expected MRR", lead.expectedMrr);
+  setRowValue(row, headerMap, "Owner", lead.owner);
   setRowValue(row, headerMap, "Notes", lead.notes);
 
   return row;
@@ -408,12 +442,85 @@ function applyLeadStatusUpdate(payload) {
     "Onboarding Step": Number(payload.onboardingStep) || 1,
     "Payment ID": clean(payload.paymentId || payload.payment_id),
     "Last Payment At": clean(payload.lastPaymentAt || payload.last_payment_at || new Date().toISOString()),
+    "Lead Stage": "Won",
+    "Next Action At": "",
+    "Expected MRR": expectedMrrForPlan(payload.plan),
+    "Owner": clean(payload.owner || PLG_CONFIG.SALES_OWNER),
     "Source": clean(payload.source || "stripe-webhook")
   };
   Object.keys(updates).forEach(header => {
     if (header in headerMap) sheet.getRange(row, headerMap[header] + 1).setValue(neutralizeSheetFormula(updates[header]));
   });
   return { row, email };
+}
+
+function sendSalesPipelineDigest() {
+  const ss = getPLGSpreadsheet();
+  const sheet = getOrCreateSheet(ss, PLG_CONFIG.LEAD_SHEET, PLG_HEADERS);
+  const headerMap = getHeaderMap(sheet);
+  if (sheet.getLastRow() < 2) return;
+
+  const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn()).getValues();
+  const endOfToday = new Date();
+  endOfToday.setHours(23, 59, 59, 999);
+  const open = rows.map((row, index) => ({
+    row: index + 2,
+    firstName: clean(row[headerMap["First Name"]]),
+    businessName: clean(row[headerMap["Business Name"]]),
+    email: clean(row[headerMap["Email"]]),
+    phone: clean(row[headerMap["Phone"]]),
+    status: clean(row[headerMap["Status"]]).toLowerCase(),
+    stage: clean(row[headerMap["Lead Stage"]]) || "New",
+    nextActionAt: parseSheetDate(row[headerMap["Next Action At"]]),
+    expectedMrr: Number(row[headerMap["Expected MRR"]]) || 0,
+  })).filter(lead => {
+    if (!lead.email || lead.status === "active" || lead.status === "closed" || lead.status === "lost") return false;
+    return !lead.nextActionAt || lead.nextActionAt <= endOfToday;
+  });
+
+  if (!open.length) return;
+  open.sort((a, b) => (a.nextActionAt ? a.nextActionAt.getTime() : 0) - (b.nextActionAt ? b.nextActionAt.getTime() : 0));
+
+  const items = open.slice(0, 25).map(lead => {
+    const due = lead.nextActionAt
+      ? Utilities.formatDate(lead.nextActionAt, Session.getScriptTimeZone(), "MMM d")
+      : "Set next action";
+    const name = lead.businessName || lead.firstName || lead.email;
+    return '<tr>' +
+      '<td style="padding:10px;border-bottom:1px solid #e5e7eb"><strong>' + escapeHtml_(name) + '</strong><br><span style="color:#64748b">' + escapeHtml_(lead.stage) + '</span></td>' +
+      '<td style="padding:10px;border-bottom:1px solid #e5e7eb">' + escapeHtml_(due) + '</td>' +
+      '<td style="padding:10px;border-bottom:1px solid #e5e7eb">' + (lead.expectedMrr ? '$' + lead.expectedMrr + '/mo' : '-') + '</td>' +
+      '<td style="padding:10px;border-bottom:1px solid #e5e7eb"><a href="mailto:' + encodeURIComponent(lead.email) + '">Email</a>' + (lead.phone ? ' &middot; <a href="tel:' + escapeHtml_(lead.phone) + '">Call</a>' : '') + '</td>' +
+    '</tr>';
+  }).join('');
+
+  MailApp.sendEmail({
+    to: PLG_CONFIG.FROM_EMAIL,
+    subject: 'PLG sales queue: ' + open.length + ' action' + (open.length === 1 ? '' : 's') + ' due',
+    body: open.length + ' PLG leads need a next action today. Open the PLG Lead Database to update stage, last contact, and next action.',
+    htmlBody: '<div style="font-family:Arial,sans-serif;max-width:760px"><h2>Today\'s PLG sales queue</h2><p>' + open.length + ' open lead' + (open.length === 1 ? '' : 's') + ' need attention.</p><table style="border-collapse:collapse;width:100%"><thead><tr><th align="left">Lead</th><th align="left">Due</th><th align="left">Potential</th><th align="left">Action</th></tr></thead><tbody>' + items + '</tbody></table><p style="color:#64748b">After contact, update Lead Stage, Last Contact At, and Next Action At in the Sheet. Paid Stripe customers move to Won automatically.</p></div>',
+    name: PLG_CONFIG.COMPANY,
+  });
+}
+
+function defaultNextActionAt() {
+  const next = new Date();
+  next.setDate(next.getDate() + 1);
+  return next.toISOString();
+}
+
+function expectedMrrForPlan(plan) {
+  const value = clean(plan).toLowerCase();
+  if (/sprint|one.?time/.test(value)) return 0;
+  if (/premium|elite/.test(value)) return 1497;
+  if (/geo|ai visibility/.test(value)) return 997;
+  if (/review defense/.test(value)) return 297;
+  return 497;
+}
+
+function escapeHtml_(value) {
+  return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&#39;");
 }
 
 function findLeadRowByEmail(sheet, headerMap, email) {

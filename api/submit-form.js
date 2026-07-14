@@ -4,6 +4,7 @@
  * Beehiiv is used only when the lead separately opts in to marketing.
  */
 import { notifyAdamOfLead, sendLeadAutoReply } from './utils/email.js';
+import { createHash, randomUUID } from 'node:crypto';
 
 // In-memory rate limit: max 5 submissions per IP per 10 minutes.
 // Per-instance only (Vercel functions aren't guaranteed to share state across
@@ -31,6 +32,7 @@ function isRateLimited(ip) {
 }
 
 export default async function handler(req, res) {
+  const requestId = randomUUID();
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Allow', 'POST');
 
@@ -105,11 +107,15 @@ export default async function handler(req, res) {
     }
 
     const timestamp = new Date().toISOString();
+    const submissionId = createHash('sha256')
+      .update(`${email.toLowerCase()}|${businessName.toLowerCase()}|${timestamp}|${requestId}`)
+      .digest('hex')
+      .slice(0, 24);
     const leadName = name || businessName;
     const firstName = getFirstName(leadName);
     const niche = mainService || businessType;
     const optedIntoMarketing = marketingConsent === true || marketingConsent === 'true' || marketingConsent === 'on';
-    const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, source, attribution: cleanAttribution, marketingConsent: optedIntoMarketing, timestamp };
+    const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, source, attribution: cleanAttribution, marketingConsent: optedIntoMarketing, timestamp, submissionId };
 
     await runRequiredIntegrations(lead);
     await runOptionalIntegrations(lead);
@@ -119,11 +125,11 @@ export default async function handler(req, res) {
       success: true,
       message: 'Form submitted successfully!',
       redirectUrl: '/thank-you',
-      data: { name: leadName, firstName, email, phone, businessName, city, businessType, niche, timestamp }
+      data: { businessName, timestamp, submissionId }
     });
 
   } catch (error) {
-    console.error('Form submission error:', error);
+    console.error(JSON.stringify({ event: 'lead_submission_failed', requestId, error: error?.message || 'unknown' }));
     return res.status(500).json({ error: 'We could not save your request. Please try again or contact Adam directly.' });
   }
 }
@@ -152,6 +158,7 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${apiKey}`
     },
+    signal: AbortSignal.timeout(8000),
     body: JSON.stringify({
       email,
       reactivate_existing: true,
@@ -237,7 +244,8 @@ async function triggerAuditGenerator(lead) {
     timestamp: lead.timestamp,
     source: 'Website',
     leadSource: lead.source,
-    auditType: /ai-visibility/.test(lead.source || '') ? 'ai-visibility' : 'gbp'
+    auditType: /ai-visibility/.test(lead.source || '') ? 'ai-visibility' : 'gbp',
+    submissionId: lead.submissionId
   }, 'Audit generator');
 }
 
@@ -281,6 +289,7 @@ async function appendToGoogleSheets(lead) {
     utm_content: attribution?.utm_content || '',
     gclid: attribution?.gclid || '',
     marketing_consent: marketingConsent ? 'Yes' : 'No',
+    submission_id: lead.submissionId,
     notes: [visibilityConcern, situation, attribution ? JSON.stringify(attribution) : ''].filter(Boolean).join('\n\n')
   }, 'Google Sheets');
 }
@@ -293,6 +302,7 @@ async function postWebhook(url, payload, label) {
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    signal: AbortSignal.timeout(8000),
     body: JSON.stringify(payload)
   });
 

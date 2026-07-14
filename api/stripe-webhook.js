@@ -39,19 +39,20 @@ export default async function handler(req, res) {
 
   try {
     if (event.type === 'checkout.session.completed') {
-      await handleCheckoutComplete(event.data.object);
+      await handleCheckoutComplete(event.data.object, event.id);
     } else if (event.type === 'invoice.paid') {
-      await handleInvoicePaid(event.data.object);
+      await handleInvoicePaid(event.data.object, event.id);
     }
   } catch (err) {
     // Log but return 200 so Stripe doesn't retry — errors here are our problem, not Stripe's
     console.error(`Handler error for ${event.type}:`, err.message);
+    return res.status(500).json({ error: 'Processing failed' });
   }
 
   return res.status(200).json({ received: true });
 }
 
-async function handleCheckoutComplete(session) {
+async function handleCheckoutComplete(session, eventId) {
   const email = session.customer_details?.email || session.customer_email;
   const name = session.customer_details?.name || '';
   const productId = session.metadata?.product_id || 'sprint';
@@ -64,19 +65,21 @@ async function handleCheckoutComplete(session) {
 
   const customer = { email, name };
 
-  await Promise.allSettled([
+  await updateSheetsToActive(email, name, plan, session.payment_intent || eventId);
+
+  const followUps = await Promise.allSettled([
     sendCustomerWelcome(customer, productId),
     sendOnboardingChecklist(customer, productId),
-    updateSheetsToActive(email, name, plan),
     notifyAdamOfNewClient(customer, plan, session.amount_total),
   ]);
+  logRejectedFollowUps(followUps, eventId);
 }
 
 // Emailed Stripe invoices don't emit checkout.session.completed, so the
 // invoice-first sales motion (free audit → email → invoice) onboards here.
 // Renewals and Checkout subscriptions also emit invoice.paid. Checkout already
 // onboards through checkout.session.completed, so only manual invoices run here.
-async function handleInvoicePaid(invoice) {
+async function handleInvoicePaid(invoice, eventId) {
   const reason = invoice.billing_reason;
   if (reason !== 'manual') return;
 
@@ -91,21 +94,24 @@ async function handleInvoicePaid(invoice) {
   const productId = invoice.metadata?.product_id || 'sprint';
   const customer = { email, name };
 
-  await Promise.allSettled([
+  await updateSheetsToActive(email, name, plan, invoice.id || eventId);
+
+  const followUps = await Promise.allSettled([
     sendCustomerWelcome(customer, productId),
     sendOnboardingChecklist(customer, productId),
-    updateSheetsToActive(email, name, plan),
     notifyAdamOfNewClient(customer, plan, invoice.amount_paid),
   ]);
+  logRejectedFollowUps(followUps, eventId);
 }
 
-async function updateSheetsToActive(email, name, plan) {
+async function updateSheetsToActive(email, name, plan, paymentId) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  if (!webhookUrl) return;
+  if (!webhookUrl) throw new Error('GOOGLE_SHEETS_WEBHOOK_URL is not configured');
 
   const res = await fetch(webhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    signal: AbortSignal.timeout(8000),
     body: JSON.stringify({
       action: 'update_status',
       email,
@@ -115,11 +121,26 @@ async function updateSheetsToActive(email, name, plan) {
       plan,
       startDate: new Date().toISOString().split('T')[0],
       onboardingStep: 1,
+      paymentId,
+      lastPaymentAt: new Date().toISOString(),
       source: 'stripe-webhook'
     })
   });
 
-  if (!res.ok) console.warn(`Sheets update failed: ${res.status}`);
+  const text = await res.text();
+  let result = {};
+  try { result = text ? JSON.parse(text) : {}; } catch { result = {}; }
+  if (!res.ok || result.success === false) {
+    throw new Error(`Sheets update failed: ${result.error || result.message || `HTTP ${res.status}`}`);
+  }
+}
+
+function logRejectedFollowUps(results, eventId) {
+  results.forEach((result, index) => {
+    if (result.status === 'rejected') {
+      console.error(JSON.stringify({ event: 'stripe_follow_up_failed', eventId, taskIndex: index, error: result.reason?.message || 'unknown' }));
+    }
+  });
 }
 
 async function notifyAdamOfNewClient(customer, plan, amountTotal) {

@@ -8,7 +8,7 @@
         "build": "vite build",
         "preview": "vite preview",
         "security:closeout": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/security-closeout.ps1",
-        "verify:plg": "node --check api/submit-form.js && node --check api/newsletter-subscribe.js && node --check api/stripe-webhook.js && node --check api/utils/email.js && node scripts/test-backend-routing.mjs && node scripts/test-places-audit-enrichment.mjs && node scripts/verify-plg-integration.mjs && npm run build"
+        "verify:plg": "node --check api/submit-form.js && node --check api/newsletter-subscribe.js && node --check api/stripe-webhook.js && node --check api/health.js && node --check api/utils/email.js && node --check ops/apps-script/lead-database/Code.js && node --check ops/apps-script/master-audit/Code.js && node --check ops/apps-script/outreach-sequencer/Code.js && node scripts/test-backend-routing.mjs && node scripts/test-places-audit-enrichment.mjs && node scripts/verify-plg-integration.mjs && npm run build"
     },
     "keywords": [
         "local-business",

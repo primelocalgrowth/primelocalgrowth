@@ -31,6 +31,7 @@ function walk(dir, files = []) {
 const submitForm = read('api/submit-form.js');
 const newsletterSubscribe = read('api/newsletter-subscribe.js');
 const stripeWebhook = read('api/stripe-webhook.js');
+const healthHandler = read('api/health.js');
 const siteForm = read('public/site-form.js');
 const privacyPage = read('public/privacy.html');
 const vercelConfig = read('vercel.json');
@@ -99,6 +100,22 @@ addCheck(
   'Newsletter reports failure when Beehiiv is unavailable',
   newsletterSubscribe.includes("return res.status(503)") &&
     newsletterSubscribe.includes("return res.status(502)")
+);
+
+addCheck(
+  'Paid-client activation is durable and retryable',
+  stripeWebhook.includes("action: 'update_status'") &&
+    stripeWebhook.includes('await updateSheetsToActive') &&
+    stripeWebhook.includes("return res.status(500).json({ error: 'Processing failed' })") &&
+    stripeWebhook.includes('paymentId')
+);
+
+addCheck(
+  'Health endpoint exposes deploy and integration readiness without secrets',
+  vercelConfig.includes('api/health.js') &&
+    healthHandler.includes('VERCEL_GIT_COMMIT_SHA') &&
+    healthHandler.includes('integrations') &&
+    !healthHandler.includes('process.env.GOOGLE_SHEETS_WEBHOOK_URL,')
 );
 
 addCheck(

@@ -28,7 +28,7 @@
         <button type="submit" id="exit-submit">Get My Free Audit &rarr;</button>
         <p id="exit-msg" aria-live="polite"></p>
       </form>
-      <p class="exit-trust">&#9733; 5.0 on Google &middot; No contracts &middot; Results in 30 days</p>
+      <p class="exit-trust">&#9733; Veteran-owned &middot; No long-term contract &middot; Transparent monthly reporting</p>
     </div>
   `;
 

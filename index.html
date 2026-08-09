@@ -267,7 +267,11 @@
   summary::-webkit-details-marker{display:none}
   summary::after{content:"+";font-family:var(--disp);font-size:24px;color:var(--amber-dark);transition:transform .3s cubic-bezier(.22,1,.36,1)}
   details[open] summary::after{transform:rotate(45deg)}
-  details .a{padding:0 24px 22px;color:var(--mist);font-size:15.5px;max-width:75ch}
+  details .a{padding:0 24px 22px;color:var(--mist);font-size:15.5px;max-width:75ch;animation:slideDown .3s cubic-bezier(.22,1,.36,1)}
+  @keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes revealIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  .rv{opacity:0;transform:translateY(16px)}
+  .rv.in{animation:revealIn .6s cubic-bezier(.22,1,.36,1) forwards}
 
   .audit{background:linear-gradient(180deg,var(--bg) 0%,#E9F0EA 100%)}
   .audit-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
@@ -279,10 +283,16 @@
   .form-founder span{font-size:13px;color:var(--mist)}
   .fld{margin-bottom:20px;position:relative}
   .fld label{display:block;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--forest-2);margin-bottom:8px}
-  .fld input{width:100%;padding:15px 16px;border:2px solid var(--line);border-radius:var(--r-md);font-family:var(--body);font-size:16px;background:var(--bg)}
-  .fld input:focus{border-color:var(--teal);background:#fff}
-  .fld input.input-valid{border-color:var(--good)}
+  .fld input{width:100%;padding:15px 16px;border:2px solid var(--line);border-radius:var(--r-md);font-family:var(--body);font-size:16px;background:var(--bg);transition:all .2s ease-out}
+  .fld input:focus{border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px rgba(46,196,182,.1)}
+  .fld input.input-valid{border-color:var(--good);padding-right:44px}
   .fld input.input-invalid{border-color:#C0533F}
+  .fld .input-check{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--good);font-weight:800;font-size:18px;pointer-events:none;opacity:0;transition:opacity .2s ease-out}
+  .fld input.input-valid ~ .input-check{opacity:1}
+  @media(max-width:720px){
+    .fld input{padding:18px 16px;font-size:16px;min-height:48px}
+    .audit form{padding:28px}
+  }
   .audit .promise{font-size:13.5px;color:var(--mist);margin-top:14px;text-align:center}
   .audit .promise a{color:inherit}
   .form-feedback{margin-top:12px;font-weight:700;font-size:14.5px;text-align:center;min-height:1.4em}
@@ -594,10 +604,10 @@
         <img src="/assets/adam-rome.jpg" alt="Adam Rome, founder of Prime Local Growth">
         <div><b>Adam Rome</b><span>Founder · reviews every audit personally</span></div>
       </div>
-      <div class="fld"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" required autocomplete="name"></div>
+      <div class="fld"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" required autocomplete="name"><span class="input-check">✓</span></div>
       <div class="fld"><label for="f-biz">Business name</label><input id="f-biz" name="businessName" type="text" required autocomplete="organization" placeholder="e.g. Rivera HVAC"></div>
       <div class="fld"><label for="f-city">City</label><input id="f-city" name="city" type="text" placeholder="e.g. Schertz, TX"></div>
-      <div class="fld"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
+      <div class="fld"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email"><span class="input-check">✓</span></div>
       <div class="fld"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" required autocomplete="tel"></div>
       <input type="hidden" name="businessType" value="local-service">
       <button class="btn" type="submit" style="width:100%">Get my free audit</button>
@@ -708,6 +718,30 @@
       var io3=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){chart.classList.add('play');io3.unobserve(chart);}});},{threshold:.5});
       io3.observe(chart);
     } else { chart.classList.add('play'); }
+  }
+
+  /* form validation feedback */
+  var emailInput=document.getElementById('f-email'), nameInput=document.getElementById('f-name');
+  function validateEmail(email){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+  if(emailInput){
+    emailInput.addEventListener('input',function(){
+      emailInput.classList.toggle('input-valid',validateEmail(emailInput.value));
+      emailInput.classList.toggle('input-invalid',emailInput.value && !validateEmail(emailInput.value));
+    });
+  }
+  if(nameInput){
+    nameInput.addEventListener('input',function(){
+      nameInput.classList.toggle('input-valid',nameInput.value.length>2);
+    });
+  }
+
+  /* scroll reveal animation for .rv elements */
+  if('IntersectionObserver' in window && !reduce){
+    var style=document.createElement('style');
+    style.textContent='.rv{opacity:0;transform:translateY(16px)}.rv.in{animation:revealIn .6s cubic-bezier(.22,1,.36,1) forwards}@keyframes revealIn{to{opacity:1;transform:translateY(0)}}';
+    document.head.appendChild(style);
   }
 
   /* mobile sticky CTA */

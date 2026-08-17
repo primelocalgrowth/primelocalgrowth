@@ -48,3 +48,4 @@ ops/apps-script/deployments.local.json
 sent-emails.json
 unsubscribes.txt
 cold-email-log.txt
+.vercel

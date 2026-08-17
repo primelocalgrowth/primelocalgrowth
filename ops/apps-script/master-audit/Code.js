@@ -192,7 +192,7 @@ function logAuditRequest(lead, auditUrl, status, error) {
     lead.visibilityConcern || "",
     auditUrl || "",
     error || ""
-  ]);
+  ].map(neutralizeSheetFormula));
 }
 
 function buildAuditDocName(lead) {
@@ -205,7 +205,7 @@ function buildAuditDocName(lead) {
 
 function isWebhookAuthorized(e) {
   const expected = clean(PropertiesService.getScriptProperties().getProperty("WEBHOOK_KEY"));
-  if (!expected) return true;
+  if (!expected) return false;
 
   const provided = clean(e && e.parameter && e.parameter.key);
   return provided === expected;
@@ -221,6 +221,13 @@ function parsePayload(e) {
 
 function clean(value) {
   return String(value || "").trim();
+}
+
+function neutralizeSheetFormula(value) {
+  if (typeof value === "string" && /^[\s]*[=+\-@]/.test(value)) {
+    return "'" + value;
+  }
+  return value;
 }
 
 function sanitizeFileName(value) {

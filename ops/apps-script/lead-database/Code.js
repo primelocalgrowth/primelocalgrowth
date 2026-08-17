@@ -270,7 +270,7 @@ function getHeaderMap(sheet) {
 
 function isWebhookAuthorized(e) {
   const expected = clean(PropertiesService.getScriptProperties().getProperty("WEBHOOK_KEY"));
-  if (!expected) return true;
+  if (!expected) return false;
 
   const provided = clean(e && e.parameter && e.parameter.key);
   return provided === expected;

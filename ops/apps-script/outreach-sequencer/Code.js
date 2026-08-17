@@ -4,15 +4,14 @@
 // Two jobs:
 //   1. doPost() receives prospects from the Cloudflare Worker and QUEUES them
 //      (writes to the "Cibolo Daily Prospects" sheet, Status = "Queued").
-//   2. runOutreachSequencer() (daily time trigger) AUTO-SENDS a 4-touch cold
-//      sequence from adam@primelocalgrowth.com, follows up non-repliers, and
-//      STOPS the instant a prospect replies (then pings Adam to take the call).
+//   2. runOutreachSequencer() (daily time trigger) creates a 4-touch cold
+//      sequence as Gmail drafts for Adam's review. It never sends automatically.
 //
 // One-time setup after pasting: run setupOutreachTriggers() once (authorizes
 // Gmail + installs the daily 9am trigger). Then it runs itself.
 //
-// Safeguards (main-domain sending): hard daily send cap, auto-stop on reply,
-// opt-out line on every email, replies checked before any send.
+// Safeguards: hard daily draft cap, stop-on-reply detection, opt-out line on
+// every email, and human review before any send.
 
 const SHEET_NAME = 'Cibolo Daily Prospects';
 const PROSPECTS_SS_ID = PropertiesService.getScriptProperties().getProperty('PROSPECTS_SPREADSHEET_ID') || '';
@@ -48,7 +47,7 @@ function doPost(e) {
 
     // This web app is deployed "Access: Anyone", so doPost is internet-reachable.
     // Without this shared-secret gate, anyone who finds the /exec URL could inject
-    // arbitrary recipients and email bodies into a pipeline that AUTO-SENDS cold
+    // arbitrary recipients and email bodies into a pipeline that creates drafts
     // email from the main sending domain. Set INBOUND_KEY in Script Properties and
     // match it to the Worker's GAS_INBOUND_KEY secret.
     const expected = PropertiesService.getScriptProperties().getProperty('INBOUND_KEY') || '';
@@ -212,12 +211,12 @@ function runOutreachSequencer() {
 
     setCell_(sheet, i, COL.step, step + 1);
     setCell_(sheet, i, COL.lastSent, now);
-    setCell_(sheet, i, COL.status, 'Active');
+    setCell_(sheet, i, COL.status, 'Drafted');
     if (threadId) setCell_(sheet, i, COL.threadId, threadId);
     sent++;
   }
 
-  Logger.log('Sequencer run complete. Emails sent this run: ' + sent);
+  Logger.log('Sequencer run complete. Drafts created this run: ' + sent);
 
   // Friday funnel report: which verticals actually reply decides what the
   // scraper should hunt next week. Best-effort, never blocks the run.
@@ -298,19 +297,18 @@ function sendSequencerStats_(sheet) {
 function sendFirstTouch_(email, row) {
   const subject = String(row[COL.subject - 1] || 'Quick question');
   const body = String(row[COL.body - 1] || '') + OPT_OUT;
-  // createDraft().send() returns the GmailMessage so we can capture the thread id.
-  const msg = GmailApp.createDraft(email, subject, body).send();
-  return msg.getThread().getId();
+  GmailApp.createDraft(email, subject, body);
+  return '';
 }
 
 function sendFollowUp_(email, threadId, row, step) {
   const body = followUpBody_(row, step) + OPT_OUT;
   const thread = threadId ? safeGetThread_(threadId) : null;
   if (thread) {
-    thread.reply(body);                 // threads under the original email
+    thread.createDraftReply(body);      // keep the message in Drafts for review
   } else {
     // Thread lost: re-anchor as a fresh send so the sequence still advances.
-    GmailApp.createDraft(email, 'Following up — ' + String(row[COL.business - 1] || ''), body).send();
+    GmailApp.createDraft(email, 'Following up — ' + String(row[COL.business - 1] || ''), body);
   }
 }
 
@@ -472,9 +470,9 @@ function notifyBatch(rows, service, date, queued) {
   GmailApp.sendEmail(
     admin,
     '[' + service + '] ' + queued + ' prospects queued — ' + date,
-    queued + ' of ' + rows.length + ' scraped ' + service + ' prospects were queued for auto-send. ' +
+    queued + ' of ' + rows.length + ' scraped ' + service + ' prospects were queued for human-reviewed drafts. ' +
     (rows.length - queued) + ' had no email and were skipped.\n\n' +
-    'The sequencer sends up to ' + SEQ.dailyCap + '/day and stops on reply. Nothing to do unless someone replies.'
+    'The sequencer creates up to ' + SEQ.dailyCap + ' reviewable drafts/day and stops on reply. Nothing sends automatically.'
   );
 }
 

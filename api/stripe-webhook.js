@@ -170,14 +170,16 @@ async function notifyAdamOfNewClient(customer, plan, amountTotal) {
   });
 }
 
-// Current primary offer: $497 one-time Opportunity Sprint or $497/mo Visibility Management.
-// Higher amounts are retained for custom or previously issued proposals.
+// Mirrors the live tiers: $497 one-time Opportunity Sprint, Growth Management
+// from $997/mo, Authority + AI Visibility from $1,497/mo. Thresholds sit below
+// each list price so proration, tax and partial periods still map correctly.
+// Only used when Stripe metadata carries no explicit plan.
 function getPlanFromAmount(amountTotal) {
   if (!amountTotal) return 'unknown';
   const dollars = amountTotal / 100;
-  if (dollars >= 950) return 'Custom Growth';
-  if (dollars >= 650) return 'Custom Foundation';
-  if (dollars >= 450) return 'Opportunity Sprint / Visibility Management';
+  if (dollars >= 1400) return 'Authority + AI Visibility';
+  if (dollars >= 900) return 'Growth Management';
+  if (dollars >= 450) return '30-Day Opportunity Sprint';
   return 'Custom';
 }
 

@@ -28,6 +28,20 @@ for (const file of files) {
   // Recurring pricing below the floor would undercut the published tiers.
   const subFloor = html.match(/\$(?:[1-8]?\d{1,2})\/(?:mo|month)\b/g);
   if (subFloor) failures.push(`${file}: sub-floor recurring price ${[...new Set(subFloor)].join(', ')}`);
+
+  // Both scorecards shipped as dead markup: questions and answer buttons with
+  // no script bound to them, so neither tool could ever produce a lead. Any
+  // page carrying the quiz markup must also load the engine that drives it.
+  if (/class="[^"]*\banswer-btn\b/.test(html) && !/src="\/scorecard\.js"/.test(html)) {
+    failures.push(`${file}: has quiz markup but does not load /scorecard.js`);
+  }
+  if (/class="[^"]*\bquestion-block\b/.test(html)) {
+    const questions = (html.match(/class="[^"]*\bquestion-block\b/g) || []).length;
+    const annotated = (html.match(/data-gap=/g) || []).length;
+    if (annotated < questions) {
+      failures.push(`${file}: ${questions} questions but only ${annotated} have data-gap copy`);
+    }
+  }
 }
 
 if (failures.length) {

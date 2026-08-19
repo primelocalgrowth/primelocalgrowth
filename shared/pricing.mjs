@@ -118,13 +118,23 @@ export const PRICE_TOKENS = {
   '{{PRICE_AUTHORITY}}': () => priceLabel(byId('authority')).replace('from ', ''),
 };
 
-/** Substitutes every {{PRICE_*}} token in a raw HTML string. */
+/**
+ * Copy tokens that are not prices but still must not drift. The audit CTA
+ * appears in page bodies as well as the nav and footer.
+ */
+export const AUDIT_CTA_LABEL = 'Get My 3-Point Visibility Audit';
+
+export const COPY_TOKENS = {
+  '{{CTA_AUDIT}}': () => AUDIT_CTA_LABEL,
+};
+
+/** Substitutes every {{PRICE_*}} and {{CTA_*}} token in a raw HTML string. */
 export function renderPrices(html) {
   let out = html;
-  for (const [token, value] of Object.entries(PRICE_TOKENS)) {
+  for (const [token, value] of Object.entries({ ...PRICE_TOKENS, ...COPY_TOKENS })) {
     out = out.split(token).join(value());
   }
-  const leftover = out.match(/\{\{PRICE_[A-Z_]+\}\}/g);
-  if (leftover) throw new Error(`Unknown price token(s): ${[...new Set(leftover)].join(', ')}`);
+  const leftover = out.match(/\{\{(?:PRICE|CTA)_[A-Z_]+\}\}/g);
+  if (leftover) throw new Error(`Unknown token(s): ${[...new Set(leftover)].join(', ')}`);
   return out;
 }

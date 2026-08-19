@@ -7,8 +7,10 @@
  * shipped two different primary CTAs depending on where you landed. Defining it
  * once is the fix.
  */
+import { AUDIT_CTA_LABEL } from '../../shared/pricing.mjs';
+
 export const CTA = {
-  auditLabel: 'Get My 3-Point Visibility Audit',
+  auditLabel: AUDIT_CTA_LABEL,
   auditHref: '/free-visibility-audit',
 };
 

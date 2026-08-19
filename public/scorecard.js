@@ -155,14 +155,23 @@
     setArc(target);
     var start = null;
     var duration = 900;
+    var settled = false;
     function tick(ts) {
+      if (settled) return;
       if (start === null) start = ts;
       var p = Math.min((ts - start) / duration, 1);
       var eased = 1 - Math.pow(1 - p, 3);
       if (scoreNum) scoreNum.textContent = String(Math.round(target * eased));
       if (p < 1) requestAnimationFrame(tick);
+      else settled = true;
     }
     requestAnimationFrame(tick);
+    // requestAnimationFrame does not run in a hidden or non-compositing tab, so
+    // without this the ring would show the score while the number stayed at 0.
+    setTimeout(function () {
+      settled = true;
+      if (scoreNum) scoreNum.textContent = String(target);
+    }, duration + 100);
   }
 
   /** Carries the result into the lead record so Adam sees it with the email. */

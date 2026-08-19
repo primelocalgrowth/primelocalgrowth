@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { renderPrices } from '../../shared/pricing.mjs';
 import body from '../content-html/contact.html?raw';
 ---
 <Base
@@ -11,5 +12,5 @@ import body from '../content-html/contact.html?raw';
   ogImage="https://www.primelocalgrowth.com/assets/gbp-results-og.jpg"
   scripts={["site-interactions","site-form","exit-intent"]}
 >
-  <Fragment set:html={body} />
+  <Fragment set:html={renderPrices(body)} />
 </Base>

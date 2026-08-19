@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { renderPrices } from '../../shared/pricing.mjs';
 import body from '../content-html/cibolo-local-seo.html?raw';
 const headExtras = "<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Who is this for in Cibolo?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"This is for Cibolo service businesses that depend on local customers finding them on Google.\"}},{\"@type\":\"Question\",\"name\":\"What gets checked first?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"We check Google profile quality, reviews, service-area signals, website trust, and competitor visibility.\"}}]}</script>";
 ---
@@ -12,5 +13,5 @@ const headExtras = "<script type=\"application/ld+json\">{\"@context\":\"https:/
   scripts={["site-interactions"]}
 >
   <Fragment slot="head" set:html={headExtras} />
-  <Fragment set:html={body} />
+  <Fragment set:html={renderPrices(body)} />
 </Base>

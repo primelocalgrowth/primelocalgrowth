@@ -1,5 +1,5 @@
 {
-  "buildCommand": "astro build",
+  "buildCommand": "astro build && node scripts/check-build.mjs",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "redirects": [

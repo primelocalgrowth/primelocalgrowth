@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { renderPrices } from '../../shared/pricing.mjs';
 import body from '../content-html/live-oak-local-seo.html?raw';
 ---
 <Base
@@ -10,5 +11,5 @@ import body from '../content-html/live-oak-local-seo.html?raw';
   ogDescription="Get found by Live Oak customers searching locally."
   scripts={["site-interactions"]}
 >
-  <Fragment set:html={body} />
+  <Fragment set:html={renderPrices(body)} />
 </Base>

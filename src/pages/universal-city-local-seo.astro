@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { renderPrices } from '../../shared/pricing.mjs';
 import body from '../content-html/universal-city-local-seo.html?raw';
 ---
 <Base
@@ -10,5 +11,5 @@ import body from '../content-html/universal-city-local-seo.html?raw';
   ogDescription="Get found by Universal City customers searching on Google."
   scripts={["site-interactions"]}
 >
-  <Fragment set:html={body} />
+  <Fragment set:html={renderPrices(body)} />
 </Base>

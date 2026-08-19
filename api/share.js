@@ -36,7 +36,10 @@ export default async function handler(req, res) {
   // Only a consented, substantive report earns indexing.
   const indexable = record.publicConsent === true && Array.isArray(record.checks) && record.checks.length >= 6;
   res.setHeader('X-Robots-Tag', indexable ? 'index, follow' : 'noindex, nofollow');
-  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=600, stale-while-revalidate=86400');
+  // Deliberately short and without stale-while-revalidate: a report that is
+  // deleted must stop being served promptly. With a 24h SWR window the edge
+  // kept serving a removed report long after the blob was gone.
+  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60');
   return send(res, 200, page(record, indexable));
 }
 

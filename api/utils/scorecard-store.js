@@ -2,48 +2,65 @@
  * Persistence for scorecard results.
  *
  * Results are stored so a run can become a shareable page instead of a number
- * that vanishes on refresh. Backed by Vercel Blob; if BLOB_READ_WRITE_TOKEN is
- * not configured the scorecard still works and simply does not offer sharing,
- * so a missing store degrades the feature rather than breaking the tool.
+ * that vanishes on refresh. Backed by a PRIVATE Vercel Blob store: these are
+ * reports about identifiable businesses, so blobs require the store token to
+ * read and are never fetchable by URL alone. The /s/<id> page is the only way
+ * a report is exposed, which keeps the consent gate meaningful.
+ *
+ * If BLOB_READ_WRITE_TOKEN is absent the scorecard still works and sharing
+ * simply reports itself unavailable, so a missing store degrades the feature
+ * rather than breaking the tool.
  */
-import { put, list } from '@vercel/blob';
+import { put, list, get } from '@vercel/blob';
 import { randomBytes } from 'node:crypto';
 
 const PREFIX = 'scorecards/';
+const ACCESS = 'private';
 
 export const storeConfigured = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 
-/** Short, URL-safe, unguessable. Not sequential: ids must not be enumerable. */
+/** Short, URL-safe, unguessable. Ids must not be enumerable. */
 export function newId() {
   return randomBytes(9).toString('base64url');
 }
+
+const pathFor = (id) => `${PREFIX}${id}.json`;
+const validId = (id) => /^[A-Za-z0-9_-]{8,32}$/.test(String(id || ''));
 
 export async function saveResult(record) {
   if (!storeConfigured()) return null;
   const id = newId();
   const payload = { ...record, id, savedAt: new Date().toISOString() };
-  await put(`${PREFIX}${id}.json`, JSON.stringify(payload), {
-    access: 'public',
+  await put(pathFor(id), JSON.stringify(payload), {
+    access: ACCESS,
     contentType: 'application/json',
     addRandomSuffix: false,
-    cacheControlMaxAge: 3600,
   });
   return payload;
 }
 
+async function readJson(pathname, timeoutMs = 6000) {
+  const result = await get(pathname, {
+    access: ACCESS,
+    abortSignal: AbortSignal.timeout(timeoutMs),
+  });
+  if (!result || !result.stream) return null;
+  const text = await new Response(result.stream).text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+}
+
 export async function loadResult(id) {
-  if (!storeConfigured()) return null;
-  if (!/^[A-Za-z0-9_-]{8,32}$/.test(String(id || ''))) return null;
-
-  // Resolve through list() rather than guessing the public URL, so a caller
-  // cannot probe the blob store with crafted paths.
-  const { blobs } = await list({ prefix: `${PREFIX}${id}.json`, limit: 1 });
-  const match = blobs.find((b) => b.pathname === `${PREFIX}${id}.json`);
-  if (!match) return null;
-
-  const res = await fetch(match.url, { signal: AbortSignal.timeout(6000) });
-  if (!res.ok) return null;
-  return await res.json();
+  if (!storeConfigured() || !validId(id)) return null;
+  try {
+    return await readJson(pathFor(id));
+  } catch {
+    // A missing blob throws rather than resolving null in some SDK paths.
+    return null;
+  }
 }
 
 /**
@@ -56,8 +73,7 @@ export async function listPublicResults(limit = 500) {
   const records = await Promise.all(
     blobs.map(async (b) => {
       try {
-        const res = await fetch(b.url, { signal: AbortSignal.timeout(5000) });
-        return res.ok ? await res.json() : null;
+        return await readJson(b.pathname, 5000);
       } catch {
         return null;
       }

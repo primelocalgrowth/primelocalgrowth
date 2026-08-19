@@ -1,0 +1,179 @@
+
+    <section class="page-hero" style="padding-bottom:0;">
+      <div class="wrap">
+        <a class="breadcrumb" href="/">Home</a>
+        <p class="eyebrow">GBP Readiness Score</p>
+        <h1 style="max-width:640px;">Is your Google listing losing you calls right now?</h1>
+        <p class="lead" style="max-width:580px;">10 questions. Under 60 seconds. See your score and find out exactly what's costing you customers.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:40px;">
+      <div class="wrap scorecard-wrap">
+
+        <!-- Progress bar -->
+        <div class="progress-bar-outer" id="progress-bar-outer">
+          <div class="progress-bar-inner" id="progress-bar" style="width:0%"></div>
+        </div>
+
+        <!-- Questions -->
+        <div id="questions">
+
+          <div class="question-block active" data-q="0" data-weight="15">
+            <p class="question-label">Question 1 of 10</p>
+            <h2 class="question-text">Does your Google Business Profile show up when you search your business name on Google?</h2>
+            <p class="question-sub">Search your exact business name right now if you're not sure.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, it shows up</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-0">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="1" data-weight="15">
+            <p class="question-label">Question 2 of 10</p>
+            <h2 class="question-text">Is your Google profile marked as "verified" by Google?</h2>
+            <p class="question-sub">Verified profiles rank significantly higher in local search.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, it's verified</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-1">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="2" data-weight="10">
+            <p class="question-label">Question 3 of 10</p>
+            <h2 class="question-text">Does your profile have at least 10 Google reviews with a 4.0 or higher rating?</h2>
+            <p class="question-sub">Reviews are one of the top factors Google uses to rank local businesses.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, 10+ reviews, 4.0+</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-2">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="3" data-weight="10">
+            <p class="question-label">Question 4 of 10</p>
+            <h2 class="question-text">Have you received a new Google review in the last 30 days?</h2>
+            <p class="question-sub">Google favors profiles with recent, ongoing review activity.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, recent review</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-3">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="4" data-weight="10">
+            <p class="question-label">Question 5 of 10</p>
+            <h2 class="question-text">Are your business name, address, and phone number identical everywhere online, Google, Yelp, your website, Facebook?</h2>
+            <p class="question-sub">Inconsistencies here confuse Google and suppress your rankings.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, all match</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-4">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="5" data-weight="10">
+            <p class="question-label">Question 6 of 10</p>
+            <h2 class="question-text">Does your Google profile have photos posted in the last 60 days?</h2>
+            <p class="question-sub">Fresh photos signal activity. Profiles without them look abandoned to Google.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, recent photos</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-5">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="6" data-weight="10">
+            <p class="question-label">Question 7 of 10</p>
+            <h2 class="question-text">Have you posted an update to your Google profile in the last 30 days?</h2>
+            <p class="question-sub">Google Posts show customers, and Google, that your business is active.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, posted recently</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-6">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="7" data-weight="10">
+            <p class="question-label">Question 8 of 10</p>
+            <h2 class="question-text">Does your profile list your specific services with descriptions, not just your business category?</h2>
+            <p class="question-sub">Profiles with detailed services rank for more search terms.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, services listed</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-7">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="8" data-weight="5">
+            <p class="question-label">Question 9 of 10</p>
+            <h2 class="question-text">Do you respond to every Google review, including the negative ones?</h2>
+            <p class="question-sub">Response rate is a trust signal Google and customers both notice.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, respond to all</button>
+              <button class="answer-btn no" data-value="no">No or not all of them</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-8">Next &rarr;</button>
+          </div>
+
+          <div class="question-block" data-q="9" data-weight="5">
+            <p class="question-label">Question 10 of 10</p>
+            <h2 class="question-text">Do you appear in the Google map pack (top 3 local results) for your main service + city search?</h2>
+            <p class="question-sub">Try: "[your service] [your city]" in an incognito window right now.</p>
+            <div class="answer-grid">
+              <button class="answer-btn yes" data-value="yes">Yes, I'm in the top 3</button>
+              <button class="answer-btn no" data-value="no">No or not sure</button>
+            </div>
+            <button class="btn btn-primary next-btn" id="next-9">See My Score &rarr;</button>
+          </div>
+
+        </div><!-- /questions -->
+
+        <!-- Results -->
+        <div class="results-block" id="results">
+          <div style="text-align:center; margin-bottom:36px;">
+            <div class="score-ring" id="score-ring">
+              <svg viewBox="0 0 120 120" width="120" height="120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="10"/>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="var(--blue)" stroke-width="10"
+                  stroke-dasharray="326.73" stroke-dashoffset="326.73"
+                  id="score-arc" stroke-linecap="round"/>
+              </svg>
+              <span class="score-ring-num" id="score-num">0</span>
+            </div>
+            <p class="score-label" id="score-label">Calculating...</p>
+            <p class="score-summary" id="score-summary"></p>
+          </div>
+
+          <div class="gap-list" id="gap-list"></div>
+
+          <div class="cta-capture">
+            <h2>Get Adam's full audit of your listing</h2>
+            <p>Your score shows where the gaps are. The audit shows exactly how to fix them, and what it's worth in calls per month.</p>
+            <form class="capture-form" data-lead-form data-form-name="scorecard_cta">
+              <div class="field">
+                <label for="sc-name" style="color:rgba(255,255,255,0.7);">Your name</label>
+                <input id="sc-name" name="name" autocomplete="name" required placeholder="First name">
+              </div>
+              <div class="field">
+                <label for="sc-email" style="color:rgba(255,255,255,0.7);">Email</label>
+                <input id="sc-email" name="email" type="email" autocomplete="email" required placeholder="you@yourbusiness.com">
+              </div>
+              <div class="field">
+                <label for="sc-biz" style="color:rgba(255,255,255,0.7);">Business name</label>
+                <input id="sc-biz" name="businessName" autocomplete="organization" required placeholder="Your business">
+              </div>
+              <input type="hidden" name="businessType" value="local-service">
+              <input type="hidden" name="source" value="gbp-scorecard" id="sc-score-field">
+              <button class="btn btn-primary btn-block" type="submit" style="margin-top:4px;">Get My Free Full Audit</button>
+            </form>
+            <p class="already-link">Already requested an audit? <a href="/contact">Email Adam directly</a></p>
+            <div class="form-feedback" role="status" aria-live="polite" style="margin-top:12px;color:#F2C078;font-weight:800;"></div>
+          </div>
+        </div><!-- /results -->
+
+      </div>
+    </section>
+  

@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { renderPrices } from '../../shared/pricing.mjs';
+import body from '../content-html/free-visibility-audit.html?raw';
+const beforeFooter = "<a class=\"btn btn-primary sticky-audit\" href=\"#audit-form\">Get My 3-Point Visibility Audit</a>";
+---
+<Base
+  title="Free Local Visibility Audit | Prime Local Growth"
+  description="Request a free visibility audit from Prime Local Growth and see where your local business shows up on Google, where it is missing, and what to fix first."
+  path="/free-visibility-audit"
+  ogDescription="See the visibility gaps costing your local business calls."
+  ogImage="https://www.primelocalgrowth.com/assets/gbp-results-og.jpg"
+  scripts={["site-interactions","site-form","exit-intent"]}
+>
+  <Fragment set:html={renderPrices(body)} />
+  <Fragment slot="before-footer" set:html={beforeFooter} />
+</Base>

@@ -1,0 +1,62 @@
+---
+import Logo from './Logo.astro';
+import { CTA, CONTACT } from '../config/site.mjs';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="footer-pre">
+    <div class="footer-cta-band">
+      <div>
+        <h3>See how visible your business really is.</h3>
+      </div>
+      <a class="btn btn-primary" href={CTA.auditHref}>{CTA.auditLabel}</a>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <Logo width={32} height={37} />
+        <strong>Prime Local Growth</strong>
+        <p>Veteran-owned local visibility systems for service businesses in San Antonio and surrounding areas.</p>
+        <div class="footer-rating">
+          <span class="footer-stars">★★★★★</span>
+          <span>5.0 on Google</span>
+        </div>
+        <div class="footer-contact">
+          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><br>
+          <a href={`tel:${CONTACT.phoneHref}`}>{CONTACT.phone}</a>
+        </div>
+      </div>
+      <nav class="footer-col" aria-label="Services navigation">
+        <div class="footer-col-head">Services</div>
+        <a href="/services">All Services</a>
+        <a href="/free-visibility-audit">Free Visibility Audit</a>
+        <a href="/the-system">How It Works</a>
+        <a href="/results">Results</a>
+        <a href="/about">About Adam</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <nav class="footer-col" aria-label="Locations navigation">
+        <div class="footer-col-head">Locations</div>
+        <a href="/cibolo-local-seo">Cibolo</a>
+        <a href="/schertz-google-business-profile">Schertz</a>
+        <a href="/universal-city-local-seo">Universal City</a>
+        <a href="/selma-google-business-profile">Selma</a>
+        <a href="/live-oak-local-seo">Live Oak</a>
+        <a href="/new-braunfels-google-business-profile">New Braunfels</a>
+        <a href="/san-antonio-local-seo">San Antonio</a>
+      </nav>
+      <nav class="footer-col" aria-label="Legal navigation">
+        <div class="footer-col-head">Legal</div>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap footer-bottom-inner">
+      <p>&copy; {year} Prime Local Growth &middot; San Antonio, TX 78108</p>
+      <p>Veteran-Owned &middot; No Long-Term Contract &middot; Progress Tracked Monthly</p>
+    </div>
+  </div>
+</footer>

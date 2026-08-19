@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { renderPrices } from '../../shared/pricing.mjs';
+import body from '../content-html/the-system.html?raw';
+---
+<Base
+  title="The Prime Local Growth System | Build, Maintain, Grow"
+  description="The Prime Local Growth System helps local service businesses build visibility, maintain visibility, and grow locally on Google."
+  path="/the-system"
+  ogTitle="The Prime Local Growth System"
+  ogDescription="Build visibility, maintain visibility, and grow locally with a simple system built for service businesses."
+  ogImage="https://www.primelocalgrowth.com/assets/gbp-results-og.jpg"
+  scripts={["site-interactions","exit-intent"]}
+  stickyAudit
+>
+  <Fragment set:html={renderPrices(body)} />
+</Base>

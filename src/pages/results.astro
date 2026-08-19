@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import body from '../content-html/results.html?raw';
+---
+<Base
+  title="Client Results | Prime Local Growth"
+  description="Real client work and verifiable Google reviews from Prime Local Growth: visibility fixes, review growth, and what clients say happened next."
+  path="/results"
+  ogDescription="Real work, real Google reviews, verifiable on Google."
+  ogImage="https://www.primelocalgrowth.com/assets/gbp-results-og.jpg"
+  scripts={["site-interactions","exit-intent"]}
+  stickyAudit
+>
+  <Fragment set:html={body} />
+</Base>

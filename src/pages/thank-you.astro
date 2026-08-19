@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import body from '../content-html/thank-you.html?raw';
+---
+<Base
+  title="Audit Request Received | Prime Local Growth"
+  description="Your Prime Local Growth visibility audit request has been received. Here is what happens next."
+  path="/thank-you"
+  ogDescription="Your free local visibility audit request has been received."
+  scripts={["site-interactions","exit-intent"]}
+>
+  <Fragment set:html={body} />
+</Base>

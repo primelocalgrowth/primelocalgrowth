@@ -4,9 +4,9 @@
     "description": "Prime Local Growth helps local service businesses get found on Google, stay visible, and win more local customers.",
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview",
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
         "security:closeout": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/security-closeout.ps1",
         "verify:plg": "node --check api/submit-form.js && node --check api/newsletter-subscribe.js && node --check api/stripe-webhook.js && node --check api/health.js && node --check api/utils/email.js && node --check ops/apps-script/lead-database/Code.js && node --check ops/apps-script/master-audit/Code.js && node --check ops/apps-script/outreach-sequencer/Code.js && node scripts/test-backend-routing.mjs && node scripts/test-places-audit-enrichment.mjs && node scripts/verify-plg-integration.mjs && npm run build"
     },
@@ -23,6 +23,7 @@
         "@vercel/speed-insights": "^2.0.0"
     },
     "devDependencies": {
+        "astro": "^7.2.4",
         "terser": "^5.0.0",
         "vite": "^8.0.14"
     }

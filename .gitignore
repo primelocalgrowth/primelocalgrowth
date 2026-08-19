@@ -49,3 +49,4 @@ sent-emails.json
 unsubscribes.txt
 cold-email-log.txt
 .vercel
+.astro/

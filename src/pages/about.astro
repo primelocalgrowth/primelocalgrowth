@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import body from '../content-html/about.html?raw';
+---
+<Base
+  title="About Adam Rome | Prime Local Growth"
+  description="Adam Rome is a U.S. Air Force veteran and founder of Prime Local Growth, a local SEO agency helping service businesses get found on Google."
+  path="/about"
+  ogDescription="Veteran-owned. Owner-operated. Adam Rome runs every Prime Local Growth engagement personally."
+  ogImage="https://www.primelocalgrowth.com/assets/adam-rome.jpg"
+  scripts={["site-interactions","exit-intent"]}
+>
+  <Fragment set:html={body} />
+</Base>

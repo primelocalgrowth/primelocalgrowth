@@ -1,0 +1,20 @@
+---
+import Logo from './Logo.astro';
+import { CTA } from '../config/site.mjs';
+---
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/"><Logo width={38} height={44} /><span>Prime Local Growth <small>The Google Visibility Company</small></span></a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" data-nav-toggle>
+      <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+    <nav class="nav-links" aria-label="Primary navigation" data-nav-links>
+      <a href="/services">Services</a>
+      <a href="/results">Results</a>
+      <a href="/contact">Contact</a>
+      <a class="btn btn-primary" href={CTA.auditHref}>{CTA.auditLabel}</a>
+    </nav>
+  </div>
+</header>

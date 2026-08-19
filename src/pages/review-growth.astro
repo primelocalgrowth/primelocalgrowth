@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import body from '../content-html/review-growth.html?raw';
+---
+<Base
+  title="Review Growth for Local Businesses | Prime Local Growth"
+  description="Review growth systems for local service businesses that need stronger trust, better reputation, and more customers choosing them from Google."
+  path="/review-growth"
+  ogTitle="Review Growth for Local Businesses"
+  ogDescription="Get more steady, trustworthy Google reviews from real customers."
+  scripts={["site-interactions"]}
+>
+  <Fragment set:html={body} />
+</Base>

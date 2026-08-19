@@ -1,0 +1,58 @@
+---
+/**
+ * Homepage. Keeps its own design system (inline CSS, anchor-link nav, its own
+ * footer) rather than site.css, so this page does not use Base.astro. The
+ * shared win here is the JSON-LD: its pricing answer is generated from
+ * shared/pricing.mjs instead of being hand-typed.
+ */
+import styles from '../content-html/index-style.css?raw';
+import body from '../content-html/index-body.html?raw';
+import inlineScript from '../content-html/index-inline.js?raw';
+import baseSchema from '../data/home-schema.json';
+import { costAnswer, renderPrices } from '../../shared/pricing.mjs';
+
+// Patch the cost answer from the single pricing source. Everything else in the
+// graph is carried through untouched.
+const schema = structuredClone(baseSchema);
+const faq = schema['@graph'].find((n) => n['@type'] === 'FAQPage');
+const costQ = faq?.mainEntity?.find((q) => q.name === 'What does this cost?');
+if (!costQ) {
+  throw new Error('Home schema is missing the "What does this cost?" question — pricing would silently go stale.');
+}
+costQ.acceptedAnswer.text = costAnswer();
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Local Growth | Local SEO San Antonio, TX</title>
+<meta name="description" content="Prime Local Growth helps local service businesses in San Antonio get found on Google, improve reviews, and win more local customers. Veteran-owned. No contracts.">
+<link rel="canonical" href="https://www.primelocalgrowth.com/">
+<meta property="og:title" content="Prime Local Growth | Get Found on Google Locally">
+<meta property="og:description" content="Prime Local Growth helps local service businesses get found on Google, improve reviews, and win more local customers.">
+<meta property="og:url" content="https://www.primelocalgrowth.com/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.primelocalgrowth.com/assets/gbp-results-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.primelocalgrowth.com/assets/gbp-results-og.jpg">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/BricolageGrotesque-600-800-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="icon" type="image/png" sizes="1024x1024" href="/assets/brand/logo/icon-square.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="1024x1024" href="/assets/brand/logo/icon-square.png">
+<script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />
+<script is:inline src="/cookie-consent.js"></script>
+<script is:inline defer src="/site-analytics.js"></script>
+<script is:inline defer src="/vercel-insights.js"></script>
+<style is:inline set:html={styles}></style>
+</head>
+<body>
+<Fragment set:html={renderPrices(body)} />
+<script is:inline set:html={inlineScript}></script>
+<script is:inline src="/site-form.js"></script>
+<script is:inline defer src="/exit-intent.js"></script>
+</body>
+</html>

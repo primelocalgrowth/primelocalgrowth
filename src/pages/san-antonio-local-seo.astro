@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import body from '../content-html/san-antonio-local-seo.html?raw';
+---
+<Base
+  title="San Antonio Local SEO | Prime Local Growth"
+  description="San Antonio local SEO and Google visibility help for service businesses that need more calls from nearby customers."
+  path="/san-antonio-local-seo"
+  ogTitle="San Antonio Local SEO"
+  ogDescription="Compete for more San Antonio searches on Google."
+  scripts={["site-interactions"]}
+>
+  <Fragment set:html={body} />
+</Base>

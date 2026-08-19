@@ -12,6 +12,7 @@
  */
 
 import { sendCustomerWelcome, sendOnboardingChecklist } from './utils/email.js';
+import { planFromAmount } from '../shared/pricing.mjs';
 
 export const config = { api: { bodyParser: false } };
 
@@ -170,17 +171,10 @@ async function notifyAdamOfNewClient(customer, plan, amountTotal) {
   });
 }
 
-// Mirrors the live tiers: $497 one-time Opportunity Sprint, Growth Management
-// from $997/mo, Authority + AI Visibility from $1,497/mo. Thresholds sit below
-// each list price so proration, tax and partial periods still map correctly.
-// Only used when Stripe metadata carries no explicit plan.
+// Delegates to the shared pricing source so plan names can never drift from
+// what the site advertises. Fallback only: an explicit metadata.plan wins.
 function getPlanFromAmount(amountTotal) {
-  if (!amountTotal) return 'unknown';
-  const dollars = amountTotal / 100;
-  if (dollars >= 1400) return 'Authority + AI Visibility';
-  if (dollars >= 900) return 'Growth Management';
-  if (dollars >= 450) return '30-Day Opportunity Sprint';
-  return 'Custom';
+  return planFromAmount(amountTotal);
 }
 
 async function getRawBody(req) {

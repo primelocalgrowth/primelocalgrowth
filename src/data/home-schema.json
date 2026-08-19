@@ -1,0 +1,134 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.primelocalgrowth.com/#business",
+      "name": "Prime Local Growth",
+      "url": "https://www.primelocalgrowth.com/",
+      "telephone": "+12106461436",
+      "email": "adam@primelocalgrowth.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Antonio",
+        "addressRegion": "TX",
+        "postalCode": "78108",
+        "addressCountry": "US"
+      },
+      "description": "The Google visibility company for local businesses.",
+      "areaServed": [
+        "Cibolo",
+        "Schertz",
+        "Universal City",
+        "Selma",
+        "Live Oak",
+        "New Braunfels",
+        "San Antonio"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "5"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Alex Arroyo"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "I've been working with Adam for about a month now and I have noticed a huge difference in my business."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Australia Manning"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "Hiring Prime Local Growth was the best business decision we've made."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Organization",
+            "name": "Bushwacked Paint & Renovations"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "Within 1 day my phones started ringing again."
+        }
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.primelocalgrowth.com/#service",
+      "name": "Prime Local Growth",
+      "url": "https://www.primelocalgrowth.com/",
+      "provider": {
+        "@id": "https://www.primelocalgrowth.com/#business"
+      },
+      "serviceType": [
+        "Google Business Profile optimization",
+        "Local SEO",
+        "Review growth",
+        "Local visibility audits"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.primelocalgrowth.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How fast will I see results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Listing improvements and review growth start showing within the first 30 days. Movement in the map results typically lands in 60-90 days depending on your competition. Every month ends with a written report."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does this cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start with a 30-Day Google Maps Opportunity Sprint for $497 one-time. If ongoing management is the right next step, the sprint fee is credited toward the first month when you continue within seven days. New Growth Management starts at $997/month. Authority + AI Visibility starts at $1,497/month. Existing agreements never change without approval."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you guarantee first place on Google?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. No legitimate company can guarantee first place on Google. Prime Local Growth focuses on improving the factors that help local businesses become easier to find, trust, and choose."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you buy fake reviews?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Never. Fake reviews get listings suspended. We build simple systems that make it easy for real, happy customers to say what they already think."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What about AI search? Will it replace the map pack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI answers in Google increasingly appear above the map pack, and they pull from the same signals: a complete profile, consistent business information, recent reviews, and clear service descriptions. The work that ranks a business in the map pack today is the same work that gets it cited by AI search tomorrow."
+          }
+        }
+      ]
+    }
+  ]
+}

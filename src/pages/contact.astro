@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import body from '../content-html/contact.html?raw';
+---
+<Base
+  title="Contact Prime Local Growth | Local Visibility Help"
+  description="Contact Prime Local Growth for Google visibility, local SEO, review growth, and free visibility audits for local service businesses."
+  path="/contact"
+  ogTitle="Contact Prime Local Growth"
+  ogDescription="Get help with local Google visibility for your service business."
+  ogImage="https://www.primelocalgrowth.com/assets/gbp-results-og.jpg"
+  scripts={["site-interactions","site-form","exit-intent"]}
+>
+  <Fragment set:html={body} />
+</Base>

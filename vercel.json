@@ -2,6 +2,13 @@
   "buildCommand": "vite build",
   "outputDirectory": "dist",
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/assets/gbp-results-og.png",
+      "destination": "/assets/gbp-results-og.jpg",
+      "permanent": true
+    }
+  ],
   "functions": {
     "api/submit-form.js": {
       "maxDuration": 10

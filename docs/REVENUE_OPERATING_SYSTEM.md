@@ -5,7 +5,7 @@
 1. Qualified local-service business requests the free visibility audit.
 2. Adam reviews the listing and sends a plain-language finding within two business days.
 3. The best-fit next step is the $497 30-Day Google Maps Opportunity Sprint.
-4. The results review determines whether $497/month Visibility Management has evidence-backed value.
+4. The results review determines whether $997/month Growth Management has evidence-backed value.
 5. Stripe payment moves the lead to `Won` and starts onboarding automatically.
 
 ## Sales stages

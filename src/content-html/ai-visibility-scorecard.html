@@ -129,6 +129,27 @@
 
           <div class="gap-list" id="gap-list"></div>
 
+          <div class="scan-block" id="scan-block">
+            <h2>Now get the measured version</h2>
+            <p class="scan-intro">The answers above are your own read on things. Enter your website and we will actually check it, the way an AI engine would: crawler access, structured data, whether your pages answer questions directly. You get a link you can send to anyone.</p>
+            <form class="scan-form" id="scan-form" novalidate>
+              <div class="field">
+                <label for="scan-url">Your website</label>
+                <input id="scan-url" name="url" type="text" inputmode="url" autocomplete="url" required placeholder="yourbusiness.com">
+              </div>
+              <div class="field">
+                <label for="scan-biz">Business name <span class="opt">(optional)</span></label>
+                <input id="scan-biz" name="businessName" autocomplete="organization" placeholder="Your business">
+              </div>
+              <label class="scan-consent">
+                <input type="checkbox" id="scan-consent" name="publicConsent">
+                <span>Publish this report publicly. It creates a page naming your business that search engines can index, and includes your result in the anonymous industry index. Leave unchecked and your report stays private and unlisted.</span>
+              </label>
+              <button class="btn btn-primary" type="submit" id="scan-submit">Check my website</button>
+            </form>
+            <div class="scan-result" id="scan-result" role="status" aria-live="polite"></div>
+          </div>
+
           <div class="cta-capture">
             <h2>See exactly what AI says about your business</h2>
             <p>Your score shows the gaps. The full audit shows the real thing, word for word what ChatGPT, Gemini, and Google's AI say when someone asks for the best in your area, who they name instead of you, and the plain plan to flip that. I put it together myself and send it to you. No call required, no sales team.</p>

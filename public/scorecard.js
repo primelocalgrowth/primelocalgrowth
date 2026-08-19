@@ -215,5 +215,123 @@
     document.dispatchEvent(new CustomEvent('scorecard:complete', { detail: { score: score, band: info.label } }));
   }
 
+  /**
+   * Optional second step: an objective scan of the visitor's website.
+   *
+   * The quiz above is self-reported. This measures the site for real and
+   * returns a shareable /s/<id> link, which is what turns a run into something
+   * that can be passed around instead of a number that disappears on refresh.
+   */
+  function initScan() {
+    var form = document.getElementById('scan-form');
+    var output = document.getElementById('scan-result');
+    if (!form || !output) return;
+
+    var submit = document.getElementById('scan-submit');
+    var urlInput = document.getElementById('scan-url');
+    var bizInput = document.getElementById('scan-biz');
+    var consent = document.getElementById('scan-consent');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var url = (urlInput.value || '').trim();
+      output.className = 'scan-result';
+      if (!url) {
+        output.classList.add('err');
+        output.textContent = 'Add your website address first.';
+        return;
+      }
+
+      submit.disabled = true;
+      var original = submit.textContent;
+      submit.textContent = 'Checking…';
+      output.textContent = 'Reading your site the way an AI engine would. This takes a few seconds.';
+
+      fetch('/api/scorecard-save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          url: url,
+          businessName: (bizInput && bizInput.value || '').trim(),
+          publicConsent: !!(consent && consent.checked)
+        })
+      })
+        .then(function (r) { return r.json().then(function (b) { return { status: r.status, body: b }; }); })
+        .then(function (res) {
+          submit.disabled = false;
+          submit.textContent = original;
+          var body = res.body || {};
+
+          if (res.status === 503) {
+            output.classList.add('err');
+            output.textContent = 'Shareable reports are not switched on yet. Your score above still stands.';
+            return;
+          }
+          if (!body.ok) {
+            output.classList.add('err');
+            output.textContent = body.reason || body.error || 'We could not read that site. Check the address and try again.';
+            return;
+          }
+          renderScanResult(output, body);
+        })
+        .catch(function () {
+          submit.disabled = false;
+          submit.textContent = original;
+          output.classList.add('err');
+          output.textContent = 'Something went wrong reaching the scanner. Please try again.';
+        });
+    });
+  }
+
+  function renderScanResult(output, body) {
+    var link = window.location.origin + body.shareUrl;
+    output.textContent = '';
+
+    var score = document.createElement('div');
+    score.className = 'scan-score';
+    score.textContent = 'Measured score: ' + body.score + '/100 — ' + body.band;
+
+    var note = document.createElement('p');
+    note.textContent = 'Your report is ready. Anyone with this link can read it.';
+
+    var row = document.createElement('div');
+    row.className = 'scan-link-row';
+
+    var field = document.createElement('input');
+    field.type = 'text';
+    field.readOnly = true;
+    field.value = link;
+    field.setAttribute('aria-label', 'Your report link');
+
+    var copy = document.createElement('button');
+    copy.type = 'button';
+    copy.className = 'scan-copy';
+    copy.textContent = 'Copy link';
+    copy.addEventListener('click', function () {
+      var done = function () { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy link'; }, 2000); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(link).then(done, function () { field.select(); });
+      } else {
+        field.select();
+        done();
+      }
+    });
+
+    var open = document.createElement('a');
+    open.className = 'scan-copy';
+    open.href = body.shareUrl;
+    open.textContent = 'Open report';
+
+    row.appendChild(field);
+    row.appendChild(copy);
+    row.appendChild(open);
+    output.appendChild(score);
+    output.appendChild(note);
+    output.appendChild(row);
+
+    document.dispatchEvent(new CustomEvent('scorecard:scanned', { detail: { score: body.score, id: body.id } }));
+  }
+
+  initScan();
   show(0);
 })();

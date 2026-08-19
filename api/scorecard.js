@@ -101,6 +101,20 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'That address could not be reached from the public internet.' });
   }
 
+  const result = await runScorecard(target, startedAt, requestId);
+  return res.status(200).json(result);
+}
+
+/**
+ * Runs the checks and returns the result object. Extracted from the handler so
+ * that saving a shareable report can re-run the checks server-side rather than
+ * trusting a score posted by the client — otherwise anyone could publish a
+ * fabricated report on this domain.
+ *
+ * Callers MUST have already passed `target` through normaliseUrl() and
+ * assertPublicUrl(); this function does not re-validate the host.
+ */
+export async function runScorecard(target, startedAt = Date.now(), requestId = 'internal') {
   const deadline = startedAt + TOTAL_BUDGET_MS;
 
   let homepage;
@@ -110,13 +124,13 @@ export default async function handler(req, res) {
   } catch (err) {
     console.error(JSON.stringify({ event: 'scorecard_homepage_failed', requestId, url: target.toString(), error: err?.message || 'unknown' }));
     // Lead tool: degrade instead of 500-ing at a prospect.
-    return res.status(200).json({
+    return {
       ok: false,
       url: target.toString(),
       reason: describeFetchFailure(err),
       checkedAt: new Date().toISOString(),
       durationMs: Date.now() - startedAt
-    });
+    };
   }
 
   const html = await readCapped(homepage.response);
@@ -148,7 +162,7 @@ export default async function handler(req, res) {
     .sort((a, b) => b.weight - a.weight)
     .map(({ id, label, weight, detail }) => ({ id, label, weight, detail }));
 
-  return res.status(200).json({
+  return {
     ok: true,
     url: finalUrl.toString(),
     score,
@@ -157,7 +171,7 @@ export default async function handler(req, res) {
     gaps,
     checkedAt: new Date().toISOString(),
     durationMs: Date.now() - startedAt
-  });
+  };
 }
 
 // ============================================================
@@ -176,7 +190,7 @@ function parseBody(raw) {
   return raw;
 }
 
-function normaliseUrl(input) {
+export function normaliseUrl(input) {
   const trimmed = input.trim();
   const withScheme = /^[a-z][a-z0-9+.-]*:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 
@@ -205,7 +219,7 @@ function normaliseUrl(input) {
   return parsed;
 }
 
-async function assertPublicUrl(parsed) {
+export async function assertPublicUrl(parsed) {
   if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') throw new Error('bad_protocol');
   if (parsed.port && parsed.port !== '80' && parsed.port !== '443') throw new Error('bad_port');
 

@@ -117,8 +117,16 @@ export default async function handler(req, res) {
     const optedIntoMarketing = marketingConsent === true || marketingConsent === 'true' || marketingConsent === 'on';
     const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, source, attribution: cleanAttribution, marketingConsent: optedIntoMarketing, timestamp, submissionId };
 
-    await runRequiredIntegrations(lead);
-    await runOptionalIntegrations(lead);
+    const capture = await captureLead(lead);
+    if (!capture.captured) {
+      console.error(JSON.stringify({ event: 'lead_capture_failed', requestId, submissionId, channels: capture.channels }));
+      return res.status(502).json({ error: 'We could not save your request. Please email adam@primelocalgrowth.com directly and it will be picked up right away.' });
+    }
+    if (capture.degraded) {
+      console.warn(JSON.stringify({ event: 'lead_capture_degraded', requestId, submissionId, channels: capture.channels }));
+    }
+
+    await runFollowUpIntegrations(lead);
 
     // Return success with redirect
     return res.status(200).json({
@@ -183,20 +191,48 @@ async function addToBeehiiv(name, email, phone, businessName, city, businessType
   return await response.json();
 }
 
-async function runRequiredIntegrations(lead) {
-  if (!process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
-    throw new Error('GOOGLE_SHEETS_WEBHOOK_URL is not configured.');
+// Sheets and the notification email are two independent records of the same
+// lead, so either one landing means the lead is recoverable. They run in
+// parallel and neither can abort the other: previously a Sheets/Apps Script
+// outage threw before the email was ever attempted, dropping the lead silently.
+async function captureLead(lead) {
+  const channels = {};
+  const attempts = [];
+
+  if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
+    attempts.push(recordChannel(channels, 'sheets', () => appendToGoogleSheets(lead)));
+  } else {
+    channels.sheets = 'not_configured';
   }
-  await appendToGoogleSheets(lead);
+
+  if (process.env.RESEND_API_KEY) {
+    attempts.push(recordChannel(channels, 'notification', () => notifyAdamOfLead(lead)));
+  } else {
+    channels.notification = 'not_configured';
+  }
+
+  await Promise.all(attempts);
+
+  const captured = channels.sheets === 'ok' || channels.notification === 'ok';
+  return { captured, degraded: captured && (channels.sheets !== 'ok' || channels.notification !== 'ok'), channels };
 }
 
-async function runOptionalIntegrations(lead) {
+async function recordChannel(channels, key, task) {
+  try {
+    await task();
+    channels[key] = 'ok';
+  } catch (err) {
+    channels[key] = 'failed';
+    console.error(JSON.stringify({ event: 'lead_channel_failed', channel: key, message: err?.message || 'unknown' }));
+  }
+}
+
+// Best effort only. Nothing here can fail a submission that was already captured.
+async function runFollowUpIntegrations(lead) {
   const tasks = [];
 
   if (process.env.RESEND_API_KEY) {
-    tasks.push(runOptionalTask('Lead notification email', () => notifyAdamOfLead(lead)));
     tasks.push(runOptionalTask('Lead auto-reply email', () => sendLeadAutoReply(lead)));
-
   }
 
   if (process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL) {

@@ -86,7 +86,7 @@
   .biz .pin{flex:none}
   .biz .nm{font-weight:600;font-size:15px;flex:1}
   .biz .meta{font-size:12.5px;color:var(--mist);white-space:nowrap;font-family:var(--mono)}
-  .biz .stars{color:#F5A623;letter-spacing:1px;font-size:11px}
+  .biz .stars{color:#A56A08;letter-spacing:1px;font-size:11px}
   .biz.you{border:2px solid var(--teal);background:#F0FBFA;order:4}
   .biz.you .nm{color:#12756B}
   .sim.play .biz.you{order:-1}

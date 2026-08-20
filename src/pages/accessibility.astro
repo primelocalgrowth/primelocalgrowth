@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import { renderPrices } from '../../shared/pricing.mjs';
+import { CONTACT } from '../config/site.mjs';
+
+const updated = new Date().toISOString().slice(0, 10);
+---
+<Base
+  title="Accessibility | Prime Local Growth"
+  description="How Prime Local Growth approaches website accessibility, what we have done, what we know is imperfect, and how to report a barrier."
+  path="/accessibility"
+>
+  <section class="section">
+    <div class="wrap" style="max-width:720px;">
+      <a class="breadcrumb" href="/">Home</a>
+      <h1>Accessibility</h1>
+      <p class="lead">This site should be usable by everyone, including people who browse with a keyboard, a screen reader, or magnification.</p>
+
+      <h2>What we aim for</h2>
+      <p>We work toward the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. That is a target we measure against, not a certification. Parts of the site will fall short at times, and we would rather say so than claim otherwise.</p>
+
+      <h2>What is in place</h2>
+      <ul class="check-list">
+        <li>A skip link so keyboard users can jump past navigation</li>
+        <li>Text alternatives on images that carry meaning</li>
+        <li>Form fields with real labels, not placeholder text standing in for them</li>
+        <li>A single, ordered heading structure on each page</li>
+        <li>Text and interface colours checked against the 4.5:1 contrast minimum</li>
+        <li>Pages that work without JavaScript for reading content</li>
+      </ul>
+
+      <h2>Known limitations</h2>
+      <p>Some third-party content we embed, such as maps and booking tools, is outside our control and may not meet the same standard. Where that happens we try to provide the same information another way, such as a plain address and a phone number.</p>
+
+      <h2>Tell us if something blocks you</h2>
+      <p>If any part of this site stops you from getting what you need, email <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> or call <a href={`tel:${CONTACT.phoneHref}`}>{CONTACT.phone}</a>. Say which page and what happened. We will reply and, where we can, give you the information directly while we fix the underlying problem.</p>
+
+      <p class="sub" style="margin-top:28px;">Last reviewed {updated}.</p>
+    </div>
+  </section>
+</Base>

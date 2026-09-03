@@ -35,7 +35,7 @@
           "@type": "Review",
           "author": {
             "@type": "Person",
-            "name": "Alex Arroyo"
+            "name": "Local Business Owner"
           },
           "reviewRating": {
             "@type": "Rating",
@@ -47,7 +47,7 @@
           "@type": "Review",
           "author": {
             "@type": "Person",
-            "name": "Australia Manning"
+            "name": "Business Owner"
           },
           "reviewRating": {
             "@type": "Rating",
@@ -59,7 +59,7 @@
           "@type": "Review",
           "author": {
             "@type": "Organization",
-            "name": "Bushwacked Paint & Renovations"
+            "name": "Painting Contractor"
           },
           "reviewRating": {
             "@type": "Rating",

@@ -24,49 +24,6 @@
         "Live Oak",
         "New Braunfels",
         "San Antonio"
-      ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-      "reviewCount": "80"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Local Business Owner"
-          },
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5"
-          },
-          "reviewBody": "I've been working with Adam for about a month now and I have noticed a huge difference in my business."
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Business Owner"
-          },
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5"
-          },
-          "reviewBody": "Hiring Prime Local Growth was the best business decision we've made."
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Organization",
-            "name": "Painting Contractor"
-          },
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5"
-          },
-          "reviewBody": "Within 1 day my phones started ringing again."
-        }
       ]
     },
     {

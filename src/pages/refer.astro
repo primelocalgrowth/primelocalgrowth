@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTACT } from '../config/site.mjs';
+---
+<Base
+  title="Refer a Business to Prime Local Growth"
+  description="Know a local business that needs more calls, bookings, or trust online? Introduce them to Prime Local Growth."
+  path="/refer"
+  ogTitle="Refer a Business to Prime Local Growth"
+  ogDescription="Help a local owner get clearer visibility, stronger proof, and better follow-up."
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <a class="breadcrumb" href="/">Home</a>
+      <p class="eyebrow">For past clients and partners</p>
+      <h1>Know a good business that is being overlooked?</h1>
+      <p class="lead">Introduce them to Prime Local Growth. We help local owners make it easier for the right customers to find, trust, and choose them.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={`mailto:${CONTACT.email}?subject=Prime%20Local%20Growth%20referral`}>Make an email introduction</a>
+        <a class="btn btn-secondary" href="/results">See the work</a>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap grid grid-2">
+      <div>
+        <p class="eyebrow">What to expect</p>
+        <h2>A useful introduction, not a sales handoff.</h2>
+        <p class="sub">Tell us who they are, what they do, and where they serve. Adam will review the opportunity, reply directly, and be honest if the fit is not right.</p>
+      </div>
+      <div class="card">
+        <ul class="check-list" style="margin-top:0;">
+          <li>Google profile and website visibility review</li>
+          <li>Plain-English explanation of what is being missed</li>
+          <li>Clear first step, scope, and starting price</li>
+          <li>No pressure and no long-term contract</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap narrow" style="text-align:center;">
+      <p class="eyebrow">The right introduction</p>
+      <h2>Best for owners who want the work handled.</h2>
+      <p class="sub">HVAC, plumbing, roofing, landscaping, automotive, salons, contractors, storage, and other local businesses can start with a focused visibility review.</p>
+      <p style="margin-top:22px;"><a class="service-link" href={`mailto:${CONTACT.email}?subject=Prime%20Local%20Growth%20referral`}>Email Adam at {CONTACT.email} &rarr;</a></p>
+    </div>
+  </section>
+</Base>

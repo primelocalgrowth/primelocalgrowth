@@ -109,6 +109,18 @@ function trackClick(event) {
     window.plgTrack('audit_cta_click', params);
   }
 
+  if (path === '/refer' || lowerLabel.includes('refer a business')) {
+    window.plgTrack('referral_page_click', params);
+  }
+
+  if (path === '/sponsorship-marketing' || lowerLabel.includes('sponsorship')) {
+    window.plgTrack('sponsorship_page_click', params);
+  }
+
+  if (path === '/results' || lowerLabel.includes('see the work') || lowerLabel.includes('results')) {
+    window.plgTrack('proof_page_click', params);
+  }
+
   if (lowerLabel.includes('breakdown') || lowerLabel.includes('video audit')) {
     window.plgTrack('video_audit_cta_click', params);
   }

@@ -58,8 +58,9 @@
     banner.innerHTML = `
       <div class="plg-cookie-inner">
         <p class="plg-cookie-text">
-          We use cookies to understand how visitors use our site (Google Analytics).
-          Your data is never sold. <a href="/privacy" class="plg-cookie-link">Privacy Policy</a>
+          <span class="plg-cookie-long">We use cookies to understand how visitors use our site (Google Analytics).
+          Your data is never sold.</span><span class="plg-cookie-short">Analytics cookies only. Never sold.</span>
+          <a href="/privacy" class="plg-cookie-link">Privacy Policy</a>
         </p>
         <div class="plg-cookie-actions">
           <button id="plg-cookie-accept" class="plg-cookie-btn plg-cookie-btn--accept">Accept</button>
@@ -129,8 +130,15 @@
         border: 1px solid #374151;
       }
       .plg-cookie-btn--decline:hover { color: #cbd5e1; border-color: #6b7280; }
-      @media (max-width: 480px) {
-        .plg-cookie-inner { flex-direction: column; align-items: flex-start; }
+      .plg-cookie-short { display: none; }
+      @media (max-width: 560px) {
+        #plg-cookie-banner { padding: 8px 12px; border-top-width: 1px; }
+        .plg-cookie-inner { flex-wrap: nowrap; gap: 10px; }
+        .plg-cookie-long { display: none; }
+        .plg-cookie-short { display: inline; }
+        .plg-cookie-text { font-size: 12px; line-height: 1.35; min-width: 0; }
+        .plg-cookie-actions { gap: 6px; }
+        .plg-cookie-btn { padding: 8px 12px; font-size: 12px; min-height: 36px; }
       }
     `;
     document.head.appendChild(style);

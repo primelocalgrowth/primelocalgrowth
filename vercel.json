@@ -52,6 +52,26 @@
       "source": "/san-antonio-local-seo",
       "destination": "/service-area",
       "permanent": true
+    },
+    {
+      "source": "/google-business-profile-optimization",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/local-seo",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/review-growth",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/review-defense",
+      "destination": "/services",
+      "permanent": true
     }
   ],
   "functions": {

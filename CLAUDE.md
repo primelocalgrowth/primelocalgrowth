@@ -4,13 +4,13 @@ Live marketing site for Prime Local Growth. Deployed on Vercel, auto-deploys fro
 
 ## Stack
 - Astro (static output, no client framework)
-- `src/pages/` - the 17 built pages; `index.astro` keeps its own design system, the other 16 use `layouts/Base.astro`
+- `src/pages/` - the 14 built pages; `index.astro` keeps its own design system, the other 13 use `layouts/Base.astro`
 - `src/layouts/Base.astro` - shared head, nav, footer, per-page body scripts
 - `src/components/` - Nav, Footer, Logo
 - `src/content-html/` - page bodies preserved verbatim from the pre-Astro site, injected with `set:html`
 - `shared/pricing.mjs` - SINGLE SOURCE for pricing, imported by both the site and `api/`
 - `src/config/site.mjs` - shared CTA and contact details
-- `public/` - static assets plus 10 standalone pages passed through untouched
+- `public/` - static assets plus 9 standalone pages passed through untouched
 - `api/` - Vercel serverless functions
 - `vercel.json` - routing, headers, deployment config
 

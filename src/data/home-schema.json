@@ -63,10 +63,10 @@
         },
         {
           "@type": "Question",
-          "name": "Do you guarantee first place on Google?",
+          "name": "What if it doesn't work?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. No legitimate company can guarantee first place on Google. Prime Local Growth focuses on improving the factors that help local businesses become easier to find, trust, and choose."
+            "text": "Then you cancel. No long-term contract means you keep control. Every month, Adam shows the work completed and the movement visible inside your own Google dashboard. Rankings, calls, and leads vary by market, so the reporting stays concrete and transparent."
           }
         },
         {
@@ -75,14 +75,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Never. Fake reviews get listings suspended. We build simple systems that make it easy for real, happy customers to say what they already think."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What about AI search? Will it replace the map pack?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI answers in Google increasingly appear above the map pack, and they pull from the same signals: a complete profile, consistent business information, recent reviews, and clear service descriptions. The work that ranks a business in the map pack today is the same work that gets it cited by AI search tomorrow."
           }
         }
       ]

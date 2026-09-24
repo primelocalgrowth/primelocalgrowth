@@ -76,16 +76,16 @@ const canonical = `${SITE}${path}`;
   </main>
   <slot name="before-footer" />
   {chrome && <Footer />}
-  {scripts.map((name) => (
-    DEFERRED.has(name)
-      ? <script is:inline defer src={`/${name}.js`}></script>
-      : <script is:inline src={`/${name}.js`}></script>
-  ))}
   {stickyAudit && (
     <div class="sticky-audit" aria-label="Get free audit">
       <a class="btn btn-primary" href={CTA.auditHref}>{CTA.auditLabel}</a>
       <a class="btn btn-secondary sticky-call" href={`tel:${CONTACT.phoneHref}`}>Call Adam</a>
     </div>
   )}
+  {scripts.map((name) => (
+    DEFERRED.has(name)
+      ? <script is:inline defer src={`/${name}.js`}></script>
+      : <script is:inline src={`/${name}.js`}></script>
+  ))}
 </body>
 </html>

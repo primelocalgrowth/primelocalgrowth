@@ -910,6 +910,8 @@ h3 {
   transition: opacity 350ms ease, transform 350ms ease;
 }
 .sticky-audit.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.sticky-call { display: none; }
+@media (max-width: 560px) { .sticky-call { display: inline-flex; } }
 .system-number {
   width: 42px;
   height: 42px;
@@ -1173,8 +1175,20 @@ input:focus, textarea:focus, select:focus {
   .cta-band { padding: 28px; border-radius: 18px; }
   .brand small { display: none; }
   .sticky-audit {
-    display: none !important;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    background: #fff;
+    border-top: 1px solid var(--line, #e5e7eb);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+    transform: translateY(100%);
   }
+  .sticky-audit .btn { flex: 1; padding: 14px 10px; font-size: 14px; box-shadow: none; }
+  .sticky-audit .sticky-call { flex: 0 0 auto; }
+  body:has(#plg-cookie-banner) .sticky-audit { display: none; }
   body { padding-bottom: 74px; }
   .compare-table {
     display: block;

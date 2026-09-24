@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { renderPrices } from '../../shared/pricing.mjs';
+import body from '../content-html/service-area.html?raw';
+const headExtras = "<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Can a local business rank without ads?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes. Map results are driven by profile quality, relevance, reviews, and trust signals, not ad spend.\"}},{\"@type\":\"Question\",\"name\":\"How long does it take?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Profile and review improvements start in the first 30 days. Map movement typically lands in 60 to 90 days depending on competition.\"}},{\"@type\":\"Question\",\"name\":\"Do you need to meet in person?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. Everything runs by email, with a written report every month.\"}}]}</script>";
+---
+<Base
+  title="Service Area: Cibolo, Schertz, New Braunfels & San Antonio | Prime Local Growth"
+  description="Google Business Profile and local SEO help for service businesses in Cibolo, Schertz, Universal City, Selma, Live Oak, New Braunfels, and San Antonio."
+  path="/service-area"
+  ogTitle="Local SEO Across the San Antonio Metro"
+  ogDescription="Google visibility help for service businesses from Cibolo to San Antonio."
+  scripts={["site-interactions"]}
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={renderPrices(body)} />
+</Base>

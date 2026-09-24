@@ -17,6 +17,41 @@
       "source": "/google-business-profile-ranking-2026",
       "destination": "/services",
       "permanent": true
+    },
+    {
+      "source": "/cibolo-local-seo",
+      "destination": "/service-area",
+      "permanent": true
+    },
+    {
+      "source": "/schertz-google-business-profile",
+      "destination": "/service-area",
+      "permanent": true
+    },
+    {
+      "source": "/universal-city-local-seo",
+      "destination": "/service-area",
+      "permanent": true
+    },
+    {
+      "source": "/selma-google-business-profile",
+      "destination": "/service-area",
+      "permanent": true
+    },
+    {
+      "source": "/live-oak-local-seo",
+      "destination": "/service-area",
+      "permanent": true
+    },
+    {
+      "source": "/new-braunfels-google-business-profile",
+      "destination": "/service-area",
+      "permanent": true
+    },
+    {
+      "source": "/san-antonio-local-seo",
+      "destination": "/service-area",
+      "permanent": true
     }
   ],
   "functions": {

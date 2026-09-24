@@ -80,8 +80,9 @@
   .hero{padding:72px 0 96px;position:relative;overflow:hidden}
   .hero::before{content:"";position:absolute;top:-220px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,#E7F0EA 0%,rgba(231,240,234,0) 70%)}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative}
-  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:48px}}
+  @media(max-width:960px){.hero-grid{grid-template-columns:minmax(0,1fr);gap:48px}}
   .hero h1 em{font-style:normal;color:var(--amber-dark);position:relative;white-space:nowrap}
+  @media(max-width:480px){.hero h1 em{white-space:normal}}
   .hero h1 em svg{position:absolute;left:0;bottom:-6px;width:100%;height:12px}
   .hero .tagline{margin-top:20px}
   .hero-ctas{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}

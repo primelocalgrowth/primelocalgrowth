@@ -113,9 +113,6 @@ function trackClick(event) {
     window.plgTrack('referral_page_click', params);
   }
 
-  if (path === '/sponsorship-marketing' || lowerLabel.includes('sponsorship')) {
-    window.plgTrack('sponsorship_page_click', params);
-  }
 
   if (path === '/results' || lowerLabel.includes('see the work') || lowerLabel.includes('results')) {
     window.plgTrack('proof_page_click', params);

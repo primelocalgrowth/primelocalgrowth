@@ -7,6 +7,16 @@
       "source": "/assets/gbp-results-og.png",
       "destination": "/assets/gbp-results-og.jpg",
       "permanent": true
+    },
+    {
+      "source": "/sponsorship-marketing",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/google-business-profile-ranking-2026",
+      "destination": "/services",
+      "permanent": true
     }
   ],
   "functions": {

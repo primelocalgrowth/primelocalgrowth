@@ -53,6 +53,7 @@ export default async function handler(req, res) {
       `https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`,
       {
         method: 'POST',
+        signal: AbortSignal.timeout(8000),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`
@@ -71,8 +72,7 @@ export default async function handler(req, res) {
     );
 
     if (!response.ok) {
-      const detail = (await response.text()).slice(0, 500);
-      console.error(`Beehiiv subscription failed (${response.status}): ${detail}`);
+      console.error(`Beehiiv subscription failed (${response.status})`);
       return res.status(502).json({ error: 'We could not complete the subscription. Please try again.' });
     }
 

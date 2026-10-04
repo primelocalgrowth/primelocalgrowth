@@ -53,10 +53,10 @@ addCheck(
 );
 
 addCheck(
-  'Submit handler requires Google Sheets or audit webhook configuration',
-  submitForm.includes('runRequiredIntegrations') &&
+  'Submit handler requires acknowledged lead capture',
+  submitForm.includes('if (!capture.captured)') &&
     submitForm.includes('GOOGLE_SHEETS_WEBHOOK_URL') &&
-    submitForm.includes('MASTER_APPS_SCRIPT_WEBHOOK_URL')
+    submitForm.includes('notifyAdamOfLead')
 );
 
 addCheck(
@@ -77,7 +77,7 @@ addCheck(
 
 addCheck(
   'Transactional email and optional integrations are isolated from the required lead record',
-  submitForm.includes('runOptionalIntegrations') && submitForm.includes('runOptionalTask')
+  submitForm.includes('runFollowUpIntegrations') && submitForm.includes('runOptionalTask')
 );
 
 addCheck(

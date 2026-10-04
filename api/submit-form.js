@@ -96,7 +96,7 @@ export default async function handler(req, res) {
     }
 
     // Validate required fields
-    if (!email || !businessName) {
+    if (!email?.trim() || !businessName?.trim()) {
       return res.status(400).json({ error: 'Please fill in all required fields' });
     }
 
@@ -353,9 +353,8 @@ async function postWebhook(url, payload, label) {
     }
   }
 
-  if (!response.ok || result.success === false) {
-    const reason = result.error || result.message || text || `HTTP ${response.status}`;
-    throw new Error(`${label} webhook failed: ${reason}`);
+    if (!response.ok || result?.success !== true) {
+      throw new Error(`${label} webhook failed: HTTP ${response.status}; missing success acknowledgement`);
   }
 
   return result;

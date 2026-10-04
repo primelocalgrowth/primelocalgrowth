@@ -87,8 +87,9 @@ document.querySelectorAll('[data-lead-form]').forEach(form => {
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(data)
       });
-      if (!response.ok) throw new Error('Submission failed');
-      feedback.textContent = 'Success. Check your email for next steps.';
+      const result = await response.json();
+      if (!response.ok || result?.success !== true) throw new Error('Submission failed');
+      feedback.textContent = 'Your request was received. Adam will follow up by email.';
       feedback.className = 'form-feedback form-feedback--success';
       if (typeof window.plgTrack === 'function') {
         window.plgTrack('lead_form_submit_success', {

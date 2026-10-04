@@ -41,6 +41,7 @@ export async function sendEmail(config) {
   try {
     const response = await fetch(RESEND_BASE, {
       method: 'POST',
+      signal: AbortSignal.timeout(8000),
       headers: {
         'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
         'Content-Type': 'application/json'
@@ -56,11 +57,14 @@ export async function sendEmail(config) {
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      throw new Error(`Resend error ${response.status}: ${error}`);
+      throw new Error(`Resend error HTTP ${response.status}`);
     }
 
-    return await response.json();
+    const result = await response.json();
+    if (typeof result?.id !== 'string' || !result.id) {
+      throw new Error('Resend did not acknowledge the message');
+    }
+    return result;
   } catch (err) {
     console.error('Email send failed:', err.message);
     throw err;

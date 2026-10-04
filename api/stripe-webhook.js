@@ -11,7 +11,7 @@
  *   GOOGLE_SHEETS_WEBHOOK_URL
  */
 
-import { sendCustomerWelcome, sendOnboardingChecklist } from './utils/email.js';
+import { sendCustomerWelcome, sendOnboardingChecklist, escapeHtml } from './utils/email.js';
 import { planFromAmount } from '../shared/pricing.mjs';
 
 export const config = { api: { bodyParser: false } };
@@ -39,13 +39,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    if (event.type === 'checkout.session.completed') {
+    if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
       await handleCheckoutComplete(event.data.object, event.id);
     } else if (event.type === 'invoice.paid') {
       await handleInvoicePaid(event.data.object, event.id);
     }
   } catch (err) {
-    // Log but return 200 so Stripe doesn't retry — errors here are our problem, not Stripe's
+    // Failed durable updates must remain retryable by Stripe.
     console.error(`Handler error for ${event.type}:`, err.message);
     return res.status(500).json({ error: 'Processing failed' });
   }
@@ -54,6 +54,7 @@ export default async function handler(req, res) {
 }
 
 async function handleCheckoutComplete(session, eventId) {
+  if (session.payment_status !== 'paid') return;
   const email = session.customer_details?.email || session.customer_email;
   const name = session.customer_details?.name || '';
   const productId = session.metadata?.product_id || 'sprint';
@@ -131,8 +132,8 @@ async function updateSheetsToActive(email, name, plan, paymentId) {
   const text = await res.text();
   let result = {};
   try { result = text ? JSON.parse(text) : {}; } catch { result = {}; }
-  if (!res.ok || result.success === false) {
-    throw new Error(`Sheets update failed: ${result.error || result.message || `HTTP ${res.status}`}`);
+  if (!res.ok || result?.success !== true) {
+    throw new Error(`Sheets update failed: HTTP ${res.status}; missing success acknowledgement`);
   }
 }
 
@@ -158,13 +159,13 @@ async function notifyAdamOfNewClient(customer, plan, amountTotal) {
           <h2 style="margin:0;color:#22c55e;">New Client Payment Received</h2>
         </div>
         <div style="background:#fff;padding:20px;border:1px solid #e5e5e5;border-top:none;">
-          <p><strong>Name:</strong> ${customer.name || 'N/A'}</p>
-          <p><strong>Email:</strong> <a href="mailto:${customer.email}">${customer.email}</a></p>
-          <p><strong>Plan:</strong> ${plan}</p>
+          <p><strong>Name:</strong> ${escapeHtml(customer.name || 'N/A')}</p>
+          <p><strong>Email:</strong> <a href="mailto:${escapeHtml(customer.email)}">${escapeHtml(customer.email)}</a></p>
+          <p><strong>Plan:</strong> ${escapeHtml(plan)}</p>
           <p><strong>Amount:</strong> ${dollars}</p>
           <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
           <hr style="margin:16px 0;border:none;border-top:1px solid #e5e5e5;">
-          <p style="font-size:13px;color:#666;">Welcome email + onboarding checklist sent automatically. Sheets updated to Active Client.</p>
+          <p style="font-size:13px;color:#666;">Sheets acknowledged the Active Client update. Check delivery records for welcome email and onboarding checklist status.</p>
         </div>
       </div>
     `

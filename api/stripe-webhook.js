@@ -67,7 +67,7 @@ async function handleCheckoutComplete(session, eventId) {
 
   const customer = { email, name };
 
-  await updateSheetsToActive(email, name, plan, session.payment_intent || eventId);
+  await updateSheetsToActive(email, name, plan, session.payment_intent || eventId, eventId);
 
   const followUps = await Promise.allSettled([
     sendCustomerWelcome(customer, productId),
@@ -96,7 +96,7 @@ async function handleInvoicePaid(invoice, eventId) {
   const productId = invoice.metadata?.product_id || 'sprint';
   const customer = { email, name };
 
-  await updateSheetsToActive(email, name, plan, invoice.id || eventId);
+  await updateSheetsToActive(email, name, plan, invoice.id || eventId, eventId);
 
   const followUps = await Promise.allSettled([
     sendCustomerWelcome(customer, productId),
@@ -106,7 +106,7 @@ async function handleInvoicePaid(invoice, eventId) {
   logRejectedFollowUps(followUps, eventId);
 }
 
-async function updateSheetsToActive(email, name, plan, paymentId) {
+async function updateSheetsToActive(email, name, plan, paymentId, eventId) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (!webhookUrl) throw new Error('GOOGLE_SHEETS_WEBHOOK_URL is not configured');
 
@@ -124,6 +124,7 @@ async function updateSheetsToActive(email, name, plan, paymentId) {
       startDate: new Date().toISOString().split('T')[0],
       onboardingStep: 1,
       paymentId,
+      eventId,
       lastPaymentAt: new Date().toISOString(),
       source: 'stripe-webhook'
     })

@@ -4,6 +4,21 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/f/proof",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=launch_posts&utm_content=proof",
+      "permanent": false
+    },
+    {
+      "source": "/f/profile",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=launch_posts&utm_content=profile",
+      "permanent": false
+    },
+    {
+      "source": "/f/adam",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=launch_posts&utm_content=adam",
+      "permanent": false
+    },
+    {
       "source": "/assets/gbp-results-og.png",
       "destination": "/assets/gbp-results-og.jpg",
       "permanent": true

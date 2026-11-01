@@ -4,6 +4,21 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/f/hours",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=launch_posts&utm_content=hours",
+      "permanent": false
+    },
+    {
+      "source": "/f/reviews",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=launch_posts&utm_content=reviews",
+      "permanent": false
+    },
+    {
+      "source": "/f/audit",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=launch_posts&utm_content=audit",
+      "permanent": false
+    },
+    {
       "source": "/f/proof",
       "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=launch_posts&utm_content=proof",
       "permanent": false

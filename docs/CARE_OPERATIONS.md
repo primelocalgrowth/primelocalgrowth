@@ -13,7 +13,16 @@ Built 2026-11-01. Everything below is deployed and inert until the setup steps a
 
 Safety design: nothing publishes from a link click (email scanners fetch links), approval links are signed and expire in 14 days, only reviews listed in the email can be answered, already-answered reviews are never overwritten, a post that is already live is skipped, low-star replies are unticked by default and flagged. Monthly reports go to Adam only until `PLG_REPORTS_AUTOSEND=true`.
 
-## One-time setup (about an hour, then it runs)
+## Setup status (updated 2026-11-01)
+
+**Done by Claude in the existing Google Cloud project `plg-lead-scraper` (project number 564050977035, billing already attached):**
+- Enabled: My Business Account Management API, My Business Business Information API, Google My Business API (v4, reviews and posts), Business Profile Performance API. Places API (New) was already enabled.
+- Created API key "PLG audit report (Places API only)", restricted to Places API (New). Copy it from Credentials, "Show key", into Vercel as `GOOGLE_PLACES_API_KEY`.
+- Submitted the Business Profile API access application for the Prime Local Growth profile. **Support case 7-4811000041363**, review time 7 to 10 business days. Do not file a second request (it delays the first). Until approved, the Business Profile APIs show quota 0.
+
+**Still to do:** OAuth consent screen set to Internal, OAuth client and refresh token (after approval), the Vercel variables below, and per-client JSON.
+
+## One-time setup steps (reference)
 
 1. **Google Cloud project** (console.cloud.google.com). Enable "Places API (New)" and the Business Profile APIs listed in Google's Basic setup page (account management, business information, My Business v4 for reviews and posts, Business Profile Performance).
 2. **Apply for Business Profile API access**: developers.google.com/my-business, "Application for Basic API Access". Google reviews it in about 14 days; quota shows 0 until approved, 300 when approved. Apply as PLG (a client's profile active 60+ days can be the qualifying profile).

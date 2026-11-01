@@ -6,6 +6,11 @@
  * surface at once. Before this existed the HTML, the FAQPage JSON-LD and the
  * Stripe webhook each carried their own copy, which is how the site advertised
  * $497/month against a $997 floor for months.
+ *
+ * 2026-11-01: repriced for an automated, low-touch model run by a small
+ * agency (market check: GBP management $125-$600/month, map-pack programs
+ * $800-$1,200). Sprint $297, Profile Care $197/month, Growth $497/month,
+ * Authority from $997/month. Invoiced by email through Wave; Stripe is backup.
  */
 
 /**
@@ -25,27 +30,35 @@ export const TIERS = [
     id: 'sprint',
     name: '30-Day Opportunity Sprint',
     fullName: '30-Day Google Maps Opportunity Sprint',
-    price: 497,
+    price: 297,
     cadence: 'one-time',
-    stripeMin: 450,
+    stripeMin: 270,
+  },
+  {
+    id: 'care',
+    name: 'Profile Care',
+    fullName: 'Profile Care',
+    price: 197,
+    cadence: 'month',
+    stripeMin: 180,
   },
   {
     id: 'growth',
     name: 'Growth Management',
     fullName: 'Growth Management',
-    price: 997,
+    price: 497,
     cadence: 'month',
     from: true,
-    stripeMin: 900,
+    stripeMin: 450,
   },
   {
     id: 'authority',
     name: 'Authority + AI Visibility',
     fullName: 'Authority + AI Visibility',
-    price: 1497,
+    price: 997,
     cadence: 'month',
     from: true,
-    stripeMin: 1400,
+    stripeMin: 900,
   },
 ];
 
@@ -53,7 +66,7 @@ export const TIERS = [
 export const RETIRED_TIERS = ['Visibility Management'];
 
 /** Floor for any new recurring engagement. */
-export const RECURRING_FLOOR = 997;
+export const RECURRING_FLOOR = 197;
 
 export const byId = (id) => {
   const tier = TIERS.find((t) => t.id === id);
@@ -80,15 +93,16 @@ export const fullLabel = (tier) =>
  */
 export const costAnswer = () => {
   const sprint = byId('sprint');
+  const care = byId('care');
   const growth = byId('growth');
   const authority = byId('authority');
   return (
     `Start with a ${sprint.fullName} for ${priceLabel(sprint)} one-time. ` +
-    `If ongoing management is the right next step, the sprint fee is credited toward the first month ` +
-    `when you continue within seven days. ` +
-    `New ${growth.name} starts at ${priceLabel(growth).replace('from ', '')}/month. ` +
+    `If you continue into ongoing care within seven days, the sprint fee is credited toward the first month. ` +
+    `${care.name} is ${priceLabel(care)}/month. ` +
+    `${growth.name} starts at ${priceLabel(growth).replace('from ', '')}/month. ` +
     `${authority.name} starts at ${priceLabel(authority).replace('from ', '')}/month. ` +
-    `Existing agreements never change without approval.`
+    `Plans are month-to-month and invoiced by email. Existing agreements never change without approval.`
   );
 };
 
@@ -114,6 +128,7 @@ export function planFromAmount(amountTotalCents) {
  */
 export const PRICE_TOKENS = {
   '{{PRICE_SPRINT}}': () => priceLabel(byId('sprint')),
+  '{{PRICE_CARE}}': () => priceLabel(byId('care')),
   '{{PRICE_GROWTH}}': () => priceLabel(byId('growth')).replace('from ', ''),
   '{{PRICE_AUTHORITY}}': () => priceLabel(byId('authority')).replace('from ', ''),
 };

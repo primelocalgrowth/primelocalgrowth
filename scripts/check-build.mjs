@@ -7,6 +7,7 @@
  */
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { RECURRING_FLOOR } from '../shared/pricing.mjs';
 
 const DIST = join(process.cwd(), 'dist');
 const failures = [];
@@ -25,9 +26,11 @@ for (const file of files) {
     failures.push(`${file}: references the retired "Visibility Management" plan`);
   }
 
-  // Recurring pricing below the floor would undercut the published tiers.
-  const subFloor = html.match(/\$(?:[1-8]?\d{1,2})\/(?:mo|month)\b/g);
-  if (subFloor) failures.push(`${file}: sub-floor recurring price ${[...new Set(subFloor)].join(', ')}`);
+  // Recurring pricing below the floor (set in shared/pricing.mjs) would undercut the published tiers.
+  const amounts = [...html.matchAll(/\$(\d{1,3}(?:,\d{3})*)\/(?:mo|month)\b/g)]
+    .map((m) => Number(m[1].replace(/,/g, '')));
+  const subFloor = amounts.filter((n) => n < RECURRING_FLOOR);
+  if (subFloor.length) failures.push(`${file}: sub-floor recurring price ${[...new Set(subFloor)].map((n) => '$' + n + '/month').join(', ')} (floor $${RECURRING_FLOOR})`);
 
   // Both scorecards shipped as dead markup: questions and answer buttons with
   // no script bound to them, so neither tool could ever produce a lead. Any

@@ -51,3 +51,5 @@ surfaces each held their own copy and drifted apart.
 - Test locally before pushing to main.
 - Never edit prices anywhere except `shared/pricing.mjs`.
 - Keep `robots.txt` and `sitemap.xml` updated after adding or removing public pages.
+- **Vercel free plan allows 12 functions and counts EVERY `.js` under `api/`, helpers included.** Shared code goes in `lib/`. `scripts/check-function-count.mjs` (part of `verify:plg`) enforces it. GitHub CI stays green when Vercel refuses a deploy, so after every push check `curl /api/health` commitSha or `gh api repos/primelocalgrowth/primelocalgrowth/commits/<sha>/status`.
+- Profile Care automation lives in `lib/care*.js`, entry `api/care.js`; setup in `docs/CARE_OPERATIONS.md`.

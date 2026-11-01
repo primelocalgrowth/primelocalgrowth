@@ -133,9 +133,9 @@ export async function sendLeadAutoReply(lead) {
       <div style="padding:32px;border:1px solid #e5e5e5;border-top:none;">
         <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Hi ${escapeHtml(firstName)},</p>
 
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Got your info for ${escapeHtml(businessName)}. I'm running your free Google visibility audit right now — checking your Google Business Profile, reviews, keywords, and comparing you to local competitors.</p>
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Got your request for ${escapeHtml(businessName)}. I'll review what you shared and reply by email with the next useful step.</p>
 
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;"><strong>You'll get the first findings within 24 hours</strong>, followed by an invitation to a focused 15-minute call to decide whether the 30-day sprint is worth doing.</p>
+        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;">We'll confirm the work and timing together before anything starts.</p>
 
         <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;"><strong>Want a sharper audit?</strong> Reply right now with 2–3 competitors customers see before you, plus your top service areas. Audits with competitor targets find the biggest gaps.</p>
 
@@ -153,7 +153,7 @@ export async function sendLeadAutoReply(lead) {
   return sendEmail({
     to: email,
     from: FROM_ADAM,
-    subject: `Your audit is underway, ${firstName}`,
+    subject: `Your request was received, ${firstName}`,
     html,
     replyTo: 'adam@primelocalgrowth.com'
   });

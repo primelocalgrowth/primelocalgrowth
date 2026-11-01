@@ -4,6 +4,7 @@
  * Beehiiv is used only when the lead separately opts in to marketing.
  */
 import { notifyAdamOfLead, sendLeadAutoReply } from './utils/email.js';
+import { isAuditRequest, sendAuditReport } from './utils/audit-report.js';
 import { createHash, randomUUID } from 'node:crypto';
 
 // In-memory rate limit: max 5 submissions per IP per 10 minutes.
@@ -237,6 +238,11 @@ async function runFollowUpIntegrations(lead) {
 
   if (process.env.MASTER_APPS_SCRIPT_WEBHOOK_URL) {
     tasks.push(runOptionalTask('Audit generator', () => triggerAuditGenerator(lead)));
+  }
+
+  // Finished audit report by email, no human step. Inert until GOOGLE_PLACES_API_KEY is set.
+  if (process.env.GOOGLE_PLACES_API_KEY && process.env.RESEND_API_KEY && isAuditRequest(lead)) {
+    tasks.push(runOptionalTask('Automated audit report', () => sendAuditReport(lead)));
   }
 
   if (lead.marketingConsent && process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {

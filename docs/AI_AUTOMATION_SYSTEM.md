@@ -522,7 +522,6 @@ Make it compelling and specific to their business.
 **Optional Tools:**
 - CRM (HubSpot, Pipedrive)
 - Project management (Monday, Asana)
-- Scheduling (Calendly)
 - Invoicing (Wave, already using)
 - Design (Canva, Adobe)
 

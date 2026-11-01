@@ -447,7 +447,7 @@ Once the client approves, begin the formal onboarding process.
 
 **Email Automation:** Automated follow-ups and reminders
 
-**Scheduling:** Calendly for appointment scheduling
+**Scheduling:** None. PLG is email-only and does not take booking calls.
 
 ### Documentation
 

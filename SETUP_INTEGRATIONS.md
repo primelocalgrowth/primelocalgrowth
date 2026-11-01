@@ -295,7 +295,7 @@ Once all integrations are working:
 1. **Monitor submissions** — Check Google Sheets daily for new leads
 2. **Set up Beehiiv automations** — Follow the templates above
 3. **Create segments** — Move subscribers Cold → Warm → Hot → Client
-4. **Connect Calendly** — When subscribers click "Book", they schedule a call
+4. **No scheduling tool** — PLG is email-only; the audit form is the only call to action
 5. **Track metrics** — Update "Metrics" sheet weekly to monitor conversion rates
 
 ---

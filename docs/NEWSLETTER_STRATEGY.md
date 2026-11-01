@@ -154,7 +154,7 @@ CTA: "Save this for reference → archive link"
 Subject: "Free visibility audit (for [specific business type])"
 Length: 1-2 min read
 Format: Offer → How it helps → How to claim
-CTA: "Schedule your audit → calendar link"
+CTA: "Get your audit → free audit page"
 
 ---
 
@@ -221,12 +221,12 @@ FOOTER
 
 **Primary CTA:**
 - For leads not yet qualified: "Learn more → [docs link or blog]"
-- For warm leads: "Let's talk → [calendar link]"
+- For warm leads: "Get your audit → [free audit page]"
 - For clients: "Case study → [full case study link]"
 
 **Button Copy:**
 - "Get the strategy"
-- "Schedule a 20-min call"
+- "Get your free audit"
 - "See the full story"
 - "Learn the framework"
 - Action-oriented, specific, benefit-driven
@@ -279,8 +279,8 @@ FOOTER
 **Email 4 (Day 7): Offer Meeting**
 - Subject: "Let's talk about your visibility"
 - Remind of lead magnet
-- Explain discovery call process (20 min, free, no pressure)
-- CTA: "Schedule your call → calendar link"
+- Explain the free audit process (by email, no call needed)
+- CTA: "Get your audit → free audit page"
 
 ### Weekly Newsletter (Ongoing)
 
@@ -431,7 +431,7 @@ Subject: "How a plumbing company got $15K/month in leads"
 - The challenge
 - The strategy
 - The results
-- CTA: "Schedule your audit"
+- CTA: "Get your free audit"
 
 ### Week 3: Social Algorithm Update
 Subject: "Facebook's algorithm just changed - here's how to adapt"

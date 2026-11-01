@@ -81,10 +81,10 @@ In Beehiiv dashboard:
 
                                                                                   The question is: Are you ready to apply this to YOUR business?
 
-                                                                                      If yes, let's talk. 20 minutes. No commitment. Just a conversation about what's possible.
+                                                                                      If yes, reply to this email. No commitment. Just an email conversation about what's possible.
 
-                                                                                          [BUTTON/LINK: Schedule Your Call]
-                                                                                            Link: https://calendly.com/adam-yoururl or your booking link
+                                                                                          [BUTTON/LINK: Get My 3-Point Visibility Audit]
+                                                                                            Link: https://www.primelocalgrowth.com/free-visibility-audit
 
                                                                                                 — Adam
                                                                                                   ```

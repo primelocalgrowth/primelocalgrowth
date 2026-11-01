@@ -31,7 +31,6 @@ const PLG_CONFIG = {
   COMPANY: "Prime Local Growth",
   WEBSITE: "primelocalgrowth.com",
   ACCESS_GUIDE: "https://www.primelocalgrowth.com/gbp-access",
-  BOOKING_LINK: "", // optional: paste a Calendly/Google booking link to use in emails
   DAILY_TRIGGER_HOUR: 8,
   SALES_DIGEST_HOUR: 7,
   SALES_DIGEST_ENABLED: false,
@@ -520,16 +519,13 @@ function sendNewLeadAlert(lead, outcome) {
 
 function sendLeadAutoReply(lead) {
   if (!PLG_CONFIG.LEAD_AUTOREPLY_ENABLED) return;
-  const booking = PLG_CONFIG.BOOKING_LINK
-    ? `If it's easier, grab a time that works for you here: ${PLG_CONFIG.BOOKING_LINK}\n\n`
-    : "";
   const body = `Hi ${lead.firstName || "there"},
 
 Thanks for reaching out about ${lead.businessName}. I got your request and I'm personally reviewing how ${lead.businessName} shows up on Google${lead.city ? " in " + lead.city : ""} right now.
 
 You'll hear from me within one business day with what I find, usually sooner.
 
-${booking}If anything is urgent, call or text me directly at ${PLG_CONFIG.PHONE}.
+If anything is urgent, reply to this email and put URGENT in the subject.
 
 Best,
 Adam Rome
@@ -733,9 +729,6 @@ function getOnboardingSubject(step, client) {
 
 function getOnboardingContent(step, c) {
   const sig = `\n\nBest,\nAdam Rome\n${PLG_CONFIG.COMPANY}\n${PLG_CONFIG.WEBSITE} | ${PLG_CONFIG.PHONE}`;
-  const book = PLG_CONFIG.BOOKING_LINK
-    ? `Book your kickoff call here: ${PLG_CONFIG.BOOKING_LINK}`
-    : `Reply with two or three times that work for a 20-minute kickoff call this week.`;
   const gbpAccess = `Add ${PLG_CONFIG.FROM_EMAIL} as a Manager on your Google Business Profile. Step-by-step guide:\n${PLG_CONFIG.ACCESS_GUIDE}`;
 
   const tracks = {
@@ -762,16 +755,16 @@ function getOnboardingContent(step, c) {
     ],
 
     premium: [
-      [`Welcome to Premium, ${c.firstName} - let's schedule your kickoff`,
-        `Hi ${c.firstName},\n\nWelcome to Prime Local Growth Premium. ${c.bizName} gets our full local visibility, AI visibility, and reputation system.\n\nTo start fast:\n1) ${book}\n2) ${gbpAccess}\n3) Website access: add ${PLG_CONFIG.FROM_EMAIL} as an editor, or tell me who manages your site.\n4) Optional but valuable: grant read access to Google Search Console and Google Analytics.\n\nOnce we have access, the full audit begins immediately.`],
+      [`Welcome to Premium, ${c.firstName} - let's get started`,
+        `Hi ${c.firstName},\n\nWelcome to Prime Local Growth Premium. ${c.bizName} gets our full local visibility, AI visibility, and reputation system.\n\nTo start fast:\n1) ${gbpAccess}\n2) Website access: add ${PLG_CONFIG.FROM_EMAIL} as an editor, or tell me who manages your site.\n3) Optional but valuable: grant read access to Google Search Console and Google Analytics.\n\nOnce we have access, the full audit begins immediately.`],
       [`Your 90-day roadmap for ${c.bizName}`,
-        `Hi ${c.firstName},\n\nYour audit is in progress and I'm building the 90-day roadmap: Google profile, website conversion, AI visibility, citations, and reviews, sequenced by what moves revenue fastest.\n\nYou'll get the roadmap on our kickoff call or by email this week.`],
+        `Hi ${c.firstName},\n\nYour audit is in progress and I'm building the 90-day roadmap: Google profile, website conversion, AI visibility, citations, and reviews, sequenced by what moves revenue fastest.\n\nYou'll get the roadmap by email this week.`],
       [`Week 1 check-in: ${c.bizName}`,
         `Hi ${c.firstName},\n\nOne week in. Foundation work is live across your profile and site.\n\nTo keep momentum: send 5-10 recent photos and a short list of your best recent customers (we'll use it to request reviews). Reply here with anything you want prioritized.`],
       [`Mid-month update: ${c.bizName}`,
         `Hi ${c.firstName},\n\nWe're two weeks in. Citations, review requests, and content are rolling out, and early ranking movement typically starts showing between weeks 2 and 6.\n\nIf you've noticed more calls or customers mentioning Google or AI, tell me. That's useful signal.`],
       [`Month 1 results: ${c.bizName} + Prime Local Growth`,
-        `Hi ${c.firstName},\n\n30 days complete. I'm putting together your results report (calls, directions, rankings, AI visibility, and reviews) along with month two priorities. ${PLG_CONFIG.BOOKING_LINK ? "Grab a time to review it together: " + PLG_CONFIG.BOOKING_LINK : "Reply with a good time to walk through it together."}`]
+        `Hi ${c.firstName},\n\n30 days complete. I'm putting together your results report (calls, directions, rankings, AI visibility, and reviews) along with month two priorities. Questions? Just reply to this email.`]
     ],
 
     reviews: [
@@ -1190,17 +1183,15 @@ function getNurtureContent(step, l) {
   const name = l.firstName || "there";
   const biz = l.businessName;
   const area = l.city ? ` in ${l.city}` : "";
-  const cta = PLG_CONFIG.BOOKING_LINK
-    ? `Grab 15 minutes here: ${PLG_CONFIG.BOOKING_LINK}`
-    : `Just reply with a good time and the best number to reach you.`;
+  const cta = `Just reply "send it" and I'll email you the top 3 fixes.`;
   const sig = `\n\nAdam Rome\n${PLG_CONFIG.COMPANY}\n${PLG_CONFIG.PHONE}`;
   const steps = [
     [`Quick question about ${biz}`,
-      `Hi ${name},\n\nI've started looking at how ${biz} shows up on Google${area}. A few things already stand out that are likely costing you calls.\n\nWould a quick 15-minute walkthrough this week be useful? I'll show you exactly what I found, no pitch required.\n\n${cta}`],
+      `Hi ${name},\n\nI've started looking at how ${biz} shows up on Google${area}. A few things already stand out that are likely costing you calls.\n\nWant me to email you exactly what I found? No pitch required.\n\n${cta}`],
     [`The 3 things that decide who gets the call${area}`,
       `Hi ${name},\n\nWhen someone${area} searches for what ${biz} does, Google mostly weighs three things:\n\n1) How complete and active your Google Business Profile is\n2) How many recent reviews you have, and whether you respond to them\n3) Whether your business details match everywhere online\n\nMost local businesses are leaving at least one of these on the table. I can tell you which one matters most for ${biz}.\n\n${cta}`],
     [`Want me to just send it over?`,
-      `Hi ${name},\n\nI know things get busy. If a call isn't convenient, reply "send it" and I'll email you the top 3 fixes for ${biz} so you can look whenever it suits you.`],
+      `Hi ${name},\n\nI know things get busy. Reply "send it" and I'll email you the top 3 fixes for ${biz} so you can look whenever it suits you.`],
     [`Should I close your file?`,
       `Hi ${name},\n\nI haven't heard back, so I'll assume the timing isn't right and close out your request for ${biz}.\n\nIf getting more calls from Google becomes a priority, just reply to this email and I'll pick it right back up.`]
   ];

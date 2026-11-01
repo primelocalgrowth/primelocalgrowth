@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { runWeekly } from '../api/care-weekly.js';
-import { runApprove } from '../api/care-approve.js';
-import { runMonthly } from '../api/care-monthly.js';
-import { draftPost, draftReply, signToken, verifyToken, weekKey, buildMonthlyReport, compare } from '../api/utils/care.js';
-import { summarizeMetrics } from '../api/utils/gbp.js';
+import { runWeekly } from '../lib/care-weekly.js';
+import { runApprove } from '../lib/care-approve.js';
+import { runMonthly } from '../lib/care-monthly.js';
+import { draftPost, draftReply, signToken, verifyToken, weekKey, buildMonthlyReport, compare } from '../lib/care.js';
+import { summarizeMetrics } from '../lib/gbp.js';
 
 const CLIENT = { id: 'shop1', businessName: 'Test Barbershop', city: 'Cibolo', accountId: '111', locationId: '222', email: 'owner@example.com', services: ['haircut'], ctaUrl: 'https://example.com/book' };
 const ENV = {
@@ -112,7 +112,7 @@ let approveUrl;
   assert.ok(!mails[0].html.includes('tok-123') && !mails[0].html.includes('csecret') && !mails[0].html.includes('refresh-abc'), 'no secrets in email');
   assert.ok(mails[0].html.includes('Read this one before you approve it.'), 'low rating flagged in digest');
   assert.ok(!fetchImpl.calls.some((c) => c.method === 'PUT' || (c.method === 'POST' && c.url.includes('localPosts'))), 'weekly run publishes nothing');
-  approveUrl = decodeURIComponent(mails[0].html.match(/care-approve\?t=([^"]+)"/)[1]);
+  approveUrl = decodeURIComponent(mails[0].html.match(/care\?action=approve&t=([^"]+)"/)[1]);
 }
 
 /* 4. approval page: GET is read-only, POST publishes only what was selected and allowed */

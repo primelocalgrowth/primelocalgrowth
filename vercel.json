@@ -105,18 +105,12 @@
     }
   ],
   "crons": [
-    { "path": "/api/care-weekly", "schedule": "0 14 * * 1" },
-    { "path": "/api/care-monthly", "schedule": "0 15 2 * *" }
+    { "path": "/api/care?action=weekly", "schedule": "0 14 * * 1" },
+    { "path": "/api/care?action=monthly", "schedule": "0 15 2 * *" }
   ],
   "functions": {
-    "api/care-weekly.js": {
+    "api/care.js": {
       "maxDuration": 60
-    },
-    "api/care-monthly.js": {
-      "maxDuration": 60
-    },
-    "api/care-approve.js": {
-      "maxDuration": 30
     },
     "api/submit-form.js": {
       "maxDuration": 30

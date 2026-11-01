@@ -4,7 +4,7 @@
  * Beehiiv is used only when the lead separately opts in to marketing.
  */
 import { notifyAdamOfLead, sendLeadAutoReply } from './utils/email.js';
-import { isAuditRequest, sendAuditReport } from './utils/audit-report.js';
+import { isAuditRequest, sendAuditReport } from '../lib/audit-report.js';
 import { createHash, randomUUID } from 'node:crypto';
 
 // In-memory rate limit: max 5 submissions per IP per 10 minutes.

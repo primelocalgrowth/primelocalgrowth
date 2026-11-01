@@ -7,7 +7,7 @@ import {
   renderReportEmail,
   runAuditReport,
   sendAuditReport,
-} from '../api/utils/audit-report.js';
+} from '../lib/audit-report.js';
 
 const place = (id, name, rating, reviews, extra = {}) => ({
   id,

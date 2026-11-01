@@ -7,7 +7,7 @@
  */
 import { randomUUID } from 'node:crypto';
 import { runScorecard, normaliseUrl, assertPublicUrl } from './scorecard.js';
-import { saveResult, storeConfigured } from './utils/scorecard-store.js';
+import { saveResult, storeConfigured } from '../lib/scorecard-store.js';
 
 const rateLimit = new Map();
 const MAX_PER_WINDOW = 4;

@@ -8,7 +8,7 @@
  * into the public index AND the report has real substance; everything else is
  * noindex, so this cannot become a farm of thin auto-generated pages.
  */
-import { loadResult, storeConfigured } from './utils/scorecard-store.js';
+import { loadResult, storeConfigured } from '../lib/scorecard-store.js';
 
 const SITE = 'https://www.primelocalgrowth.com';
 

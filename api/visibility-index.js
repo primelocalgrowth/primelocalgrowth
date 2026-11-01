@@ -9,7 +9,7 @@
  * Only reports whose owner opted into the public index are counted, and the
  * page stays noindex until there is enough data to be worth indexing.
  */
-import { listPublicResults, storeConfigured } from './utils/scorecard-store.js';
+import { listPublicResults, storeConfigured } from '../lib/scorecard-store.js';
 
 const SITE = 'https://www.primelocalgrowth.com';
 const MIN_SAMPLE = 10; // below this the numbers are noise, not a finding

@@ -108,8 +108,12 @@ export default async function handler(req, res) {
     }
 
     const timestamp = new Date().toISOString();
+    const providedId = req.body.submissionId;
+    if (providedId != null && (typeof providedId !== 'string' || !/^[a-zA-Z0-9-]{16,80}$/.test(providedId))) {
+      return res.status(400).json({ error: 'Invalid submission identity' });
+    }
     const submissionId = createHash('sha256')
-      .update(`${email.toLowerCase()}|${businessName.toLowerCase()}|${timestamp}|${requestId}`)
+      .update(`${email.toLowerCase()}|${businessName.toLowerCase()}|${providedId || `${timestamp}|${requestId}`}`)
       .digest('hex')
       .slice(0, 24);
     const leadName = name || businessName;

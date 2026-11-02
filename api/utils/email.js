@@ -3,6 +3,8 @@
  * Eliminates duplication, ensures consistency, optimizes for cost/speed
  */
 
+import { brandedEmail, esc as brandEsc, p as brandP, h2 as brandH2, signature, ctaPanel, C as BRAND } from '../../lib/email-brand.js';
+
 const RESEND_BASE = 'https://api.resend.com/emails';
 const FROM_ADAM = 'Adam Rome <adam@primelocalgrowth.com>';
 const FROM_PLG = 'Prime Local Growth <adam@primelocalgrowth.com>';
@@ -78,29 +80,28 @@ export async function notifyAdamOfLead(lead) {
   const { name, email, phone, businessName, businessType, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, attribution = {}, timestamp } = lead;
   const sourceLabel = attribution.utm_source || attribution.gclid || attribution.fbclid || referrer || 'direct / unknown';
 
-  const html = `
-    <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
-      <div style="background:#0f172a;color:#fff;padding:20px;border-radius:8px 8px 0 0;">
-        <h2 style="margin:0;color:#0ea5e9;">New Lead: ${escapeHtml(name)}</h2>
-      </div>
-      <div style="background:#fff;padding:20px;border:1px solid #e5e5e5;border-top:none;font-family:Arial,sans-serif;">
-        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-        <p><strong>Business:</strong> ${escapeHtml(businessName)}</p>
-        <p><strong>Type:</strong> ${escapeHtml(businessType)}</p>
-        ${website ? `<p><strong>Website:</strong> ${escapeHtml(website)}</p>` : ''}
-        ${mainService ? `<p><strong>Main Service:</strong> ${escapeHtml(mainService)}</p>` : ''}
-        ${visibilityConcern ? `<p><strong>Visibility Concern:</strong><br>${escapeHtml(visibilityConcern)}</p>` : ''}
-        <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
-        <p><strong>Phone:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone) || 'N/A'}</a></p>
-        <p><strong>Source:</strong> ${escapeHtml(sourceLabel)}</p>
-        <p><strong>Landing/Page:</strong> ${escapeHtml(pagePath || pageUrl || 'N/A')}</p>
-        ${situation ? `<p><strong>Situation:</strong><br>${escapeHtml(situation)}</p>` : ''}
-        ${attribution.utm_campaign ? `<p><strong>Campaign:</strong> ${escapeHtml(attribution.utm_campaign)}</p>` : ''}
-        <p><strong>Submitted:</strong> ${new Date(timestamp).toLocaleString()}</p>
-        ${getEmailFooter()}
-      </div>
-    </div>
-  `;
+  const row = (k, v) => v ? `<tr><td valign="top" style="padding:9px 12px 9px 0;border-bottom:1px solid ${BRAND.line};font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:${BRAND.mist};white-space:nowrap;">${k}</td><td style="padding:9px 0;border-bottom:1px solid ${BRAND.line};font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.5;color:${BRAND.ink};">${v}</td></tr>` : '';
+  const rows = [
+    row('Business', brandEsc(businessName)),
+    row('Name', brandEsc(name)),
+    row('Email', `<a href="mailto:${brandEsc(email)}" style="color:${BRAND.forest};font-weight:700;">${brandEsc(email)}</a>`),
+    row('Phone', phone ? `<a href="tel:${brandEsc(phone)}" style="color:${BRAND.forest};">${brandEsc(phone)}</a>` : ''),
+    row('City', brandEsc(lead.city || '')),
+    row('Website', website ? brandEsc(website) : ''),
+    row('Main service', brandEsc(mainService || '')),
+    row('Concern', brandEsc(visibilityConcern || '')),
+    row('Situation', brandEsc(situation || '')),
+    row('Type', brandEsc(businessType)),
+    row('Source', brandEsc(sourceLabel)),
+    row('Page', brandEsc(pagePath || pageUrl || 'N/A')),
+    row('Campaign', attribution.utm_campaign ? brandEsc(attribution.utm_campaign) : ''),
+    row('Submitted', brandEsc(new Date(timestamp).toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CT')),
+  ].join('');
+  const html = brandedEmail({
+    preheader: `${businessName} (${email}) just asked for an audit.`,
+    label: 'New lead',
+    content: `<div style="font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:700;color:${BRAND.forest};margin:0 0 4px;">${brandEsc(businessName)}</div><div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:${BRAND.mist};margin:0 0 18px;">New request from ${brandEsc(name)}. Reply to this email to answer them directly.</div><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${rows}</table>`,
+  });
 
   return sendEmail({
     to: 'adam@primelocalgrowth.com',
@@ -118,37 +119,23 @@ export async function sendLeadAutoReply(lead) {
   const { name, email, businessName, businessType } = lead;
   const firstName = name.split(' ')[0];
 
-  const html = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
-    <div style="max-width:600px;margin:0 auto;background:#fff;">
-      <div style="background:#1b3a6b;padding:24px 32px;">
-        <p style="margin:0;font-size:18px;font-weight:700;color:#fff;">Prime Local Growth</p>
-      </div>
-      <div style="padding:32px;border:1px solid #e5e5e5;border-top:none;">
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Hi ${escapeHtml(firstName)},</p>
-
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 16px;">Got your request for ${escapeHtml(businessName)}. I'll review what you shared and reply by email with the next useful step.</p>
-
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;">We'll confirm the work and timing together before anything starts.</p>
-
-        <p style="font-size:16px;color:#1a1a1a;line-height:1.6;margin:0 0 24px;"><strong>Want a sharper audit?</strong> Reply right now with 2–3 competitors customers see before you, plus your top service areas. Audits with competitor targets find the biggest gaps.</p>
-
-        <p style="font-size:14px;color:#666;line-height:1.6;margin:0;">Questions in the meantime? Just reply to this email — I read every one personally.</p>
-
-        <p style="font-size:14px;color:#666;line-height:1.6;margin:16px 0 0;">— Adam Rome<br>Prime Local Growth<br><a href="tel:210-646-1436" style="color:#0ea5e9;text-decoration:none;">210-646-1436</a></p>
-
-        ${getEmailFooter()}
-      </div>
-    </div>
-    </body>
-    </html>
-  `;
+  const html = brandedEmail({
+    preheader: `Got your request for ${businessName}. Here is what happens next.`,
+    label: 'Request received',
+    content: [
+      brandP(`Hi ${brandEsc(firstName)},`),
+      brandP(`Got your request for <strong>${brandEsc(businessName)}</strong>. I read it myself and will reply by email with the next useful step, usually within 24 hours.`),
+      brandH2('What happens next'),
+      brandP('1. I look at your Google profile and the businesses customers see before you.<br>2. I email you the findings in plain English.<br>3. If you want help, we agree on the work and timing by email before anything starts.'),
+      ctaPanel({
+        title: 'Want a sharper audit?',
+        body: 'Reply with 2 or 3 competitors customers see before you, plus your top service areas. Audits with competitor targets find the biggest gaps.',
+        label: 'Reply with my competitors',
+        href: 'mailto:adam@primelocalgrowth.com?subject=' + encodeURIComponent('Competitors for ' + businessName),
+      }),
+      signature(),
+    ].join(''),
+  });
 
   return sendEmail({
     to: email,

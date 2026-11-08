@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { renderPrices } from '../../shared/pricing.mjs';
+import body from '../content-html/sample-audit.html?raw';
+---
+<Base
+  title="Sample Visibility Audit | Prime Local Growth"
+  description="See a real Google visibility audit for a Cibolo barbershop, with the business and competitor names removed. This is what we email you."
+  path="/sample-audit"
+  ogDescription="A real audit, anonymized: where the shop showed up, who customers saw instead, and the three fixes that mattered."
+  scripts={["site-interactions","exit-intent"]}
+  stickyAudit
+>
+  <Fragment set:html={renderPrices(body)} />
+</Base>

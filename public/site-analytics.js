@@ -109,6 +109,10 @@ function trackClick(event) {
     window.plgTrack('audit_cta_click', params);
   }
 
+  if (path === '/sample-audit') {
+    window.plgTrack('sample_audit_click', params);
+  }
+
   if (path === '/refer' || lowerLabel.includes('refer a business')) {
     window.plgTrack('referral_page_click', params);
   }

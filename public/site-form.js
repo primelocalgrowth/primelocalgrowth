@@ -46,6 +46,13 @@ document.querySelectorAll('[data-lead-form] input:not([type="hidden"]):not([type
 });
 
 document.querySelectorAll('[data-lead-form]').forEach(form => {
+  form.addEventListener('focusin', () => {
+    if (form.dataset.started) return;
+    form.dataset.started = '1';
+    if (typeof window.plgTrack === 'function') {
+      window.plgTrack('lead_form_start', { form_name: form.getAttribute('data-form-name') || 'visibility_audit' });
+    }
+  });
   form.addEventListener('submit', async event => {
     event.preventDefault();
     const feedback = form.querySelector('.form-feedback');

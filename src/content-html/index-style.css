@@ -253,7 +253,6 @@
   @media(max-width:720px){.sticky-cta{display:flex}}
 
   /* Quick conversion fixes */
-  .audit form .fld:nth-child(n+3):nth-child(-n+5){display:none}
   .btn{transition:all .15s ease-out}
   .btn:hover:not(:disabled){transform:scale(1.05);box-shadow:0 20px 40px rgba(46,196,182,.3)}
   .btn:active:not(:disabled){transform:scale(.95)}

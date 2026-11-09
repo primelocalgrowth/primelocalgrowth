@@ -45,6 +45,8 @@ document.querySelectorAll('[data-lead-form] input:not([type="hidden"]):not([type
   });
 });
 
+const PAGE_LOADED_AT = Date.now();
+
 document.querySelectorAll('[data-lead-form]').forEach(form => {
   form.addEventListener('focusin', () => {
     if (form.dataset.started) return;
@@ -66,6 +68,7 @@ document.querySelectorAll('[data-lead-form]').forEach(form => {
     data.marketingConsent = data.marketingConsent === 'true';
     data.pagePath = window.location.pathname;
     data.pageUrl = window.location.href;
+    data.formAge = Date.now() - PAGE_LOADED_AT;
     data.referrer = document.referrer || '';
     data.attribution = typeof window.plgGetAttribution === 'function' ? window.plgGetAttribution() : {};
     form.dataset.submissionId ||= crypto.randomUUID();

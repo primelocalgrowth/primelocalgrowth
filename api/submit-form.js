@@ -5,6 +5,7 @@
  */
 import { notifyAdamOfLead, sendLeadAutoReply } from './utils/email.js';
 import { isAuditRequest, sendAuditReport } from '../lib/audit-report.js';
+import { detectSpam } from '../lib/spam-filter.js';
 import { createHash, randomUUID } from 'node:crypto';
 
 // In-memory rate limit: max 5 submissions per IP per 10 minutes.
@@ -74,6 +75,12 @@ export default async function handler(req, res) {
     // Honeypot: bots fill this visually hidden field. Return a generic success
     // without invoking downstream services so the field does not become an oracle.
     if (String(companyWebsite || '').trim()) {
+      return res.status(200).json({ success: true, redirectUrl: '/thank-you' });
+    }
+
+    const spamReason = detectSpam({ situation, visibilityConcern, name, businessName, formAge: req.body.formAge });
+    if (spamReason) {
+      console.warn(JSON.stringify({ event: 'lead_spam_dropped', requestId, reason: spamReason }));
       return res.status(200).json({ success: true, redirectUrl: '/thank-you' });
     }
 

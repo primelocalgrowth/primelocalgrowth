@@ -107,6 +107,56 @@
       "source": "/review-defense",
       "destination": "/services",
       "permanent": true
+    },
+    {
+      "source": "/austin-hvac-google",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/san-antonio-dental-google",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/austin-hair-salon-google",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/austin-barbershop-google",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/dallas-barbershop-google",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/houston-plumber-google",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/san-antonio-barbershop-google",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/san-antonio-plumber-google",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/playbooks",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/review",
+      "destination": "https://g.page/r/CSRlPk-HmJb0EBM/review",
+      "permanent": false
     }
   ],
   "crons": [

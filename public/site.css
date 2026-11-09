@@ -2016,3 +2016,6 @@ h1 { letter-spacing: -0.035em; }
 .footer-col a { color: #D5E3DA; }
 .footer-col a:hover { color: #FFC56B; }
 .footer-brand > p { color: #BFD2C7; }
+.footer .btn-primary, .footer .btn-primary:hover { color: #14342B; text-decoration: none; }
+.footer-rating span:last-child { color: #BFD2C7; }
+.footer-bottom p { color: #9DB5A7; }

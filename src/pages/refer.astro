@@ -22,28 +22,36 @@ import { CONTACT } from '../config/site.mjs';
     </div>
   </section>
   <section class="section">
-    <div class="wrap grid grid-2">
-      <div>
-        <p class="eyebrow">What to expect</p>
+    <div class="wrap">
+      <div class="narrow">
         <h2>A useful introduction, not a sales handoff.</h2>
-        <p class="sub">Tell us who they are, what they do, and where they serve. Adam will review the opportunity, reply directly, and be honest if the fit is not right.</p>
+        <p class="sub">Two lines in an email is enough. Adam takes it from there and is honest if the fit is not right.</p>
       </div>
-      <div class="card">
-        <ul class="check-list" style="margin-top:0;">
-          <li>Google profile and website visibility review</li>
-          <li>Plain-English explanation of what is being missed</li>
-          <li>Clear first step, scope, and starting price</li>
-          <li>No pressure and no long-term contract</li>
-        </ul>
+      <div class="fix-rows" style="margin-top:40px;">
+        <article class="fix-row">
+          <h3>You send one email</h3>
+          <p class="sub">Tell Adam who they are, what they do and where they serve. No forms, no commitment from you or from them.</p>
+        </article>
+        <article class="fix-row">
+          <h3>Adam looks at their Google presence</h3>
+          <p class="sub">He reviews their profile, reviews and competitors, then replies to them directly with a plain-English explanation of what is being missed.</p>
+        </article>
+        <article class="fix-row">
+          <h3>They get an honest answer</h3>
+          <p class="sub">A clear first step, scope and starting price, with no pressure and no long-term contract. If it is not a fit, they hear that too.</p>
+        </article>
       </div>
     </div>
   </section>
   <section class="section alt">
-    <div class="wrap narrow" style="text-align:center;">
-      <p class="eyebrow">The right introduction</p>
-      <h2>Best for owners who want the work handled.</h2>
-      <p class="sub">HVAC, plumbing, roofing, landscaping, automotive, salons, contractors, storage, and other local businesses can start with a focused visibility review.</p>
-      <p style="margin-top:22px;"><a class="service-link" href={`mailto:${CONTACT.email}?subject=Prime%20Local%20Growth%20referral`}>Email Adam at {CONTACT.email} &rarr;</a></p>
+    <div class="wrap narrow">
+      <div class="cta-band">
+        <div>
+          <h2>Best for owners who want the work handled.</h2>
+          <p>HVAC, plumbing, roofing, landscaping, automotive, salons, contractors, storage and other service businesses can start with a focused visibility review.</p>
+        </div>
+        <a class="btn btn-primary" href={`mailto:${CONTACT.email}?subject=Prime%20Local%20Growth%20referral`}>Email Adam</a>
+      </div>
     </div>
   </section>
 </Base>

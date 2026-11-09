@@ -2004,3 +2004,15 @@ h1 { letter-spacing: -0.035em; }
 .plan-feature .check-list li::before, .authority-card .check-list li::before { color: #FF9F1C; }
 .authority-card p, .authority-card .sub { color: #BFD2C7; }
 .authority-card p strong { color: #fff; }
+
+/* City list (replaces equal cards on Where we work) */
+.city-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; margin-top: 36px; }
+.city-list > div { padding: 26px 0; border-top: 1px solid var(--line); }
+.city-list > div:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+.city-list h3 { font-size: 22px; margin-bottom: 8px; }
+.city-list p { color: var(--muted); margin: 0; max-width: 52ch; }
+@media (max-width: 760px) { .city-list { grid-template-columns: minmax(0, 1fr); } .city-list > div:nth-last-child(2) { border-bottom: 0; } }
+.footer-col-head { color: #9DB5A7; }
+.footer-col a { color: #D5E3DA; }
+.footer-col a:hover { color: #FFC56B; }
+.footer-brand > p { color: #BFD2C7; }

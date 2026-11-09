@@ -79,7 +79,7 @@ const canonical = `${SITE}${path}`;
   {stickyAudit && (
     <div class="sticky-audit" aria-label="Get free audit">
       <a class="btn btn-primary" href={CTA.auditHref}>{CTA.auditLabel}</a>
-      <a class="btn btn-secondary sticky-call" href={`mailto:${CONTACT.email}`}>Email Adam</a>
+      <a class="btn btn-secondary sticky-call" href={`tel:${CONTACT.phoneHref}`}>Call or text</a>
     </div>
   )}
   {scripts.map((name) => (

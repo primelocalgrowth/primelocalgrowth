@@ -2019,3 +2019,5 @@ h1 { letter-spacing: -0.035em; }
 .footer .btn-primary, .footer .btn-primary:hover { color: #14342B; text-decoration: none; }
 .footer-rating span:last-child { color: #BFD2C7; }
 .footer-bottom p { color: #9DB5A7; }
+.service-link { color: var(--amber-text, #8A5300); }
+.breadcrumb, .nav-links a:hover { color: var(--amber-text, #8A5300); }

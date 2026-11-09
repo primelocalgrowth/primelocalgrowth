@@ -17,36 +17,18 @@
           <h2>What we fix</h2>
           <p class="sub">Three areas decide whether a nearby customer finds you, trusts you, and calls. Every plan works on all three.</p>
         </div>
-        <div class="grid grid-3" style="margin-top:34px;">
-          <article class="card" id="google-business-profile">
+        <div class="fix-rows" style="margin-top:40px;">
+          <article class="fix-row" id="google-business-profile">
             <h3>Google Business Profile</h3>
-            <p class="sub">The profile customers see before they call. We make it easier for Google and customers to understand what you do and where.</p>
-            <ul class="check-list">
-              <li>Categories and services</li>
-              <li>Business description and local relevance</li>
-              <li>Photos, posts, and trust signals</li>
-              <li>Service areas and questions</li>
-            </ul>
+            <div><p class="sub">The profile customers see before they call. We make it easier for Google and customers to understand what you do and where.</p><ul class="check-list"><li>Categories and services</li><li>Business description and local relevance</li><li>Photos, posts, and trust signals</li><li>Service areas and questions</li></ul></div>
           </article>
-          <article class="card" id="local-seo">
+          <article class="fix-row" id="local-seo">
             <h3>Local SEO</h3>
-            <p class="sub">Connecting your website, business information, and service areas so Google matches you to nearby searches.</p>
-            <ul class="check-list">
-              <li>Service and city targeting</li>
-              <li>Website trust and call clarity</li>
-              <li>Directory and listing consistency</li>
-              <li>Competitor visibility review</li>
-            </ul>
+            <div><p class="sub">Connecting your website, business information, and service areas so Google matches you to nearby searches.</p><ul class="check-list"><li>Service and city targeting</li><li>Website trust and call clarity</li><li>Directory and listing consistency</li><li>Competitor visibility review</li></ul></div>
           </article>
-          <article class="card" id="reviews">
+          <article class="fix-row" id="reviews">
             <h3>Reviews and reputation</h3>
-            <p class="sub">A steady, ethical system for more recent reviews, and a fast response when a bad or fake one lands. No fake reviews, no incentives.</p>
-            <ul class="check-list">
-              <li>Review request link, script, and timing</li>
-              <li>Monitoring and a response to every review</li>
-              <li>Negative review de-escalation</li>
-              <li>Removal requests for policy-violating reviews</li>
-            </ul>
+            <div><p class="sub">A steady, ethical system for more recent reviews, and a fast response when a bad or fake one lands. No fake reviews, no incentives.</p><ul class="check-list"><li>Review request link, script, and timing</li><li>Monitoring and a response to every review</li><li>Negative review de-escalation</li><li>Removal requests for policy-violating reviews</li></ul></div>
           </article>
         </div>
       </div>
@@ -57,12 +39,16 @@
           <h2>Start with the free audit, then pick what you need.</h2>
           <p class="sub">No contracts. Everything runs by email and is invoiced by email. Start with the free audit, add the sprint if it makes sense, and keep care going only as long as it earns its place.</p>
         </div>
-        <div class="grid grid-3" style="margin-top:34px; max-width:1200px; margin-left:auto; margin-right:auto; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
-          <article class="card price-card highlight">
-            <span class="tag">Start here</span>
-            <h3>30-Day Google Maps Opportunity Sprint</h3>
-            <p style="font-size:30px; font-weight:800; margin:8px 0;">{{PRICE_SPRINT}}<span style="font-size:16px; font-weight:400; color:var(--muted);">&nbsp;&middot;&nbsp;one-time</span></p>
-            <p><strong>Best for:</strong> Established local businesses with good customer proof that are being outranked or overlooked on Google.</p>
+        <div class="plans">
+          <article class="plan-feature">
+            <div class="plan-main">
+              <span class="tag">Start here</span>
+              <h3>30-Day Google Maps Opportunity Sprint</h3>
+              <p class="price-line"><span class="amt">{{PRICE_SPRINT}}</span><span class="per">one-time</span></p>
+              <p><strong>Best for:</strong> Established businesses with good customer proof that are being outranked or overlooked on Google.</p>
+              <div class="outcome">Continue within seven days and the {{PRICE_SPRINT}} sprint fee is credited toward your first month of care.</div>
+              <p style="margin-top:22px;"><a class="btn btn-primary" href="/free-visibility-audit">See if the sprint fits</a></p>
+            </div>
             <ul class="check-list">
               <li>Baseline check for 3 valuable searches in your actual service area</li>
               <li>Google Business Profile and top-competitor gap review</li>
@@ -71,13 +57,11 @@
               <li>Mobile website call-path check</li>
               <li>Before-and-after scorecard sent by email</li>
             </ul>
-            <div class="outcome">Continue within seven days and the {{PRICE_SPRINT}} sprint fee is credited toward your first month of care.</div>
-            <p><a class="btn btn-primary btn-block" href="/free-visibility-audit">See if the sprint fits</a></p>
           </article>
           <article class="card price-card">
             <span class="tag">After the sprint</span>
             <h3>Profile Care</h3>
-            <p style="font-size:30px; font-weight:800; margin:8px 0;">{{PRICE_CARE}}<span style="font-size:16px; font-weight:400; color:var(--muted);">/mo &middot; month-to-month</span></p>
+            <p class="price-line"><span class="amt">{{PRICE_CARE}}</span><span class="per">/mo, month-to-month</span></p>
             <p><strong>Best for:</strong> Businesses that want a steady, well-kept Google profile without doing the work.</p>
             <ul class="check-list">
               <li>Fresh Google Business Profile posts every week</li>
@@ -91,7 +75,7 @@
           <article class="card price-card">
             <span class="tag">For competitive markets</span>
             <h3>Growth Management</h3>
-            <p style="font-size:30px; font-weight:800; margin:8px 0;">{{PRICE_GROWTH}}<span style="font-size:16px; font-weight:400; color:var(--muted);">/mo and up &middot; month-to-month</span></p>
+            <p class="price-line"><span class="amt">{{PRICE_GROWTH}}</span><span class="per">/mo and up</span></p>
             <p><strong>Best for:</strong> Businesses in crowded markets that want more than upkeep.</p>
             <ul class="check-list">
               <li>Everything in Profile Care</li>
@@ -105,7 +89,7 @@
           <article class="card price-card authority-card">
             <span class="tag">For expansion</span>
             <h3>Authority + AI Visibility</h3>
-            <p style="font-size:30px; font-weight:800; margin:8px 0;">{{PRICE_AUTHORITY}}<span style="font-size:16px; font-weight:400; color:#c8d5e0;">/mo and up</span></p>
+            <p class="price-line"><span class="amt">{{PRICE_AUTHORITY}}</span><span class="per">/mo and up</span></p>
             <p><strong>Best for:</strong> Multi-city and high-competition businesses ready to expand local authority and conversion paths.</p>
             <ul class="check-list">
               <li>Everything in Growth Management</li>

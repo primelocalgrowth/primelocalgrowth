@@ -4,6 +4,11 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/f/sample",
+      "destination": "/sample-audit?utm_source=facebook&utm_medium=social&utm_campaign=launch_posts&utm_content=sample",
+      "permanent": false
+    },
+    {
       "source": "/f/ig",
       "destination": "/free-visibility-audit?utm_source=instagram&utm_medium=social&utm_campaign=launch_posts&utm_content=bio",
       "permanent": false

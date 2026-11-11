@@ -9,6 +9,11 @@
       "permanent": false
     },
     {
+      "source": "/f/groups",
+      "destination": "/free-visibility-audit?utm_source=facebook_groups&utm_medium=social&utm_campaign=group_posts&utm_content=audit_offer",
+      "permanent": false
+    },
+    {
       "source": "/f/ig",
       "destination": "/free-visibility-audit?utm_source=instagram&utm_medium=social&utm_campaign=launch_posts&utm_content=bio",
       "permanent": false

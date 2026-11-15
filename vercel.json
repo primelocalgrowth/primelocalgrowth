@@ -44,6 +44,16 @@
       "permanent": false
     },
     {
+      "source": "/f/dec1",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=holiday_2026&utm_content=december_hours",
+      "permanent": false
+    },
+    {
+      "source": "/f/results",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=holiday_2026&utm_content=proof_reviews",
+      "permanent": false
+    },
+    {
       "source": "/f/ig",
       "destination": "/free-visibility-audit?utm_source=instagram&utm_medium=social&utm_campaign=launch_posts&utm_content=bio",
       "permanent": false

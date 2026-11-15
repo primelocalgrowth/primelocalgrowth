@@ -34,6 +34,31 @@
       "permanent": false
     },
     {
+      "source": "/f/o-barber",
+      "destination": "/free-visibility-audit?utm_source=email&utm_medium=outreach&utm_campaign=cold_outreach_2026_11&utm_content=outreach_barbershop",
+      "permanent": false
+    },
+    {
+      "source": "/f/o-salon",
+      "destination": "/free-visibility-audit?utm_source=email&utm_medium=outreach&utm_campaign=cold_outreach_2026_11&utm_content=outreach_salon",
+      "permanent": false
+    },
+    {
+      "source": "/f/o-hvac",
+      "destination": "/free-visibility-audit?utm_source=email&utm_medium=outreach&utm_campaign=cold_outreach_2026_11&utm_content=outreach_hvac",
+      "permanent": false
+    },
+    {
+      "source": "/f/o-plumb",
+      "destination": "/free-visibility-audit?utm_source=email&utm_medium=outreach&utm_campaign=cold_outreach_2026_11&utm_content=outreach_plumbing",
+      "permanent": false
+    },
+    {
+      "source": "/f/o-other",
+      "destination": "/free-visibility-audit?utm_source=email&utm_medium=outreach&utm_campaign=cold_outreach_2026_11&utm_content=outreach_other",
+      "permanent": false
+    },
+    {
       "source": "/f/blackfriday",
       "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=holiday_2026&utm_content=black_friday",
       "permanent": false

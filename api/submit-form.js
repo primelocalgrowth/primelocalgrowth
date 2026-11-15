@@ -61,6 +61,7 @@ export default async function handler(req, res) {
       businessType = 'local-service',
       website = '',
       mainService = '',
+      heardFrom = '',
       visibilityConcern = '',
       situation = '',
       pagePath = '',
@@ -84,8 +85,8 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, redirectUrl: '/thank-you' });
     }
 
-    const fields = { name, email, phone, businessName, city, businessType, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, source };
-    const limits = { name: 120, email: 254, phone: 40, businessName: 160, city: 120, businessType: 100, website: 500, mainService: 160, visibilityConcern: 2000, situation: 2000, pagePath: 500, pageUrl: 1000, referrer: 1000, source: 160 };
+    const fields = { name, email, phone, businessName, city, businessType, website, mainService, heardFrom, visibilityConcern, situation, pagePath, pageUrl, referrer, source };
+    const limits = { name: 120, email: 254, phone: 40, businessName: 160, city: 120, businessType: 100, website: 500, mainService: 160, heardFrom: 160, visibilityConcern: 2000, situation: 2000, pagePath: 500, pageUrl: 1000, referrer: 1000, source: 160 };
     for (const [key, value] of Object.entries(fields)) {
       if (value != null && typeof value !== 'string') {
         return res.status(400).json({ error: `Invalid ${key}` });
@@ -127,7 +128,7 @@ export default async function handler(req, res) {
     const firstName = getFirstName(leadName);
     const niche = mainService || businessType;
     const optedIntoMarketing = marketingConsent === true || marketingConsent === 'true' || marketingConsent === 'on';
-    const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, visibilityConcern, situation, pagePath, pageUrl, referrer, source, attribution: cleanAttribution, marketingConsent: optedIntoMarketing, timestamp, submissionId };
+    const lead = { name: leadName, firstName, email, phone, businessName, city, businessType, niche, website, mainService, heardFrom: String(heardFrom || '').trim(), visibilityConcern, situation, pagePath, pageUrl, referrer, source, attribution: cleanAttribution, marketingConsent: optedIntoMarketing, timestamp, submissionId };
 
     const capture = await captureLead(lead);
     if (!capture.captured) {
@@ -327,6 +328,7 @@ async function appendToGoogleSheets(lead) {
     business_type: businessType,
     website: website || '',
     main_service: mainService || '',
+    heard_from: lead.heardFrom || '',
     visibility_concern: visibilityConcern || '',
     situation: situation || '',
     source_detail: 'inbound',
@@ -343,7 +345,7 @@ async function appendToGoogleSheets(lead) {
     gclid: attribution?.gclid || '',
     marketing_consent: marketingConsent ? 'Yes' : 'No',
     submission_id: lead.submissionId,
-    notes: [visibilityConcern, situation, attribution ? JSON.stringify(attribution) : ''].filter(Boolean).join('\n\n')
+    notes: [lead.heardFrom ? `Heard from: ${lead.heardFrom}` : '', visibilityConcern, situation, attribution ? JSON.stringify(attribution) : ''].filter(Boolean).join('\n\n')
   }, 'Google Sheets');
 }
 

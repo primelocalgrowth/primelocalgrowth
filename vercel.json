@@ -14,6 +14,26 @@
       "permanent": false
     },
     {
+      "source": "/f/g-sasb",
+      "destination": "/free-visibility-audit?utm_source=facebook_groups&utm_medium=social&utm_campaign=group_posts&utm_content=g_sa_small_business",
+      "permanent": false
+    },
+    {
+      "source": "/f/g-owners",
+      "destination": "/free-visibility-audit?utm_source=facebook_groups&utm_medium=social&utm_campaign=group_posts&utm_content=g_business_owners",
+      "permanent": false
+    },
+    {
+      "source": "/f/g-cibolo",
+      "destination": "/free-visibility-audit?utm_source=facebook_groups&utm_medium=social&utm_campaign=group_posts&utm_content=g_cibolo",
+      "permanent": false
+    },
+    {
+      "source": "/f/g-schertz",
+      "destination": "/free-visibility-audit?utm_source=facebook_groups&utm_medium=social&utm_campaign=group_posts&utm_content=g_schertz",
+      "permanent": false
+    },
+    {
       "source": "/f/blackfriday",
       "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=holiday_2026&utm_content=black_friday",
       "permanent": false

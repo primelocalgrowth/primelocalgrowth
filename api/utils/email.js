@@ -93,6 +93,8 @@ export async function notifyAdamOfLead(lead) {
     row('Situation', brandEsc(situation || '')),
     row('Type', brandEsc(businessType)),
     row('Source', brandEsc(sourceLabel)),
+    row('Heard from', brandEsc(lead.heardFrom || '')),
+    row('Link', attribution.utm_content ? brandEsc(attribution.utm_content) : ''),
     row('Page', brandEsc(pagePath || pageUrl || 'N/A')),
     row('Campaign', attribution.utm_campaign ? brandEsc(attribution.utm_campaign) : ''),
     row('Submitted', brandEsc(new Date(timestamp).toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CT')),

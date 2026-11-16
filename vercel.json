@@ -59,6 +59,16 @@
       "permanent": false
     },
     {
+      "source": "/f/reportcard",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=report_card_dec_2026&utm_content=reportcard",
+      "permanent": false
+    },
+    {
+      "source": "/f/reportcard-ig",
+      "destination": "/free-visibility-audit?utm_source=instagram&utm_medium=social&utm_campaign=report_card_dec_2026&utm_content=reportcard",
+      "permanent": false
+    },
+    {
       "source": "/f/blackfriday",
       "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=holiday_2026&utm_content=black_friday",
       "permanent": false

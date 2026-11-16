@@ -27,9 +27,11 @@ function doPost(e) {
     });
   }
 
+  let lead;
+  let auditFile;
   try {
     const payload = parsePayload(e);
-    const lead = normalizeAuditLead(payload);
+    lead = normalizeAuditLead(payload);
     const validationError = validateAuditLead(lead);
 
     if (validationError) {
@@ -41,20 +43,40 @@ function doPost(e) {
       });
     }
 
-    const auditFile = createAuditDocument(lead);
+    auditFile = createAuditDocument(lead);
 
     logAuditRequest(lead, auditFile.getUrl(), "Created", "");
 
-    notifyAdmin(lead, auditFile);
+    // A notification failure must not turn a completed document into a failed audit.
+    let notificationSent = true;
+    try {
+      notifyAdmin(lead, auditFile);
+    } catch (notificationError) {
+      notificationSent = false;
+      console.error("Audit created but admin notification failed.");
+      try {
+        logAuditRequest(lead, auditFile.getUrl(), "Notification Failed", "Draft created; admin notification needs retry.");
+      } catch (logError) {
+        console.error("Notification failure could not be recorded; completed draft is preserved.");
+      }
+    }
 
     return jsonResponse({
       success: true,
       auditUrl: auditFile.getUrl(),
-      auditId: auditFile.getId()
+      auditId: auditFile.getId(),
+      notificationSent
     });
   } catch (err) {
     const message = err && err.message ? err.message : String(err);
     console.error(`Audit generation failed: ${message}`);
+    if (lead) {
+      try {
+        logAuditRequest(lead, auditFile ? auditFile.getUrl() : "", "Failed", message);
+      } catch (logError) {
+        console.error("Audit failure could not be recorded in Audit Requests.");
+      }
+    }
 
     return jsonResponse({
       success: false,
@@ -66,8 +88,23 @@ function doPost(e) {
 }
 
 function createAuditDocument(lead) {
-  const templateDoc = DriveApp.getFileById(AUDIT_CONFIG.MASTER_TEMPLATE_ID);
-  const folder = DriveApp.getFolderById(AUDIT_CONFIG.AUDIT_FOLDER_ID);
+  // Operators can repair resource bindings without changing a deployed webhook URL.
+  const properties = PropertiesService.getScriptProperties();
+  const templateId = clean(properties.getProperty("MASTER_TEMPLATE_ID")) || AUDIT_CONFIG.MASTER_TEMPLATE_ID;
+  const folderId = clean(properties.getProperty("AUDIT_FOLDER_ID")) || AUDIT_CONFIG.AUDIT_FOLDER_ID;
+  let templateDoc;
+  let folder;
+  try {
+    templateDoc = DriveApp.getFileById(templateId);
+    if (templateDoc.getMimeType() !== MimeType.GOOGLE_DOCS) throw new Error("Template is not a Google Doc.");
+  } catch (err) {
+    throw new Error("Audit template is missing, inaccessible, or not a Google Doc. Set MASTER_TEMPLATE_ID in Script Properties and verify access as the deployment owner.");
+  }
+  try {
+    folder = DriveApp.getFolderById(folderId);
+  } catch (err) {
+    throw new Error("Audit destination folder is missing or inaccessible. Set AUDIT_FOLDER_ID in Script Properties and verify access as the deployment owner.");
+  }
   const docName = buildAuditDocName(lead);
   const newFile = templateDoc.makeCopy(docName, folder);
   const newDoc = DocumentApp.openById(newFile.getId());
@@ -247,4 +284,5 @@ function jsonResponse(data) {
     .createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
 

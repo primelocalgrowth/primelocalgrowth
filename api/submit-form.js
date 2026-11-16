@@ -252,9 +252,13 @@ async function runFollowUpIntegrations(lead) {
     tasks.push(runOptionalTask('Audit generator', () => triggerAuditGenerator(lead)));
   }
 
-  // Finished audit report by email, no human step. Inert until GOOGLE_PLACES_API_KEY is set.
-  if (process.env.GOOGLE_PLACES_API_KEY && process.env.RESEND_API_KEY && isAuditRequest(lead)) {
-    tasks.push(runOptionalTask('Automated audit report', () => sendAuditReport(lead)));
+  // Places-only output is an internal draft; the public offer requires full review.
+  if (process.env.RESEND_API_KEY && isAuditRequest(lead)) {
+    tasks.push(runOptionalTask('Internal audit research', async () => {
+      const audit = await sendAuditReport(lead);
+      console.info(JSON.stringify({ event: 'audit_review_required', submissionId: lead.submissionId, status: audit.status, reason: audit.reason, draftSent: audit.draftSent }));
+      return audit;
+    }));
   }
 
   if (lead.marketingConsent && process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {

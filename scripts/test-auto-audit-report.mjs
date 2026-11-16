@@ -104,7 +104,8 @@ const competitors = [
   let sent = 0;
   const res = await sendAuditReport(lead, { apiKey: 'k', fetchImpl, sendEmailImpl: async () => { sent++; return { id: 'e' }; } });
   assert.equal(res.sent, false);
-  assert.equal(sent, 0, 'no email when the business is not matched');
+  assert.equal(sent, 1, 'an unmatched business creates an internal research alert');
+  assert.equal(res.status, 'needs_review');
 }
 
 // 4. Too few competitors: skip rather than publish a thin report
@@ -129,10 +130,14 @@ const competitors = [
   const fetchImpl = mockFetch({ business: [place('biz', 'Lopez Plumbing', 4.2, 14)], results: competitors });
   const mails = [];
   const res = await sendAuditReport(lead, { apiKey: 'k', fetchImpl, sendEmailImpl: async (m) => { mails.push(m); return { id: 'e1' }; } });
-  assert.equal(res.sent, true);
+  assert.equal(res.sent, false);
+  assert.equal(res.draftSent, true);
+  assert.equal(res.status, 'needs_review');
   assert.equal(mails.length, 1);
-  assert.equal(mails[0].to, 'maria@example.com');
-  assert.equal(mails[0].replyTo, 'adam@primelocalgrowth.com');
+  assert.equal(mails[0].to, 'adam@primelocalgrowth.com');
+  assert.match(mails[0].subject, /INTERNAL DRAFT/);
+  assert.match(mails[0].html, /not a completed customer audit/);
+  assert.equal(mails[0].replyTo, 'maria@example.com');
 }
 
 // 7. Rules and matching
@@ -152,3 +157,13 @@ const competitors = [
 }
 
 console.log('PASS auto audit report: two bounded Places calls, honest rule-based fixes, escaped email, no guess on weak matches, no key leaks.');
+
+// Missing Places credentials must still request research internally, never email the lead.
+{
+  const mails = [];
+  const res = await sendAuditReport(lead, { apiKey: '', sendEmailImpl: async m => { mails.push(m); return { id: 'alert' }; } });
+  assert.equal(res.sent, false);
+  assert.equal(res.reason, 'places_not_configured');
+  assert.equal(mails[0].to, 'adam@primelocalgrowth.com');
+  assert.match(mails[0].html, /Search exact phone/);
+}

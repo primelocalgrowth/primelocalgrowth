@@ -18,3 +18,9 @@
 ## Verification
 
 Run `npm run verify:plg` for repository checks and `npm run security:closeout` for the full local operator preflight plus repository verification.
+
+## Audit delivery
+
+- Read and follow `AUDIT-DELIVERY-STANDARD.md` for every customer visibility audit.
+- Compare the draft against the current public audit offer before calling it complete.
+- Places-only research stays an internal draft. Missing evidence requires review; never substitute a website review for the full audit.

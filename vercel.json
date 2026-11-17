@@ -69,6 +69,16 @@
       "permanent": false
     },
     {
+      "source": "/f/barber-check",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=trade_pulse_barber&utm_content=barber_check",
+      "permanent": false
+    },
+    {
+      "source": "/f/barber-check-ig",
+      "destination": "/free-visibility-audit?utm_source=instagram&utm_medium=social&utm_campaign=trade_pulse_barber&utm_content=barber_check",
+      "permanent": false
+    },
+    {
       "source": "/f/blackfriday",
       "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=holiday_2026&utm_content=black_friday",
       "permanent": false

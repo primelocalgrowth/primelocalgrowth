@@ -79,6 +79,51 @@
       "permanent": false
     },
     {
+      "source": "/f/b1",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=barber_dec_2026&utm_content=b1",
+      "permanent": false
+    },
+    {
+      "source": "/f/b2",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=barber_dec_2026&utm_content=b2",
+      "permanent": false
+    },
+    {
+      "source": "/f/b3",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=barber_dec_2026&utm_content=b3",
+      "permanent": false
+    },
+    {
+      "source": "/f/b4",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=barber_dec_2026&utm_content=b4",
+      "permanent": false
+    },
+    {
+      "source": "/f/b5",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=barber_dec_2026&utm_content=b5",
+      "permanent": false
+    },
+    {
+      "source": "/f/b6",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=barber_dec_2026&utm_content=b6",
+      "permanent": false
+    },
+    {
+      "source": "/f/b7",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=barber_dec_2026&utm_content=b7",
+      "permanent": false
+    },
+    {
+      "source": "/f/b8",
+      "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=barber_dec_2026&utm_content=b8",
+      "permanent": false
+    },
+    {
+      "source": "/f/gbp-barber",
+      "destination": "/free-visibility-audit?utm_source=google&utm_medium=gbp&utm_campaign=barber_dec_2026&utm_content=gbp_barber",
+      "permanent": false
+    },
+    {
       "source": "/f/blackfriday",
       "destination": "/free-visibility-audit?utm_source=facebook&utm_medium=social&utm_campaign=holiday_2026&utm_content=black_friday",
       "permanent": false

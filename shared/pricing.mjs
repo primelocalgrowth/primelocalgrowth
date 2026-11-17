@@ -98,8 +98,7 @@ export const costAnswer = () => {
   const authority = byId('authority');
   return (
     `Start with a ${sprint.fullName} for ${priceLabel(sprint)} one-time. ` +
-    `If you continue into ongoing care within seven days, the sprint fee is credited toward the first month. ` +
-    `${care.name} is ${priceLabel(care)}/month. ` +
+    `The sprint is the one-time setup. After that, ${care.name} is ${priceLabel(care)}/month for ongoing maintenance, and extra services can be added when you need them. ` +
     `${growth.name} starts at ${priceLabel(growth).replace('from ', '')}/month. ` +
     `${authority.name} starts at ${priceLabel(authority).replace('from ', '')}/month. ` +
     `Plans are month-to-month and invoiced by email. Existing agreements never change without approval.`

@@ -89,21 +89,13 @@ export const fullLabel = (tier) =>
 
 /**
  * The answer used in the FAQPage JSON-LD. This is the string Google and the AI
- * answer engines actually quote, so it is derived rather than hand-written.
+ * answer engines actually quote. 2026-11-25: public pages show the three
+ * packages without prices (Adam's call); TIERS above still drive Stripe mapping.
  */
-export const costAnswer = () => {
-  const sprint = byId('sprint');
-  const care = byId('care');
-  const growth = byId('growth');
-  const authority = byId('authority');
-  return (
-    `Start with a ${sprint.fullName} for ${priceLabel(sprint)} one-time. ` +
-    `The sprint is the one-time setup. After that, ${care.name} is ${priceLabel(care)}/month for ongoing maintenance, and extra services can be added when you need them. ` +
-    `${growth.name} starts at ${priceLabel(growth).replace('from ', '')}/month. ` +
-    `${authority.name} starts at ${priceLabel(authority).replace('from ', '')}/month. ` +
-    `Plans are month-to-month and invoiced by email. Existing agreements never change without approval.`
-  );
-};
+export const costAnswer = () =>
+  'Prime Local Growth has three monthly packages: Google; Google + Social; and Full Growth, which adds a website upgrade and analytics. ' +
+  'Every package is month to month, with no setup fee and no contract. ' +
+  'Your price depends on the package and how competitive your market is, so Adam quotes it in writing after your free audit, before any work starts.';
 
 /**
  * Classify a Stripe amount (in cents) to a plan name. Fallback only — an

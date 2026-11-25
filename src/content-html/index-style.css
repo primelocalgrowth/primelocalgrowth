@@ -166,18 +166,33 @@
   .review-links{margin-top:28px;font-size:15.5px;display:flex;flex-wrap:wrap;gap:8px 24px}
   @media(max-width:860px){.founder-grid{grid-template-columns:1fr;gap:36px}.portrait img{max-width:260px}}
 
-  /* Pricing: a work order, not a card */
-  .order{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--gut);border-top:1.5px solid var(--ink);padding-top:28px}
-  .order-price .amt{font-family:var(--serif);font-size:clamp(64px,7vw,96px);line-height:.9;letter-spacing:-.02em;display:block}
-  .order-price .per{display:block;margin-top:10px}
-  .order-price .fit{margin-top:20px;font-size:15.5px;color:var(--mute);max-width:30ch}
+  /* Package checklists */
   .included{list-style:none;columns:2;column-gap:var(--gut);margin-bottom:32px}
   .included li{break-inside:avoid;padding:12px 0 12px 28px;border-bottom:1px solid var(--rule);position:relative;font-size:16.5px}
   .included li::before{content:"";position:absolute;left:2px;top:19px;width:12px;height:7px;border-left:2px solid var(--good);border-bottom:2px solid var(--good);transform:rotate(-45deg)}
   .order-cta{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
   .order-terms{margin-top:24px;font-size:15px;color:var(--mute);max-width:62ch}
   .order-terms b{color:var(--ink);font-weight:600}
-  @media(max-width:860px){.order{grid-template-columns:1fr;gap:28px}.included{columns:1}}
+  @media(max-width:860px){.included{columns:1}}
+
+  /* Where you show up: a plain index of places, ruled like the ledger */
+  .places{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--gut)}
+  .places li{border-top:1.5px solid var(--ink);padding:18px 0 32px}
+  .places b{display:block;font-family:var(--serif);font-weight:500;font-size:26px;line-height:1.15;letter-spacing:-.01em;margin-bottom:8px}
+  .places span{display:block;font-size:15.5px;line-height:1.5;color:var(--mute);max-width:26ch}
+  .places .places-cta{border-top-color:var(--rule-strong);display:flex;align-items:flex-start;font-size:16px}
+  @media(max-width:960px){.places{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:560px){.places{grid-template-columns:1fr}.places li{padding:16px 0 22px}.places b{font-size:24px}}
+
+  /* Packages: three work orders, no prices */
+  .packages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut);margin-bottom:40px}
+  .pkg{border-top:1.5px solid var(--ink);padding-top:20px}
+  .pkg h3{font-size:clamp(30px,2.8vw,38px);line-height:1.05;letter-spacing:-.015em;margin:14px 0 10px}
+  .pkg-fit{font-size:16.5px;color:var(--ink-2);margin-bottom:18px;max-width:32ch}
+  .pkg .included{columns:1;margin-bottom:0}
+  .pkg-pick{border-top:4px solid var(--amber);padding-top:17.5px}
+  .pkg-pick .label{color:var(--amber-ink)}
+  @media(max-width:860px){.packages{grid-template-columns:1fr;gap:40px}}
 
   /* FAQ */
   .faq{border-top:1.5px solid var(--ink)}

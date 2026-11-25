@@ -136,7 +136,7 @@ export const PRICE_TOKENS = {
  * Copy tokens that are not prices but still must not drift. The audit CTA
  * appears in page bodies as well as the nav and footer.
  */
-export const AUDIT_CTA_LABEL = 'Get My 3-Point Visibility Audit';
+export const AUDIT_CTA_LABEL = 'Get my free audit';
 
 export const COPY_TOKENS = {
   '{{CTA_AUDIT}}': () => AUDIT_CTA_LABEL,

@@ -75,7 +75,7 @@ ${indexable ? `<link rel="canonical" href="${SITE}${esc(path)}">` : '<meta name=
   <nav class="nav-links" aria-label="Primary navigation">
     <a href="/services">Services</a>
     <a href="/results">Results</a>
-    <a class="btn btn-primary" href="/free-visibility-audit">Get My 3-Point Visibility Audit</a>
+    <a class="btn btn-primary" href="/free-visibility-audit">Get my free audit</a>
   </nav>
 </div></header>
 <main id="main">${bodyHtml}</main>
@@ -107,7 +107,7 @@ function page(record, indexable) {
     <div class="card" style="margin-top:28px;">
       <h2>What this does not tell you</h2>
       <p>This report measures whether AI engines <em>can</em> read and cite ${esc(label)}. It does not show what ChatGPT, Gemini, or Google's AI actually say when a customer asks for the best in the area, or who they name instead. That is what the full audit covers.</p>
-      <p style="margin-top:14px;"><a class="btn btn-primary" href="/free-visibility-audit">Get My 3-Point Visibility Audit</a></p>
+      <p style="margin-top:14px;"><a class="btn btn-primary" href="/free-visibility-audit">Get my free audit</a></p>
     </div>
     ${indexable ? '' : '<p class="sub" style="margin-top:20px;font-size:14px;">This report is private and not indexed by search engines.</p>'}
   </div></section>`;

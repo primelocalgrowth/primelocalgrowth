@@ -128,7 +128,7 @@ ${indexable ? `<link rel="canonical" href="${SITE}/ai-visibility-index">` : '<me
   <nav class="nav-links" aria-label="Primary navigation">
     <a href="/services">Services</a>
     <a href="/results">Results</a>
-    <a class="btn btn-primary" href="/free-visibility-audit">Get My 3-Point Visibility Audit</a>
+    <a class="btn btn-primary" href="/free-visibility-audit">Get my free audit</a>
   </nav>
 </div></header>
 <main id="main">

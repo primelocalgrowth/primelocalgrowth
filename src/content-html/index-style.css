@@ -28,7 +28,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;font-kerning:normal}
+  body{font-family:var(--sans);font-optical-sizing:auto;background:var(--paper);color:var(--ink);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;font-kerning:normal}
   a{color:inherit}
   img{max-width:100%;display:block}
   p{text-wrap:pretty}
@@ -75,19 +75,23 @@
   @media(max-width:1100px){.nav-links{display:none}}
   @media(max-width:620px){.nav{gap:14px;height:60px}.nav .btn{display:none}.nav-phone span{display:none}.brand .word{font-size:15px}}
 
-  /* Hero */
-  .hero{padding:72px 0 64px;border-bottom:1px solid var(--rule)}
-  .hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:end}
-  .kicker{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:28px}
-  .hero h1{margin-bottom:28px}
-  .hero .lede{margin-bottom:36px}
+  /* Hero: a report cover. Masthead rule, full-width headline, then the evidence. */
+  .hero{padding:28px 0 72px;border-bottom:1px solid var(--rule)}
+  .masthead{display:flex;flex-wrap:wrap;gap:6px 0;padding:12px 0;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--rule);margin-bottom:56px}
+  .masthead span{padding-right:18px;margin-right:18px;border-right:1px solid var(--rule)}
+  .masthead span:last-of-type{border-right:0}
+  .hero-title{font-size:clamp(46px,8.4vw,124px);line-height:.94;letter-spacing:-.03em;max-width:13ch;margin-bottom:56px}
+  .hero-title em{display:block;color:var(--ink-2)}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:start}
+  .hero .lede{margin-bottom:36px;font-size:clamp(19px,1.7vw,22px)}
   .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
   .hero-call{font-size:15px;color:var(--mute);line-height:1.4}
   .hero-call a{font-family:var(--mono);color:var(--ink);font-size:15px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--rule-strong)}
   .hero-proof{margin-top:40px;padding-top:20px;border-top:1px solid var(--rule);display:flex;gap:14px;align-items:center;font-size:15px;color:var(--ink-2);max-width:56ch}
   .hero-proof img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
   .hero-proof b{font-weight:600}
-  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:48px}.hero{padding:48px 0}}
+  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:48px}.hero{padding:20px 0 56px}.hero-title{margin-bottom:36px}.masthead{margin-bottom:36px}}
+  @media(max-width:720px){.masthead span{border-right:0;margin-right:14px;padding-right:0}}
 
   /* Figure */
   figure.fig{margin:0}
@@ -95,19 +99,22 @@
   .fig-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:12px;border-bottom:1px solid var(--rule);margin-bottom:8px}
   .fig-head h3{font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:0}
   .fig svg{display:block;width:100%;height:auto;overflow:visible}
-  .fig svg text{font-family:var(--mono);font-size:11px;fill:#5d6d64}
-  .fig svg .ann{font-family:var(--sans);font-size:12px;fill:var(--ink)}
-  .fig svg .pk{font-family:var(--mono);font-size:13px;font-weight:500;fill:var(--ink)}
+  .fig svg text{font-family:var(--mono);font-size:10px;fill:#5d6d64}
+  .fig svg .ann{font-family:var(--sans);font-size:11px;fill:var(--ink)}
+  .fig svg .pk{font-family:var(--mono);font-size:12px;font-weight:500;fill:var(--ink)}
+  @media(max-width:560px){.fig svg text{font-size:13px}.fig svg .ann{font-size:13px}.fig svg .pk{font-size:14px}}
   figcaption{font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.45;color:var(--mute);margin-top:12px}
   figcaption b{font-style:normal;font-family:var(--sans);font-weight:700;font-size:13px;color:var(--ink);margin-right:6px}
 
   /* Sections */
-  section{padding:104px 0;border-bottom:1px solid var(--rule)}
+  section{padding:120px 0;border-bottom:1px solid var(--rule)}
   @media(max-width:720px){section{padding:68px 0}}
   .sec-head{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--gut);margin-bottom:48px}
   .sec-head .label{padding-top:12px}
   .sec-head h2{max-width:18ch}
   .sec-head .body-lg{margin-top:20px}
+  .sec-no{display:inline-block;min-width:2.4em;color:var(--ink);font-weight:500}
+  .audit .sec-no{color:var(--amber)}
   @media(max-width:860px){.sec-head{grid-template-columns:1fr;gap:12px}.sec-head .label{padding-top:0}}
 
   /* Ledger: the results table */
@@ -153,7 +160,8 @@
   .founder .body-lg{margin-bottom:36px}
   .review{border-top:1.5px solid var(--ink);padding-top:24px;max-width:58ch}
   .review .stars{font-family:var(--mono);font-size:13px;color:var(--amber-ink);letter-spacing:.1em;margin-bottom:12px}
-  .review blockquote p{font-family:var(--serif);font-size:clamp(24px,2.4vw,30px);line-height:1.3;letter-spacing:-.005em}
+  .review blockquote{position:relative}
+  .review blockquote p{hanging-punctuation:first;font-family:var(--serif);font-size:clamp(24px,2.4vw,30px);line-height:1.3;letter-spacing:-.005em}
   .review footer{margin-top:14px;font-size:15px;color:var(--mute)}
   .review-links{margin-top:28px;font-size:15.5px;display:flex;flex-wrap:wrap;gap:8px 24px}
   @media(max-width:860px){.founder-grid{grid-template-columns:1fr;gap:36px}.portrait img{max-width:260px}}
@@ -238,4 +246,12 @@
   .sticky-cta .btn{flex:1;padding:14px 10px;font-size:15px}
   @media(max-width:720px){.sticky-cta{display:flex}}
 
+  /* Motion: two moments only, both on content that is already visible without script.
+     The chart line draws once, and the highlighter crosses the 92 once. */
+  .motion .fig .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1) .2s}
+  .motion .fig.in .draw{stroke-dashoffset:0}
+  .motion .ledger mark{background-size:0% 100%;background-repeat:no-repeat;transition:background-size .7s cubic-bezier(.22,1,.36,1) .3s}
+  .motion .ledger.in mark{background-size:100% 100%}
+  .faq details[open] .a{animation:faqin .25s ease-out}
+  @keyframes faqin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
   @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}

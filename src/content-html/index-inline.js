@@ -1,4 +1,12 @@
 (function(){
+  /* motion: only when the visitor allows it and the browser can observe; otherwise everything shows as is */
+  var calm=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!calm && 'IntersectionObserver' in window){
+    document.documentElement.classList.add('motion');
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.35});
+    document.querySelectorAll('.fig,.ledger').forEach(function(el){io.observe(el);});
+  }
+
   /* form validation feedback */
   function validateEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
   var emailInput=document.getElementById('f-email'), nameInput=document.getElementById('f-name');

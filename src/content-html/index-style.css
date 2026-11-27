@@ -413,14 +413,14 @@
   @media(max-width:860px){.math{grid-template-columns:1fr;gap:12px}}
   .trades-also{margin-top:28px;color:var(--mute);font-size:15.5px}
 
-  .commit{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink)}
+  .commit{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink)}
   .commit li{padding:24px 22px 30px 0;border-bottom:1px solid var(--rule)}
-  .commit li:not(:nth-child(4n+1)){padding-left:22px;border-left:1px solid var(--rule)}
+  .commit li:not(:nth-child(3n+1)){padding-left:22px;border-left:1px solid var(--rule)}
   .commit .label{display:block;margin-bottom:18px;color:var(--amber-ink)}
   .commit h3{font-size:22px;line-height:1.2;margin-bottom:10px}
   .commit p{font-size:15.5px;color:var(--ink-2)}
   .commit a{text-decoration-color:var(--amber);text-underline-offset:3px}
-  @media(max-width:1100px){.commit{grid-template-columns:repeat(2,minmax(0,1fr))}.commit li:not(:nth-child(4n+1)){padding-left:0;border-left:0}.commit li:nth-child(even){padding-left:22px;border-left:1px solid var(--rule)}}
+  @media(max-width:1100px){.commit{grid-template-columns:repeat(2,minmax(0,1fr))}.commit li:not(:nth-child(3n+1)){padding-left:0;border-left:0}.commit li:nth-child(even){padding-left:22px;border-left:1px solid var(--rule)}}
   @media(max-width:620px){.commit{grid-template-columns:1fr}.commit li:nth-child(even){padding-left:0;border-left:0}}
 
   .named{margin-top:40px;padding-top:24px;border-top:1px solid var(--rule)}

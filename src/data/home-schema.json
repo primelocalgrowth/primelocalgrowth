@@ -66,7 +66,7 @@
           "name": "What does this cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Every package is month to month, with no setup fee and no contract. Your price depends on the package and how competitive your market is, so Adam quotes it in writing after your free audit, before any work starts."
+            "text": "There are three monthly packages: Google; Google + Social; and Full Growth, which adds a website upgrade and analytics. Every package is month to month, with no setup fee and no contract. Your free audit shows which package fits, and you get the price in writing before any work starts."
           }
         },
         {
@@ -74,7 +74,7 @@
           "name": "What if it doesn't work?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Then you stop, with no contract to buy out and everything still in your name. Nobody honest can guarantee rankings, because Google decides them. What you get instead is a written plan, a monthly report from your own Google dashboard and a check-in at day 30, so you always know where you stand."
+            "text": "Then you stop, with no contract to buy out and everything still in your name. Nobody honest can guarantee rankings, because Google decides them. What you get instead is a written plan, a monthly report from your own Google dashboard and a results review at day 30, so you always know where you stand."
           }
         },
         {
@@ -82,7 +82,7 @@
           "name": "Can I try it free first?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The audit is free and yours to keep, with the three fixes that would help you fastest. The work itself is paid month to month from the start, so Adam earns it every month and you can stop any month."
+            "text": "The audit is free and yours to keep, with the three fixes that would help you fastest. The work itself is paid month to month from the start, and you can stop any month."
           }
         },
         {
@@ -90,15 +90,23 @@
           "name": "Who owns my Google profile and logins?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You do. Your profile, logins, photos and posts stay in your name. Adam is added as a manager, and you can remove him from your own account at any time."
+            "text": "You do. Your profile, logins, photos and posts stay in your name. We are added as a manager, and you can remove that access from your own account at any time."
           }
         },
         {
           "@type": "Question",
-          "name": "What happens if Adam is unavailable?",
+          "name": "Where will my business show up?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Every account runs on a written playbook, with posts scheduled ahead. All access is already in your name, so your listing keeps running and nothing is held back. Calls and texts get a reply within one business day."
+            "text": "Everywhere customers search before they call: Google Search and Maps, Apple Maps, Bing, Yelp, Nextdoor and social media. Your name, hours and phone number are corrected so they match on every one, and the higher packages add social posting and a website upgrade."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do the monthly reports show?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Calls, direction requests, website clicks and new reviews, pulled from your own Google dashboard, plus the work done that month. Weak months are reported the same way as strong ones."
           }
         },
         {

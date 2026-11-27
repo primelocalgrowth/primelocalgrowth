@@ -394,3 +394,39 @@
   @keyframes faqin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 
   @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+
+  /* ---- Offer v2: trades, 90-day steps, how Adam works, named results ---- */
+  .steps-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  @media(max-width:1100px){.steps-4{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:48px}}
+  @media(max-width:860px){.steps-4{grid-template-columns:1fr;gap:40px}}
+
+  .trades{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1.5px solid var(--ink);border-bottom:1px solid var(--rule)}
+  .trades li{padding:22px 20px 26px 0;border-right:1px solid var(--rule)}
+  .trades li+li{padding-left:20px}
+  .trades li:last-child{border-right:0}
+  .trades .label{display:block;color:var(--ink);font-weight:500;margin-bottom:10px}
+  .trade-q{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.25;color:var(--ink-2)}
+  @media(max-width:960px){.trades{grid-template-columns:repeat(2,minmax(0,1fr))}.trades li,.trades li+li{padding:18px 16px 20px 0;border-right:0;border-bottom:1px solid var(--rule)}.trades li:nth-child(even){padding-left:16px;border-left:1px solid var(--rule)}.trades li:last-child{border-bottom:0;grid-column:1/-1}}
+  .math{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--gut);margin-top:48px;padding:28px 0 0;border-top:1px solid var(--rule)}
+  .math-t{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);line-height:1.35;max-width:40ch}
+  .math-t em{background:linear-gradient(transparent 62%,rgba(255,159,28,.45) 62%)}
+  @media(max-width:860px){.math{grid-template-columns:1fr;gap:12px}}
+  .trades-also{margin-top:28px;color:var(--mute);font-size:15.5px}
+
+  .commit{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1.5px solid var(--ink)}
+  .commit li{padding:24px 22px 30px 0;border-bottom:1px solid var(--rule)}
+  .commit li:not(:nth-child(3n+1)){padding-left:22px;border-left:1px solid var(--rule)}
+  .commit .label{display:block;margin-bottom:18px;color:var(--amber-ink)}
+  .commit h3{font-size:22px;line-height:1.2;margin-bottom:10px}
+  .commit p{font-size:15.5px;color:var(--ink-2)}
+  .commit a{text-decoration-color:var(--amber);text-underline-offset:3px}
+  @media(max-width:1100px){.commit{grid-template-columns:repeat(2,minmax(0,1fr))}.commit li:not(:nth-child(3n+1)){padding-left:0;border-left:0}.commit li:nth-child(even){padding-left:22px;border-left:1px solid var(--rule)}}
+  @media(max-width:620px){.commit{grid-template-columns:1fr}.commit li:nth-child(even){padding-left:0;border-left:0}}
+
+  .named{margin-top:40px;padding-top:24px;border-top:1px solid var(--rule)}
+  .named[hidden]{display:none}
+  .named-list{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut);margin-top:16px}
+  .named-biz{font-weight:600}
+  .named-num{font-family:var(--serif);font-size:34px;line-height:1.1;margin:6px 0}
+  .named-src{font-size:14px;color:var(--mute)}
+  @media(max-width:860px){.named-list{grid-template-columns:1fr}}

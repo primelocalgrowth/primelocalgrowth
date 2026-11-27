@@ -95,7 +95,7 @@ export const fullLabel = (tier) =>
 export const costAnswer = () =>
   'Prime Local Growth has three monthly packages: Google; Google + Social; and Full Growth, which adds a website upgrade and analytics. ' +
   'Every package is month to month, with no setup fee and no contract. ' +
-  'Your price depends on the package and how competitive your market is, so Adam quotes it in writing after your free audit, before any work starts.';
+  'Your free audit shows which package fits, and you get the price in writing before any work starts.';
 
 /**
  * Classify a Stripe amount (in cents) to a plan name. Fallback only — an
